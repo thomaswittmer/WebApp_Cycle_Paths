@@ -1,0 +1,29 @@
+#app{
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: 560px 1fr;
+}
+
+.barre_laterale{
+    background-color: antiquewhite;
+    grid-column: 1;
+    grid-row: 1/2;
+}
+
+.carte{
+    margin-left: 50px;
+    grid-column: 2;
+    grid-row: 1/2;
+}
+
+.curseur-date {
+    width: 100%;
+    margin: 50px auto;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#dateSlider {
+    width: 80%;
+}
