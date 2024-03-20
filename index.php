@@ -20,6 +20,9 @@ Flight::route('POST /recup_annee', function(){
         $test = "année : ".$_POST['annee'];
     }
     Flight::json($test);
+
+Flight::route('/map', function(){
+    Flight::render('map');
 });
 
 Flight::start();
