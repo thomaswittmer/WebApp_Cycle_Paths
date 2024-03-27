@@ -3,7 +3,7 @@
 require 'flight/Flight.php';
 
 Flight::route('/', function(){
-    Flight::render('map');
+    Flight::render('accueil');
 });
 
 Flight::route('POST /lumino', function(){
@@ -24,6 +24,10 @@ Flight::route('POST /recup_annee', function(){
 
 Flight::route('/map', function(){
     Flight::render('map');
+});
+
+Flight::route('/cesium', function(){
+    Flight::render('cesium');
 });
 
 Flight::start();
