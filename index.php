@@ -22,12 +22,12 @@ Flight::route('POST /recup_annee', function(){
     Flight::json($test);
 });
 
-Flight::route('/map', function(){
-    Flight::render('map');
+Flight::route('/connexion', function(){
+    Flight::render('connexion');
 });
 
-Flight::route('/map2', function(){
-    Flight::render('map2');
+Flight::route('/map', function(){
+    Flight::render('map');
 });
 
 Flight::route('/cesium', function(){
