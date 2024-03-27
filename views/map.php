@@ -26,8 +26,7 @@
         </div>
 
         <!-- Contenu de la page d'accueil -->
-        <div class="carte">
-            <div id="cesiumContainer"></div>
+        <div id="cesiumContainer">
             <script>
                 const viewer = new Cesium.Viewer('cesiumContainer', {
                     imageryProvider: false,

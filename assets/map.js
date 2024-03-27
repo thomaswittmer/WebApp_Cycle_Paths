@@ -24,24 +24,31 @@ let app = Vue.createApp({
 }).mount('#app');
 
 // Récupérer tous les boutons radio
-var radioButtons = document.querySelectorAll('input[type="radio"]');
-let lumi_select = null;
+var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
 // Ajouter un écouteur d'événements à chaque bouton radio
-radioButtons.forEach(function(radioButton) {
-    radioButton.addEventListener('click', function() {
-        // envoi du formulaire avec la case cochee
+checkboxes.forEach(function(check) {
+    check.addEventListener('change', function() {
+        let lumi_select = [];
+        // Parcourir toutes les cases cochées et les ajouter à FormData
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                lumi_select.push(checkbox.value);
+            }
+        });
+
+        // Créer un objet FormData et ajouter les valeurs des cases cochées comme un tableau
         let donnees = new FormData();
-        if (lumi_select != radioButton.value){
-            lumi_select = radioButton.value;
-            donnees.append('lumi', radioButton.value);
-            fetch('/lumino', {
-            method: 'post',
-            body: donnees
-            })
-            .then(r => r.json())
-            .then(r => {
-            console.log(r)
-            })
-        }
+        donnees.append('lumi', lumi_select); // Utilisation de 'lumi[]' pour créer un tableau de valeurs
+
+        fetch('/lumino', {
+        method: 'post',
+        body: donnees
+        })
+        .then(r => r.json())
+        .then(r => {
+        console.log(r)
+        })    
+
     });
 });
