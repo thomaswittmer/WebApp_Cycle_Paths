@@ -26,6 +26,10 @@ Flight::route('/map', function(){
     Flight::render('map');
 });
 
+Flight::route('/map2', function(){
+    Flight::render('map2');
+});
+
 Flight::route('/cesium', function(){
     Flight::render('cesium');
 });
