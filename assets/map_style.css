@@ -1,10 +1,11 @@
 #app{
     display: flex;
     align-items: start;
+    background-color: antiquewhite;
 }
 
 .barre_laterale{
-    background-color: antiquewhite;
+    
     grid-column: 1;
     align-self: start;
     height: 100vh;
@@ -12,6 +13,10 @@
 }
 
 #Lumi {
+    margin: 20px;
+}
+
+.btn-group {
     margin: 20px;
 }
 
@@ -41,6 +46,7 @@
 
 }
 body, html {
+    background-color: antiquewhite;
     margin: 0;
     padding: 0;
     height: 100%;

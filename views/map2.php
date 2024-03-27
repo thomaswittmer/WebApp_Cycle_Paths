@@ -8,8 +8,9 @@
     <link href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/map_style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
     
@@ -24,6 +25,27 @@
                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="nuit_avec"> Nuit avec éclairage<br>
                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="nuit_sans"> Nuit sans éclairage<br>
             </form>
+
+            <!-- Example split danger button -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary">Sélectionner la météo</button>
+                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <form>
+                        <div class="dropdown-item">
+                            <input class="form-check-input mr-2" type="checkbox" value="pluie"> Pluie<br>
+                        </div>
+                        <div class="dropdown-item">
+                            <input class="form-check-input mr-2" type="checkbox" value="brouillard"> Brouillard<br>
+                        </div>
+                        <div class="dropdown-item">
+                            <input class="form-check-input mr-2" type="checkbox" value="soleil"> Soleil<br>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <!-- Contenu de la page d'accueil -->
@@ -36,6 +58,8 @@
             </div>
         </div>
     </div>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/map.js"></script>
     <script>
             // Enable simultaneous requests.
