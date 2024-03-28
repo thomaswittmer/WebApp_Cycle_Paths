@@ -30,6 +30,10 @@ Flight::route('/map', function(){
     Flight::render('map');
 });
 
+Flight::route('/map3', function(){
+    Flight::render('map3');
+});
+
 Flight::route('/cesium', function(){
     Flight::render('cesium');
 });
