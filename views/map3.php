@@ -6,6 +6,44 @@
     <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
     <link href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     <style>
+        body{
+            background-color: #333;
+            height: 50vh;
+            margin: 0;
+            padding: 0;
+            max-height: 100vh;
+            overflow: hidden;
+        }
+
+        #app{
+            display: flex;
+            flex-direction: row;
+            align-items: start;
+            background-color: #333;
+
+        }
+
+        .barre_laterale{
+            display: flex;
+            flex-direction: column;
+            align-items : center;
+            justify-content: center;
+            background-color: #333;
+            grid-column: 1;
+            align-self: start;
+            height: 100vh;
+            width: 260px;
+            color: white;
+            padding : 5px;
+        }
+
+        #cesiumContainer {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         /* Style pour le header */
         header {
             background-color: #333; /* Couleur de fond */
@@ -74,78 +112,94 @@
 
 
     
+    <div id=app>
+        <div class="barre_laterale">
+            <form id="Lumi" method='POST' action=''>
+                Type de luminosité :<br>
+                <input type="radio" name="lum" value="jour"> Jour<br>
+                <input type="radio" name="lum" value="nuit_avec"> Nuit avec éclairage<br>
+                <input type="radio" name="lum" value="nuit_sans"> Nuit sans éclairage<br>
+            </form>
+        </div>
+        
+        <div id="cesiumContainer"></div>
+    </div>
 
-    <div id="cesiumContainer"></div>
+
+
+
+
+
     <script>
-    // Enable simultaneous requests.
-    Cesium.RequestScheduler.requestsByServer["tile.googleapis.com:443"] = 18;
+        // Enable simultaneous requests.
+        Cesium.RequestScheduler.requestsByServer["tile.googleapis.com:443"] = 18;
 
-    // Create the viewer.
-    const viewer = new Cesium.Viewer("cesiumContainer", {
-        imageryProvider: false,
-        baseLayerPicker: false,
-        requestRenderMode: true,
-        geocoder: false,
-        globe: false,
-    });
+        // Create the viewer.
+        const viewer = new Cesium.Viewer("cesiumContainer", {
+            imageryProvider: false,
+            baseLayerPicker: false,
+            requestRenderMode: true,
+            geocoder: false,
+            globe: false,
+        });
 
-    // Définir les coordonnées de Paris
-    const parisCoordinates = Cesium.Cartesian3.fromDegrees(2.3522, 48.8566);
+        // Définir les coordonnées de Paris
+        const parisCoordinates = Cesium.Cartesian3.fromDegrees(2.3522, 48.8566);
 
-    // Déplacer la caméra vers Paris avec une altitude ajustée pour une vue d'ensemble de la ville
-    viewer.camera.flyTo({
-        destination: Cesium.Cartesian3.fromDegrees(2.3522, 48.8566, 20000), // Ajouter l'altitude ici (50000 mètres)
-        orientation: {
-            heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
-            pitch: Cesium.Math.toRadians(-90), // Inclinaison de la caméra en degrés
-            roll: 0 // Rotation de la caméra en degrés
-        },
-    });
-
-    // Add 3D Tiles tileset.
-    const tileset = viewer.scene.primitives.add(
-        new Cesium.Cesium3DTileset({
-        url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyAuosDPx4wvSs6L__ZM1AtcJLjTaGq2P7w",
-        // This property is required to display attributions as required.
-        showCreditsOnScreen: true,
-        })
-    );
-
-    // Define the zoomToViewport function
-    function zoomToViewport(viewport) {
+        // Déplacer la caméra vers Paris avec une altitude ajustée pour une vue d'ensemble de la ville
         viewer.camera.flyTo({
-            destination: Cesium.Rectangle.fromDegrees(
-                viewport.getSouthWest().lng(), 
-                viewport.getSouthWest().lat(), 
-                viewport.getNorthEast().lng(), 
-                viewport.getNorthEast().lat()
-            ),
+            destination: Cesium.Cartesian3.fromDegrees(2.3522, 48.8566, 20000), // Ajouter l'altitude ici (50000 mètres)
+            orientation: {
+                heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
+                pitch: Cesium.Math.toRadians(-90), // Inclinaison de la caméra en degrés
+                roll: 0 // Rotation de la caméra en degrés
+            },
         });
-    }
 
-    function initAutocomplete() {
-        const autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById("pacViewPlace"),
-        {
-            fields: [
-            "geometry",
-            "name",
-            ],
-        }
+        // Add 3D Tiles tileset.
+        const tileset = viewer.scene.primitives.add(
+            new Cesium.Cesium3DTileset({
+            url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyAuosDPx4wvSs6L__ZM1AtcJLjTaGq2P7w",
+            // This property is required to display attributions as required.
+            showCreditsOnScreen: true,
+            })
         );
-        autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        if (!place.geometry || !place.geometry.viewport) {
-            window.alert("No viewport for input: " + place.name);
-            return;
+
+        // Define the zoomToViewport function
+        function zoomToViewport(viewport) {
+            viewer.camera.flyTo({
+                destination: Cesium.Rectangle.fromDegrees(
+                    viewport.getSouthWest().lng(), 
+                    viewport.getSouthWest().lat(), 
+                    viewport.getNorthEast().lng(), 
+                    viewport.getNorthEast().lat()
+                ),
+            });
         }
-        zoomToViewport(place.geometry.viewport);
-        });
-    }
+
+        function initAutocomplete() {
+            const autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById("pacViewPlace"),
+            {
+                fields: [
+                "geometry",
+                "name",
+                ],
+            }
+            );
+            autocomplete.addListener("place_changed", () => {
+            const place = autocomplete.getPlace();
+            if (!place.geometry || !place.geometry.viewport) {
+                window.alert("No viewport for input: " + place.name);
+                return;
+            }
+            zoomToViewport(place.geometry.viewport);
+            });
+        }
     </script>
     <script
-    async=""
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuosDPx4wvSs6L__ZM1AtcJLjTaGq2P7w&libraries=places&callback=initAutocomplete"
+        async=""
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuosDPx4wvSs6L__ZM1AtcJLjTaGq2P7w&libraries=places&callback=initAutocomplete"
     ></script>
 </body>
 </html>
