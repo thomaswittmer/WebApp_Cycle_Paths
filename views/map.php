@@ -17,35 +17,60 @@
 
     <div id="app">
         
-        <!-- Barre latéral pour choisir les paramètres -->
+        <!-- Barre latérale pour choisir les paramètres -->
         <div class="barre_laterale">
-            <form id="Lumi" method='POST' action=''>
-                Type de luminosité :<br>
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="jour"> Jour<br>
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="nuit_avec"> Nuit avec éclairage<br>
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="nuit_sans"> Nuit sans éclairage<br>
-            </form>
-
-            <!-- Example split danger button -->
-            <div class="btn-group">
-                <button type="button" class="btn btn-secondary">Sélectionner la météo</button>
-                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <form>
-                        <div class="dropdown-item">
-                            <input class="form-check-input mr-2" type="checkbox" value="pluie"> Pluie<br>
-                        </div>
-                        <div class="dropdown-item">
-                            <input class="form-check-input mr-2" type="checkbox" value="brouillard"> Brouillard<br>
-                        </div>
-                        <div class="dropdown-item">
-                            <input class="form-check-input mr-2" type="checkbox" value="soleil"> Soleil<br>
-                        </div>
-                    </form>
+            <!-- LUMINOSITE -->
+            <div class="boutons-barre">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">Luminosité</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <form>
+                            <div class="dropdown-item">
+                                <input class="form-check-input mr-2" type="checkbox" value="jour"> Jour<br>
+                            </div>
+                            <div class="dropdown-item">
+                                <input class="form-check-input mr-2" type="checkbox" value="nuit_avec"> Nuit avec éclairage<br>
+                            </div>
+                            <div class="dropdown-item">
+                                <input class="form-check-input mr-2" type="checkbox" value="nuit_sans"> Nuit sans éclairage<br>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
+                <!-- METEO -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">Sélectionner la météo</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <form>
+                            <div class="dropdown-item">
+                                <input class="form-check-input mr-2" type="checkbox" value="pluie"> Pluie<br>
+                            </div>
+                            <div class="dropdown-item">
+                                <input class="form-check-input mr-2" type="checkbox" value="brouillard"> Brouillard<br>
+                            </div>
+                            <div class="dropdown-item">
+                                <input class="form-check-input mr-2" type="checkbox" value="soleil"> Soleil<br>
+                            </div>
+                            <div class="dropdown-item">
+                                <input class="form-check-input mr-2" type="checkbox" value="neige"> Neige<br>
+                            </div>
+                            <div class="dropdown-item">
+                                <input class="form-check-input mr-2" type="checkbox" value="vent"> Vent<br>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
             </div>
+
         </div>
 
         <!-- Contenu de la page d'accueil -->
