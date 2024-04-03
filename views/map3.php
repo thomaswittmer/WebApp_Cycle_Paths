@@ -41,13 +41,6 @@
             padding : 5px;
         }
 
-        #cesiumContainer {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
         /* Style pour le header */
         header {
             background-color: #333; /* Couleur de fond */
@@ -97,44 +90,6 @@
             margin-left: 10px; /* Espacement à gauche */
         }
 
-        .carte {
-            grid-column: 2;
-            display: grid;
-            grid-template-rows: 650px 1fr;
-            height: 100%;
-            width: 100%;
-        }
-
-        .curseur-date {
-            grid-row: 2;
-            width: 100%;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        #dateSlider {
-            width: 80%;
-        }
-
-        input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 10px;
-            background: #d3d3d3; /* Couleur de fond du curseur */
-        }
-
-        input[type="range"]::-moz-range-thumb {
-            width: 50px; /* Largeur de l'image */
-            height: 50px; /* Hauteur de l'image */
-            background: url('../assets/images/curseur.png'); /* Chemin vers l'image */
-            background-size: contain;
-            cursor: pointer;
-            border: none;
-        }
-  
-
-
     </style>
 </head>
 <body>
@@ -161,9 +116,8 @@
             <!-- LUMINOSITE -->
             <div class="boutons-barre">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Luminosité</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Luminosité
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <form>
@@ -182,9 +136,8 @@
 
                 <!-- METEO -->
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Sélectionner la météo</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sélectionner la météo
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <form>
@@ -258,7 +211,7 @@
         // Add 3D Tiles tileset.
         const tileset = viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
-                url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
+                //url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
                 // This property is required to display attributions as required.
                 showCreditsOnScreen: true,
             })
@@ -314,7 +267,7 @@
 
     <script
         async=""
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
+        src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
