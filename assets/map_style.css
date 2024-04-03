@@ -47,13 +47,7 @@
     padding: 0;
 
 }
-body, html {
-    background-color: antiquewhite;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-}
+
 
 input[type="range"] {
     -webkit-appearance: none;
@@ -66,7 +60,7 @@ input[type="range"] {
   input[type="range"]::-moz-range-thumb {
     width: 50px; /* Largeur de l'image */
     height: 50px; /* Hauteur de l'image */
-    background: url('../images/curseur.png') center center no-repeat; /* Chemin vers l'image */
+    background: url('images/curseur.png') center center no-repeat; /* Chemin vers l'image */
     background-size: contain;
     cursor: pointer;
     border: none;
