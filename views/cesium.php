@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>CesiumJS 3D Tiles Simple Demo</title>
+  <link rel="icon" type="image/png" href="/assets/images/safelane.png" sizes="32x32 64x64">
   <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
   <link href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
   <meta name="description" content="Une démo simple de CesiumJS utilisant des tuiles 3D.">
