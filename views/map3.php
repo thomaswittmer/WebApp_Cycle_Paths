@@ -153,12 +153,61 @@
     
     <div id=app>
         <div class="barre_laterale">
-            <form id="Lumi" method='POST' action=''>
-                Type de luminosité :<br>
-                <input type="radio" name="lum" value="jour"> Jour<br>
-                <input type="radio" name="lum" value="nuit_avec"> Nuit avec éclairage<br>
-                <input type="radio" name="lum" value="nuit_sans"> Nuit sans éclairage<br>
-            </form>
+            <!-- Barre latérale pour choisir les paramètres -->
+        <div class="barre_laterale">
+            <!-- LUMINOSITE -->
+            <div class="boutons-barre">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">Luminosité</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <form>
+                            <div class="dropdown-item lumi">
+                                <input class="form-check-input mr-2" type="checkbox" value="jour"> Jour<br>
+                            </div>
+                            <div class="dropdown-item lumi">
+                                <input class="form-check-input mr-2" type="checkbox" value="nuit_avec"> Nuit avec éclairage<br>
+                            </div>
+                            <div class="dropdown-item lumi">
+                                <input class="form-check-input mr-2" type="checkbox" value="nuit_sans"> Nuit sans éclairage<br>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- METEO -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">Sélectionner la météo</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <form>
+                            <div class="dropdown-item meteo">
+                                <input class="form-check-input mr-2" type="checkbox" value="pluie"> Pluie<br>
+                            </div>
+                            <div class="dropdown-item meteo">
+                                <input class="form-check-input mr-2" type="checkbox" value="brouillard"> Brouillard<br>
+                            </div>
+                            <div class="dropdown-item meteo">
+                                <input class="form-check-input mr-2" type="checkbox" value="soleil"> Soleil<br>
+                            </div>
+                            <div class="dropdown-item meteo">
+                                <input class="form-check-input mr-2" type="checkbox" value="neige"> Neige<br>
+                            </div>
+                            <div class="dropdown-item meteo">
+                                <input class="form-check-input mr-2" type="checkbox" value="vent"> Vent<br>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
+            </div>
+
+        </div>
         </div>
         <div class="carte">
             <div id="cesiumContainer"></div>
@@ -249,6 +298,7 @@
         async=""
         src="https://maps.googleapis.com/maps/api/js?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
