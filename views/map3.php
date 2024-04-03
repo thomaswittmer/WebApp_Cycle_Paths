@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="assets/map_style.css">
     <style>
         body{
             background-color: #333;
@@ -38,13 +39,6 @@
             width: 260px;
             color: white;
             padding : 20px;
-        }
-
-        #cesiumContainer {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
         }
 
         /* Style pour le header */
@@ -161,8 +155,8 @@
             <!-- LUMINOSITE -->
             <div class="boutons-barre">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                        Luminosité <span class="visually-hidden">Toggle Dropdown</span>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Luminosité
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <form>
@@ -181,8 +175,8 @@
 
                 <!-- METEO -->
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                        Météo <span class="visually-hidden">Toggle Dropdown</span>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sélectionner la météo
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <form>
@@ -258,7 +252,7 @@
         // Add 3D Tiles tileset.
         const tileset = viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
-                url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
+                //url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
                 // This property is required to display attributions as required.
                 showCreditsOnScreen: true,
             })
@@ -299,7 +293,7 @@
 
     <script
         async=""
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
+        src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
