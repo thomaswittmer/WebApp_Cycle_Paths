@@ -2,13 +2,12 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <title>SAFELANE</title>
+    <title>CesiumJS 3D Tiles Places API Integration Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/vue@2"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="assets/map_style.css">
     <style>
         body{
@@ -206,7 +205,7 @@
 
         </div>
         <div class="carte">
-            <div id="map"></div>
+            <div id="cesiumContainer"></div>
             <!-- curseur temporel -->
             <div class="curseur-date">
                     <input type="range" min="2000" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
@@ -218,8 +217,84 @@
 
 
 
+
     <script src="/assets/map.js"></script>
-    <script src="/assets/leaflet.js"></script>
+    <script>
+        // Enable simultaneous requests.
+        Cesium.RequestScheduler.requestsByServer["tile.googleapis.com:443"] = 18;
+
+        // Create the viewer.
+        const viewer = new Cesium.Viewer("cesiumContainer", {
+            imageryProvider: false,
+            baseLayerPicker: false,
+            requestRenderMode: true,
+            geocoder: false,
+            globe: false,
+            timeline: false,
+            animation: false
+        });
+
+        viewer.scene.skyAtmosphere.show = true;
+
+        // Définir les coordonnées de Paris
+        const parisCoordinates = Cesium.Cartesian3.fromDegrees(2.3522, 48.8566);
+
+        // Déplacer la caméra vers Paris avec une altitude ajustée pour une vue d'ensemble de la ville
+        viewer.camera.flyTo({
+            destination: Cesium.Cartesian3.fromDegrees(2.3522, 48.8566, 20000), // Ajouter l'altitude ici (50000 mètres)
+            orientation: {
+                heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
+                pitch: Cesium.Math.toRadians(-90), // Inclinaison de la caméra en degrés
+                roll: 0 // Rotation de la caméra en degrés
+            },
+        });
+
+        // Add 3D Tiles tileset.
+        const tileset = viewer.scene.primitives.add(
+            new Cesium.Cesium3DTileset({
+                //url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
+                // This property is required to display attributions as required.
+                showCreditsOnScreen: true,
+            })
+        );
+
+        // Define the zoomToViewport function
+        function zoomToViewport(viewport) {
+            viewer.camera.flyTo({
+                destination: Cesium.Rectangle.fromDegrees(
+                    viewport.getSouthWest().lng(), 
+                    viewport.getSouthWest().lat(), 
+                    viewport.getNorthEast().lng(), 
+                    viewport.getNorthEast().lat()
+                ),
+            });
+        }
+
+        function initAutocomplete() {
+            const autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById("pacViewPlace"),
+            {
+                fields: [
+                "geometry",
+                "name",
+                ],
+            }
+            );
+            autocomplete.addListener("place_changed", () => {
+            const place = autocomplete.getPlace();
+            if (!place.geometry || !place.geometry.viewport) {
+                window.alert("No viewport for input: " + place.name);
+                return;
+            }
+            zoomToViewport(place.geometry.viewport);
+            });
+        }
+    </script>
+
+    <script
+        async=""
+        src="https://maps.googleapis.com/maps/api/js?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
