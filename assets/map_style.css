@@ -57,14 +57,18 @@ input[type="range"] {
     background: #d3d3d3; /* Couleur de fond du curseur */
   }
 
-  input[type="range"]::-moz-range-thumb {
+input[type="range"]::-webkit-slider-thumb,
+input[type="range"]::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
     width: 50px; /* Largeur de l'image */
     height: 50px; /* Hauteur de l'image */
-    background: url('images/curseur.png') center center no-repeat; /* Chemin vers l'image */
+    background: url('curseur.png') center center no-repeat; /* Chemin vers l'image */
     background-size: contain;
     cursor: pointer;
     border: none;
-  }
+}
+  
 
 p {
     color: white;

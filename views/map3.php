@@ -5,7 +5,6 @@
     <title>CesiumJS 3D Tiles Places API Integration Demo</title>
     <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
     <link href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/map_style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -24,7 +23,7 @@
             flex-direction: row;
             align-items: start;
             background-color: #333;
-
+            padding: 30px;
         }
 
         .barre_laterale{
@@ -38,7 +37,7 @@
             height: 73.5vh;
             width: 260px;
             color: white;
-            padding : 5px;
+            padding : 20px;
         }
 
         #cesiumContainer {
@@ -110,6 +109,7 @@
             width: 100%;
             text-align: center;
             margin-top: 20px;
+            color: white;
         }
 
         #dateSlider {
@@ -124,14 +124,18 @@
             background: #d3d3d3; /* Couleur de fond du curseur */
         }
 
+        input[type="range"]::-webkit-slider-thumb,
         input[type="range"]::-moz-range-thumb {
+            -webkit-appearance: none;
+            appearance: none;
             width: 50px; /* Largeur de l'image */
             height: 50px; /* Hauteur de l'image */
-            background: url('../assets/images/curseur.png'); /* Chemin vers l'image */
+            background: url('../assets/images/safelane.png') center center no-repeat; /* Chemin vers l'image */
             background-size: contain;
             cursor: pointer;
             border: none;
         }
+
     </style>
 </head>
 <body>
@@ -152,15 +156,13 @@
 
     
     <div id=app>
-        <div class="barre_laterale">
             <!-- Barre latérale pour choisir les paramètres -->
         <div class="barre_laterale">
             <!-- LUMINOSITE -->
             <div class="boutons-barre">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Luminosité</button>
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
+                        Luminosité <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <form>
@@ -179,9 +181,8 @@
 
                 <!-- METEO -->
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Sélectionner la météo</button>
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
+                        Météo <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <form>
@@ -206,8 +207,8 @@
 
                 <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
             </div>
+            
 
-        </div>
         </div>
         <div class="carte">
             <div id="cesiumContainer"></div>
@@ -235,6 +236,8 @@
             requestRenderMode: true,
             geocoder: false,
             globe: false,
+            timeline: false,
+            animation: false
         });
 
         viewer.scene.skyAtmosphere.show = true;
@@ -255,7 +258,7 @@
         // Add 3D Tiles tileset.
         const tileset = viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
-                url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
+                url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
                 // This property is required to display attributions as required.
                 showCreditsOnScreen: true,
             })
@@ -296,7 +299,7 @@
 
     <script
         async=""
-        src="https://maps.googleapis.com/maps/api/js?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
