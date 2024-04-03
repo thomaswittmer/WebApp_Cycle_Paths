@@ -6,6 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
     <link href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/map_style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
@@ -96,16 +97,42 @@
             margin-left: 10px; /* Espacement à gauche */
         }
 
+        .carte {
+            grid-column: 2;
+            display: grid;
+            grid-template-rows: 650px 1fr;
+            height: 100%;
+            width: 100%;
+        }
+
         .curseur-date {
             grid-row: 2;
             width: 100%;
-            margin: 50px auto;
             text-align: center;
+            margin-top: 20px;
         }
 
         #dateSlider {
             width: 80%;
         }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 10px;
+            background: #d3d3d3; /* Couleur de fond du curseur */
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 50px; /* Largeur de l'image */
+            height: 50px; /* Hauteur de l'image */
+            background: url('../assets/images/curseur.png'); /* Chemin vers l'image */
+            background-size: contain;
+            cursor: pointer;
+            border: none;
+        }
+  
 
 
     </style>
@@ -136,17 +163,21 @@
                 <input type="radio" name="lum" value="nuit_sans"> Nuit sans éclairage<br>
             </form>
         </div>
-        <div id="cesiumContainer"></div>
+        <div class="carte">
+            <div id="cesiumContainer"></div>
+            <!-- curseur temporel -->
+            <div class="curseur-date">
+                    <input type="range" min="2000" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
+                    <p>Date sélectionnée : {{ selectedYear }}</p>
+            </div>
+        </div>
     </div>
-    <div class="curseur-date">
-        <input type="range" min="2000" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
-        <p>Date sélectionnée : {{ selectedYear }}</p>
-    </div>
 
 
 
 
 
+    <script src="/assets/map.js"></script>
     <script>
         // Enable simultaneous requests.
         Cesium.RequestScheduler.requestsByServer["tile.googleapis.com:443"] = 18;
@@ -159,6 +190,8 @@
             geocoder: false,
             globe: false,
         });
+
+        viewer.scene.skyAtmosphere.show = true;
 
         // Définir les coordonnées de Paris
         const parisCoordinates = Cesium.Cartesian3.fromDegrees(2.3522, 48.8566);
@@ -176,11 +209,26 @@
         // Add 3D Tiles tileset.
         const tileset = viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
-            url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
-            // This property is required to display attributions as required.
-            showCreditsOnScreen: true,
+                url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
+                // This property is required to display attributions as required.
+                showCreditsOnScreen: true,
             })
         );
+
+        // Promesse pour garantir que le marqueur est ajouté après le chargement du tileset
+        tileset.readyPromise.then(function(tileset) {
+            // Créer un marqueur à Paris
+            const parisMarker = viewer.entities.add({
+                name: 'Paris Marker',
+                position: Cesium.Cartesian3.fromDegrees(2.3522, 48.8566), // Coordonnées de Paris
+                point: {
+                    pixelSize: 10,
+                    color: Cesium.Color.RED,
+                    outlineColor: Cesium.Color.WHITE,
+                    outlineWidth: 2,
+                },
+            });
+        });
 
         // Define the zoomToViewport function
         function zoomToViewport(viewport) {
@@ -214,6 +262,7 @@
             });
         }
     </script>
+
     <script
         async=""
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"

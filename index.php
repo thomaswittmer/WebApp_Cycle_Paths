@@ -38,6 +38,11 @@ Flight::route('/cesium', function(){
     Flight::render('cesium');
 });
 
+Flight::route('/mapJeanne', function(){
+    Flight::render('mapJeanne');
+});
+
+
 Flight::start();
 
 ?>
