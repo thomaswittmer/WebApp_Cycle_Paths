@@ -2,29 +2,38 @@
     display: flex;
     flex-direction: row;
     align-items: start;
+    background-color: antiquewhite;
 }
 
 .barre_laterale{
-    background-color: antiquewhite;
+    
     grid-column: 1;
     align-self: start;
     height: 100vh;
     width: 400px;
 }
 
-.carte{
+#plan {
+    margin: 20px;
+}
+
+.btn-group{
+    margin: 20px;
+}
+
+.carte {
     grid-column: 2;
     display: grid;
-    grid-template-rows: 550px 1fr;
-    height: 100vh;
-    width: 1100px;
+    grid-template-rows: 650px 1fr;
+    height: 100%;
+    width: 100%;
 }
 
 .curseur-date {
     grid-row: 2;
     width: 100%;
-    margin: 50px auto;
     text-align: center;
+    margin-top: 20px;
 }
 
 #dateSlider {
@@ -36,10 +45,30 @@
     height: 100%;
     margin: 0;
     padding: 0;
+
 }
 body, html {
+    background-color: antiquewhite;
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
 }
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    background: #d3d3d3; /* Couleur de fond du curseur */
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 50px; /* Largeur de l'image */
+    height: 50px; /* Hauteur de l'image */
+    background: url('../images/curseur.png') center center no-repeat; /* Chemin vers l'image */
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+  }
+  
