@@ -132,9 +132,6 @@
             cursor: pointer;
             border: none;
         }
-  
-
-
     </style>
 </head>
 <body>
@@ -209,26 +206,11 @@
         // Add 3D Tiles tileset.
         const tileset = viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
-                url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
+                url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
                 // This property is required to display attributions as required.
                 showCreditsOnScreen: true,
             })
         );
-
-        // Promesse pour garantir que le marqueur est ajouté après le chargement du tileset
-        tileset.readyPromise.then(function(tileset) {
-            // Créer un marqueur à Paris
-            const parisMarker = viewer.entities.add({
-                name: 'Paris Marker',
-                position: Cesium.Cartesian3.fromDegrees(2.3522, 48.8566), // Coordonnées de Paris
-                point: {
-                    pixelSize: 10,
-                    color: Cesium.Color.RED,
-                    outlineColor: Cesium.Color.WHITE,
-                    outlineWidth: 2,
-                },
-            });
-        });
 
         // Define the zoomToViewport function
         function zoomToViewport(viewport) {
@@ -265,7 +247,7 @@
 
     <script
         async=""
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
+        src="https://maps.googleapis.com/maps/api/js?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
     ></script>
 </body>
 </html>
