@@ -65,4 +65,7 @@ input[type="range"] {
     cursor: pointer;
     border: none;
   }
-  
+
+p {
+    color: white;
+}
