@@ -5,10 +5,10 @@
     <title>CesiumJS 3D Tiles Places API Integration Demo</title>
     <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
     <link href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/map_style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="assets/map_style.css">
     <style>
         body{
             background-color: #333;
@@ -24,7 +24,7 @@
             flex-direction: row;
             align-items: start;
             background-color: #333;
-
+            padding: 30px;
         }
 
         .barre_laterale{
@@ -38,7 +38,7 @@
             height: 73.5vh;
             width: 260px;
             color: white;
-            padding : 5px;
+            padding : 20px;
         }
 
         /* Style pour le header */
@@ -90,6 +90,46 @@
             margin-left: 10px; /* Espacement à gauche */
         }
 
+        .carte {
+            grid-column: 2;
+            display: grid;
+            grid-template-rows: 650px 1fr;
+            height: 100%;
+            width: 100%;
+        }
+
+        .curseur-date {
+            grid-row: 2;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+        }
+
+        #dateSlider {
+            width: 80%;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 10px;
+            background: #d3d3d3; /* Couleur de fond du curseur */
+        }
+
+        input[type="range"]::-webkit-slider-thumb,
+        input[type="range"]::-moz-range-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 50px; /* Largeur de l'image */
+            height: 50px; /* Hauteur de l'image */
+            background: url('../assets/images/safelane.png') center center no-repeat; /* Chemin vers l'image */
+            background-size: contain;
+            cursor: pointer;
+            border: none;
+        }
+
     </style>
 </head>
 <body>
@@ -110,7 +150,6 @@
 
     
     <div id=app>
-        <div class="barre_laterale">
             <!-- Barre latérale pour choisir les paramètres -->
         <div class="barre_laterale">
             <!-- LUMINOSITE -->
@@ -162,8 +201,8 @@
 
                 <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
             </div>
+            
 
-        </div>
         </div>
         <div class="carte">
             <div id="cesiumContainer"></div>
@@ -191,6 +230,8 @@
             requestRenderMode: true,
             geocoder: false,
             globe: false,
+            timeline: false,
+            animation: false
         });
 
         viewer.scene.skyAtmosphere.show = true;
@@ -216,21 +257,6 @@
                 showCreditsOnScreen: true,
             })
         );
-
-        // Promesse pour garantir que le marqueur est ajouté après le chargement du tileset
-        tileset.readyPromise.then(function(tileset) {
-            // Créer un marqueur à Paris
-            const parisMarker = viewer.entities.add({
-                name: 'Paris Marker',
-                position: Cesium.Cartesian3.fromDegrees(2.3522, 48.8566), // Coordonnées de Paris
-                point: {
-                    pixelSize: 10,
-                    color: Cesium.Color.RED,
-                    outlineColor: Cesium.Color.WHITE,
-                    outlineWidth: 2,
-                },
-            });
-        });
 
         // Define the zoomToViewport function
         function zoomToViewport(viewport) {
