@@ -5,6 +5,9 @@
     <title>CesiumJS 3D Tiles Places API Integration Demo</title>
     <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
     <link href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/map_style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         body{
             background-color: #333;
@@ -12,7 +15,7 @@
             margin: 0;
             padding: 0;
             max-height: 100vh;
-            overflow: hidden;
+            /*overflow: hidden;*/
         }
 
         #app{
@@ -31,7 +34,7 @@
             background-color: #333;
             grid-column: 1;
             align-self: start;
-            height: 100vh;
+            height: 73.5vh;
             width: 260px;
             color: white;
             padding : 5px;
@@ -93,6 +96,18 @@
             margin-left: 10px; /* Espacement à gauche */
         }
 
+        .curseur-date {
+            grid-row: 2;
+            width: 100%;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        #dateSlider {
+            width: 80%;
+        }
+
+
     </style>
 </head>
 <body>
@@ -121,10 +136,12 @@
                 <input type="radio" name="lum" value="nuit_sans"> Nuit sans éclairage<br>
             </form>
         </div>
-        
         <div id="cesiumContainer"></div>
     </div>
-
+    <div class="curseur-date">
+        <input type="range" min="2000" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
+        <p>Date sélectionnée : {{ selectedYear }}</p>
+    </div>
 
 
 
@@ -159,7 +176,7 @@
         // Add 3D Tiles tileset.
         const tileset = viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
-            url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyAuosDPx4wvSs6L__ZM1AtcJLjTaGq2P7w",
+            url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
             // This property is required to display attributions as required.
             showCreditsOnScreen: true,
             })
@@ -199,7 +216,10 @@
     </script>
     <script
         async=""
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuosDPx4wvSs6L__ZM1AtcJLjTaGq2P7w&libraries=places&callback=initAutocomplete"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
     ></script>
 </body>
 </html>
+
+<!-- clef Gabin : AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80 -->
+<!-- clef Thomas : AIzaSyAuosDPx4wvSs6L__ZM1AtcJLjTaGq2P7w -->
