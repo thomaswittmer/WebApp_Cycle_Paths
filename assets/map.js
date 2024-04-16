@@ -113,9 +113,26 @@ pistesLayer = null;
 acciLayer = null;
 var map = L.map('map').setView([48.866667, 2.333333], 12);
 
-var fondCarte = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+var fondCarte = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+}).addTo(this.map);
+
+var fondCarte2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 28,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+
+
+// passage en mode plan si la carte est très zoomée et en mode aérien si on est loin de la zone
+map.on('zoomend', () => {
+    if (this.map.getZoom() >= 18) {
+        this.map.removeLayer(fondCarte);
+        this.map.addLayer(fondCarte2);
+    } else {
+        this.map.removeLayer(fondCarte2);
+        this.map.addLayer(fondCarte);
+    }
+});
 
 
 // Récupération de toutes les pistes cyclables
