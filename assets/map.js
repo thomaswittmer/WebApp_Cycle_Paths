@@ -64,7 +64,6 @@ checkboxes.forEach(function(check) {
 // PLAN VELO
 let plan = document.getElementById("plan");
 var planVisible = false; // Indique si le plan vélo est visible ou non
-let planLayer = null;
 
 plan.addEventListener('click', function() {
     var button = this;
@@ -88,20 +87,8 @@ plan.addEventListener('click', function() {
         // Si le plan vélo est caché, l'afficher
         button.textContent = 'Masquer le plan vélo';
         button.classList.add('clique'); // Ajouter la classe de grisage
-
-        // Récupération de toutes les pistes cyclables
-        fetch('recupere_plan')
-        .then(result => result.json())
-        .then(result => {
-
-        planLayer = L.geoJSON(result, {
-            style: {
-                color: 'blue', // Couleur de la ligne
-                weight: 2, // Épaisseur de la ligne
-                opacity: 1 // Opacité de la ligne
-            }
-        }).addTo(map);
-        })
+        planLayer.addTo(map);
+        
     }
     // Mettre à jour l'état du bouton
     planVisible = !planVisible;
@@ -109,8 +96,9 @@ plan.addEventListener('click', function() {
 });
 
 // CARTE
-pistesLayer = null;
-acciLayer = null;
+var pistesLayer = null;
+var acciLayer = null;
+var planLayer = null;
 var map = L.map('map').setView([48.866667, 2.333333], 12);
 
 var fondCarte = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -164,4 +152,19 @@ fetch('recupere_acci')
             });
         }
     }).addTo(map);
+})
+
+
+// Récupération de toutes les pistes cyclables
+fetch('recupere_plan')
+.then(result => result.json())
+.then(result => {
+
+planLayer = L.geoJSON(result, {
+    style: {
+        color: 'blue', // Couleur de la ligne
+        weight: 2, // Épaisseur de la ligne
+        opacity: 1 // Opacité de la ligne
+    }
+});
 })
