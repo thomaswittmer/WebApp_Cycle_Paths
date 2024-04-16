@@ -1,17 +1,17 @@
-#plan {
-    margin: 20px;
-}
-
-.btn-group{
-    margin: 20px;
-}
-
 .carte {
     grid-column: 2;
     display: grid;
     grid-template-rows: 570px 1fr;
     height: 100%;
     width: 100%;
+}
+
+.btn {
+    margin-bottom: 20px; /* Réglez la marge comme vous le souhaitez */
+}
+
+.clique {
+    opacity: 0.5; /* Réglez l'opacité pour griser le bouton */
 }
 
 .curseur-date {
@@ -56,4 +56,11 @@ input[type="range"]::-moz-range-thumb {
 
 p {
     color: white;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
