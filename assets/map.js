@@ -23,24 +23,31 @@ let app = Vue.createApp({
 
 }).mount('#app');
 
-// LUMINOSITE
+// PARAMETRES
 var checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
 // Ajouter un écouteur d'événements à chaque bouton radio
 checkboxes.forEach(function(check) {
     check.addEventListener('change', function() {
         let lumi_select = [];
+        let meteo_select = [];
         // Parcourir toutes les cases cochées et les ajouter à FormData
         checkboxes.forEach(function(checkbox) {
             if (checkbox.checked) {
-                lumi_select.push(checkbox.value);
+                if (checkbox.parentNode.classList.contains('lumi')) {
+                    // Si la case à cocher appartient à la classe "dropdown-item lumi"
+                    lumi_select.push(checkbox.value);
+                } else if (checkbox.parentNode.classList.contains('meteo')) {
+                    // Si la case à cocher appartient à la classe "dropdown-item meteo"
+                    meteo_select.push(checkbox.value);
+                }
             }
         });
-
         // Créer un objet FormData et ajouter les valeurs des cases cochées comme un tableau
         let donnees = new FormData();
         donnees.append('lumi', lumi_select); // Utilisation de 'lumi[]' pour créer un tableau de valeurs
-
+        donnees.append('meteo', meteo_select); // Utilisation de 'meteo[]' pour créer un tableau de valeurs
+        console.log(donnees);
         fetch('/lumino', {
         method: 'post',
         body: donnees
@@ -54,32 +61,90 @@ checkboxes.forEach(function(check) {
 });
 
 
-// METEO
-var dropdownCheckboxes = document.querySelectorAll('.dropdown-item input[type="checkbox"]');
+// PLAN VELO
+let plan = document.getElementById("plan");
+var planVisible = false; // Indique si le plan vélo est visible ou non
+let planLayer = null;
 
-// Ajouter un écouteur d'événements à chaque case à cocher dans le menu déroulant
-dropdownCheckboxes.forEach(function(check) {
-    check.addEventListener('change', function() {
-        let lumi_select = [];
-        // Parcourir toutes les cases cochées dans le menu déroulant et les ajouter à l'array lumi_select
-        dropdownCheckboxes.forEach(function(checkbox) {
-            if (checkbox.checked) {
-                lumi_select.push(checkbox.value);
+plan.addEventListener('click', function() {
+    var button = this;
+    // Vérifie l'état actuel du bouton
+    if (planVisible) {
+        // Si le plan vélo est visible, le masquer
+        button.textContent = 'Plan Vélo 2024';
+        button.classList.remove('clique'); // Supprimer la classe de grisage
+        console.log(planLayer);
+        map.removeLayer(planLayer);
+        pistesLayer.addTo(map);
+        acciLayer.addTo(map);
+
+    } else {
+        // supprimer les autres couches sauf la couche de base
+        map.eachLayer(function(layer) {
+            if (layer !== fondCarte) {
+                map.removeLayer(layer);
             }
         });
+        // Si le plan vélo est caché, l'afficher
+        button.textContent = 'Masquer le plan vélo';
+        button.classList.add('clique'); // Ajouter la classe de grisage
 
-        // Créer un objet FormData et ajouter les valeurs des cases cochées comme un tableau
-        let donnees = new FormData();
-        donnees.append('meteo', lumi_select); // Utilisation de 'lumi[]' pour créer un tableau de valeurs
+        // Récupération de toutes les pistes cyclables
+        fetch('recupere_plan')
+        .then(result => result.json())
+        .then(result => {
 
-        console.log(donnees);
-        fetch('/lumino', {
-            method: 'post',
-            body: donnees
+        planLayer = L.geoJSON(result, {
+            style: {
+                color: 'blue', // Couleur de la ligne
+                weight: 2, // Épaisseur de la ligne
+                opacity: 1 // Opacité de la ligne
+            }
+        }).addTo(map);
         })
-        .then(r => r.json())
-        .then(r => {
-            console.log(r)
-        });
-    });
+    }
+    // Mettre à jour l'état du bouton
+    planVisible = !planVisible;
+
 });
+
+// CARTE
+pistesLayer = null;
+acciLayer = null;
+var map = L.map('map').setView([48.866667, 2.333333], 12);
+
+var fondCarte = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+
+// Récupération de toutes les pistes cyclables
+fetch('recupere_pistes')
+.then(result => result.json())
+.then(result => {
+    pistesLayer = L.geoJSON(result, {
+        style: {
+            color: 'blue', // Couleur de la ligne
+            weight: 2, // Épaisseur de la ligne
+            opacity: 1 // Opacité de la ligne
+        }
+    }).addTo(map);
+})
+
+// Récupération de tous les accidents
+fetch('recupere_acci')
+.then(result => result.json())
+.then(result => {
+    acciLayer = L.geoJSON(result, {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 2.5,
+                fillColor: "red",
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            });
+        }
+    }).addTo(map);
+})
