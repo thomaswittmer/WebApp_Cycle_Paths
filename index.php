@@ -1,7 +1,5 @@
 <?php
-
 require 'flight/Flight.php';
-
 $server = 'localhost';
 $port = '5432';
 $base= 'amenagement_velo_paris';
@@ -69,15 +67,16 @@ Flight::route('/mapJeanne', function(){
 Flight::route('GET /recupere_acci', function(){
     $link = Flight::get('BDD');
 
-    $accidents = pg_query($link, "SELECT ST_AsGeoJSON(geom) AS geom FROM accident_velo_2010_2022");
+    $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(geom) AS geo FROM accident_velo_2010_2022");
 
     $features = [];
     while ($row = pg_fetch_assoc($accidents)) {
-        $geometry = json_decode($row['geom']);
+        $geometry = json_decode($row['geo']);
+        unset($row['geom']); // on retire la colonne geom pour ne garder que la geo en geojson
         $features[] = array(
             'type' => 'Feature',
             'geometry' => $geometry,
-            'properties' => array() 
+            'properties' => $row
         );
     }
 
@@ -92,15 +91,16 @@ Flight::route('GET /recupere_acci', function(){
 Flight::route('GET /recupere_pistes', function(){
     $link = Flight::get('BDD');
 
-    $accidents = pg_query($link, "SELECT ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geom FROM voie_cyclable_geovelo;");
+    $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geo FROM voie_cyclable_geovelo;");
 
     $features = [];
     while ($row = pg_fetch_assoc($accidents)) {
-        $geometry = json_decode($row['geom']);
+        $geometry = json_decode($row['geo']);
+        unset($row['geom']); // on retire la colonne geom pour ne garder que la geo en geojson
         $features[] = array(
             'type' => 'Feature',
             'geometry' => $geometry,
-            'properties' => array() 
+            'properties' => $row
         );
     }
 
