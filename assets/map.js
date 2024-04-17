@@ -11,52 +11,86 @@ let app = Vue.createApp({
             var acci_annee = accidents.features.filter(feature => {
                 return feature.properties.an === this.selectedYear;
             });
-            var piste_annee = pistes.features.filter(feature => {
+            /*var piste_annee = pistes.features.filter(feature => {
                 return feature.properties.annee <= this.selectedYear;
-            });
+            });*/
                 
             map.removeLayer(acciLayer);
-            map.removeLayer(pistesLayer);
+            // map.removeLayer(pistesLayer);
 
-            // affichage des accidents de l'annee
+            // geojson des accidents de l'annee
             var geojsonAcci = {
                 type: "FeatureCollection",
                 features: acci_annee
             };
 
-            // affichage des pistes de l'annee
-            var geojsonPistes = {
+            // geojson des pistes de l'annee
+            /*var geojsonPistes = {
                 type: "FeatureCollection",
                 features: piste_annee
-            };
-            // Créer une couche GeoJSON avec pointToLayer pour personnaliser l'affichage
-            pistesLayer = L.geoJSON(geojsonPistes, {
-                style: {
-                    color: 'blue', // Couleur de la ligne
-                    weight: 2, // Épaisseur de la ligne
-                    opacity: 1 // Opacité de la ligne
-                }
-            }).addTo(map);
-            
-            // Créer une couche GeoJSON avec pointToLayer pour personnaliser l'affichage
-            acciLayer = L.geoJSON(geojsonAcci, {
-                pointToLayer: function (feature, latlng) {
-                    return L.circleMarker(latlng, {
-                        radius: 2.5,
-                        fillColor: "red",
-                        color: "#000",
-                        weight: 1,
-                        opacity: 1,
-                        fillOpacity: 0.8
-                    });
-                }
-            }).addTo(map);
+            };*/
+            // Création de la nouvelle couche des pistes et affichage sur la carte
+            // pistesLayer = creeCouchePistes(geojsonPistes).addTo(map);
+
+            // Création de la nouvelle couche des accidents et affichage sur la carte
+            acciLayer = creeCoucheAccidents(geojsonAcci).addTo(map);
 
 
         }
     }
 
 }).mount('#app');
+
+
+// crée la couche contenant les pistes contenues dans "objet"
+function creeCouchePistes(objet) {
+    return L.geoJSON(objet, {
+        style: function (feature) {
+            // Récupérer la valeur de la colonne ame_d
+            const ame_d = feature.properties.ame_d;
+
+            // Définir la couleur en fonction de la valeur de ame_d
+            let couleur = null;
+            if (ame_d === 'COULOIR BUS+VELO') {
+                couleur = 'yellow';
+            } else if (ame_d === 'VOIE VERTE' || ame_d === 'AMENAGEMENT MIXTE PIETON VELO HORS VOIE VERTE') {
+                couleur = 'green';
+            } else if (ame_d === 'PISTE CYCLABLE') {
+                couleur = 'blue'; // Couleur par défaut
+            } else if (ame_d === 'BANDE CYCLABLE') {
+                couleur = 'purple'; // Couleur par défaut
+            }
+            else {
+                couleur = 'orange';
+            }
+
+            // Retourner le style avec la couleur définie
+            return {
+                color: couleur, // Couleur de la ligne
+                weight: 2, // Épaisseur de la ligne
+                opacity: 1 // Opacité de la ligne
+            };
+        }
+    });
+}
+
+
+// crée la couche contenant les accidents contenus dans "objet"
+function creeCoucheAccidents(objet) {
+    return L.geoJSON(objet, {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 2.5,
+                fillColor: "red",
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            });
+        }
+    })
+}
+
 
 var accidents = null;
 var pistes = null;
@@ -166,13 +200,7 @@ fetch('recupere_pistes')
 .then(result => result.json())
 .then(result => {
     pistes = result;
-    pistesLayer = L.geoJSON(result, {
-        style: {
-            color: 'blue', // Couleur de la ligne
-            weight: 2, // Épaisseur de la ligne
-            opacity: 1 // Opacité de la ligne
-        }
-    }).addTo(map);
+    pistesLayer = creeCouchePistes(pistes).addTo(map);
 })
 
 // Récupération de tous les accidents
@@ -180,19 +208,7 @@ fetch('recupere_acci')
 .then(result => result.json())
 .then(result => {
     accidents = result;
-    console.log(result);
-    acciLayer = L.geoJSON(result, {
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-                radius: 2.5,
-                fillColor: "red",
-                color: "#000",
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            });
-        }
-    }).addTo(map);
+    acciLayer = creeCoucheAccidents(result).addTo(map);
 })
 
 
@@ -201,11 +217,5 @@ fetch('recupere_plan')
 .then(result => result.json())
 .then(result => {
 
-planLayer = L.geoJSON(result, {
-    style: {
-        color: 'blue', // Couleur de la ligne
-        weight: 2, // Épaisseur de la ligne
-        opacity: 1 // Opacité de la ligne
-    }
-});
+planLayer = creeCouchePistes(result);
 })
