@@ -8,20 +8,58 @@ let app = Vue.createApp({
     },
     methods: {
         cherche_annee(){
-            let send = new FormData();
-            send.append('annee', this.selectedYear);
-            fetch('/recup_annee', {
-            method: 'post',
-            body: send
-            })
-            .then(r => r.json())
-            .then(r => {
-            console.log(r)
-            })
+            var acci_annee = accidents.features.filter(feature => {
+                return feature.properties.an === this.selectedYear;
+            });
+            var piste_annee = pistes.features.filter(feature => {
+                return feature.properties.annee <= this.selectedYear;
+            });
+                
+            map.removeLayer(acciLayer);
+            map.removeLayer(pistesLayer);
+
+            // affichage des accidents de l'annee
+            var geojsonAcci = {
+                type: "FeatureCollection",
+                features: acci_annee
+            };
+
+            // affichage des pistes de l'annee
+            var geojsonPistes = {
+                type: "FeatureCollection",
+                features: piste_annee
+            };
+            // Créer une couche GeoJSON avec pointToLayer pour personnaliser l'affichage
+            pistesLayer = L.geoJSON(geojsonPistes, {
+                style: {
+                    color: 'blue', // Couleur de la ligne
+                    weight: 2, // Épaisseur de la ligne
+                    opacity: 1 // Opacité de la ligne
+                }
+            }).addTo(map);
+            
+            // Créer une couche GeoJSON avec pointToLayer pour personnaliser l'affichage
+            acciLayer = L.geoJSON(geojsonAcci, {
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, {
+                        radius: 2.5,
+                        fillColor: "red",
+                        color: "#000",
+                        weight: 1,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    });
+                }
+            }).addTo(map);
+
+
         }
     }
 
 }).mount('#app');
+
+var accidents = null;
+var pistes = null;
 
 // PARAMETRES
 var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -127,6 +165,7 @@ map.on('zoomend', () => {
 fetch('recupere_pistes')
 .then(result => result.json())
 .then(result => {
+    pistes = result;
     pistesLayer = L.geoJSON(result, {
         style: {
             color: 'blue', // Couleur de la ligne
@@ -140,6 +179,8 @@ fetch('recupere_pistes')
 fetch('recupere_acci')
 .then(result => result.json())
 .then(result => {
+    accidents = result;
+    console.log(result);
     acciLayer = L.geoJSON(result, {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
