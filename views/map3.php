@@ -167,13 +167,19 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <form>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value="jour"> Jour<br>
+                            <input class="form-check-input mr-2" type="checkbox" value=1> Plein jour<br>
                         </div>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value="nuit_avec"> Nuit avec éclairage<br>
+                            <input class="form-check-input mr-2" type="checkbox" value=2> Crépuscule ou aube<br>
                         </div>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value="nuit_sans"> Nuit sans éclairage<br>
+                            <input class="form-check-input mr-2" type="checkbox" value=3> Nuit sans éclairage public<br>
+                        </div>
+                        <div class="dropdown-item lumi">
+                            <input class="form-check-input mr-2" type="checkbox" value=4> Nuit avec éclairage public non allumé<br>
+                        </div>
+                        <div class="dropdown-item lumi">
+                            <input class="form-check-input mr-2" type="checkbox" value=5> Nuit avec éclairage public allumé<br>
                         </div>
                     </form>
                 </div>
