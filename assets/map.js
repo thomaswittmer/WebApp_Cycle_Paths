@@ -8,9 +8,18 @@ let app = Vue.createApp({
     },
     methods: {
         cherche_annee(){
-            var acci_annee = accidents.features.filter(feature => {
+            acci_anneeSelect = accidents.features.filter(feature => {
                 return feature.properties.an === this.selectedYear;
             });
+            if (acci_paramSelect != null) {
+                acci_select = acci_paramSelect.filter(element => {
+                    return acci_anneeSelect.includes(element);
+                });
+            }
+            else {
+                acci_select = acci_anneeSelect;
+            }
+            
             /*var piste_annee = pistes.features.filter(feature => {
                 return feature.properties.annee <= this.selectedYear;
             });*/
@@ -21,7 +30,7 @@ let app = Vue.createApp({
             // geojson des accidents de l'annee
             var geojsonAcci = {
                 type: "FeatureCollection",
-                features: acci_annee
+                features: acci_select
             };
 
             // geojson des pistes de l'annee
@@ -40,7 +49,6 @@ let app = Vue.createApp({
     }
 
 }).mount('#app');
-
 
 // crée la couche contenant les pistes contenues dans "objet"
 function creeCouchePistes(objet) {
@@ -79,7 +87,7 @@ function creeCouchePistes(objet) {
 function creeCoucheAccidents(objet) {
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
+            const marker = L.circleMarker(latlng, {
                 radius: 2.5,
                 fillColor: "red",
                 color: "#000",
@@ -87,6 +95,16 @@ function creeCoucheAccidents(objet) {
                 opacity: 1,
                 fillOpacity: 0.8
             });
+            // Récupération des informations de l'accident correspondant
+            const properties = feature.properties;
+            const popupContenu = `
+            <b>Date:</b> ${properties.date}<br>
+            <b>Commune:</b> ${properties.com}<br>
+            <b>Vitesse max:</b> ${properties.vma}<br>
+            `;
+            // Ajout d'une pop-up au marqueur
+            marker.bindPopup(popupContenu);
+            return marker;
         }
     })
 }
@@ -94,6 +112,9 @@ function creeCoucheAccidents(objet) {
 
 var accidents = null;
 var pistes = null;
+var acci_select = null;
+var acci_anneeSelect = null;
+var acci_paramSelect = null;
 
 // PARAMETRES
 var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -116,7 +137,7 @@ checkboxes.forEach(function(check) {
             }
         });
         // Créer un objet FormData et ajouter les valeurs des cases cochées comme un tableau
-        let donnees = new FormData();
+        /*let donnees = new FormData();
         donnees.append('lumi', lumi_select); // Utilisation de 'lumi[]' pour créer un tableau de valeurs
         donnees.append('meteo', meteo_select); // Utilisation de 'meteo[]' pour créer un tableau de valeurs
         console.log(donnees);
@@ -127,7 +148,23 @@ checkboxes.forEach(function(check) {
         .then(r => r.json())
         .then(r => {
         console.log(r)
-        })    
+        })*/ 
+        // accidents selectionnes avec la luminosité
+        acci_paramSelect = accidents.features.filter(feature => {
+            return lumi_select.includes(feature.properties.lum);
+        });
+        // accidents en luminosité et en année
+        if (acci_anneeSelect != null) {
+            acci_select = acci_anneeSelect.filter(element => {
+                return acci_paramSelect.includes(element);
+            });
+        }
+        else {
+            acci_select = acci_paramSelect;
+        }
+
+        map.removeLayer(acciLayer);
+        acciLayer = creeCoucheAccidents(acci_select).addTo(map);
 
     });
 });

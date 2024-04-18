@@ -64,6 +64,31 @@ Flight::route('/mapJeanne', function(){
     Flight::render('mapJeanne');
 });
 
+Flight::route('GET /recupere_pistes', function(){
+    $link = Flight::get('BDD');
+
+    $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geo FROM voie_cyclable_geovelo;");
+
+    $features = [];
+    while ($row = pg_fetch_assoc($accidents)) {
+        $geometry = json_decode($row['geo']);
+        unset($row['geom']); // on retire la colonne geom pour ne garder que la geo en geojson
+        $features[] = array(
+            'type' => 'Feature',
+            'geometry' => $geometry,
+            'properties' => $row
+        );
+    }
+
+    $geojson = array(
+        'type' => 'FeatureCollection',
+        'features' => $features
+    );
+
+    Flight::json($geojson);
+});
+
+
 Flight::route('GET /recupere_acci', function(){
     $link = Flight::get('BDD');
 
@@ -88,29 +113,6 @@ Flight::route('GET /recupere_acci', function(){
     Flight::json($geojson);
 });
 
-Flight::route('GET /recupere_pistes', function(){
-    $link = Flight::get('BDD');
-
-    $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geo FROM voie_cyclable_geovelo;");
-
-    $features = [];
-    while ($row = pg_fetch_assoc($accidents)) {
-        $geometry = json_decode($row['geo']);
-        unset($row['geom']); // on retire la colonne geom pour ne garder que la geo en geojson
-        $features[] = array(
-            'type' => 'Feature',
-            'geometry' => $geometry,
-            'properties' => $row
-        );
-    }
-
-    $geojson = array(
-        'type' => 'FeatureCollection',
-        'features' => $features
-    );
-
-    Flight::json($geojson);
-});
 
 Flight::route('GET /recupere_plan', function(){
     $link = Flight::get('BDD');
