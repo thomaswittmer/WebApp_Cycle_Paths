@@ -7,9 +7,15 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://unpkg.com/vue@3.2.31"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="assets/map_style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
     <style>
         body{
             background-color: #333;
@@ -28,7 +34,7 @@
             padding: 30px;
         }
 
-        .barre_laterale{
+        .barre-laterale{
             display: flex;
             flex-direction: column;
             align-items : center;
@@ -152,52 +158,54 @@
     
     <div id=app>
             <!-- Barre latérale pour choisir les paramètres -->
-        <div class="barre_laterale">
+        <div class="barre-laterale">
             <!-- LUMINOSITE -->
             <div class="boutons-barre">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Luminosité
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <form>
-                            <div class="dropdown-item lumi">
-                                <input class="form-check-input mr-2" type="checkbox" value="jour"> Jour<br>
-                            </div>
-                            <div class="dropdown-item lumi">
-                                <input class="form-check-input mr-2" type="checkbox" value="nuit_avec"> Nuit avec éclairage<br>
-                            </div>
-                            <div class="dropdown-item lumi">
-                                <input class="form-check-input mr-2" type="checkbox" value="nuit_sans"> Nuit sans éclairage<br>
-                            </div>
-                        </form>
-                    </div>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Luminosité
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <form>
+                        <div class="dropdown-item lumi">
+                            <input class="form-check-input mr-2" type="checkbox" value=1 checked> Plein jour<br>
+                        </div>
+                        <div class="dropdown-item lumi">
+                            <input class="form-check-input mr-2" type="checkbox" value=2 checked> Crépuscule ou aube<br>
+                        </div>
+                        <div class="dropdown-item lumi">
+                            <input class="form-check-input mr-2" type="checkbox" value=3 checked> Nuit sans éclairage public<br>
+                        </div>
+                        <div class="dropdown-item lumi">
+                            <input class="form-check-input mr-2" type="checkbox" value=4 checked> Nuit avec éclairage public non allumé<br>
+                        </div>
+                        <div class="dropdown-item lumi">
+                            <input class="form-check-input mr-2" type="checkbox" value=5 checked> Nuit avec éclairage public allumé<br>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- METEO -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sélectionner la météo
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <form>
-                            <div class="dropdown-item meteo">
-                                <input class="form-check-input mr-2" type="checkbox" value="pluie"> Pluie<br>
-                            </div>
-                            <div class="dropdown-item meteo">
-                                <input class="form-check-input mr-2" type="checkbox" value="brouillard"> Brouillard<br>
-                            </div>
-                            <div class="dropdown-item meteo">
-                                <input class="form-check-input mr-2" type="checkbox" value="soleil"> Soleil<br>
-                            </div>
-                            <div class="dropdown-item meteo">
-                                <input class="form-check-input mr-2" type="checkbox" value="neige"> Neige<br>
-                            </div>
-                            <div class="dropdown-item meteo">
-                                <input class="form-check-input mr-2" type="checkbox" value="vent"> Vent<br>
-                            </div>
-                        </form>
-                    </div>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sélectionner la météo
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <form>
+                        <div class="dropdown-item meteo">
+                            <input class="form-check-input mr-2" type="checkbox" value="pluie" checked> Pluie<br>
+                        </div>
+                        <div class="dropdown-item meteo">
+                            <input class="form-check-input mr-2" type="checkbox" value="brouillard" checked> Brouillard<br>
+                        </div>
+                        <div class="dropdown-item meteo">
+                            <input class="form-check-input mr-2" type="checkbox" value="soleil" checked> Soleil<br>
+                        </div>
+                        <div class="dropdown-item meteo">
+                            <input class="form-check-input mr-2" type="checkbox" value="neige" checked> Neige<br>
+                        </div>
+                        <div class="dropdown-item meteo">
+                            <input class="form-check-input mr-2" type="checkbox" value="vent" checked> Vent<br>
+                        </div>
+                    </form>
                 </div>
 
                 <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
@@ -206,10 +214,12 @@
 
         </div>
         <div class="carte">
-            <div id="map"></div>
+            <!--<div id="cesiumContainer"></div> -->
             <!-- curseur temporel -->
+            <div id="map"></div>
             <div class="curseur-date">
                     <input type="range" min="2000" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
+                    <input class="form-check-input mr-2" type="checkbox" value=1 v-model="caseChecked" :disabled="caseDisabled" @change="annule_annee"> <span :class="{ 'anDesactive': caseDisabled }"> Toutes les années </span><br>
                     <p>Date sélectionnée : {{ selectedYear }}</p>
             </div>
         </div>
@@ -219,7 +229,7 @@
 
 
     <script src="/assets/map.js"></script>
-    <script src="/assets/leaflet.js"></script>
+    <!-- <script src="/assets/leaflet.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
