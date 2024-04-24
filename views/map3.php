@@ -167,19 +167,19 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <form>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value=1 checked> Plein jour<br>
+                            <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked> Plein jour<br>
                         </div>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value=2 checked> Crépuscule ou aube<br>
+                            <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked> Crépuscule ou aube<br>
                         </div>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value=3 checked> Nuit sans éclairage public<br>
+                            <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked> Nuit sans éclairage public<br>
                         </div>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value=4 checked> Nuit avec éclairage public non allumé<br>
+                            <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked> Nuit avec éclairage public non allumé<br>
                         </div>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value=5 checked> Nuit avec éclairage public allumé<br>
+                            <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked> Nuit avec éclairage public allumé<br>
                         </div>
                     </form>
                 </div>
@@ -218,7 +218,7 @@
             <!-- curseur temporel -->
             <div id="map"></div>
             <div class="curseur-date">
-                    <input type="range" min="2000" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
+                    <input type="range" min="2016" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
                     <input class="form-check-input mr-2" type="checkbox" value=1 v-model="caseChecked" :disabled="caseDisabled" @change="annule_annee"> <span :class="{ 'anDesactive': caseDisabled }"> Toutes les années </span><br>
                     <p>Date sélectionnée : {{ selectedYear }}</p>
             </div>

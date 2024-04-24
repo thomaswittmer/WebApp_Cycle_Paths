@@ -112,7 +112,7 @@ function creeCoucheAccidents(objet) {
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
             const marker = L.circleMarker(latlng, {
-                radius: 2.5,
+                radius: 4,
                 fillColor: "red",
                 color: "#000",
                 weight: 1,
@@ -123,8 +123,16 @@ function creeCoucheAccidents(objet) {
             const properties = feature.properties;
             const popupContenu = `
             <b>Date:</b> ${properties.date}<br>
-            <b>Commune:</b> ${properties.com}<br>
-            <b>Vitesse max:</b> ${properties.vma}<br>
+            <b>Type d'intersection :</b> ${properties.int}<br>
+            <b>Vitesse max :</b> ${properties.vma}<br>
+            <b>Type de collision :</b> ${properties.col}<br>
+            <b>Conditions atmosphériques :</b> ${properties.atm}<br>
+            <b>Catégorie de route :</b> ${properties.catr}<br>
+            <b>Etat de la route :</b> ${properties.surf}<br>
+            <b>Infrastructure de la route :</b> ${properties.infra}<br>
+            <b>Catégorie du véhicule :</b> ${properties.catv}<br>
+            <b>Circulation :</b> ${properties.circ}<br>
+
             `;
             // Ajout d'une pop-up au marqueur
             marker.bindPopup(popupContenu);
