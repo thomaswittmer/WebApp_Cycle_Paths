@@ -2,6 +2,7 @@ let app = Vue.createApp({
     data() {
         return {
             selectedYear: '',
+            suggestions: [],
             caseChecked: true,
             caseDisabled: true
         };
@@ -9,6 +10,7 @@ let app = Vue.createApp({
     computed: {
     },
     methods: {
+
         cherche_annee(){
             this.caseChecked = false;
             this.caseDisabled = false;
@@ -106,9 +108,42 @@ function creeCouchePistes(objet) {
     });
 }
 
+// cree couche plan velo selon statut 
+function creeCouchePlan(objet) {
+    return L.geoJSON(objet, {
+        style: function (feature) {
+            // Récupérer la valeur de la colonne statut
+            const statut = feature.properties.statut;
+
+            // Définir la couleur en fonction de la valeur de ame_d
+            let couleur = null;
+            if (statut === 'à réaliser') {
+                couleur = 'orange';
+            } else if (statut=== 'existant' ) {
+                couleur = 'blue';
+            }
+            else{
+                couleur ='gray'
+            }
+
+            // Retourner le style avec la couleur définie
+            return {
+                color: couleur, // Couleur de la ligne
+                weight: 2, // Épaisseur de la ligne
+                opacity: 1 // Opacité de la ligne
+            };
+        }
+    });
+}
 
 // crée la couche contenant les accidents contenus dans "objet"
 function creeCoucheAccidents(objet) {
+    //tentative cluster
+    var clusterGroup = L.markerClusterGroup({
+        maxClusterRadius: 50, 
+        disableClusteringAtZoom: 15 //fin des clusters quand on zoome
+    }); 
+
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
             const marker = L.circleMarker(latlng, {
@@ -119,6 +154,7 @@ function creeCoucheAccidents(objet) {
                 opacity: 1,
                 fillOpacity: 0.8
             });
+            
             // Récupération des informations de l'accident correspondant
             const properties = feature.properties;
             const popupContenu = `
@@ -128,11 +164,35 @@ function creeCoucheAccidents(objet) {
             `;
             // Ajout d'une pop-up au marqueur
             marker.bindPopup(popupContenu);
-            return marker;
+            clusterGroup.addLayer(marker);
+            //return marker;
+            return clusterGroup;
         }
     })
 }
 
+
+// Fonction pour mettre à jour la légende
+function mettreAJourLegende(etatCouches) {
+    const legendElement = document.getElementById('legend');
+    if (etatCouches.planVisible) {
+        legendElement.innerHTML = `
+            <h3>Légende</h3>
+            <div><span class="legend-color" style="background-color: blue;"></span> Existant </div>
+            <div><span class="legend-color" style="background-color: orange;"></span> A réaliser </div>
+        `;
+    } else {
+        legendElement.innerHTML = `
+            <h3>Légende</h3>
+            <div><span class="legend-color" style="background-color: blue;"></span> piste cyclable</div>
+                <div><span class="legend-color" style="background-color: green;"></span> voie verte / aménagement mixte</div>
+                <div><span class="legend-color" style="background-color: yellow;"></span> couloir bus + vélo</div>
+                <div><span class="legend-color" style="background-color: purple;"></span> bande cyclable</div>
+                <div><span class="legend-color" style="background-color: orange;"></span> autre</div>
+                
+        `;
+    }
+}
 
 var accidents = null;
 var pistes = null;
@@ -185,6 +245,8 @@ checkboxes.forEach(function(check) {
 let plan = document.getElementById("plan");
 var planVisible = false; // Indique si le plan vélo est visible ou non
 
+// gestion couleur des pistes 
+
 plan.addEventListener('click', function() {
     var button = this;
     // Vérifie l'état actuel du bouton
@@ -206,6 +268,7 @@ plan.addEventListener('click', function() {
         acciLayer.bringToFront();
         
     }
+    mettreAJourLegende({ planVisible: !planVisible });
     // Mettre à jour l'état du bouton
     planVisible = !planVisible;
 
@@ -221,11 +284,94 @@ var fondCarte = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/service
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 }).addTo(this.map);
 
+
+//la barre de recherche des adresses
+
+// test ESRI 
+const api = "AAPK07603a779b2f4f9dab2e28dc9fde0f05IJ2S4Lh8g5-lGWF4WEkWb1aRCDmpSK4NEfHQdWICq1wU-r9GM1MLdWTUL_qxj0xt";
+const geocoder = L.esri.Geocoding.geocodeService({
+    apikey: api
+});
+const searchInput = document.getElementById('research_input');
+const suggestions = document.getElementById('suggestions');
+
+
+searchInput.addEventListener('input', function() {
+    const query = this.value;
+
+    geocoder.suggest().text(query).run((error, results, response) => {
+      if (error) {
+        console.error('Error fetching address suggestions:', error);
+        return;
+      }
+
+      suggestions.innerHTML = ''; // Efface les suggestions précédentes
+
+//propose des suggestions en dessous de la barre
+      results.suggestions.forEach(suggestion => {
+        const address = suggestion.text;
+        const location = suggestion.location;
+        // Vérifier si la suggestion se trouve dans la zone géographique de Paris
+        /*if (
+            address.toLowerCase().includes('paris')
+            location.x >= 2.224199 &&
+            location.x <= 2.469920 &&
+            location.y >= 48.815573  &&
+            location.y <= 48.902145
+            )*/{         
+        const a = document.createElement('a');
+        a.classList.add('dropdown-item');
+        a.textContent = address;
+        a.addEventListener('click', function() {
+            searchInput.value = address; 
+            suggestions.style.display = 'none'; 
+          });
+        suggestions.appendChild(a);
+            }
+      });
+
+      if (results.suggestions.length > 0) {
+        suggestions.style.display = 'block';
+      } else {
+        suggestions.style.display = 'none';
+      }
+    });
+  });
+
+//zoome sur l'endroit selectionne
+  suggestions.addEventListener('click', function(event) {
+    const target = event.target;
+    if (target && target.matches('a.dropdown-item')) {
+      const address = target.textContent.trim();
+      geocoder.geocode().text(address).run((error, results, response) => {
+        if (error) {
+          console.error('Error geocoding address:', error);
+          return;
+        }
+        if (results.results.length > 0) {
+          const location = results.results[0].latlng;
+          map.setView(location, 18); 
+        }
+      });
+      searchInput.value = address; 
+      suggestions.style.display = 'none'; 
+    }
+  });
+
+
+// Cacher le menu déroulant si on clique en dehors
+  document.addEventListener('click', function(event) {
+    if (!event.target.closest('.input-group')) {
+      suggestions.style.display = 'none';
+    }
+  });
+
+
+
 var fondCarte2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 28,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
-
 
 // passage en mode plan si la carte est très zoomée et en mode aérien si on est loin de la zone
 map.on('zoomend', () => {
@@ -260,6 +406,5 @@ fetch('recupere_pistes')
 fetch('recupere_plan')
 .then(result => result.json())
 .then(result => {
-
-planLayer = creeCouchePistes(result);
+planLayer = creeCouchePlan(result);
 })
