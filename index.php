@@ -176,7 +176,7 @@ Flight::route('GET /recupere_acci', function(){
 Flight::route('GET /recupere_plan', function(){
     $link = Flight::get('BDD');
 
-    $accidents = pg_query($link, "SELECT ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geom FROM plan_velo;");
+    $accidents = pg_query($link, "SELECT ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geom, statut FROM plan_velo;");
 
     $features = [];
     while ($row = pg_fetch_assoc($accidents)) {
@@ -184,7 +184,7 @@ Flight::route('GET /recupere_plan', function(){
         $features[] = array(
             'type' => 'Feature',
             'geometry' => $geometry,
-            'properties' => array() 
+            'properties' => array('statut' => $row['statut']) 
         );
     }
 
