@@ -198,19 +198,19 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <form>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value=1> Plein jour<br>
+                            <input class="form-check-input mr-2" type="checkbox" value=1 checked> Plein jour<br>
                         </div>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value=2> Crépuscule ou aube<br>
+                            <input class="form-check-input mr-2" type="checkbox" value=2 checked> Crépuscule ou aube<br>
                         </div>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value=3> Nuit sans éclairage public<br>
+                            <input class="form-check-input mr-2" type="checkbox" value=3 checked> Nuit sans éclairage public<br>
                         </div>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value=4> Nuit avec éclairage public non allumé<br>
+                            <input class="form-check-input mr-2" type="checkbox" value=4 checked> Nuit avec éclairage public non allumé<br>
                         </div>
                         <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value=5> Nuit avec éclairage public allumé<br>
+                            <input class="form-check-input mr-2" type="checkbox" value=5 checked> Nuit avec éclairage public allumé<br>
                         </div>
                     </form>
                 </div>
@@ -222,19 +222,19 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <form>
                         <div class="dropdown-item meteo">
-                            <input class="form-check-input mr-2" type="checkbox" value="pluie"> Pluie<br>
+                            <input class="form-check-input mr-2" type="checkbox" value="pluie" checked> Pluie<br>
                         </div>
                         <div class="dropdown-item meteo">
-                            <input class="form-check-input mr-2" type="checkbox" value="brouillard"> Brouillard<br>
+                            <input class="form-check-input mr-2" type="checkbox" value="brouillard" checked> Brouillard<br>
                         </div>
                         <div class="dropdown-item meteo">
-                            <input class="form-check-input mr-2" type="checkbox" value="soleil"> Soleil<br>
+                            <input class="form-check-input mr-2" type="checkbox" value="soleil" checked> Soleil<br>
                         </div>
                         <div class="dropdown-item meteo">
-                            <input class="form-check-input mr-2" type="checkbox" value="neige"> Neige<br>
+                            <input class="form-check-input mr-2" type="checkbox" value="neige" checked> Neige<br>
                         </div>
                         <div class="dropdown-item meteo">
-                            <input class="form-check-input mr-2" type="checkbox" value="vent"> Vent<br>
+                            <input class="form-check-input mr-2" type="checkbox" value="vent" checked> Vent<br>
                         </div>
                     </form>
                 </div>
@@ -260,6 +260,7 @@
             <div id="map"></div>
             <div class="curseur-date">
                     <input type="range" min="2000" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
+                    <input class="form-check-input mr-2" type="checkbox" value=1 v-model="caseChecked" :disabled="caseDisabled" @change="annule_annee"> <span :class="{ 'anDesactive': caseDisabled }"> Toutes les années </span><br>
                     <p>Date sélectionnée : {{ selectedYear }}</p>
             </div>
         </div>

@@ -2,7 +2,9 @@ let app = Vue.createApp({
     data() {
         return {
             selectedYear: '',
-            suggestions: []
+            suggestions: [],
+            caseChecked: true,
+            caseDisabled: true
         };
     },
     computed: {
@@ -10,6 +12,8 @@ let app = Vue.createApp({
     methods: {
 
         cherche_annee(){
+            this.caseChecked = false;
+            this.caseDisabled = false;
             acci_anneeSelect = accidents.features.filter(feature => {
                 return feature.properties.an === this.selectedYear;
             });
@@ -46,8 +50,27 @@ let app = Vue.createApp({
             // Création de la nouvelle couche des accidents et affichage sur la carte
             acciLayer = creeCoucheAccidents(geojsonAcci).addTo(map);
 
-            
-    
+
+        },
+
+        annule_annee() {
+            this.selectedYear='';
+            this.caseDisabled = true;
+
+            acci_anneeSelect = accidents.features;
+            if (acci_paramSelect != null) {
+                acci_select = acci_paramSelect.filter(element => {
+                    return acci_anneeSelect.includes(element);
+                });
+            }
+            else {
+                acci_select = acci_anneeSelect;
+            }
+            map.removeLayer(acciLayer);
+            // geojson des accidents de l'annee
+
+            // Création de la nouvelle couche des accidents et affichage sur la carte
+            acciLayer = creeCoucheAccidents(acci_select).addTo(map);
         }
     }
 
@@ -178,7 +201,7 @@ var acci_anneeSelect = null;
 var acci_paramSelect = null;
 
 // PARAMETRES
-var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+var checkboxes = document.querySelectorAll('.dropdown-menu input[type="checkbox"]');
 
 // Ajouter un écouteur d'événements à chaque bouton radio
 checkboxes.forEach(function(check) {
@@ -197,19 +220,7 @@ checkboxes.forEach(function(check) {
                 }
             }
         });
-        // Créer un objet FormData et ajouter les valeurs des cases cochées comme un tableau
-        /*let donnees = new FormData();
-        donnees.append('lumi', lumi_select); // Utilisation de 'lumi[]' pour créer un tableau de valeurs
-        donnees.append('meteo', meteo_select); // Utilisation de 'meteo[]' pour créer un tableau de valeurs
-        console.log(donnees);
-        fetch('/lumino', {
-        method: 'post',
-        body: donnees
-        })
-        .then(r => r.json())
-        .then(r => {
-        console.log(r)
-        })*/ 
+
         // accidents selectionnes avec la luminosité
         acci_paramSelect = accidents.features.filter(feature => {
             return lumi_select.includes(feature.properties.lum);
@@ -223,7 +234,6 @@ checkboxes.forEach(function(check) {
         else {
             acci_select = acci_paramSelect;
         }
-
         map.removeLayer(acciLayer);
         acciLayer = creeCoucheAccidents(acci_select).addTo(map);
 
@@ -244,22 +254,18 @@ plan.addEventListener('click', function() {
         // Si le plan vélo est visible, le masquer
         button.textContent = 'Plan Vélo 2024';
         button.classList.remove('clique'); // Supprimer la classe de grisage
-        console.log(planLayer);
         map.removeLayer(planLayer);
         pistesLayer.addTo(map);
-        acciLayer.addTo(map);
+        acciLayer.bringToFront();
 
     } else {
         // supprimer les autres couches sauf la couche de base
-        map.eachLayer(function(layer) {
-            if (layer !== fondCarte) {
-                map.removeLayer(layer);
-            }
-        });
+        map.removeLayer(pistesLayer);
         // Si le plan vélo est caché, l'afficher
         button.textContent = 'Masquer le plan vélo';
         button.classList.add('clique'); // Ajouter la classe de grisage
         planLayer.addTo(map);
+        acciLayer.bringToFront();
         
     }
     mettreAJourLegende({ planVisible: !planVisible });
@@ -379,20 +385,20 @@ map.on('zoomend', () => {
 });
 
 
+// Récupération de tous les accidents
+fetch('recupere_acci')
+.then(result => result.json())
+.then(result => {
+    accidents = result;
+})
+
 // Récupération de toutes les pistes cyclables
 fetch('recupere_pistes')
 .then(result => result.json())
 .then(result => {
     pistes = result;
     pistesLayer = creeCouchePistes(pistes).addTo(map);
-})
-
-// Récupération de tous les accidents
-fetch('recupere_acci')
-.then(result => result.json())
-.then(result => {
-    accidents = result;
-    acciLayer = creeCoucheAccidents(result).addTo(map);
+    acciLayer = creeCoucheAccidents(accidents).addTo(map);
 })
 
 

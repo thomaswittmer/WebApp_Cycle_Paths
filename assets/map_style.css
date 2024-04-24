@@ -14,6 +14,10 @@
     opacity: 0.5; /* Réglez l'opacité pour griser le bouton */
 }
 
+.anDesactive {
+    color: #6c757d; /* Couleur grise */
+}
+
 .curseur-date {
     grid-row: 2;
     width: 100%;
