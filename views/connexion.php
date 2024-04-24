@@ -20,6 +20,6 @@
         </form>
     </div>
 
-    <script src="assets/accueil.js"></script>
+    <script src="assets/connexion.js"></script>
 </body>
 </html>

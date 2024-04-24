@@ -25,13 +25,9 @@ let app = Vue.createApp({
             else {
                 acci_select = acci_anneeSelect;
             }
-            
-            /*var piste_annee = pistes.features.filter(feature => {
-                return feature.properties.annee <= this.selectedYear;
-            });*/
                 
             map.removeLayer(acciLayer);
-            // map.removeLayer(pistesLayer);
+            //map.removeLayer(pistesLayer);
 
             // geojson des accidents de l'annee
             var geojsonAcci = {
@@ -39,17 +35,20 @@ let app = Vue.createApp({
                 features: acci_select
             };
 
-            // geojson des pistes de l'annee
-            /*var geojsonPistes = {
-                type: "FeatureCollection",
-                features: piste_annee
-            };*/
-            // Création de la nouvelle couche des pistes et affichage sur la carte
-            // pistesLayer = creeCouchePistes(geojsonPistes).addTo(map);
-
             // Création de la nouvelle couche des accidents et affichage sur la carte
             acciLayer = creeCoucheAccidents(geojsonAcci).addTo(map);
 
+            // creation de la couche des pistes existant l'annee selectionnee et affichage sur la carte
+            /*let send = new FormData();
+            send.append('annee', this.selectedYear);
+            fetch('recup_annee', {
+                method: 'post',
+                body: send
+              })
+              .then(r => r.json())
+              .then(r => {
+                pistesLayer = creeCouchePistes(r).addTo(map);
+              })*/
 
         },
 

@@ -6,7 +6,7 @@ $server = 'localhost';
 $port = '5432';
 $base = 'amenagement_velo_paris';
 $user = 'postgres';
-$password = getenv('DB_PASSWORD'); // Retrieve password from environment variable
+$password = 'user'; // Retrieve password from environment variable
 
 // Create DSN string
 $dsn = "host=$server port=$port dbname=$base user=$user password=$password";
@@ -45,11 +45,29 @@ Flight::route('POST /lumino', function(){
 });
 
 Flight::route('POST /recup_annee', function(){
-    $test = null;
+    $res = null;
     if (isset($_POST['annee'])){
-        $test = "année : ".$_POST['annee'];
+        $link = Flight::get('BDD');
+
+        $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geo FROM voie_cyclable_geovelo WHERE annee <= '" . $_POST['annee'] . "' OR annee IS NULL;");
+
+        $features = [];
+        while ($row = pg_fetch_assoc($accidents)) {
+            $geometry = json_decode($row['geo']);
+            unset($row['geom']); // on retire la colonne geom pour ne garder que la geo en geojson
+            $features[] = array(
+                'type' => 'Feature',
+                'geometry' => $geometry,
+                'properties' => $row
+            );
+        }
+
+        $geojson = array(
+            'type' => 'FeatureCollection',
+            'features' => $features
+        );
     }
-    Flight::json($test);
+    Flight::json($geojson);
 });
 
 Flight::route('/connexion', function(){
@@ -68,14 +86,6 @@ Flight::route('/map4', function(){
     Flight::render('map4', );
 });
 
-
-
-
-// Configuration de la base de données
-$host = 'localhost';
-$dbname = 'amenagement_velo_paris';
-$username = 'postgres';
-$password = getenv('DB_PASSWORD'); // Retrieve password from environment variable
 
 Flight::route('GET /getAccidentCoordinates', function(){
     $link = Flight::get('BDD');
@@ -109,10 +119,6 @@ Flight::route('GET /getAccidentCoordinates', function(){
         echo json_encode(['error' => 'Paramètre num_acc manquant']);
     }
 });
-
-
-
-
 
 
 Flight::route('/cesium', function(){
