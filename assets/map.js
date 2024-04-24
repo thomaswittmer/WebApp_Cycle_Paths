@@ -85,16 +85,16 @@ function creeCouchePistes(objet) {
             // Définir la couleur en fonction de la valeur de ame_d
             let couleur = null;
             if (ame_d === 'COULOIR BUS+VELO') {
-                couleur = 'yellow';
+                couleur = '#EC1DD0  ';
             } else if (ame_d === 'VOIE VERTE' || ame_d === 'AMENAGEMENT MIXTE PIETON VELO HORS VOIE VERTE') {
-                couleur = 'green';
+                couleur = '#63DE6E';
             } else if (ame_d === 'PISTE CYCLABLE') {
-                couleur = 'blue'; // Couleur par défaut
+                couleur = '#1D3FD9'; 
             } else if (ame_d === 'BANDE CYCLABLE') {
-                couleur = 'purple'; // Couleur par défaut
+                couleur = '#4DC0EF'; 
             }
             else {
-                couleur = 'orange';
+                couleur = '#C1A4BD  ';
             }
 
             // Retourner le style avec la couleur définie
@@ -193,11 +193,11 @@ function mettreAJourLegende(etatCouches) {
     } else {
         legendElement.innerHTML = `
             <h3>Légende</h3>
-            <div><span class="legend-color" style="background-color: blue;"></span> piste cyclable</div>
-                <div><span class="legend-color" style="background-color: green;"></span> voie verte / aménagement mixte</div>
-                <div><span class="legend-color" style="background-color: yellow;"></span> couloir bus + vélo</div>
-                <div><span class="legend-color" style="background-color: purple;"></span> bande cyclable</div>
-                <div><span class="legend-color" style="background-color: orange;"></span> autre</div>
+            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
+                <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
+                <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
+                <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
+                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
                 
         `;
     }

@@ -131,7 +131,7 @@
             grid-template-rows: 650px 1fr;
             height: 100%;
             width: 100%;
-        }
+        }        
 
         .curseur-date {
             grid-row: 2;
@@ -139,10 +139,22 @@
             text-align: center;
             margin-top: 20px;
             color: white;
+            display: flex;
+            flex-direction: column; /* Nouveau style en colonne */
+            align-items: flex-start; /* Alignement à gauche */
+        }
+
+        .checkbox-date {
+            margin-bottom: 10px; /* Espacement entre la case à cocher et le slider */
         }
 
         #dateSlider {
-            width: 80%;
+            width: 100%; 
+            margin-bottom: 10px;
+        }
+
+        #date{
+            margin:auto;
         }
 
         input[type="range"] {
@@ -238,11 +250,11 @@
 
                 <div id="legend">
                 <h3>Légende</h3>
-                <div><span class="legend-color" style="background-color: blue;"></span> piste cyclable</div>
-                <div><span class="legend-color" style="background-color: green;"></span> voie verte / aménagement mixte</div>
-                <div><span class="legend-color" style="background-color: yellow;"></span> couloir bus + vélo</div>
-                <div><span class="legend-color" style="background-color: purple;"></span> bande cyclable</div>
-                <div><span class="legend-color" style="background-color: orange;"></span> autre</div>
+                <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
+                <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
+                <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
+                <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
+                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
                 
     </div>
             </div>
@@ -254,9 +266,13 @@
             <!-- curseur temporel -->
             <div id="map"></div>
             <div class="curseur-date">
+                <div class="checkbox-date">
+                    <input class="form-check-input mr-2" type="checkbox" value=1 v-model="caseChecked" id="checkboxdate" :disabled="caseDisabled" @change="annule_annee">
+                    <span :class="{ 'anDesactive': caseDisabled }"> Toutes les années </span><br>
+                </div>
                     <input type="range" min="2016" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
-                    <input class="form-check-input mr-2" type="checkbox" value=1 v-model="caseChecked" :disabled="caseDisabled" @change="annule_annee"> <span :class="{ 'anDesactive': caseDisabled }"> Toutes les années </span><br>
-                    <p>Date sélectionnée : {{ selectedYear }}</p>
+                    <!--<input class="form-check-input mr-2" type="checkbox" value=1 v-model="caseChecked"  :disabled="caseDisabled" @change="annule_annee"> <span :class="{ 'anDesactive': caseDisabled }"> Toutes les années </span><br>-->
+                    <p id="date">Date sélectionnée : {{ selectedYear }}</p>
             </div>
         </div>
     </div>
