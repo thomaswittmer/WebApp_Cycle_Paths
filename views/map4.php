@@ -48,7 +48,7 @@
             padding: 10px; /* Espacement intérieur */
             display: flex; /* Utilisation de flexbox */
             align-items: center; /* Centrer verticalement les éléments */
-            justify-content: center;
+            justify-content: space-between;
         }
 
         /* Style pour le titre */
@@ -64,22 +64,9 @@
             margin-right: 10px; /* Espacement à droite */
         }
 
-        #research_bar {
-            margin-left: auto; /* Permet de pousser la barre de recherche et le bouton à droite */
-            display: flex; /* Utilisation de flexbox */
-            align-items: center; /* Centrer verticalement les éléments */
-        }
-
-        #research_bar input[type="text"] {
-            padding: 8px; /* Espacement intérieur */
-            border: none; /* Pas de bordure */
-            border-radius: 5px; /* Coins arrondis */
-            margin-right: 5px; /* Espacement à droite */
-            font-size: 16px; /* Taille de la police */
-        }
         
-        .connexion-button {
-            background-color: #007bff; /* Couleur de fond */
+        .return-button {
+            background-color: red; /* Couleur de fond */
             color: #fff; /* Couleur du texte */
             padding: 10px 20px; /* Espacement intérieur */
             border: none; /* Pas de bordure */
@@ -98,165 +85,120 @@
             width: 100%;
         }
 
-        .curseur-date {
-            grid-row: 2;
-            width: 100%;
-            text-align: center;
-            margin-top: 20px;
-            color: white;
-        }
-
-        #dateSlider {
-            width: 80%;
-        }
-
-        input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 10px;
-            background: #d3d3d3; /* Couleur de fond du curseur */
-        }
-
-        input[type="range"]::-webkit-slider-thumb,
-        input[type="range"]::-moz-range-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 50px; /* Largeur de l'image */
-            height: 50px; /* Hauteur de l'image */
-            background: url('../assets/images/safelane.png') center center no-repeat; /* Chemin vers l'image */
-            background-size: contain;
-            cursor: pointer;
-            border: none;
-        }
-
     </style>
 </head>
 <body>
     <header>
         <img src="/assets/images/safelane.png" alt="Logo" class="header-image"> <!-- Assurez-vous de remplacer "votre-image.jpg" par le chemin de votre image -->
         <h1>SAFELANE</h1>
-        <div id="research_bar">
-            <input
-                type="text"
-                id="pacViewPlace"
-                name="pacViewPlace"
-                placeholder="Entrez un lieu..."
-            />
-        </div>
-        <a href="connexion" class="connexion-button">Connexion</a> <!-- Lien vers connexion.php -->
+        <a href="map3" class="return-button">Retour</a> <!-- Lien de retour-->
     </header>
+
 
 
     
     <div id=app>
-            <!-- Barre latérale pour choisir les paramètres -->
-        <div class="barre_laterale">
-            <!-- LUMINOSITE -->
-            <div class="boutons-barre">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Luminosité
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <form>
-                            <div class="dropdown-item lumi">
-                                <input class="form-check-input mr-2" type="checkbox" value="jour"> Jour<br>
-                            </div>
-                            <div class="dropdown-item lumi">
-                                <input class="form-check-input mr-2" type="checkbox" value="nuit_avec"> Nuit avec éclairage<br>
-                            </div>
-                            <div class="dropdown-item lumi">
-                                <input class="form-check-input mr-2" type="checkbox" value="nuit_sans"> Nuit sans éclairage<br>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- METEO -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sélectionner la météo
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <form>
-                            <div class="dropdown-item meteo">
-                                <input class="form-check-input mr-2" type="checkbox" value="pluie"> Pluie<br>
-                            </div>
-                            <div class="dropdown-item meteo">
-                                <input class="form-check-input mr-2" type="checkbox" value="brouillard"> Brouillard<br>
-                            </div>
-                            <div class="dropdown-item meteo">
-                                <input class="form-check-input mr-2" type="checkbox" value="soleil"> Soleil<br>
-                            </div>
-                            <div class="dropdown-item meteo">
-                                <input class="form-check-input mr-2" type="checkbox" value="neige"> Neige<br>
-                            </div>
-                            <div class="dropdown-item meteo">
-                                <input class="form-check-input mr-2" type="checkbox" value="vent"> Vent<br>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
-            </div>
-            
-
-        </div>
         <div class="carte">
             <div id="cesiumContainer"></div>
-            <!-- curseur temporel -->
-            <div class="curseur-date">
-                    <input type="range" min="2000" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
-                    <p>Date sélectionnée : {{ selectedYear }}</p>
-            </div>
         </div>
     </div>
 
 
-
-
-
-    <script src="/assets/map.js"></script>
     <script>
+
         // Enable simultaneous requests.
         Cesium.RequestScheduler.requestsByServer["tile.googleapis.com:443"] = 18;
 
-        // Create the viewer.
-        const viewer = new Cesium.Viewer("cesiumContainer", {
-            imageryProvider: false,
-            baseLayerPicker: false,
-            requestRenderMode: true,
-            geocoder: false,
-            globe: false,
-            timeline: false,
-            animation: false
+
+
+
+
+
+    // Fonction pour récupérer les coordonnées de l'accident depuis la base de données
+    function getAccidentCoordinatesFromDB(num_acc) {
+        return new Promise((resolve, reject) => {
+            // URL de votre API pour récupérer les coordonnées d'un accident
+            const apiUrl = `http://localhost:80/getAccidentCoordinates?num_acc=${num_acc}`;
+
+            // Effectuer la requête AJAX
+            $.ajax({
+                url: apiUrl,
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    // Vérifier si les coordonnées ont été récupérées avec succès
+                    if (response && response.lat && response.long) {
+                        const coordinates = {
+                            latitude: response.lat,
+                            longitude: response.long
+                        };
+                        resolve(coordinates);
+                    } else {
+                        reject('Erreur lors de la récupération des coordonnées');
+                    }
+                },
+                error: function(error) {
+                    reject('Erreur lors de la requête à la base de données');
+                }
+            });
         });
+    }
 
-        viewer.scene.skyAtmosphere.show = true;
+    // Récupération du paramètre accidentId depuis l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const accidentId = urlParams.get('accidentId');
 
-        // Définir les coordonnées de Paris
-        const parisCoordinates = Cesium.Cartesian3.fromDegrees(2.3522, 48.8566);
+    // Appel de la fonction pour récupérer les coordonnées de l'accident
+    getAccidentCoordinatesFromDB(accidentId)
+        .then(coordinates => {
+            // Initialisation de la vue Cesium avec les coordonnées récupérées
+            const viewer = new Cesium.Viewer('cesiumContainer', {
+                baseLayerPicker: false,
+                geocoder: false,
+                homeButton: false,
+                navigationHelpButton: false,
+                sceneModePicker: false,
+                fullscreenButton: false,
+                animation: false,
+                timeline: false,
+            });
+            viewer.scene.skyAtmosphere.show = true;
 
-        // Déplacer la caméra vers Paris avec une altitude ajustée pour une vue d'ensemble de la ville
-        viewer.camera.flyTo({
-            destination: Cesium.Cartesian3.fromDegrees(2.3522, 48.8566, 20000), // Ajouter l'altitude ici (50000 mètres)
-            orientation: {
-                heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
-                pitch: Cesium.Math.toRadians(-90), // Inclinaison de la caméra en degrés
-                roll: 0 // Rotation de la caméra en degrés
-            },
-        });
 
-        // Add 3D Tiles tileset.
-        const tileset = viewer.scene.primitives.add(
-            new Cesium.Cesium3DTileset({
-                //url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80",
-                // This property is required to display attributions as required.
-                showCreditsOnScreen: true,
+            // Création d'un point sur la carte avec les coordonnées
+            const point = viewer.entities.add({
+                name: 'Accident',
+                position: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude),
+                point: {
+                    pixelSize: 10,
+                    color: Cesium.Color.RED,
+                    outlineColor: Cesium.Color.WHITE,
+                    outlineWidth: 2,
+                },
+            });
+
+           // Déplacer la caméra vers le point avec une altitude ajustée
+            viewer.camera.flyTo({
+                destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude - 0.0015, 300),
+                orientation: {
+                    heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
+                    pitch: Cesium.Math.toRadians(-50), // Inclinaison de la caméra en degrés
+                    roll: 0 // Rotation de la caméra en degrés
+                },
+            });
+
+
+            // Ajout du tileset
+            const tileset = new Cesium.Cesium3DTileset({
+                url: 'https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'
+            });
+            viewer.scene.primitives.add(tileset);
+            viewer.zoomTo(tileset);
             })
-        );
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+
 
         // Define the zoomToViewport function
         function zoomToViewport(viewport) {
@@ -292,9 +234,10 @@
     </script>
 
     <script
-        async=""
-        src="https://maps.googleapis.com/maps/api/js?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
+        async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
     ></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

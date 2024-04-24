@@ -25,13 +25,9 @@ let app = Vue.createApp({
             else {
                 acci_select = acci_anneeSelect;
             }
-            
-            /*var piste_annee = pistes.features.filter(feature => {
-                return feature.properties.annee <= this.selectedYear;
-            });*/
                 
             map.removeLayer(acciLayer);
-            // map.removeLayer(pistesLayer);
+            //map.removeLayer(pistesLayer);
 
             // geojson des accidents de l'annee
             var geojsonAcci = {
@@ -39,17 +35,20 @@ let app = Vue.createApp({
                 features: acci_select
             };
 
-            // geojson des pistes de l'annee
-            /*var geojsonPistes = {
-                type: "FeatureCollection",
-                features: piste_annee
-            };*/
-            // Création de la nouvelle couche des pistes et affichage sur la carte
-            // pistesLayer = creeCouchePistes(geojsonPistes).addTo(map);
-
             // Création de la nouvelle couche des accidents et affichage sur la carte
             acciLayer = creeCoucheAccidents(geojsonAcci).addTo(map);
 
+            // creation de la couche des pistes existant l'annee selectionnee et affichage sur la carte
+            /*let send = new FormData();
+            send.append('annee', this.selectedYear);
+            fetch('recup_annee', {
+                method: 'post',
+                body: send
+              })
+              .then(r => r.json())
+              .then(r => {
+                pistesLayer = creeCouchePistes(r).addTo(map);
+              })*/
 
         },
 
@@ -147,7 +146,7 @@ function creeCoucheAccidents(objet) {
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
             const marker = L.circleMarker(latlng, {
-                radius: 2.5,
+                radius: 4.5,
                 fillColor: "red",
                 color: "#000",
                 weight: 1,
@@ -159,16 +158,26 @@ function creeCoucheAccidents(objet) {
             const properties = feature.properties;
             const popupContenu = `
             <b>Date:</b> ${properties.date}<br>
-            <b>Commune:</b> ${properties.com}<br>
-            <b>Vitesse max:</b> ${properties.vma}<br>
+            <b>Type d'intersection :</b> ${properties.int}<br>
+            <b>Vitesse max :</b> ${properties.vma}<br>
+            <b>Type de collision :</b> ${properties.col}<br>
+            <b>Conditions atmosphériques :</b> ${properties.atm}<br>
+            <b>Catégorie de route :</b> ${properties.catr}<br>
+            <b>Etat de la route :</b> ${properties.surf}<br>
+            <b>Infrastructure de la route :</b> ${properties.infra}<br>
+            <b>Catégorie du véhicule :</b> ${properties.catv}<br>
+            <b>Circulation :</b> ${properties.circ}<br>
+            <button onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
+
             `;
+            
             // Ajout d'une pop-up au marqueur
             marker.bindPopup(popupContenu);
             clusterGroup.addLayer(marker);
             //return marker;
             return clusterGroup;
         }
-    })
+    });
 }
 
 
