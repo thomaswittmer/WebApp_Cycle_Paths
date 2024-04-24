@@ -417,3 +417,29 @@ fetch('recupere_plan')
 .then(result => {
 planLayer = creeCouchePlan(result);
 })
+
+
+var imageOverlay;
+
+function showImageOverlay(imageUrl) {
+    if (!imageOverlay) {
+        imageOverlay = L.imageOverlay(imageUrl, [[51.49, -0.08], [51.51, -0.06]]).addTo(map);
+        document.getElementById('overlayImage').src = imageUrl;
+        document.getElementById('image-overlay').style.display = 'block';
+    } else {
+        map.removeLayer(imageOverlay);
+        imageOverlay = L.imageOverlay(imageUrl, [[51.49, -0.08], [51.51, -0.06]]).addTo(map);
+        document.getElementById('overlayImage').src = imageUrl;
+    }
+}
+
+function closeImageOverlay() {
+    if (imageOverlay) {
+        map.removeLayer(imageOverlay);
+        document.getElementById('image-overlay').style.display = 'none';
+        imageOverlay = null;
+    }
+}
+
+// Masquer l'overlay d'image au chargement de la page
+document.getElementById('image-overlay').style.display = 'none';

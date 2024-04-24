@@ -7,15 +7,15 @@
 }
 
 .btn {
-    margin-bottom: 20px; /* Réglez la marge comme vous le souhaitez */
+    margin-bottom: 20px;
 }
 
 .clique {
-    opacity: 0.5; /* Réglez l'opacité pour griser le bouton */
+    opacity: 0.5;
 }
 
 .anDesactive {
-    color: #6c757d; /* Couleur grise */
+    color: #6c757d;
 }
 
 .curseur-date {
@@ -67,4 +67,44 @@ p {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+#image-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+  
+#image-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+  
+.close-button {
+    cursor: pointer;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: red;
+    color: white;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);/
+}
+
+.btn-stat{
+    margin-bottom: -20px;
 }
