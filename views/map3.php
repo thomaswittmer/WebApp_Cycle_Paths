@@ -16,6 +16,15 @@
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+
+    <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.css" crossorigin="" />
+    <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.js" crossorigin=""></script>
+
     <style>
         body{
             background-color: #333;
@@ -47,6 +56,22 @@
             color: white;
             padding : 20px;
         }
+        .legend{
+            top: 10px;
+            right: 10px;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        .legend-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
 
         /* Style pour le header */
         header {
@@ -72,19 +97,22 @@
         }
 
         #research_bar {
-            margin-left: auto; /* Permet de pousser la barre de recherche et le bouton à droite */
-            display: flex; /* Utilisation de flexbox */
+            margin-left: auto;
             align-items: center; /* Centrer verticalement les éléments */
         }
 
-        #research_bar input[type="text"] {
+        #research_input[type="text"] {
+            align-items: center;
             padding: 8px; /* Espacement intérieur */
             border: none; /* Pas de bordure */
             border-radius: 5px; /* Coins arrondis */
             margin-right: 5px; /* Espacement à droite */
             font-size: 16px; /* Taille de la police */
         }
-        
+
+        .dropdown-item {
+        cursor: pointer;
+        }
         .connexion-button {
             background-color: #007bff; /* Couleur de fond */
             color: #fff; /* Couleur du texte */
@@ -96,7 +124,7 @@
             text-decoration: none; /* Suppression du soulignement */
             margin-left: 10px; /* Espacement à gauche */
         }
-
+        
         .carte {
             grid-column: 2;
             display: grid;
@@ -145,11 +173,14 @@
         <h1>SAFELANE</h1>
         <div id="research_bar">
             <input
-                type="text"
-                id="pacViewPlace"
+                type="search"
+                id="research_input"
                 name="pacViewPlace"
                 placeholder="Entrez un lieu..."
             />
+            <ul id="suggestions" class="dropdown-menu" style="display: none;">
+        
+        </ul>
         </div>
         <a href="connexion" class="connexion-button">Connexion</a> <!-- Lien vers connexion.php -->
     </header>
@@ -209,6 +240,16 @@
                 </div>
 
                 <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
+
+                <div id="legend">
+                <h3>Légende</h3>
+                <div><span class="legend-color" style="background-color: blue;"></span> piste cyclable</div>
+                <div><span class="legend-color" style="background-color: green;"></span> voie verte / aménagement mixte</div>
+                <div><span class="legend-color" style="background-color: yellow;"></span> couloir bus + vélo</div>
+                <div><span class="legend-color" style="background-color: purple;"></span> bande cyclable</div>
+                <div><span class="legend-color" style="background-color: orange;"></span> autre</div>
+                
+    </div>
             </div>
             
 
