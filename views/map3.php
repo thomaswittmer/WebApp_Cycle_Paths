@@ -182,7 +182,8 @@
         
         </ul>
         </div>
-        <a href="connexion" class="connexion-button">Connexion</a> <!-- Lien vers connexion.php -->
+
+        
     </header>
 
 
@@ -215,28 +216,22 @@
                     </form>
                 </div>
 
-                <!-- METEO -->
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    Sélectionner la météo
+                <!-- CARACTERISTIQUES -->
+                <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Caractéristiques
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <form>
-                        <div class="dropdown-item meteo">
-                            <input class="form-check-input mr-2" type="checkbox" value="pluie" checked> Pluie<br>
-                        </div>
-                        <div class="dropdown-item meteo">
-                            <input class="form-check-input mr-2" type="checkbox" value="brouillard" checked> Brouillard<br>
-                        </div>
-                        <div class="dropdown-item meteo">
-                            <input class="form-check-input mr-2" type="checkbox" value="soleil" checked> Soleil<br>
-                        </div>
-                        <div class="dropdown-item meteo">
-                            <input class="form-check-input mr-2" type="checkbox" value="neige" checked> Neige<br>
-                        </div>
-                        <div class="dropdown-item meteo">
-                            <input class="form-check-input mr-2" type="checkbox" value="vent" checked> Vent<br>
-                        </div>
-                    </form>
+                    <div class="dropdown-menu">
+                        <form>
+                            <a class="dropdown-item" value="int">Type d'intersection</a>
+                            <a class="dropdown-item" value="col">Type de collision</a>
+                            <a class="dropdown-item" value="atm">Conditions atmosphériques</a>
+                            <a class="dropdown-item" value="catr">Catégorie de route</a>
+                            <a class="dropdown-item" value="surf">Etat de la route</a>
+                            <a class="dropdown-item" value="infra">Infrastructure de la route</a>
+                            <a class="dropdown-item" value="catv">Catégorie du véhicule</a>
+                        </form>
+                    </div>
                 </div>
 
                 <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
@@ -267,11 +262,10 @@
     </div>
 
 
-
-
     <script src="/assets/map.js"></script>
     <!-- <script src="/assets/leaflet.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 </html>
 

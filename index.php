@@ -37,11 +37,29 @@ Flight::route('POST /lumino', function(){
 });
 
 Flight::route('POST /recup_annee', function(){
-    $test = null;
+    $res = null;
     if (isset($_POST['annee'])){
-        $test = "année : ".$_POST['annee'];
+        $link = Flight::get('BDD');
+
+        $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geo FROM voie_cyclable_geovelo WHERE annee <= '" . $_POST['annee'] . "' OR annee IS NULL;");
+
+        $features = [];
+        while ($row = pg_fetch_assoc($accidents)) {
+            $geometry = json_decode($row['geo']);
+            unset($row['geom']); // on retire la colonne geom pour ne garder que la geo en geojson
+            $features[] = array(
+                'type' => 'Feature',
+                'geometry' => $geometry,
+                'properties' => $row
+            );
+        }
+
+        $geojson = array(
+            'type' => 'FeatureCollection',
+            'features' => $features
+        );
     }
-    Flight::json($test);
+    Flight::json($geojson);
 });
 
 Flight::route('/connexion', function(){
@@ -54,6 +72,10 @@ Flight::route('/map', function(){
 
 Flight::route('/map3', function(){
     Flight::render('map3', );
+});
+
+Flight::route('/map4', function(){
+    Flight::render('map4', );
 });
 
 Flight::route('/cesium', function(){
