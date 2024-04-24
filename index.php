@@ -2,9 +2,9 @@
 require 'flight/Flight.php';
 $server = 'localhost';
 $port = '5432';
-$base= 'PDI';
+$base= 'amenagement_velo_paris';
 $user = 'postgres';
-$password = 'ZhW#L!th6BW';
+$password = 'user';
 $dsn = "host=$server port=$port dbname=$base user=$user password=$password";
 $link = pg_connect($dsn);
 

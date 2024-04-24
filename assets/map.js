@@ -147,7 +147,7 @@ function creeCoucheAccidents(objet) {
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
             const marker = L.circleMarker(latlng, {
-                radius: 4,
+                radius: 4.5,
                 fillColor: "red",
                 color: "#000",
                 weight: 1,
