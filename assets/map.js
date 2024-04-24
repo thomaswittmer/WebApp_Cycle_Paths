@@ -125,13 +125,18 @@ function creeCoucheAccidents(objet) {
             <b>Date:</b> ${properties.date}<br>
             <b>Commune:</b> ${properties.com}<br>
             <b>Vitesse max:</b> ${properties.vma}<br>
+            <button onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
+            
             `;
+            
             // Ajout d'une pop-up au marqueur
             marker.bindPopup(popupContenu);
+            
             return marker;
         }
-    })
+    });
 }
+
 
 
 var accidents = null;
