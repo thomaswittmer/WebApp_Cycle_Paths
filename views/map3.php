@@ -181,8 +181,9 @@
 </head>
 <body>
     <header>
-        <img src="/assets/images/safelane.png" alt="Logo" class="header-image"> <!-- Assurez-vous de remplacer "votre-image.jpg" par le chemin de votre image -->
+        <img src="/assets/images/safelane.png" alt="Logo" class="header-image">
         <h1>SAFELANE</h1>
+
         <div id="research_bar">
             <input
                 type="search"
@@ -195,7 +196,20 @@
         </ul>
         </div>
 
-        
+        <div class="btn-stat">
+            <button type="button" class="btn btn-warning">Statistiques</button>
+            <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
+                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_intersection.png')">Type d'intersection</a></li>
+                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_surface.png')">Type de surface</a></li>
+                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_luminosite.png')">Type de luminosité</a></li>
+                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_collision.png')">Type de collision</a></li>
+            </ul>
+        </div>
+
     </header>
 
 
@@ -261,10 +275,20 @@
             
 
         </div>
+        
         <div class="carte">
             <!--<div id="cesiumContainer"></div> -->
             <!-- curseur temporel -->
-            <div id="map"></div>
+            <div id="map">
+
+                <!-- fermer les fenêtres des statistiques -->
+                <div id="image-overlay">
+                    <img id="overlayImage" src="" alt="Overlay Image">
+                    <span class="close-button" onclick="closeImageOverlay()">X</span>
+                </div>
+
+            </div>
+
             <div class="curseur-date">
                 <div class="checkbox-date">
                     <input class="form-check-input mr-2" type="checkbox" value=1 v-model="caseChecked" id="checkboxdate" :disabled="caseDisabled" @change="annule_annee">

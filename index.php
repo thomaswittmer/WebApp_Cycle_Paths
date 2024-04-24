@@ -6,9 +6,7 @@ $server = 'localhost';
 $port = '5432';
 $base = 'amenagement_velo_paris';
 $user = 'postgres';
-$password = 'user'; // Retrieve password from environment variable
-
-// Create DSN string
+$password = 'postgres';
 $dsn = "host=$server port=$port dbname=$base user=$user password=$password";
 
 // Connect to database
