@@ -1,18 +1,26 @@
 <?php
 require 'flight/Flight.php';
+
+// Database configuration
 $server = 'localhost';
 $port = '5432';
-$base= 'amenagement_velo_paris';
+$base = 'amenagement_velo_paris';
 $user = 'postgres';
-$password = 'user';
+$password = getenv('DB_PASSWORD'); // Retrieve password from environment variable
+
+// Create DSN string
 $dsn = "host=$server port=$port dbname=$base user=$user password=$password";
+
+// Connect to database
 $link = pg_connect($dsn);
 
+// Check connection and set Flight variable
 if (!$link) {
-  die('Erreur de connexion');
+    die('Erreur de connexion: ' . pg_last_error());
 } else {
-  Flight::set('BDD', $link) ;
-};
+    Flight::set('BDD', $link);
+}
+
 
 
 Flight::route('/', function(){
@@ -55,6 +63,57 @@ Flight::route('/map', function(){
 Flight::route('/map3', function(){
     Flight::render('map3', );
 });
+
+Flight::route('/map4', function(){
+    Flight::render('map4', );
+});
+
+
+
+
+// Configuration de la base de données
+$host = 'localhost';
+$dbname = 'amenagement_velo_paris';
+$username = 'postgres';
+$password = getenv('DB_PASSWORD'); // Retrieve password from environment variable
+
+Flight::route('GET /getAccidentCoordinates', function(){
+    $link = Flight::get('BDD');
+
+    // Vérifiez si num_acc est défini
+    if (isset($_GET['num_acc']) && $_GET['num_acc'] !== null) {
+        $num_acc = $_GET['num_acc'];
+
+        // Utilisez une requête préparée pour éviter les injections SQL
+        $stmt = pg_prepare($link, "get_accident", 'SELECT lat, long FROM accident_velo_2010_2022 WHERE num_acc = $1');
+        
+        // Exécutez la requête avec le paramètre num_acc
+        $result = pg_execute($link, "get_accident", array($num_acc));
+
+        // Récupérez les données
+        $accident = pg_fetch_assoc($result);
+
+        // Vérifiez si un accident a été trouvé
+        if ($accident) {
+            // Renvoyer les données en format JSON
+            header('Content-Type: application/json');
+            echo json_encode($accident);
+        } else {
+            // Renvoyer une erreur si aucun accident n'a été trouvé
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Accident non trouvé']);
+        }
+    } else {
+        // Renvoyer une erreur si num_acc n'est pas défini
+        header('Content-Type: application/json');
+        echo json_encode(['error' => 'Paramètre num_acc manquant']);
+    }
+});
+
+
+
+
+
 
 Flight::route('/cesium', function(){
     Flight::render('cesium');

@@ -168,15 +168,17 @@ function creeCoucheAccidents(objet) {
             <b>Infrastructure de la route :</b> ${properties.infra}<br>
             <b>Catégorie du véhicule :</b> ${properties.catv}<br>
             <b>Circulation :</b> ${properties.circ}<br>
+            <button onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
 
             `;
+            
             // Ajout d'une pop-up au marqueur
             marker.bindPopup(popupContenu);
             clusterGroup.addLayer(marker);
             //return marker;
             return clusterGroup;
         }
-    })
+    });
 }
 
 
