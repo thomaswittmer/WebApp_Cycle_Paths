@@ -48,13 +48,13 @@
             flex-direction: column;
             align-items : center;
             justify-content: center;
-            background-color: #333;
+            background-color: dark;
             grid-column: 1;
             align-self: start;
             height: 73.5vh;
             width: 260px;
             color: white;
-            padding : 20px;
+            padding : 50px;
         }
         .legend{
             top: 10px;
@@ -178,12 +178,90 @@
         }
 
     </style>
+
 </head>
 <body>
     <header>
+
+    <!-- menu latéral à gauche en Bootstrap-->
+    <nav class="navbar navbar-dark" style="background-color: #333;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" style="order: -1;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Paramètres</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                    <!-- Choix des paramètres -->
+                    <div class="barre-laterale">
+                        <!-- LUMINOSITE -->
+                        <div class="boutons-barre">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Luminosité
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <form>
+                                    <div class="dropdown-item lumi">
+                                        <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked> Plein jour<br>
+                                    </div>
+                                    <div class="dropdown-item lumi">
+                                        <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked> Crépuscule ou aube<br>
+                                    </div>
+                                    <div class="dropdown-item lumi">
+                                        <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked> Nuit sans éclairage public<br>
+                                    </div>
+                                    <div class="dropdown-item lumi">
+                                        <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked> Nuit avec éclairage public non allumé<br>
+                                    </div>
+                                    <div class="dropdown-item lumi">
+                                        <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked> Nuit avec éclairage public allumé<br>
+                                    </div>
+                                </form>
+                            </div>
+                            </div>
+
+                            <!-- CARACTERISTIQUES -->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Caractéristiques
+                                </button>
+                                <div class="dropdown-menu">
+                                    <form>
+                                        <a class="dropdown-item" value="int">Type d'intersection</a>
+                                        <a class="dropdown-item" value="col">Type de collision</a>
+                                        <a class="dropdown-item" value="atm">Conditions atmosphériques</a>
+                                        <a class="dropdown-item" value="catr">Catégorie de route</a>
+                                        <a class="dropdown-item" value="surf">Etat de la route</a>
+                                        <a class="dropdown-item" value="infra">Infrastructure de la route</a>
+                                        <a class="dropdown-item" value="catv">Catégorie du véhicule</a>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
+
+                            <div id="legend">
+                            <h3>Légende</h3>
+                            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
+                            <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
+                            <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
+                            <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
+                            <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
         <img src="/assets/images/safelane.png" alt="Logo" class="header-image">
         <h1>SAFELANE</h1>
 
+        
         <div id="research_bar">
             <input
                 type="search"
@@ -215,66 +293,7 @@
 
     
     <div id=app>
-            <!-- Barre latérale pour choisir les paramètres -->
-        <div class="barre-laterale">
-            <!-- LUMINOSITE -->
-            <div class="boutons-barre">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    Luminosité
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <form>
-                        <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked> Plein jour<br>
-                        </div>
-                        <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked> Crépuscule ou aube<br>
-                        </div>
-                        <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked> Nuit sans éclairage public<br>
-                        </div>
-                        <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked> Nuit avec éclairage public non allumé<br>
-                        </div>
-                        <div class="dropdown-item lumi">
-                            <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked> Nuit avec éclairage public allumé<br>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- CARACTERISTIQUES -->
-                <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Caractéristiques
-                </button>
-                    <div class="dropdown-menu">
-                        <form>
-                            <a class="dropdown-item" value="int">Type d'intersection</a>
-                            <a class="dropdown-item" value="col">Type de collision</a>
-                            <a class="dropdown-item" value="atm">Conditions atmosphériques</a>
-                            <a class="dropdown-item" value="catr">Catégorie de route</a>
-                            <a class="dropdown-item" value="surf">Etat de la route</a>
-                            <a class="dropdown-item" value="infra">Infrastructure de la route</a>
-                            <a class="dropdown-item" value="catv">Catégorie du véhicule</a>
-                        </form>
-                    </div>
-                </div>
-
-                <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
-
-                <div id="legend">
-                <h3>Légende</h3>
-                <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
-                <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
-                <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
-                <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
-                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
-                
-    </div>
-            </div>
-            
-
-        </div>
+        
         
         <div class="carte">
             <!--<div id="cesiumContainer"></div> -->
@@ -301,6 +320,7 @@
         </div>
     </div>
 
+    
 
     <script src="/assets/map.js"></script>
     <!-- <script src="/assets/leaflet.js"></script> -->

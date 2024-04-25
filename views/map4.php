@@ -190,7 +190,7 @@
 
             // Ajout du tileset
             const tileset = new Cesium.Cesium3DTileset({
-                url: 'https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'
+                url: 'https://tile.googleapis.com/v1/3dtiles/root.json?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'
             });
             viewer.scene.primitives.add(tileset);
             viewer.zoomTo(tileset);
@@ -235,7 +235,7 @@
 
     <script
         async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
+        src="https://maps.googleapis.com/maps/api/js?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
     ></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
