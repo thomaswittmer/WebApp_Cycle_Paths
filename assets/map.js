@@ -313,8 +313,8 @@ var acciLayer = null;
 var planLayer = null;
 var map = L.map('map').setView([48.866667, 2.333333], 12);
 
-var fondCarte = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+var defaultLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(this.map);
 
 
@@ -340,7 +340,7 @@ searchInput.addEventListener('input', function() {
 
       suggestions.innerHTML = ''; // Efface les suggestions précédentes
 
-//propose des suggestions en dessous de la barre
+    //propose des suggestions en dessous de la barre
       results.suggestions.forEach(suggestion => {
         const address = suggestion.text;
         const location = suggestion.location;
@@ -369,10 +369,10 @@ searchInput.addEventListener('input', function() {
         suggestions.style.display = 'none';
       }
     });
-  });
+});
 
 //zoome sur l'endroit selectionne
-  suggestions.addEventListener('click', function(event) {
+suggestions.addEventListener('click', function(event) {
     const target = event.target;
     if (target && target.matches('a.dropdown-item')) {
       const address = target.textContent.trim();
@@ -389,31 +389,13 @@ searchInput.addEventListener('input', function() {
       searchInput.value = address; 
       suggestions.style.display = 'none'; 
     }
-  });
+});
 
 
 // Cacher le menu déroulant si on clique en dehors
-  document.addEventListener('click', function(event) {
+document.addEventListener('click', function(event) {
     if (!event.target.closest('.input-group')) {
       suggestions.style.display = 'none';
-    }
-  });
-
-
-
-var fondCarte2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 28,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-});
-
-// passage en mode plan si la carte est très zoomée et en mode aérien si on est loin de la zone
-map.on('zoomend', () => {
-    if (this.map.getZoom() >= 18) {
-        this.map.removeLayer(fondCarte);
-        this.map.addLayer(fondCarte2);
-    } else {
-        this.map.removeLayer(fondCarte2);
-        this.map.addLayer(fondCarte);
     }
 });
 
@@ -443,6 +425,7 @@ planLayer = creeCouchePlan(result);
 })
 
 
+// Affichage de l'overlay d'images de statistiques
 var imageOverlay;
 
 function showImageOverlay(imageUrl) {
@@ -457,6 +440,7 @@ function showImageOverlay(imageUrl) {
     }
 }
 
+// Fonction pour fermer l'overlay d'image de stat qui est sur la carte
 function closeImageOverlay() {
     if (imageOverlay) {
         map.removeLayer(imageOverlay);
@@ -467,3 +451,31 @@ function closeImageOverlay() {
 
 // Masquer l'overlay d'image au chargement de la page
 document.getElementById('image-overlay').style.display = 'none';
+
+
+
+// Ajouter d'autres couches de tuiles pour différentes vues
+var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+var topographicLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Associer des boutons à des actions pour changer de fond de plan
+    document.getElementById('btnSatellite').onclick = function() {
+        map.removeLayer(defaultLayer);
+        map.addLayer(satelliteLayer);
+        map.removeLayer(topographicLayer);
+    };
+
+    document.getElementById('btnTopographic').onclick = function() {
+        map.removeLayer(defaultLayer);
+        map.removeLayer(satelliteLayer);
+        map.addLayer(topographicLayer);
+    };
+
+    // Définir un bouton pour revenir au fond de plan par défaut
+    document.getElementById('btnDefault').onclick = function() {
+        map.removeLayer(satelliteLayer);
+        map.removeLayer(topographicLayer);
+        map.addLayer(defaultLayer);
+    };
+});
