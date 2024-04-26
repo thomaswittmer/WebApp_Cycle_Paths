@@ -135,27 +135,45 @@ function creeCouchePlan(objet) {
     });
 }
 
+
 // crée la couche contenant les accidents contenus dans "objet"
 function creeCoucheAccidents(objet) {
-    //tentative cluster
+    //cluster
     var clusterGroup = L.markerClusterGroup({
         maxClusterRadius: 50, 
         disableClusteringAtZoom: 15 //fin des clusters quand on zoome
     }); 
-
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
-            const marker = L.circleMarker(latlng, {
-                radius: 4.5,
-                fillColor: "red",
-                color: "#000",
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            });
+            const properties = feature.properties;
+            // si rien n'est sélectionné
+            if (type == null){
+                var mark = L.circleMarker(latlng, {
+                    radius: 4.5,
+                    fillColor: "red",
+                    color: "#000",
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                });
+            }
+            // si un des paramètres est sélectionné
+            else {
+                // Créer une icône personnalisée
+                var customIcon = L.icon({
+                    iconUrl: 'assets/images/icones/'+properties[type]+'.png', // chemin vers icône
+                    iconSize: [32, 32], // Taille icône
+                    iconAnchor: [16, 16], // point d'ancrage centre icône
+                    popupAnchor: [0, -16] // point d'ancrage popup par rapport à l'icône
+                });
+        
+                // Créer le marqueur avec l'icône personnalisée
+                var mark = L.marker(latlng, { icon: customIcon }).addTo(map);
+            }
+            const marker = mark;
             
             // Récupération des informations de l'accident correspondant
-            const properties = feature.properties;
+
             const popupContenu = `
             <b>Date:</b> ${properties.date}<br>
             <b>Type d'intersection :</b> ${properties.int}<br>
@@ -174,8 +192,8 @@ function creeCoucheAccidents(objet) {
             // Ajout d'une pop-up au marqueur
             marker.bindPopup(popupContenu);
             clusterGroup.addLayer(marker);
-            //return marker;
-            return clusterGroup;
+            return marker;
+            //return clusterGroup;
         }
     });
 }
@@ -208,6 +226,8 @@ var pistes = null;
 var acci_select = null;
 var acci_anneeSelect = null;
 var acci_paramSelect = null;
+var type = null;
+
 
 // PARAMETRES
 var checkboxes = document.querySelectorAll('.droite input[type="checkbox"]');
@@ -217,22 +237,25 @@ checkboxes.forEach(function(check) {
     check.addEventListener('change', function() {
         let lumi_select = [];
         let meteo_select = [];
+        type = check.parentNode.parentNode.className.split(' ')[1];
         // Parcourir toutes les cases cochées et les ajouter à FormData
         checkboxes.forEach(function(checkbox) {
             if (checkbox.checked) {
-                if (checkbox.parentNode.parentNode.classList.contains('lumi')) {
+                // icone de la coche
+                let icone = checkbox.parentNode.parentNode.querySelector('img').getAttribute('alt');
+                if (checkbox.parentNode.parentNode.classList.contains('lum')) {
                     // Si la case à cocher appartient à la classe "dropdown-item lumi"
-                    lumi_select.push(checkbox.value);
-                } else if (checkbox.parentNode.classList.contains('meteo')) {
+                    lumi_select.push({valeur: checkbox.value, icon: icone});
+                } else if (checkbox.parentNode.parentNode.classList.contains('atm')) {
                     // Si la case à cocher appartient à la classe "dropdown-item meteo"
-                    meteo_select.push(checkbox.value);
+                    meteo_select.push({valeur: checkbox.value, icon: icone});
                 }
             }
         });
-
         // accidents selectionnes avec la luminosité
         acci_paramSelect = accidents.features.filter(feature => {
-            return lumi_select.includes(feature.properties.lum);
+            // true ou false selon si l'accident appartient aux param sélectionnés
+            return (lumi_select.some(item => item.valeur === feature.properties.lum) && meteo_select.some(item => item.valeur === feature.properties.atm));
         });
         // accidents en luminosité et en année
         if (acci_anneeSelect != null) {
@@ -243,6 +266,7 @@ checkboxes.forEach(function(check) {
         else {
             acci_select = acci_paramSelect;
         }
+
         map.removeLayer(acciLayer);
         acciLayer = creeCoucheAccidents(acci_select).addTo(map);
 

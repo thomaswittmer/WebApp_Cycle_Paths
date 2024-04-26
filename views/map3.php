@@ -205,49 +205,141 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <form>
-                                        <div class="form-switch lumi mx-2">
+                                        <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/soleil.png" alt="Soleil">
+                                                <img src="../assets/images/icones/Plein jour.png" alt="Plein jour">
                                                 Plein jour
                                             </div>
                                             <div class="droite">
                                                 <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked>
                                             </div>
                                         </div>
-                                        <div class="form-switch lumi mx-2">
+                                        <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/sea.png" alt="aube">
+                                                <img src="../assets/images/icones/Crépuscule ou aube.png" alt="Crépuscule ou aube">
                                                 Crépuscule ou aube
                                             </div>
-                                            <div class="droit">
+                                            <div class="droite">
                                                 <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
                                             </div>
                                         </div>
-                                        <div class="form-switch lumi mx-2">
+                                        <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/lune.png" alt="lune">
+                                                <img src="../assets/images/icones/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
                                                 Nuit sans éclairage public
                                             </div>
                                             <div class="droite">
                                                 <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
                                             </div>
                                         </div>
-                                        <div class="form-switch lumi mx-2">
+                                        <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/eteint.png" alt="eteint">
+                                                <img src="../assets/images/icones/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
                                                 Nuit avec éclairage public non allumé
                                             </div>
                                             <div class="droite">
                                                 <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
                                             </div>
                                         </div>
-                                        <div class="form-switch lumi mx-2">
+                                        <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/allume.png" alt="allume">
+                                                <img src="../assets/images/icones/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
                                                 Nuit avec éclairage public allumé
                                             </div>
                                             <div class="droite">
                                                 <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- METEO -->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Météo
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <form>
+                                        <div class="form-switch atm mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/Temps éblouissant.png" alt="Temps éblouissant">
+                                                Temps éblouissant
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Temps éblouissant" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch atm mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/Brouillard - fumée.png" alt="Brouillard - fumée">
+                                                Brouillard - fumée
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Brouillard - fumée" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch atm mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/Neige - grêle.png" alt="Neige - grêle">
+                                                Neige - grêle
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Neige - grêle" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch atm mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/Vent fort - tempête.png" alt="Vent fort - tempête">
+                                                Vent fort - tempête
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Vent fort - tempête" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch atm mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/Pluie légère.png" alt="Pluie légère">
+                                                Pluie légère
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Pluie légère" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch atm mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/Pluie forte.png" alt="Pluie forte">
+                                                Pluie forte
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Pluie forte" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch atm mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/Temps couvert.png" alt="Temps couvert">
+                                                Temps couvert
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Temps couvert" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch atm mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/Normale.png" alt="Normale">
+                                                Normale
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Normale" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch atm mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/Autre.png" alt="Autre">
+                                                Autre
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Autre" checked>
                                             </div>
                                         </div>
                                     </form>
