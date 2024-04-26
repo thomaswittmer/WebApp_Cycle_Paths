@@ -80,16 +80,18 @@ p {
     border-radius: 10px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-  
 #image-overlay img {
     max-width: 100%;
-    max-height: 100%;
+    max-height: 60vh;
     width: auto;
     height: auto;
 }
-  
+
 .close-button {
     cursor: pointer;
     position: absolute;
@@ -102,8 +104,9 @@ p {
     text-align: center;
     line-height: 20px;
     border-radius: 50%;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);/
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
+
 
 .btn-stat{
     margin-bottom: -20px;
@@ -137,4 +140,67 @@ p {
 
 .form-switch .droite {
     margin-left: auto; 
+}
+
+
+#titre-carte{
+    border-top: 2px solid #ccc; /* Ligne de séparation */
+    margin-top: 25px;
+    padding-top: 25px;
+}
+
+.button-container-fond {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.map-button {
+    position: relative;
+    border: none;
+    background-color: #f0f0f0;
+    padding: 0;
+    width: 80px; /* Largeur fixe pour chaque bouton */
+    height: 80px; /* Hauteur fixe pour chaque bouton */
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 20px; /* Espacement entre chaque bouton (à droite) */
+}
+
+.map-button:last-child {
+    margin-right: 0; /* Aucun espacement à droite pour le dernier bouton */
+}
+
+.map-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.button-label {
+    position: absolute;
+    bottom: 10px; /* Ajustez cette valeur pour le positionnement vertical */
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.button-label-sat {
+    position: absolute;
+    bottom: 10px; /* Ajustez cette valeur pour le positionnement vertical */
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
 }

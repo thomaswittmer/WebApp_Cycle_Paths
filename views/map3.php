@@ -52,7 +52,7 @@
             grid-column: 1;
             align-self: start;
             height: 73.5vh;
-            width: 260px;
+            width: 360px;
             color: white;
             padding : 50px;
         }
@@ -192,13 +192,14 @@
             </button>
             <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Paramètres</h5>
+                    <h2 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Paramètres</h2>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                     <!-- Choix des paramètres -->
                     <div class="barre-laterale">
                         <!-- LUMINOSITE -->
                         <div class="boutons-barre">
+
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     Luminosité
@@ -374,8 +375,27 @@
                             <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
                             <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
                             <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
+
                             
                         </div>
+
+                        <!-- FOND DE CARTE -->
+                        <h3 id="titre-carte">Fond de carte</h3>
+                        <div class="button-container-fond">
+                            <button id="btnSatellite" class="map-button">
+                                <img src="assets/images/fond_aerien_paris.png" alt="Vue satellite">
+                                <span class="button-label-sat">Vue satellite</span>
+                            </button>
+                            <button id="btnTopographic" class="map-button">
+                                <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
+                                <span class="button-label">Vue topo</span>
+                            </button>
+                            <button id="btnDefault" class="map-button">
+                                <img src="assets/images/fond_routier_paris.png" alt="Vue routière">
+                                <span class="button-label">Vue routière</span>
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -384,17 +404,9 @@
         <img src="/assets/images/safelane.png" alt="Logo" class="header-image">
         <h1>SAFELANE</h1>
 
-        
         <div id="research_bar">
-            <input
-                type="search"
-                id="research_input"
-                name="pacViewPlace"
-                placeholder="Entrez un lieu..."
-            />
-            <ul id="suggestions" class="dropdown-menu" style="display: none;">
-        
-        </ul>
+            <input class="form-control me-2" type="search" id="research_input" name="pacViewPlace" placeholder="Entrez un lieu..." aria-label="Search">
+            <ul id="suggestions" class="dropdown-menu" style="display: none;"></ul>
         </div>
 
         <div class="btn-stat">
