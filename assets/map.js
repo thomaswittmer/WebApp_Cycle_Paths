@@ -210,7 +210,7 @@ var acci_anneeSelect = null;
 var acci_paramSelect = null;
 
 // PARAMETRES
-var checkboxes = document.querySelectorAll('.dropdown-menu input[type="checkbox"]');
+var checkboxes = document.querySelectorAll('.droite input[type="checkbox"]');
 
 // Ajouter un écouteur d'événements à chaque bouton radio
 checkboxes.forEach(function(check) {
@@ -220,7 +220,7 @@ checkboxes.forEach(function(check) {
         // Parcourir toutes les cases cochées et les ajouter à FormData
         checkboxes.forEach(function(checkbox) {
             if (checkbox.checked) {
-                if (checkbox.parentNode.classList.contains('lumi')) {
+                if (checkbox.parentNode.parentNode.classList.contains('lumi')) {
                     // Si la case à cocher appartient à la classe "dropdown-item lumi"
                     lumi_select.push(checkbox.value);
                 } else if (checkbox.parentNode.classList.contains('meteo')) {

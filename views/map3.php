@@ -186,7 +186,7 @@
     <!-- menu latéral à gauche en Bootstrap-->
     <nav class="navbar navbar-dark" style="background-color: #333;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"></a>
+            <a class="navbar-brand"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" style="order: -1;">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -199,30 +199,61 @@
                     <div class="barre-laterale">
                         <!-- LUMINOSITE -->
                         <div class="boutons-barre">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                Luminosité
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <form>
-                                    <div class="dropdown-item lumi">
-                                        <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked> Plein jour<br>
-                                    </div>
-                                    <div class="dropdown-item lumi">
-                                        <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked> Crépuscule ou aube<br>
-                                    </div>
-                                    <div class="dropdown-item lumi">
-                                        <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked> Nuit sans éclairage public<br>
-                                    </div>
-                                    <div class="dropdown-item lumi">
-                                        <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked> Nuit avec éclairage public non allumé<br>
-                                    </div>
-                                    <div class="dropdown-item lumi">
-                                        <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked> Nuit avec éclairage public allumé<br>
-                                    </div>
-                                </form>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Luminosité
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <form>
+                                        <div class="form-switch lumi mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/soleil.png" alt="Soleil">
+                                                Plein jour
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch lumi mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/sea.png" alt="aube">
+                                                Crépuscule ou aube
+                                            </div>
+                                            <div class="droit">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch lumi mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/lune.png" alt="lune">
+                                                Nuit sans éclairage public
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch lumi mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/eteint.png" alt="eteint">
+                                                Nuit avec éclairage public non allumé
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch lumi mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/allume.png" alt="allume">
+                                                Nuit avec éclairage public allumé
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            </div>
+                            
 
                             <!-- CARACTERISTIQUES -->
                             <div class="btn-group">
