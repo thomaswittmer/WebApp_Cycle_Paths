@@ -108,3 +108,33 @@ p {
 .btn-stat{
     margin-bottom: -20px;
 }
+
+.dropdown-menu {
+    min-width: auto !important;   /* Ne pas couper la ligne du menu deroulant en 1*/
+    width: max-content !important;
+}
+
+
+.form-switch.lumi img {
+    height: 40px; /* Hauteur de l'image */
+    width: auto; /* Largeur automatique pour conserver les proportions */
+    margin-right: 10px; /* Marge à droite pour séparer l'image du texte */
+}
+
+.form-switch.lumi {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-switch.lumi input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+.form-switch.lumi .gauche {
+    margin-right: 10px;
+}
+
+.form-switch.lumi .droite {
+    margin-left: auto; 
+}
