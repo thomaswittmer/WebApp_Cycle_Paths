@@ -208,7 +208,7 @@
                                     <form>
                                         <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Plein jour.png" alt="Plein jour">
+                                                <img src="../assets/images/icones/lum/Plein jour.png" alt="Plein jour">
                                                 Plein jour
                                             </div>
                                             <div class="droite">
@@ -217,7 +217,7 @@
                                         </div>
                                         <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Crépuscule ou aube.png" alt="Crépuscule ou aube">
+                                                <img src="../assets/images/icones/lum/Crépuscule ou aube.png" alt="Crépuscule ou aube">
                                                 Crépuscule ou aube
                                             </div>
                                             <div class="droite">
@@ -226,7 +226,7 @@
                                         </div>
                                         <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
+                                                <img src="../assets/images/icones/lum/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
                                                 Nuit sans éclairage public
                                             </div>
                                             <div class="droite">
@@ -235,7 +235,7 @@
                                         </div>
                                         <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
+                                                <img src="../assets/images/icones/lum/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
                                                 Nuit avec éclairage public non allumé
                                             </div>
                                             <div class="droite">
@@ -244,7 +244,7 @@
                                         </div>
                                         <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
+                                                <img src="../assets/images/icones/lum/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
                                                 Nuit avec éclairage public allumé
                                             </div>
                                             <div class="droite">
@@ -264,7 +264,7 @@
                                     <form>
                                         <div class="form-switch atm mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Temps éblouissant.png" alt="Temps éblouissant">
+                                                <img src="../assets/images/icones/atm/Temps éblouissant.png" alt="Temps éblouissant">
                                                 Temps éblouissant
                                             </div>
                                             <div class="droite">
@@ -273,7 +273,7 @@
                                         </div>
                                         <div class="form-switch atm mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Brouillard - fumée.png" alt="Brouillard - fumée">
+                                                <img src="../assets/images/icones/atm/Brouillard - fumée.png" alt="Brouillard - fumée">
                                                 Brouillard - fumée
                                             </div>
                                             <div class="droite">
@@ -282,7 +282,7 @@
                                         </div>
                                         <div class="form-switch atm mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Neige - grêle.png" alt="Neige - grêle">
+                                                <img src="../assets/images/icones/atm/Neige - grêle.png" alt="Neige - grêle">
                                                 Neige - grêle
                                             </div>
                                             <div class="droite">
@@ -291,7 +291,7 @@
                                         </div>
                                         <div class="form-switch atm mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Vent fort - tempête.png" alt="Vent fort - tempête">
+                                                <img src="../assets/images/icones/atm/Vent fort - tempête.png" alt="Vent fort - tempête">
                                                 Vent fort - tempête
                                             </div>
                                             <div class="droite">
@@ -300,7 +300,7 @@
                                         </div>
                                         <div class="form-switch atm mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Pluie légère.png" alt="Pluie légère">
+                                                <img src="../assets/images/icones/atm/Pluie légère.png" alt="Pluie légère">
                                                 Pluie légère
                                             </div>
                                             <div class="droite">
@@ -309,7 +309,7 @@
                                         </div>
                                         <div class="form-switch atm mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Pluie forte.png" alt="Pluie forte">
+                                                <img src="../assets/images/icones/atm/Pluie forte.png" alt="Pluie forte">
                                                 Pluie forte
                                             </div>
                                             <div class="droite">
@@ -318,7 +318,7 @@
                                         </div>
                                         <div class="form-switch atm mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Temps couvert.png" alt="Temps couvert">
+                                                <img src="../assets/images/icones/atm/Temps couvert.png" alt="Temps couvert">
                                                 Temps couvert
                                             </div>
                                             <div class="droite">
@@ -327,7 +327,7 @@
                                         </div>
                                         <div class="form-switch atm mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Normale.png" alt="Normale">
+                                                <img src="../assets/images/icones/atm/Normale.png" alt="Normale">
                                                 Normale
                                             </div>
                                             <div class="droite">
@@ -336,7 +336,7 @@
                                         </div>
                                         <div class="form-switch atm mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/Autre.png" alt="Autre">
+                                                <img src="../assets/images/icones/atm/Autre.png" alt="Autre">
                                                 Autre
                                             </div>
                                             <div class="droite">
@@ -355,13 +355,12 @@
                                 </button>
                                 <div class="dropdown-menu">
                                     <form>
-                                        <a class="dropdown-item" value="int">Type d'intersection</a>
-                                        <a class="dropdown-item" value="col">Type de collision</a>
-                                        <a class="dropdown-item" value="atm">Conditions atmosphériques</a>
-                                        <a class="dropdown-item" value="catr">Catégorie de route</a>
-                                        <a class="dropdown-item" value="surf">Etat de la route</a>
-                                        <a class="dropdown-item" value="infra">Infrastructure de la route</a>
-                                        <a class="dropdown-item" value="catv">Catégorie du véhicule</a>
+                                        <option class="dropdown-item caractere" value="int">Type d'intersection</option>
+                                        <option class="dropdown-item caractere" value="col">Type de collision</option>
+                                        <option class="dropdown-item caractere" value="catr">Catégorie de route</option>
+                                        <option class="dropdown-item caractere" value="surf">Etat de la route</option>
+                                        <option class="dropdown-item caractere" value="infra">Infrastructure de la route</option>
+                                        <option class="dropdown-item caractere" value="catv">Catégorie du véhicule</option>
                                     </form>
                                 </div>
                             </div>
@@ -379,6 +378,9 @@
                             
                         </div>
 
+                        <div id="legendAcci"></div>
+
+                        
                         <!-- FOND DE CARTE -->
                         <h3 id="titre-carte">Fond de carte</h3>
                         <div class="button-container-fond">
@@ -388,7 +390,7 @@
                             </button>
                             <button id="btnTopographic" class="map-button">
                                 <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
-                                <span class="button-label">Vue topo</span>
+                                <span class="button-label">Vue topologique</span>
                             </button>
                             <button id="btnDefault" class="map-button">
                                 <img src="assets/images/fond_routier_paris.png" alt="Vue routière">

@@ -161,12 +161,11 @@ function creeCoucheAccidents(objet) {
             else {
                 // Créer une icône personnalisée
                 var customIcon = L.icon({
-                    iconUrl: 'assets/images/icones/'+properties[type]+'.png', // chemin vers icône
+                    iconUrl: 'assets/images/icones/'+type+'/'+properties[type]+'.png', // chemin vers icône
                     iconSize: [32, 32], // Taille icône
                     iconAnchor: [16, 16], // point d'ancrage centre icône
                     popupAnchor: [0, -16] // point d'ancrage popup par rapport à l'icône
                 });
-        
                 // Créer le marqueur avec l'icône personnalisée
                 var mark = L.marker(latlng, { icon: customIcon }).addTo(map);
             }
@@ -221,6 +220,29 @@ function mettreAJourLegende(etatCouches) {
     }
 }
 
+// Affichage de la nouvelle légende des accidents
+function afficheLegendeAccident(choix) {
+    const legendElement = document.getElementById('legendAcci');
+    if (choix == "catv") {
+        legendElement.innerHTML = `
+            <h3>Légende des Accidents</h3>
+            <div><img src="assets/images/icones/surf/catv/Bicyclette"> Bicyclette </div>
+            <div><img src="assets/images/icones/surf/catv/Vélo à Assistance Electrique (VAE).png"> Vélo à Assistance Electrique (VAE) </div>
+            <div><img src="assets/images/icones/surf/catv/Non renseigné.png"> Non renseigné </div>
+        `;
+    } else {
+        legendElement.innerHTML = `
+            <h3>Légende</h3>
+            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
+                <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
+                <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
+                <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
+                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
+                
+        `;
+    }
+}
+
 var accidents = null;
 var pistes = null;
 var acci_select = null;
@@ -229,7 +251,7 @@ var acci_paramSelect = null;
 var type = null;
 
 
-// PARAMETRES
+// PARAMETRES VARIANTS
 var checkboxes = document.querySelectorAll('.droite input[type="checkbox"]');
 
 // Ajouter un écouteur d'événements à chaque bouton radio
@@ -273,6 +295,20 @@ checkboxes.forEach(function(check) {
     });
 });
 
+
+// CARACTERISTIQUES
+var caracteres = document.querySelectorAll('.caractere');
+
+// ecouteur d'evenement
+caracteres.forEach(function (carac) {
+    carac.addEventListener('click', function() {
+        // récupération de tous les types de la variable cochée
+        type = carac.value;
+        afficheLegendeAccident(type);
+        map.removeLayer(acciLayer);
+        acciLayer = creeCoucheAccidents(acci_select).addTo(map);
+    });
+});
 
 // PLAN VELO
 let plan = document.getElementById("plan");
@@ -405,6 +441,7 @@ fetch('recupere_acci')
 .then(result => result.json())
 .then(result => {
     accidents = result;
+    acci_select = accidents;
 })
 
 // Récupération de toutes les pistes cyclables

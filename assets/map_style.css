@@ -56,6 +56,17 @@ input[type="range"]::-moz-range-thumb {
     cursor: pointer;
     border: none;
 }
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px; /* Largeur de l'image */
+    height: 50px; /* Hauteur de l'image */
+    background: url('../assets/images/safelane.png') center center no-repeat; /* Chemin vers l'image */
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+}
   
 
 p {
@@ -161,8 +172,8 @@ p {
     border: none;
     background-color: #f0f0f0;
     padding: 0;
-    width: 80px; /* Largeur fixe pour chaque bouton */
-    height: 80px; /* Hauteur fixe pour chaque bouton */
+    width: 90px; /* Largeur fixe pour chaque bouton */
+    height: 90px; /* Hauteur fixe pour chaque bouton */
     display: flex;
     border-radius: 10px;
     flex-direction: column;
