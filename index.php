@@ -68,6 +68,25 @@ Flight::route('POST /recup_annee', function(){
     Flight::json($geojson);
 });
 
+Flight::route('POST /recup_caractere', function(){
+    if (isset($_POST['caractere'])){
+        $link = Flight::get('BDD');
+
+        $caractere = pg_query($link, "SELECT DISTINCT (int) FROM accident_velo_2010_2022");
+    
+        $features = [];
+        while ($row = pg_fetch_assoc($caractere)) {
+            $features[] = $row;
+        }
+
+        $geojson = array(
+            'type' => 'FeatureCollection',
+            'features' => $features
+        );
+    }
+    Flight::json($geojson);
+});
+
 Flight::route('/connexion', function(){
     Flight::render('connexion');
 });
