@@ -204,7 +204,6 @@
                                     <form>
                                         <option class="dropdown-item caractere" value="int">Type d'intersection</option>
                                         <option class="dropdown-item caractere" value="col">Type de collision</option>
-                                        <option class="dropdown-item caractere" value="catr">Catégorie de route</option>
                                         <option class="dropdown-item caractere" value="surf">Etat de la route</option>
                                         <option class="dropdown-item caractere" value="infra">Infrastructure de la route</option>
                                         <option class="dropdown-item caractere" value="catv">Catégorie du véhicule</option>
