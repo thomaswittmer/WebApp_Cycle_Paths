@@ -1,4 +1,16 @@
 <?php
+//////FICHIER NON UTILE
+
+
+
+
+
+
+
+
+
+
+
 
 // Configuration de la base de données
 $host = 'localhost';
