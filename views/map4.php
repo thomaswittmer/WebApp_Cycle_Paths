@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <title>CesiumJS 3D Tiles Places API Integration Demo</title>
+    <title>SAFELANE 3D</title>
+    <link rel="icon" type="image/png" href="/assets/images/safelane.png" sizes="32x32 64x64">
     <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
     <link href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -89,36 +90,26 @@
 </head>
 <body>
     <header>
-        <img src="/assets/images/safelane.png" alt="Logo" class="header-image"> <!-- Assurez-vous de remplacer "votre-image.jpg" par le chemin de votre image -->
+        <img src="/assets/images/safelane.png" alt="Logo" class="header-image"> 
         <h1>SAFELANE</h1>
-        <a href="map3" class="return-button">Retour</a> <!-- Lien de retour-->
+        <a href="map3" class="return-button">Retour</a> 
     </header>
-
-
 
     
     <div id=app>
-        <div class="carte">
             <div id="cesiumContainer"></div>
-        </div>
     </div>
 
 
     <script>
 
-        // Enable simultaneous requests.
-        Cesium.RequestScheduler.requestsByServer["tile.googleapis.com:443"] = 18;
-
-
-
-
-
-
+    // Enable simultaneous requests.
+    Cesium.RequestScheduler.requestsByServer["tile.googleapis.com:443"] = 18;
     // Fonction pour récupérer les coordonnées de l'accident depuis la base de données
     function getAccidentCoordinatesFromDB(num_acc) {
         return new Promise((resolve, reject) => {
             // URL de votre API pour récupérer les coordonnées d'un accident
-            const apiUrl = `http://localhost:80/getAccidentCoordinates?num_acc=${num_acc}`;
+            const apiUrl = `http://localhost:8000/getAccidentCoordinates?num_acc=${num_acc}`;
 
             // Effectuer la requête AJAX
             $.ajax({
@@ -165,17 +156,6 @@
             viewer.scene.skyAtmosphere.show = true;
 
 
-            // Création d'un point sur la carte avec les coordonnées
-            const point = viewer.entities.add({
-                name: 'Accident',
-                position: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude),
-                point: {
-                    pixelSize: 10,
-                    color: Cesium.Color.RED,
-                    outlineColor: Cesium.Color.WHITE,
-                    outlineWidth: 2,
-                },
-            });
 
            // Déplacer la caméra vers le point avec une altitude ajustée
             viewer.camera.flyTo({
@@ -188,16 +168,84 @@
             });
 
 
-            // Ajout du tileset
+
+
+            // Chargement du tileset
             const tileset = new Cesium.Cesium3DTileset({
-                url: 'https://tile.googleapis.com/v1/3dtiles/root.json?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'
+                url: 'https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'
             });
             viewer.scene.primitives.add(tileset);
             viewer.zoomTo(tileset);
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-            });
+
+
+
+
+            function getAltitudeFromCoordinates(lat, long) {
+                const apiKey = 'AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'; // Remplacez YOUR_API_KEY par votre propre clé d'API
+
+                const apiUrl = `https://api.open-elevation.com/api/v1/lookup?locations=${lat},${long}&key=${apiKey}`;
+
+                return new Promise((resolve, reject) => {
+                    fetch(apiUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data && data.results && data.results.length > 0) {
+                                const altitude = data.results[0].elevation;
+                                resolve(altitude);
+                            } else {
+                                reject('Impossible de récupérer l\'altitude');
+                            }
+                        })
+                        .catch(error => {
+                            reject('Erreur lors de la requête pour récupérer l\'altitude');
+                        });
+                });
+            }
+            
+
+
+
+
+            getAccidentCoordinatesFromDB(accidentId)
+                .then(coordinates => {
+                    // Utilisation de la fonction pour obtenir l'altitude à partir des coordonnées de l'accident
+                    getAltitudeFromCoordinates(coordinates.latitude, coordinates.longitude)
+                        .then(altitude => {
+                            console.log('Altitude:', altitude);
+                            
+                            // Création d'un point sur la carte avec les coordonnées et l'altitude récupérées
+                            const point = viewer.entities.add({
+                                name: 'Accident',
+                                position: Cesium.Cartesian3.fromDegrees(
+                                    coordinates.longitude,
+                                    coordinates.latitude,
+                                    altitude  // Utilisation de l'altitude récupérée ici
+                                ),
+                                point: {
+                                    pixelSize: 10,
+                                    color: Cesium.Color.RED,
+                                    outlineColor: Cesium.Color.WHITE,
+                                    outlineWidth: 2,
+                                },
+                            });
+
+                            // Déplacer la caméra vers le point avec une altitude ajustée
+                            viewer.camera.flyTo({
+                                destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude, altitude + 300),
+                                orientation: {
+                                    heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
+                                    pitch: Cesium.Math.toRadians(-50), // Inclinaison de la caméra en degrés
+                                    roll: 0 // Rotation de la caméra en degrés
+                                },
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Erreur lors de la récupération de l\'altitude:', error);
+                        });
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des coordonnées de l\'accident:', error);
+                });
 
 
         // Define the zoomToViewport function
@@ -211,32 +259,11 @@
                 ),
             });
         }
-
-        function initAutocomplete() {
-            const autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById("pacViewPlace"),
-            {
-                fields: [
-                "geometry",
-                "name",
-                ],
-            }
-            );
-            autocomplete.addListener("place_changed", () => {
-            const place = autocomplete.getPlace();
-            if (!place.geometry || !place.geometry.viewport) {
-                window.alert("No viewport for input: " + place.name);
-                return;
-            }
-            zoomToViewport(place.geometry.viewport);
-            });
-        }
+        });
     </script>
 
-    <script
-        async
-        src="https://maps.googleapis.com/maps/api/js?key=AAIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80&libraries=places&callback=initAutocomplete"
-    ></script>
+        
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
