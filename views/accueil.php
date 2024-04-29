@@ -3,52 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/accueil_style.css">
-    <link rel="icon" type="image/png" href="/assets/images/safelane.png" sizes="32x32 64x64">
+    <link rel="icon" type="image/png" href="/assets/images/icon_safelane_carre.png" sizes="32x32">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-image: url("https://cdn.paris.fr/paris/2019/07/24/original-16a41c93d50a95cd15d8919d7101479f.jpg");
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .login-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 50%;
-            height: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-        <img src="/assets/images/safelane.png" height=200px>
-        <p>Bienvenue sur ce site Internet favorisant la sécurité des cyclistes à Paris.</p>
+        <img src="/assets/images/safelane_carre.png" height=200px><br>
+        <h1>Bienvenue sur l'application SAFELANE.</h1><br>
+
+        <p>Une application web a été développée pour répondre à l'augmentation des accidents de vélo à Paris entre 2016 et 2022 
+        malgré les aménagements cyclables existants. Cette application vise à identifier les zones à risque les plus élevés pour les 
+        cyclistes, afin de prioriser les améliorations nécessaires. Elle offrira une carte interactive 2D avec une option 3D pour une 
+        visualisation détaillée des données, permettant une meilleure planification urbaine. En plus d'améliorer la sécurité des cyclistes 
+        parisiens, cette application pourrait inspirer d'autres grandes villes à adopter des solutions similaires, contribuant ainsi à une 
+        évolution positive de la mobilité cycliste à l'échelle mondiale.</p>
+
+        <!-- Groupe de boutons pour ouvrir la popup et accéder à la carte -->
+        <div class="button-group">
+            <button class="btn btn-outline-danger btn-lg mt-3" onclick="openPopup()">Voir les fonctionnalités</button>
+            <a href="/map3" class="btn btn-success btn-lg mt-3">Accéder à l'application</a>
+        </div>
+
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup()">X</span>
+                <h2>Fonctionnalités de SAFELANE</h2>
+                <p>Voici les principales fonctionnalités de l'application :</p>
+                <ul>
+                    <li>⚠️ Identification des zones à risque pour les cyclistes.</li>
+                    <li>🚲 Consultation du Plan Vélo 2021-2026 de la mairie de Paris.</li>
+                    <li>🗓️ Visualisation des données des accidents par année.</li>
+                    <li>🎥 Carte interactive 2D avec option 3D pour une visualisation plus détaillée du lieu de l'accident.</li>
+                    <li>✅ Filtrage des accidents par caractéristiques (météo, infrastructure, luminosité, ...).</li>
+                    <li>🗺️ Personnalisation du fond de carte.</li>
+                    <li>📈 Affichage de statistiques sur les accidents.</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <a href="connexion" class="login-button">Se connecter</a>
+    <script src="/assets/accueil.js"></script>
 </body>
 </html>

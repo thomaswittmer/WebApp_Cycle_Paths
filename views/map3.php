@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>SAFELANE</title>
+    <link rel="icon" type="image/png" href="/assets/images/icon_safelane_carre.png" sizes="32x32 64x64 128x128">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -10,22 +11,16 @@
     <script src="https://unpkg.com/vue@3.2.31"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="assets/map_style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
 
     <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.css" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.css" crossorigin=""/>
     <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.js" crossorigin=""></script>
-
-
 </head>
 <body>
     <header>
@@ -218,16 +213,20 @@
                                 </div>
                             </div>
 
+                            <!-- COUCHES PISTES -->
+                            <h3 id="titre-pistes">Couches voies cyclables</h3>
+
                             <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
 
                             <div id="legend">
-                                <h3>Légende</h3>
+                            <h4>Légende</h4>
                                 <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
                                 <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
                                 <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
                                 <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
                                 <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
                             </div>
+
 
                         <!-- FOND DE CARTE -->
                         <h3 id="titre-carte">Fond de carte</h3>
@@ -249,8 +248,7 @@
             </div>
         </div>
     </nav>
-
-        <img src="/assets/images/safelane.png" alt="Logo" class="header-image">
+        <img src="/assets/images/safelane_carre.png" alt="Logo" class="header-image">
         <h1>SAFELANE</h1>
 
         <div id="research_bar">
