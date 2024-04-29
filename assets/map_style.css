@@ -167,13 +167,23 @@ input[type="range"] {
     background: rgba(73, 109, 160, 1);
 }
 
-input[type="range"]::-webkit-slider-thumb,
 input[type="range"]::-moz-range-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 50px; /* Largeur de l'image */
     height: 50px; /* Hauteur de l'image */
-    background: url('../assets/images/safelane.png') center center no-repeat; 
+    background: url('../assets/images/icon_safelane.png') center center no-repeat; 
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px; /* Largeur de l'image */
+    height: 50px; /* Hauteur de l'image */
+    background: url('../assets/images/icon_safelane.png') center center no-repeat; 
     background-size: contain;
     cursor: pointer;
     border: none;
@@ -302,6 +312,16 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
+/* Styles CSS pour les images de légende */
+.legend-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px; /* Espace entre l'image et le texte */
+}
+
+#legendAcci {
+    margin-top: 20px;
+}
 
 /*bouton fonds de carte*/
 

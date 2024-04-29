@@ -162,7 +162,7 @@ function creeCoucheAccidents(objet) {
                 // Créer une icône personnalisée
                 var customIcon = L.icon({
                     iconUrl: 'assets/images/icones/'+type+'/'+properties[type]+'.png', // chemin vers icône
-                    iconSize: [32, 32], // Taille icône
+                    iconSize: [25, 25], // Taille icône
                     iconAnchor: [16, 16], // point d'ancrage centre icône
                     popupAnchor: [0, -16] // point d'ancrage popup par rapport à l'icône
                 });
@@ -225,20 +225,62 @@ function afficheLegendeAccident(choix) {
     const legendElement = document.getElementById('legendAcci');
     if (choix == "catv") {
         legendElement.innerHTML = `
-            <h3>Légende des Accidents</h3>
-            <div><img src="assets/images/icones/surf/catv/Bicyclette"> Bicyclette </div>
-            <div><img src="assets/images/icones/surf/catv/Vélo à Assistance Electrique (VAE).png"> Vélo à Assistance Electrique (VAE) </div>
-            <div><img src="assets/images/icones/surf/catv/Non renseigné.png"> Non renseigné </div>
+            <h4>Légende des Accidents</h4>
+            <div><img class="legend-img" src="assets/images/icones/catv/Bicyclette.png"> Bicyclette </div>
+            <div><img class="legend-img" src="assets/images/icones/catv/Vélo à Assistance Electrique (VAE).png"> Vélo à Assistance Electrique (VAE) </div>
+            <div><img class="legend-img" src="assets/images/icones/catv/Non renseigné.png"> Non renseigné </div>
         `;
-    } else {
+    } else if (choix == "int") {
         legendElement.innerHTML = `
-            <h3>Légende</h3>
-            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
-                <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
-                <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
-                <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
-                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
-                
+            <h4>Légende des Accidents</h4>
+            <div><img class="legend-img" src="assets/images/icones/int/Passage à niveau.png"> Passage à niveau </div>
+            <div><img class="legend-img" src="assets/images/icones/int/Intersection à plus de 4 branches.png"> Intersection à plus de 4 branches </div>
+            <div><img class="legend-img" src="assets/images/icones/int/Intersection en Y.png"> Intersection en Y </div>
+            <div><img class="legend-img" src="assets/images/icones/int/Intersection en T.png"> Intersection en T </div>
+            <div><img class="legend-img" src="assets/images/icones/int/Giratoire.png"> Giratoire </div>
+            <div><img class="legend-img" src="assets/images/icones/int/Intersection en X.png"> Intersection en X </div>
+            <div><img class="legend-img" src="assets/images/icones/int/Place.png"> Place </div>
+            <div><img class="legend-img" src="assets/images/icones/int/Hors intersection.png"> Hors intersection </div>
+            <div><img class="legend-img" src="assets/images/icones/int/Autre intersection.png"> Autre intersection </div>
+        `;
+    } else if (choix == "col") {
+        legendElement.innerHTML = `
+            <h4>Légende des Accidents</h4>
+            <div><img class="legend-img" src="assets/images/icones/col/Deux véhicules - par l'arrière.png"> Deux véhicules - par l'arrière </div>
+            <div><img class="legend-img" src="assets/images/icones/col/Deux véhicules - par le côté.png"> Deux véhicules - par le côté </div>
+            <div><img class="legend-img" src="assets/images/icones/col/Trois véhicules et plus - en chaîne.png"> Trois véhicules et plus - en chaîne </div>
+            <div><img class="legend-img" src="assets/images/icones/col/Deux véhicules - frontale.png"> Deux véhicules - frontale </div>
+            <div><img class="legend-img" src="assets/images/icones/col/Trois véhicules et plus - collisions multiples.png"> Trois véhicules et plus - collisions multiples </div>
+            <div><img class="legend-img" src="assets/images/icones/col/Sans collision.png"> Sans collision </div>
+            <div><img class="legend-img" src="assets/images/icones/col/Autre collision.png"> Autre collision </div>
+            <div><img class="legend-img" src="assets/images/icones/col/Non renseigné.png"> Non renseigné </div>
+        `;
+    } else if (choix == "surf") {
+        legendElement.innerHTML = `
+            <h4>Légende des Accidents</h4>
+            <div><img class="legend-img" src="assets/images/icones/surf/Normale.png"> Normale </div>
+            <div><img class="legend-img" src="assets/images/icones/surf/Enneigée.png"> Enneigée </div>
+            <div><img class="legend-img" src="assets/images/icones/surf/Flaques.png"> Flaques </div>
+            <div><img class="legend-img" src="assets/images/icones/surf/Mouillée.png"> Mouillée - en chaîne </div>
+            <div><img class="legend-img" src="assets/images/icones/surf/Inondée.png"> Inondée </div>
+            <div><img class="legend-img" src="assets/images/icones/surf/Corps gras - huile.png"> Corps gras - huile </div>
+            <div><img class="legend-img" src="assets/images/icones/surf/Verglacée.png"> Verglacée </div>
+            <div><img class="legend-img" src="assets/images/icones/surf/Autre.png"> Autre </div>
+            <div><img class="legend-img" src="assets/images/icones/surf/Non renseigné.png"> Non renseigné </div>
+        `;
+    } else if (choix == "infra") {
+        legendElement.innerHTML = `
+            <h4>Légende des Accidents</h4>
+            <div><img class="legend-img" src="assets/images/icones/infra/Aucun.png"> Aucun </div>
+            <div><img class="legend-img" src="assets/images/icones/infra/Bretelle d'échangeur ou de raccordement.png"> Bretelle d'échangeur ou de raccordement </div>
+            <div><img class="legend-img" src="assets/images/icones/infra/Carrefour aménagé.png"> Carrefour aménagé </div>
+            <div><img class="legend-img" src="assets/images/icones/infra/Chantier.png"> Chantier </div>
+            <div><img class="legend-img" src="assets/images/icones/infra/Pont - autopont.png"> Pont - autopont </div>
+            <div><img class="legend-img" src="assets/images/icones/infra/Souterrain - tunnel.png"> Souterrain - tunnel </div>
+            <div><img class="legend-img" src="assets/images/icones/infra/Voie ferrée.png"> Voie ferrée </div>
+            <div><img class="legend-img" src="assets/images/icones/infra/Zone piétonne.png"> Zone piétonne </div>
+            <div><img class="legend-img" src="assets/images/icones/infra/Autre.png"> Autre </div>
+            <div><img class="legend-img" src="assets/images/icones/infra/Non renseigné.png"> Non renseigné </div>
         `;
     }
 }
@@ -257,6 +299,7 @@ var checkboxes = document.querySelectorAll('.droite input[type="checkbox"]');
 // Ajouter un écouteur d'événements à chaque bouton radio
 checkboxes.forEach(function(check) {
     check.addEventListener('change', function() {
+        document.getElementById('legendAcci').innerHTML = ``;
         let lumi_select = [];
         let meteo_select = [];
         type = check.parentNode.parentNode.className.split(' ')[1];
