@@ -4,12 +4,42 @@ let app = Vue.createApp({
             selectedYear: '',
             suggestions: [],
             caseChecked: true,
-            caseDisabled: true
+            caseDisabled: true,
+            isAutoPlaying: false,
+            autoPlayInterval: null 
         };
     },
     computed: {
     },
     methods: {
+        startAutoPlay() {
+            this.isAutoPlaying = true;
+            this.autoPlayInterval = setInterval(() => {
+                this.nextYear();
+            }, 1000);
+        },
+       
+        stopAutoPlay() {
+            this.isAutoPlaying = false;
+            clearInterval(this.autoPlayInterval);
+            this.caseChecked = true;
+            this.annule_annee();
+        },
+        
+        nextYear() {
+            if (this.selectedYear === '') {
+                this.selectedYear = '2016';
+                this.cherche_annee();
+            } else {
+                let currentYear = parseInt(this.selectedYear);
+                if (currentYear < 2022) {
+                    this.selectedYear = (currentYear + 1).toString();
+                    this.cherche_annee();
+                } else {
+                    this.stopAutoPlay();
+                }
+            }
+        },
 
         cherche_annee(){
             this.caseChecked = false;
