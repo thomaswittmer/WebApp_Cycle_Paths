@@ -105,6 +105,12 @@ let app = Vue.createApp({
 
 }).mount('#app');
 
+//gestion curseur sur la map
+var dateSlider = document.getElementById('dateSlider');
+dateSlider.addEventListener('mousemove', function(event) {
+    event.stopPropagation(); 
+});
+
 // crée la couche contenant les pistes contenues dans "objet"
 function creeCouchePistes(objet) {
     return L.geoJSON(objet, {
@@ -168,7 +174,6 @@ function creeCouchePlan(objet) {
 
 // crée la couche contenant les accidents contenus dans "objet"
 function creeCoucheAccidents(objet) {
-    //cluster
     var clusterGroup = L.markerClusterGroup({
         maxClusterRadius: 50, 
         disableClusteringAtZoom: 15 //fin des clusters quand on zoome
@@ -197,9 +202,9 @@ function creeCoucheAccidents(objet) {
                     popupAnchor: [0, -16] // point d'ancrage popup par rapport à l'icône
                 });
                 // Créer le marqueur avec l'icône personnalisée
-                var mark = L.marker(latlng, { icon: customIcon }).addTo(map);
+                var mark = L.marker(latlng, { icon: customIcon });
             }
-            const marker = mark;
+            //const marker = mark;
             
             // Récupération des informations de l'accident correspondant
 
@@ -219,12 +224,13 @@ function creeCoucheAccidents(objet) {
             `;
             
             // Ajout d'une pop-up au marqueur
-            marker.bindPopup(popupContenu);
-            clusterGroup.addLayer(marker);
-            return marker;
-            //return clusterGroup;
+            mark.bindPopup(popupContenu);
+            clusterGroup.addLayer(mark);
+            //return mark;
+            return clusterGroup;
         }
     });
+    
 }
 
 
