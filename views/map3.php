@@ -388,7 +388,7 @@
                             </button>
                             <button id="btnTopographic" class="map-button">
                                 <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
-                                <span class="button-label">Vue topo</span>
+                                <span class="button-label">Vue topologique</span>
                             </button>
                             <button id="btnDefault" class="map-button">
                                 <img src="assets/images/fond_routier_paris.png" alt="Vue routière">
