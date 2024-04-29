@@ -167,13 +167,23 @@ input[type="range"] {
     background: rgba(73, 109, 160, 1);
 }
 
-input[type="range"]::-webkit-slider-thumb,
 input[type="range"]::-moz-range-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 50px; /* Largeur de l'image */
     height: 50px; /* Hauteur de l'image */
-    background: url('../assets/images/safelane.png') center center no-repeat; 
+    background: url('../assets/images/icon_safelane.png') center center no-repeat; 
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px; /* Largeur de l'image */
+    height: 50px; /* Hauteur de l'image */
+    background: url('../assets/images/icon_safelane.png') center center no-repeat; 
     background-size: contain;
     cursor: pointer;
     border: none;
@@ -293,7 +303,16 @@ input[type="range"]::-moz-range-thumb {
     padding-top: 10px;
 }
 
+/* Styles CSS pour les images de légende */
+.legend-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px; /* Espace entre l'image et le texte */
+}
 
+#legendAcci {
+    margin-top: 20px;
+}
 
 /*bouton fonds de carte*/
 #titre-carte, #titre-pistes{
@@ -357,4 +376,46 @@ input[type="range"]::-moz-range-thumb {
     font-size: 14px;
     font-weight: bold;
     color: white;
+}
+
+.play {
+    position: absolute;
+    bottom: 56px; 
+    left: 10px; 
+    z-index: 1000; 
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 20px;
+    padding: 5px px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.stop {
+    position: absolute;
+    bottom: 56px; 
+    left: 10px; 
+    z-index: 1000; 
+    background-color: #eb3d3d;
+    border: 2px solid #c60d0d;
+    border-radius: 20px;
+    padding: 5px px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.play:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+img {
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
 }
