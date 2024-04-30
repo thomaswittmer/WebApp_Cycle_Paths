@@ -51,7 +51,7 @@
                 </div>
 
                 <!-- bouton play pour lire les accidents dans le temps automatiquement-->
-                <button :class="isAutoPlaying ? 'stop' : 'play'" @click="isAutoPlaying ? stopAutoPlay() : startAutoPlay()" :disabled="isAutoPlaying">
+                <button :class="isAutoPlaying ? 'stop' : 'play'" @click="isAutoPlaying ? stopAutoPlay() : startAutoPlay()">
                     <img v-if="!isAutoPlaying" src="assets/images/play.svg" alt="Lecture automatique">
                     <img v-else src="assets/images/stop.svg" alt="Arrêter la lecture automatique">
                 </button>
@@ -69,15 +69,10 @@
                         </button>
 
                         <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-        
-                        <!--<div class = "menu-lateral">-->
-                            <!--<div class="offcanvas-header">
-                                <h2 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Paramètres</h2>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            </div>
+            
 
-                        <!-- Choix des paramètres -->
-                            <!--<div class = "menu-lateral">
+                    <!-- Choix des paramètres -->
+                <div class = "menu-lateral">
 
                         <!-- LUMINOSITE -->
                            <!-- <div class="boutons-barre">
@@ -313,8 +308,26 @@
         
                         <!--<div class = "menu-lateral">-->
                             <div class="offcanvas-header">
-                                <h2 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Paramètres</h2>
+                                <a href="/"><img src="/assets/images/param_safelane.png" alt="logo" class="header-image"></a>
+                                <a id="infoButton" href=".popup"><img src="/assets/images/bouton_info.png" alt="info" class="bouton-info"></a>
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+
+                            <div id="popup" class="popup">
+                                <div class="popup-content">
+                                    <span class="close" onclick="closePopup()">X</span>
+                                    <h2>Fonctionnalités de SAFELANE</h2>
+                                    <p>Voici les principales fonctionnalités de l'application :</p>
+                                    <ul>
+                                        <li>⚠️ Identification des zones à risque pour les cyclistes.</li>
+                                        <li>🚲 Consultation du Plan Vélo 2021-2026 de la mairie de Paris.</li>
+                                        <li>🗓️ Visualisation des données des accidents par année.</li>
+                                        <li>🎥 Carte interactive 2D avec option 3D pour une visualisation plus détaillée du lieu de l'accident.</li>
+                                        <li>✅ Filtrage des accidents par caractéristiques (météo, infrastructure, luminosité, ...).</li>
+                                        <li>🗺️ Personnalisation du fond de carte.</li>
+                                        <li>📈 Affichage de statistiques sur les accidents.</li>
+                                    </ul>
+                                </div>
                             </div>
 
                         <!-- Choix des paramètres -->
@@ -561,9 +574,8 @@
         
     </div><!--app-->
 
-    
-
     <script src="/assets/map.js"></script>
+    <script src="/assets/accueil.js"></script>
     <!-- <script src="/assets/leaflet.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     

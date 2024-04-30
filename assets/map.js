@@ -2,6 +2,7 @@ let app = Vue.createApp({
     data() {
         return {
             selectedYear: '',
+            selectedMonth: '',
             suggestions: [],
             caseChecked: true,
             caseDisabled: true,
@@ -23,6 +24,7 @@ let app = Vue.createApp({
             this.isAutoPlaying = false;
             clearInterval(this.autoPlayInterval);
             this.caseChecked = true;
+            this.selectedYear = '';
             this.annule_annee();
         },
         
@@ -80,6 +82,26 @@ let app = Vue.createApp({
                 pistesLayer = creeCouchePistes(r).addTo(map);
               })*/
 
+        },
+        
+        cherche_mois_annee() {
+            let selectedYear = this.selectedYear;
+            let selectedMonth = this.selectedMonth;
+
+            acci_moisAnneeSelect = accidents.features.filter(feature => {
+                annee = feature.properties.an;
+                mois = feature.properties.mois;
+                return annee === selectedYear && mois === selectedMonth;
+            });
+
+            map.removeLayer(acciLayer);
+
+            var geojsonAcciMoisAnnee = {
+                type: "FeatureCollection",
+                features: acci_moisAnneeSelect
+            };
+
+            acciLayer = creeCoucheAccidents(geojsonAcciMoisAnnee).addTo(map);
         },
 
         annule_annee() {
@@ -221,8 +243,7 @@ function creeCoucheAccidents(objet) {
             <b>Infrastructure de la route :</b> ${properties.infra}<br>
             <b>Catégorie du véhicule :</b> ${properties.catv}<br>
             <b>Circulation :</b> ${properties.circ}<br>
-            <button onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
-
+            <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
             `;
             
             // Ajout d'une pop-up au marqueur
@@ -327,6 +348,7 @@ var accidents = null;
 var pistes = null;
 var acci_select = null;
 var acci_anneeSelect = null;
+var acci_moisAnneeSelect = null;
 var acci_paramSelect = null;
 var type = null;
 

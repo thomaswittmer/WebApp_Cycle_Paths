@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
 body {
     background-image: url("https://cdn.paris.fr/paris/2019/07/24/original-16a41c93d50a95cd15d8919d7101479f.jpg");
     background-size: cover;
@@ -8,7 +10,7 @@ body {
 }
 
 h1 {
-    font-family: Arial, sans-serif;
+    font-family: 'Zen Dots', sans-serif;
 }
 
 p {
