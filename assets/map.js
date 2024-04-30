@@ -1,23 +1,26 @@
 let app = Vue.createApp({
     data() {
         return {
-            selectedYear: '',
+            selectedYear: '2016-2022',
             selectedMonth: '',
             suggestions: [],
             caseChecked: true,
             caseDisabled: true,
             isAutoPlaying: false,
-            autoPlayInterval: null 
+            autoPlayInterval: null,
+            isPaused: false
         };
     },
     computed: {
     },
     methods: {
         startAutoPlay() {
-            this.isAutoPlaying = true;
-            this.autoPlayInterval = setInterval(() => {
-                this.nextYear();
-            }, 1000);
+            if (!this.isAutoPlaying) {
+                this.isAutoPlaying = true;
+                this.autoPlayInterval = setInterval(() => {
+                    this.nextYear();
+                }, 1000);
+            }
         },
        
         stopAutoPlay() {
@@ -26,6 +29,14 @@ let app = Vue.createApp({
             this.caseChecked = true;
             this.selectedYear = '';
             this.annule_annee();
+        },
+
+        pauseAutoPlay() {
+            if (this.isAutoPlaying) {
+                clearInterval(this.autoPlayInterval);
+                this.isAutoPlaying = false;
+                this.isPaused = true;
+            }
         },
         
         nextYear() {
@@ -105,7 +116,7 @@ let app = Vue.createApp({
         },
 
         annule_annee() {
-            this.selectedYear='';
+            this.selectedYear='2016-2022';
             this.caseDisabled = true;
 
             acci_anneeSelect = accidents.features;
@@ -132,8 +143,6 @@ var dateSlider = document.getElementById('dateSlider');
 dateSlider.addEventListener('mousemove', function(event) {
     event.stopPropagation(); 
 });
-
-
 
 // crée la couche contenant les pistes contenues dans "objet"
 function creeCouchePistes(objet) {
@@ -195,7 +204,6 @@ function creeCouchePlan(objet) {
     });
 }
 
-
 // crée la couche contenant les accidents contenus dans "objet"
 function creeCoucheAccidents(objet) {
     var clusterGroup = L.markerClusterGroup({
@@ -231,7 +239,6 @@ function creeCoucheAccidents(objet) {
             //const marker = mark;
             
             // Récupération des informations de l'accident correspondant
-
             const popupContenu = `
             <b>Date:</b> ${properties.date}<br>
             <b>Type d'intersection :</b> ${properties.int}<br>
@@ -255,7 +262,6 @@ function creeCoucheAccidents(objet) {
     });
     
 }
-
 
 // Fonction pour mettre à jour la légende
 function mettreAJourLegende(etatCouches) {
@@ -352,7 +358,6 @@ var acci_moisAnneeSelect = null;
 var acci_paramSelect = null;
 var type = null;
 
-
 // PARAMETRES VARIANTS
 var checkboxes = document.querySelectorAll('.droite input[type="checkbox"]');
 
@@ -420,7 +425,6 @@ dropdownMeteo.addEventListener('click', function() {
     caracDecalable.classList.toggle('carac-decale-vers-le-bas');
 });
 
-
 // CARACTERISTIQUES
 var caracteres = document.querySelectorAll('.caractere');
 
@@ -486,7 +490,6 @@ var defaultLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(this.map);
 
-
 //la barre de recherche des adresses
 
 // test ESRI 
@@ -496,7 +499,6 @@ const geocoder = L.esri.Geocoding.geocodeService({
 });
 const searchInput = document.getElementById('research_input');
 const suggestions = document.getElementById('suggestions');
-
 
 searchInput.addEventListener('input', function() {
     const query = this.value;
@@ -560,14 +562,12 @@ suggestions.addEventListener('click', function(event) {
     }
 });
 
-
 // Cacher le menu déroulant si on clique en dehors
 document.addEventListener('click', function(event) {
     if (!event.target.closest('.input-group')) {
       suggestions.style.display = 'none';
     }
 });
-
 
 // Récupération de tous les accidents
 fetch('recupere_acci')
@@ -586,14 +586,12 @@ fetch('recupere_pistes')
     acciLayer = creeCoucheAccidents(accidents).addTo(map);
 })
 
-
 // Récupération de toutes les pistes cyclables
 fetch('recupere_plan')
 .then(result => result.json())
 .then(result => {
 planLayer = creeCouchePlan(result);
 })
-
 
 // Affichage de l'overlay d'images de statistiques
 var imageOverlay;
@@ -622,8 +620,6 @@ function closeImageOverlay() {
 // Masquer l'overlay d'image au chargement de la page
 document.getElementById('image-overlay').style.display = 'none';
 
-
-
 // Ajouter d'autres couches de tuiles pour différentes vues
 var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
 var topographicLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
@@ -648,6 +644,4 @@ document.addEventListener('DOMContentLoaded', function() {
         map.removeLayer(topographicLayer);
         map.addLayer(defaultLayer);
     };
-
-
 });
