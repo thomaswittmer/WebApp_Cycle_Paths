@@ -5,6 +5,7 @@
     <title>SAFELANE</title>
     <link rel="icon" type="image/png" href="/assets/images/icon_safelane_carre.png" sizes="32x32 64x64 128x128">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/assets/images/safelane.png" sizes="32x32 64x64">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -245,7 +246,22 @@
                                 <span class="button-label">Vue routière</span>
                             </button>
                         </div>
-                </div>
+
+                        <!-- AFFICHAGE CLUSTERS -->
+                        <h3 id="titre-carte">Affichage des clusters</h3>
+                        <div class="button-container-fond">
+                            <form>
+                                <div class="form-switch atm mx-2">
+                                    <div class="gauche">
+                                        <img src="../assets/images/cluster.png" alt="Clusters">
+                                        Masquer les clusters
+                                    </div>
+                                    <div class="droite">
+                                        <input id="clusterCheckbox" class="form-check-input mr-2" type="checkbox" value="Clusters" checked>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
             </div>
         </div>
     </nav>

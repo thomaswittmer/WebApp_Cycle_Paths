@@ -1,22 +1,4 @@
 <?php
-//////FICHIER NON UTILE
-
-
-
-
-
-
-
-
-
-
-
-
-// Configuration de la base de données
-$host = 'localhost';
-$dbname = 'amenagement_velo_paris';
-$username = 'postgres';
-$password = "getenv('DB_PASSWORD')"; // Retrieve password from environment variable
 
 try {
     // Connexion à la base de données
