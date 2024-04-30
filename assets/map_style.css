@@ -419,3 +419,13 @@ img {
     height: 24px;
     pointer-events: none;
 }
+
+.meteo-decale-vers-le-bas {
+    margin-top: 220px; /* Ajustez la valeur de la marge selon vos besoins */
+    transition: margin-top 0.3s ease; /* Ajoute une transition fluide */
+}
+
+.carac-decale-vers-le-bas {
+    margin-top: 380px; /* Ajustez la valeur de la marge selon vos besoins */
+    transition: margin-top 0.3s ease; /* Ajoute une transition fluide */
+}

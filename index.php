@@ -6,7 +6,7 @@ $server = 'localhost';
 $port = '5432';
 $base = 'amenagement_velo_paris';
 $user = 'postgres';
-$password = 'ZhW#L!th6BW';
+$password = 'user';
 $dsn = "host=$server port=$port dbname=$base user=$user password=$password";
 
 // Connect to database
