@@ -6,7 +6,7 @@ $server = 'localhost';
 $port = '5432';
 $base = 'amenagement_velo_paris';
 $user = 'postgres';
-$password = 'user';
+$password = 'postgres';
 $dsn = "host=$server port=$port dbname=$base user=$user password=$password";
 
 // Connect to database
@@ -18,8 +18,6 @@ if (!$link) {
 } else {
     Flight::set('BDD', $link);
 }
-
-
 
 Flight::route('/', function(){
     Flight::render('accueil');
@@ -87,14 +85,6 @@ Flight::route('POST /recup_caractere', function(){
     Flight::json($geojson);
 });
 
-Flight::route('/connexion', function(){
-    Flight::render('connexion');
-});
-
-Flight::route('/map', function(){
-    Flight::render('map');
-});
-
 Flight::route('/map3', function(){
     Flight::render('map3', );
 });
@@ -140,10 +130,6 @@ Flight::route('GET /getAccidentCoordinates', function(){
 
 Flight::route('/cesium', function(){
     Flight::render('cesium');
-});
-
-Flight::route('/mapJeanne', function(){
-    Flight::render('mapJeanne');
 });
 
 Flight::route('GET /recupere_pistes', function(){
