@@ -111,6 +111,8 @@ dateSlider.addEventListener('mousemove', function(event) {
     event.stopPropagation(); 
 });
 
+
+
 // crée la couche contenant les pistes contenues dans "objet"
 function creeCouchePistes(objet) {
     return L.geoJSON(objet, {
@@ -426,7 +428,8 @@ plan.addEventListener('click', function() {
 var pistesLayer = null;
 var acciLayer = null;
 var planLayer = null;
-var map = L.map('map').setView([48.866667, 2.333333], 12);
+var map = L.map('map',{ zoomControl: false }).setView([48.866667, 2.333333], 12);
+new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 var defaultLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -594,4 +597,6 @@ document.addEventListener('DOMContentLoaded', function() {
         map.removeLayer(topographicLayer);
         map.addLayer(defaultLayer);
     };
+
+
 });
