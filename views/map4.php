@@ -9,11 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="assets/map_style.css">
     <style>
         body{
             background-color: #333;
-            height: 50vh;
             margin: 0;
             padding: 0;
             max-height: 100vh;
@@ -25,22 +23,8 @@
             flex-direction: row;
             align-items: start;
             background-color: #333;
-            padding: 30px;
         }
 
-        .barre_laterale{
-            display: flex;
-            flex-direction: column;
-            align-items : center;
-            justify-content: center;
-            background-color: #333;
-            grid-column: 1;
-            align-self: start;
-            height: 73.5vh;
-            width: 260px;
-            color: white;
-            padding : 20px;
-        }
 
         /* Style pour le header */
         header {
@@ -78,13 +62,15 @@
             margin-left: 10px; /* Espacement à gauche */
         }
 
-        .carte {
-            grid-column: 2;
-            display: grid;
-            grid-template-rows: 650px 1fr;
-            height: 100%;
+        /* BOUTON 3D*/
+        #cesiumContainer {
             width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+
         }
+
 
     </style>
 </head>
@@ -92,6 +78,10 @@
     <header>
         <img src="/assets/images/safelane.png" alt="Logo" class="header-image"> 
         <h1>SAFELANE</h1>
+        <input type="checkbox" id="animationCheckbox">
+        <label for="animationCheckbox">Activer animation</label>
+
+
         <a href="map3" class="return-button">Retour</a> 
     </header>
 
@@ -99,6 +89,11 @@
     <div id=app>
             <div id="cesiumContainer"></div>
     </div>
+
+
+
+
+
 
 
     <script>
@@ -156,20 +151,6 @@
             viewer.scene.skyAtmosphere.show = true;
 
 
-
-           // Déplacer la caméra vers le point avec une altitude ajustée
-            viewer.camera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude - 0.0015, 300),
-                orientation: {
-                    heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
-                    pitch: Cesium.Math.toRadians(-50), // Inclinaison de la caméra en degrés
-                    roll: 0 // Rotation de la caméra en degrés
-                },
-            });
-
-
-
-
             // Chargement du tileset
             const tileset = new Cesium.Cesium3DTileset({
                 url: 'https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'
@@ -179,9 +160,9 @@
 
 
 
-
+        
             function getAltitudeFromCoordinates(lat, long) {
-                const apiKey = 'AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'; // Remplacez YOUR_API_KEY par votre propre clé d'API
+                const apiKey = 'AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'; 
 
                 const apiUrl = `https://api.open-elevation.com/api/v1/lookup?locations=${lat},${long}&key=${apiKey}`;
 
@@ -201,10 +182,7 @@
                         });
                 });
             }
-            
-
-
-
+    
 
             getAccidentCoordinatesFromDB(accidentId)
                 .then(coordinates => {
@@ -231,7 +209,7 @@
 
                             // Déplacer la caméra vers le point avec une altitude ajustée
                             viewer.camera.flyTo({
-                                destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude, altitude + 300),
+                                destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude - 0.002, altitude + 300),
                                 orientation: {
                                     heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
                                     pitch: Cesium.Math.toRadians(-50), // Inclinaison de la caméra en degrés
@@ -262,6 +240,7 @@
         });
     </script>
 
+    
         
 
 

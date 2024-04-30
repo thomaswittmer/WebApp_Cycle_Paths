@@ -246,7 +246,22 @@
                                 <span class="button-label">Vue routière</span>
                             </button>
                         </div>
-                </div>
+
+                        <!-- AFFICHAGE CLUSTERS -->
+                        <h3 id="titre-carte">Affichage des clusters</h3>
+                        <div class="button-container-fond">
+                            <form>
+                                <div class="form-switch atm mx-2">
+                                    <div class="gauche">
+                                        <img src="../assets/images/cluster.png" alt="Clusters">
+                                        Masquer les clusters
+                                    </div>
+                                    <div class="droite">
+                                        <input id="clusterCheckbox" class="form-check-input mr-2" type="checkbox" value="Clusters" checked>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
             </div>
         </div>
     </nav>
