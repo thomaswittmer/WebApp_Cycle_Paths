@@ -6,7 +6,7 @@ $server = 'localhost';
 $port = '5432';
 $base = 'amenagement_velo_paris';
 $user = 'postgres';
-$password = 'ZhW#L!th6BW';
+$password = 'user';
 $dsn = "host=$server port=$port dbname=$base user=$user password=$password";
 
 // Connect to database
@@ -174,7 +174,7 @@ Flight::route('GET /recupere_pistes', function(){
 Flight::route('GET /recupere_acci', function(){
     $link = Flight::get('BDD');
 
-    $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(geom) AS geo FROM accident_velo_2010_2022");
+    $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(geom) AS geo, EXTRACT(MONTH FROM TO_DATE(date, 'DD/MM/YYYY')) AS mois FROM accident_velo_2010_2022");
 
     $features = [];
     while ($row = pg_fetch_assoc($accidents)) {

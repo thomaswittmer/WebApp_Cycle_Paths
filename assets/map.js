@@ -2,6 +2,7 @@ let app = Vue.createApp({
     data() {
         return {
             selectedYear: '',
+            selectedMonth: '',
             suggestions: [],
             caseChecked: true,
             caseDisabled: true,
@@ -23,6 +24,7 @@ let app = Vue.createApp({
             this.isAutoPlaying = false;
             clearInterval(this.autoPlayInterval);
             this.caseChecked = true;
+            this.selectedYear = '';
             this.annule_annee();
         },
         
@@ -81,6 +83,26 @@ let app = Vue.createApp({
               })*/
 
         },
+        
+        cherche_mois_annee() {
+            let selectedYear = this.selectedYear;
+            let selectedMonth = this.selectedMonth;
+
+            acci_moisAnneeSelect = accidents.features.filter(feature => {
+                annee = feature.properties.an;
+                mois = feature.properties.mois;
+                return annee === selectedYear && mois === selectedMonth;
+            });
+
+            map.removeLayer(acciLayer);
+
+            var geojsonAcciMoisAnnee = {
+                type: "FeatureCollection",
+                features: acci_moisAnneeSelect
+            };
+
+            acciLayer = creeCoucheAccidents(geojsonAcciMoisAnnee).addTo(map);
+        },
 
         annule_annee() {
             this.selectedYear='';
@@ -110,6 +132,8 @@ var dateSlider = document.getElementById('dateSlider');
 dateSlider.addEventListener('mousemove', function(event) {
     event.stopPropagation(); 
 });
+
+
 
 // crée la couche contenant les pistes contenues dans "objet"
 function creeCouchePistes(objet) {
@@ -219,8 +243,7 @@ function creeCoucheAccidents(objet) {
             <b>Infrastructure de la route :</b> ${properties.infra}<br>
             <b>Catégorie du véhicule :</b> ${properties.catv}<br>
             <b>Circulation :</b> ${properties.circ}<br>
-            <button onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
-
+            <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
             `;
             
             // Ajout d'une pop-up au marqueur
@@ -261,14 +284,14 @@ function afficheLegendeAccident(choix) {
     const legendElement = document.getElementById('legendAcci');
     if (choix == "catv") {
         legendElement.innerHTML = `
-            <h4>Légende des Accidents</h4>
+            <h4>Catégories de véhicule</h4>
             <div><img class="legend-img" src="assets/images/icones/catv/Bicyclette.png"> Bicyclette </div>
             <div><img class="legend-img" src="assets/images/icones/catv/Vélo à Assistance Electrique (VAE).png"> Vélo à Assistance Electrique (VAE) </div>
             <div><img class="legend-img" src="assets/images/icones/catv/Non renseigné.png"> Non renseigné </div>
         `;
     } else if (choix == "int") {
         legendElement.innerHTML = `
-            <h4>Légende des Accidents</h4>
+            <h4>Types d'intersection</h4>
             <div><img class="legend-img" src="assets/images/icones/int/Passage à niveau.png"> Passage à niveau </div>
             <div><img class="legend-img" src="assets/images/icones/int/Intersection à plus de 4 branches.png"> Intersection à plus de 4 branches </div>
             <div><img class="legend-img" src="assets/images/icones/int/Intersection en Y.png"> Intersection en Y </div>
@@ -281,7 +304,7 @@ function afficheLegendeAccident(choix) {
         `;
     } else if (choix == "col") {
         legendElement.innerHTML = `
-            <h4>Légende des Accidents</h4>
+            <h4>Types de collision</h4>
             <div><img class="legend-img" src="assets/images/icones/col/Deux véhicules - par l'arrière.png"> Deux véhicules - par l'arrière </div>
             <div><img class="legend-img" src="assets/images/icones/col/Deux véhicules - par le côté.png"> Deux véhicules - par le côté </div>
             <div><img class="legend-img" src="assets/images/icones/col/Trois véhicules et plus - en chaîne.png"> Trois véhicules et plus - en chaîne </div>
@@ -293,11 +316,11 @@ function afficheLegendeAccident(choix) {
         `;
     } else if (choix == "surf") {
         legendElement.innerHTML = `
-            <h4>Légende des Accidents</h4>
+            <h4>Etats de la surface du sol</h4>
             <div><img class="legend-img" src="assets/images/icones/surf/Normale.png"> Normale </div>
             <div><img class="legend-img" src="assets/images/icones/surf/Enneigée.png"> Enneigée </div>
             <div><img class="legend-img" src="assets/images/icones/surf/Flaques.png"> Flaques </div>
-            <div><img class="legend-img" src="assets/images/icones/surf/Mouillée.png"> Mouillée - en chaîne </div>
+            <div><img class="legend-img" src="assets/images/icones/surf/Mouillée.png"> Mouillée </div>
             <div><img class="legend-img" src="assets/images/icones/surf/Inondée.png"> Inondée </div>
             <div><img class="legend-img" src="assets/images/icones/surf/Corps gras - huile.png"> Corps gras - huile </div>
             <div><img class="legend-img" src="assets/images/icones/surf/Verglacée.png"> Verglacée </div>
@@ -306,7 +329,7 @@ function afficheLegendeAccident(choix) {
         `;
     } else if (choix == "infra") {
         legendElement.innerHTML = `
-            <h4>Légende des Accidents</h4>
+            <h4>Types d'infrastructures présentes</h4>
             <div><img class="legend-img" src="assets/images/icones/infra/Aucun.png"> Aucun </div>
             <div><img class="legend-img" src="assets/images/icones/infra/Bretelle d'échangeur ou de raccordement.png"> Bretelle d'échangeur ou de raccordement </div>
             <div><img class="legend-img" src="assets/images/icones/infra/Carrefour aménagé.png"> Carrefour aménagé </div>
@@ -325,6 +348,7 @@ var accidents = null;
 var pistes = null;
 var acci_select = null;
 var acci_anneeSelect = null;
+var acci_moisAnneeSelect = null;
 var acci_paramSelect = null;
 var type = null;
 
@@ -335,6 +359,10 @@ var checkboxes = document.querySelectorAll('.droite input[type="checkbox"]');
 // Ajouter un écouteur d'événements à chaque bouton radio
 checkboxes.forEach(function(check) {
     check.addEventListener('change', function() {
+        // supprimer la classe 'active' de toutes les options de caractéristiques
+        caracteres.forEach(function(opt) {
+            opt.classList.remove('active');
+        });
         document.getElementById('legendAcci').innerHTML = ``;
         let lumi_select = [];
         let meteo_select = [];
@@ -374,6 +402,24 @@ checkboxes.forEach(function(check) {
     });
 });
 
+// déplacer le contenu de meteo vers le bas lorsque le menu est ouvert
+let dropdownLumi = document.querySelector('.btn-group.lumi .dropdown-toggle');
+
+dropdownLumi.addEventListener('click', function() {
+    // décale l'element en dessous (meteo)
+    let meteoDecalable = document.querySelector('.btn-group.meteo');
+    meteoDecalable.classList.toggle('meteo-decale-vers-le-bas');
+});
+
+// déplacer le contenu de caracteristiques vers le bas lorsque le menu est ouvert
+let dropdownMeteo = document.querySelector('.btn-group.meteo .dropdown-toggle');
+
+dropdownMeteo.addEventListener('click', function() {
+    // décale l'element en dessous (meteo)
+    let caracDecalable = document.querySelector('.btn-group.carac');
+    caracDecalable.classList.toggle('carac-decale-vers-le-bas');
+});
+
 
 // CARACTERISTIQUES
 var caracteres = document.querySelectorAll('.caractere');
@@ -381,6 +427,13 @@ var caracteres = document.querySelectorAll('.caractere');
 // ecouteur d'evenement
 caracteres.forEach(function (carac) {
     carac.addEventListener('click', function() {
+        // supprimer la classe 'active' de toutes les options
+        caracteres.forEach(function(opt) {
+            opt.classList.remove('active');
+        });
+        // Ajouter la classe 'active' à l'option cliquée
+        this.classList.add('active');
+
         // récupération de tous les types de la variable cochée
         type = carac.value;
         afficheLegendeAccident(type);
@@ -426,7 +479,8 @@ plan.addEventListener('click', function() {
 var pistesLayer = null;
 var acciLayer = null;
 var planLayer = null;
-var map = L.map('map').setView([48.866667, 2.333333], 12);
+var map = L.map('map',{ zoomControl: false }).setView([48.866667, 2.333333], 12);
+new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 var defaultLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -594,4 +648,6 @@ document.addEventListener('DOMContentLoaded', function() {
         map.removeLayer(topographicLayer);
         map.addLayer(defaultLayer);
     };
+
+
 });
