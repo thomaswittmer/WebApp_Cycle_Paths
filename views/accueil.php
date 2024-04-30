@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <img src="/assets/images/safelane_carre.png" height=200px><br>
-        <h1>Bienvenue sur l'application SAFELANE.</h1><br>
+        <h1>Bienvenue sur l'application SAFELANE</h1><br>
 
         <p>Une application web a été développée pour répondre à l'augmentation des accidents de vélo à Paris entre 2016 et 2022 
         malgré les aménagements cyclables existants. Cette application vise à identifier les zones à risque les plus élevés pour les 

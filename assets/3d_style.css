@@ -1,0 +1,53 @@
+body{
+    background-color: #333;
+    height: 50vh;
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
+    /*overflow: hidden;*/
+}
+
+#app{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    background-color: #333;
+    padding: 30px;
+}
+
+
+/* Style pour le header */
+header {
+    background-color: #333; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    padding: 10px; /* Espacement intérieur */
+    display: flex; /* Utilisation de flexbox */
+    align-items: center; /* Centrer verticalement les éléments */
+    justify-content: space-between;
+}
+
+/* Style pour le titre */
+h1 {
+    margin: 0; /* Réinitialiser les marges */
+    margin-left: 5px; /* Nouvelle marge à gauche */
+    font-family: 'Zen Dots';font-size: 32px;
+}
+
+.header-image {
+    width: 50px; /* Largeur de l'image */
+    height: auto; /* Hauteur automatique en maintenant le ratio */
+    margin-right: 10px; /* Espacement à droite */
+}
+
+
+.return-button {
+    background-color: red; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    padding: 10px 20px; /* Espacement intérieur */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    font-family: 'Zen Dots';
+    cursor: pointer; /* Curseur au survol */
+    text-decoration: none; /* Suppression du soulignement */
+    margin-left: 10px; /* Espacement à gauche */
+}
