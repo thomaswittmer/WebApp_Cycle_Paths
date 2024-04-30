@@ -72,8 +72,6 @@
             
 
                     <!-- Choix des paramètres -->
-                <div class = "menu-lateral">
-
                         <!-- LUMINOSITE -->
                            <!-- <div class="boutons-barre">
                                     <div class="btn-group">
@@ -132,10 +130,9 @@
                                     </div>
                                 </div>
 
-                            <!-- METEO -->
-                            <!--<div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Météo
+                            <div class="btn-group lumi">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                                    Meteo
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <form>
@@ -335,8 +332,8 @@
 
                         <!-- LUMINOSITE -->
                            <div class="boutons-barre">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="btn-group lumi">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                                             Luminosité
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -392,8 +389,8 @@
                                 </div>
 
                             <!-- METEO -->
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="btn-group meteo">
+                                <button type="button" class="btn btn-primary dropdown-toggle meteo" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false" data-bs-auto-close="false">
                                     Météo
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -485,7 +482,7 @@
                             
 
                             <!-- CARACTERISTIQUES -->
-                            <div class="btn-group">
+                            <div class="btn-group carac contenu-decalable">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Caractéristiques
                                 </button>
