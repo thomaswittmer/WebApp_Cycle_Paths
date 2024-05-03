@@ -63,6 +63,7 @@ ul li {
 }
 .popup-content {
     background-color: #fff;
+    border: 3px solid #333;
     max-width: 80%;
     margin: 0 auto;
     padding: 20px;

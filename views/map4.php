@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         body{
-            background-color: #333;
+            background-color: #0b101f;
             margin: 0;
             padding: 0;
             max-height: 100vh;
@@ -22,13 +22,13 @@
             display: flex;
             flex-direction: row;
             align-items: start;
-            background-color: #333;
+            background-color: #0b101f;
         }
 
 
         /* Style pour le header */
         header {
-            background-color: #333; /* Couleur de fond */
+            background-color: #0b101f; /* Couleur de fond */
             color: #fff; /* Couleur du texte */
             padding: 10px; /* Espacement intérieur */
             display: flex; /* Utilisation de flexbox */
@@ -51,16 +51,24 @@
 
         
         .return-button {
-            background-color: red; /* Couleur de fond */
+            background-color: #dc3545; /* Couleur de fond */
             color: #fff; /* Couleur du texte */
             padding: 10px 20px; /* Espacement intérieur */
             border: none; /* Pas de bordure */
             border-radius: 5px; /* Coins arrondis */
-            font-family: 'Zen Dots';
+            font-family: 'Arial', sans-serif; /* Police de caractères */
+            font-size: 16px; /* Taille de la police */
+            font-weight: bold; /* Gras */
             cursor: pointer; /* Curseur au survol */
             text-decoration: none; /* Suppression du soulignement */
             margin-left: 10px; /* Espacement à gauche */
+            transition: background-color 0.3s ease; /* Transition en douceur */
         }
+
+        .return-button:hover {
+            background-color: #c82333; /* Couleur de fond au survol */
+        }
+
 
         /* BOUTON 3D*/
         #cesiumContainer {
@@ -71,20 +79,19 @@
 
         }
 
+        .header-image {
+            width: 350px; /* Largeur de l'image */
+        }
+
+
 
     </style>
 </head>
 <body>
     <header>
-        <img src="/assets/images/safelane.png" alt="Logo" class="header-image"> 
-        <h1>SAFELANE</h1>
-        <input type="checkbox" id="animationCheckbox">
-        <label for="animationCheckbox">Activer animation</label>
-
-
+        <img src="/assets/images/param_safelane.png" alt="Logo" class="header-image"> 
         <a href="map3" class="return-button">Retour</a> 
     </header>
-
     
     <div id=app>
             <div id="cesiumContainer"></div>
