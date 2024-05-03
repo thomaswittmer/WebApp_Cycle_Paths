@@ -121,7 +121,7 @@
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                                     Luminosité
                                 </button>
-                                <div class="dropdown-menu position-fixed" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <form>
                                         <div class="form-switch lum mx-2">
                                             <div class="gauche">
@@ -189,7 +189,7 @@
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                                 Météo
                             </button>
-                            <div class="dropdown-menu position-fixed" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <form>
                                     <div class="form-switch atm mx-2">
                                         <div class="gauche">
@@ -199,6 +199,9 @@
                                             <input class="form-check-input mr-2" type="checkbox" value="atm">
                                         </div>
                                     </div>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
                                     <div class="form-switch atm mx-2">
                                         <div class="gauche">
                                             <img src="../assets/images/icones/atm/Temps éblouissant.png" alt="Temps éblouissant">
@@ -289,7 +292,7 @@
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Caractéristiques
                             </button>
-                            <div class="dropdown-menu position-fixed">
+                            <div class="dropdown-menu">
                                 <form>
                                     <option class="dropdown-item caractere" value="int">Type d'intersection</option>
                                     <option class="dropdown-item caractere" value="col">Type de collision</option>
@@ -359,19 +362,13 @@
 
 
                         <!-- AFFICHAGE CLUSTERS -->
-                        <div class="button-container-fond">
-                            <form>
-                                <div class="form-switch atm mx-2">
-                                    <div class="gauche">
-                                        <img src="../assets/images/cluster.png" alt="Clusters">
-                                        Masquer les clusters
-                                    </div>
-                                    <div class="droite">
-                                        <input id="clusterCheckbox" class="form-check-input mr-2" type="checkbox" value="Clusters" >
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                        <h3 id="titre-carte">Affichage des clusters</h3>
+                        <form>
+                            <div class="form-switch cluster mx-2">
+                                Masquer les accidents
+                                <input id="accidentsCheckbox" class="form-check-input mr-2" type="checkbox">
+                            </div>
+                        </form>
                     </div> <!--barre-laterale-->
                 </div>
             </div>

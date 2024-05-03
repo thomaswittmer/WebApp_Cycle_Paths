@@ -174,10 +174,10 @@ let app = Vue.createApp({
             // Création de la nouvelle couche des accidents et affichage sur la carte
             acciLayer = creeCoucheAccidents(acci_select).addTo(map);
 
-            
+
 
         },
-        
+
     }
 
 }).mount('#app');
@@ -206,9 +206,9 @@ function creeCouchePistes(objet) {
             } else if (ame_d === 'VOIE VERTE' || ame_d === 'AMENAGEMENT MIXTE PIETON VELO HORS VOIE VERTE') {
                 couleur = '#63DE6E';
             } else if (ame_d === 'PISTE CYCLABLE') {
-                couleur = '#1D3FD9'; 
+                couleur = '#1D3FD9';
             } else if (ame_d === 'BANDE CYCLABLE') {
-                couleur = '#4DC0EF'; 
+                couleur = '#4DC0EF';
             }
             else {
                 couleur = '#C1A4BD  ';
@@ -270,7 +270,7 @@ function creeCoucheAccidents(objet) {
     var clusterGroup = L.markerClusterGroup({
         maxClusterRadius: 50,
         disableClusteringAtZoom: 15 //fin des clusters quand on zoome
-    }); 
+    });
 
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
@@ -324,7 +324,7 @@ function creeCoucheAccidents(objet) {
             return clusterGroup;
         }
     });
-    
+
 
 }
 
@@ -446,6 +446,11 @@ checkboxes.forEach(function (check) {
                     all.checked = false;
                 })
                 this.checked = true; // on recoche l'actuelle
+                btnCluster.checked = false;  // on decoche la case du masquage des accidents
+                // On desactive toutes les caractéristiques dans le menu correspondant
+                caracteres.forEach(function (opt) {
+                    opt.classList.remove('active');
+                });
                 type = check.value;  // nouvelle legende selectionnee
                 map.removeLayer(acciLayer);
                 acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
@@ -456,6 +461,7 @@ checkboxes.forEach(function (check) {
                 type = null;  // nouvelle legende selectionnee (aucune)
                 map.removeLayer(acciLayer);
                 acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
+                btnCluster.checked = false;  // on decoche la case du masquage des accidents
             }
         }
         else {
@@ -488,59 +494,59 @@ checkboxes.forEach(function (check) {
             else {
                 acci_select = acci_paramSelect;
             }
-        if (check.value == "lum" || check.value == "atm") {
-            // si on coche la case
-            if (this.checked) {
-                document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { // on décoche toutes les visualisations
-                    all.checked = false;
-                })
-                this.checked = true; // on recoche l'actuelle
-                type = check.value;  // nouvelle legende selectionnee
-                map.removeLayer(acciLayer);
-                acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
-                document.getElementById('legendAcci').innerHTML = ``; // on supprime la legende
-            }
-            // si on la décoche
-            else {
-                type = null;  // nouvelle legende selectionnee (aucune)
-                map.removeLayer(acciLayer);
-                acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
-            }
-        }
-        else {
-            let lumi_select = [];
-            let meteo_select = [];
-            // Parcourir toutes les cases cochées
-            checkboxes.forEach(function (checkbox) {
-                if (checkbox.checked) {
-                    // icone de la coche
-                    if (checkbox.parentNode.parentNode.classList.contains('lum')) {
-                        // Si la case à cocher appartient à la classe "dropdown-item lumi"
-                        lumi_select.push(checkbox.value);
-                    } else if (checkbox.parentNode.parentNode.classList.contains('atm')) {
-                        // Si la case à cocher appartient à la classe "dropdown-item meteo"
-                        meteo_select.push(checkbox.value);
-                    }
+            if (check.value == "lum" || check.value == "atm") {
+                // si on coche la case
+                if (this.checked) {
+                    document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { // on décoche toutes les visualisations
+                        all.checked = false;
+                    })
+                    this.checked = true; // on recoche l'actuelle
+                    type = check.value;  // nouvelle legende selectionnee
+                    map.removeLayer(acciLayer);
+                    acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
+                    document.getElementById('legendAcci').innerHTML = ``; // on supprime la legende
                 }
-            });
-            // accidents selectionnes avec la luminosité
-            acci_paramSelect = accidents.features.filter(feature => {
-                // true ou false selon si l'accident appartient aux param sélectionnés
-                return (lumi_select.includes(feature.properties.lum) && meteo_select.includes(feature.properties.atm));
-            });
-            // accidents en luminosité et en année
-            if (acci_anneeSelect != null) {
-                acci_select = acci_anneeSelect.filter(element => {
-                    return acci_paramSelect.includes(element);
-                });
+                // si on la décoche
+                else {
+                    type = null;  // nouvelle legende selectionnee (aucune)
+                    map.removeLayer(acciLayer);
+                    acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
+                }
             }
             else {
-                acci_select = acci_paramSelect;
-            }
+                let lumi_select = [];
+                let meteo_select = [];
+                // Parcourir toutes les cases cochées
+                checkboxes.forEach(function (checkbox) {
+                    if (checkbox.checked) {
+                        // icone de la coche
+                        if (checkbox.parentNode.parentNode.classList.contains('lum')) {
+                            // Si la case à cocher appartient à la classe "dropdown-item lumi"
+                            lumi_select.push(checkbox.value);
+                        } else if (checkbox.parentNode.parentNode.classList.contains('atm')) {
+                            // Si la case à cocher appartient à la classe "dropdown-item meteo"
+                            meteo_select.push(checkbox.value);
+                        }
+                    }
+                });
+                // accidents selectionnes avec la luminosité
+                acci_paramSelect = accidents.features.filter(feature => {
+                    // true ou false selon si l'accident appartient aux param sélectionnés
+                    return (lumi_select.includes(feature.properties.lum) && meteo_select.includes(feature.properties.atm));
+                });
+                // accidents en luminosité et en année
+                if (acci_anneeSelect != null) {
+                    acci_select = acci_anneeSelect.filter(element => {
+                        return acci_paramSelect.includes(element);
+                    });
+                }
+                else {
+                    acci_select = acci_paramSelect;
+                }
 
-            map.removeLayer(acciLayer);
-            acciLayer = creeCoucheAccidents(acci_select).addTo(map);
-        }
+                map.removeLayer(acciLayer);
+                acciLayer = creeCoucheAccidents(acci_select).addTo(map);
+            }
             map.removeLayer(acciLayer);
             acciLayer = creeCoucheAccidents(acci_select).addTo(map);
         }
@@ -579,12 +585,13 @@ caracteres.forEach(function (carac) {
         this.classList.add('active');
 
         // on décoche toutes les visualisations
-        document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { 
+        document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) {
             all.checked = false;
         })
+        btnCluster.checked = false;  // on decoche la case du masquage des accidents
 
         // on décoche toutes les visualisations
-        document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { 
+        document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) {
             all.checked = false;
         })
 
@@ -646,13 +653,16 @@ const map2 = document.getElementById('map');
 function toggleSidebar() {
     sidebar.style.left = '0';
     sidebar.style.width = '30%';
-    map2.style.width = '70%'; 
+    map2.style.width = '70%';
+
+    sidebar.classList.add('sidebar-transition');
+    map2.classList.add('map-transition');
 }
 
 function closeSidebar() {
-    sidebar.style.left = '-30%'; 
-    map2.style.width = '100%'; 
-  }
+    sidebar.style.left = '-30%';
+    map2.style.width = '100%';
+}
 
 // Écouteur d'événement pour le clic sur un bouton par exemple
 document.getElementById('btn-lateral').addEventListener('click', toggleSidebar);
@@ -817,28 +827,38 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Définir un bouton pour revenir au fond de plan par défaut
-    document.getElementById('btnOpenStreetMap').onclick = function() {
+    document.getElementById('btnOpenStreetMap').onclick = function () {
         map.removeLayer(satelliteLayer);
         map.removeLayer(topographicLayer);
         map.removeLayer(defaultLayer);
         map.addLayer(openStreetMapLayer)
     };
 
-    document.getElementById('btnDefault').onclick = function() {
-    document.getElementById('btnOpenStreetMap').onclick = function() {
-        map.removeLayer(satelliteLayer);
-        map.removeLayer(topographicLayer);
-        map.removeLayer(defaultLayer);
-        map.addLayer(openStreetMapLayer)
-    };
+    document.getElementById('btnDefault').onclick = function () {
+        document.getElementById('btnOpenStreetMap').onclick = function () {
+            map.removeLayer(satelliteLayer);
+            map.removeLayer(topographicLayer);
+            map.removeLayer(defaultLayer);
+            map.addLayer(openStreetMapLayer)
+        };
 
-    document.getElementById('btnDefault').onclick = function() {
-        map.removeLayer(satelliteLayer);
-        map.removeLayer(topographicLayer);
-        map.removeLayer(openStreetMapLayer);
-        map.removeLayer(openStreetMapLayer);
-        map.addLayer(defaultLayer);
-    };
-
+        document.getElementById('btnDefault').onclick = function () {
+            map.removeLayer(satelliteLayer);
+            map.removeLayer(topographicLayer);
+            map.removeLayer(openStreetMapLayer);
+            map.removeLayer(openStreetMapLayer);
+            map.addLayer(defaultLayer);
+        };
     }
 });
+
+// Gestion l'appration/disparition des accidents
+var btnCluster = document.getElementById('accidentsCheckbox');
+btnCluster.addEventListener('change', function () {
+    if (this.checked) {
+        map.removeLayer(acciLayer);
+    }
+    else {
+        acciLayer.addTo(map);
+    }
+})
