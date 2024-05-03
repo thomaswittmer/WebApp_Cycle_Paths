@@ -21,11 +21,11 @@ if (!$link) {
 
 
 
-Flight::route('/', function(){
+Flight::route('/', function () {
     Flight::render('accueil');
 });
 
-Flight::route('POST /lumino', function(){
+Flight::route('POST /lumino', function () {
 
     // Récupérer les données POST envoyées par le client
     $lumi = isset($_POST['lumi']) ? $_POST['lumi'] : '';
@@ -42,9 +42,9 @@ Flight::route('POST /lumino', function(){
     Flight::json($elements);
 });
 
-Flight::route('POST /recup_annee', function(){
+Flight::route('POST /recup_annee', function () {
     $res = null;
-    if (isset($_POST['annee'])){
+    if (isset($_POST['annee'])) {
         $link = Flight::get('BDD');
 
         $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geo FROM voie_cyclable_geovelo WHERE annee <= '" . $_POST['annee'] . "' OR annee IS NULL;");
@@ -68,12 +68,12 @@ Flight::route('POST /recup_annee', function(){
     Flight::json($geojson);
 });
 
-Flight::route('POST /recup_caractere', function(){
-    if (isset($_POST['caractere'])){
+Flight::route('POST /recup_caractere', function () {
+    if (isset($_POST['caractere'])) {
         $link = Flight::get('BDD');
 
         $caractere = pg_query($link, "SELECT DISTINCT (int) FROM accident_velo_2010_2022");
-    
+
         $features = [];
         while ($row = pg_fetch_assoc($caractere)) {
             $features[] = $row;
@@ -87,24 +87,24 @@ Flight::route('POST /recup_caractere', function(){
     Flight::json($geojson);
 });
 
-Flight::route('/connexion', function(){
+Flight::route('/connexion', function () {
     Flight::render('connexion');
 });
 
-Flight::route('/map', function(){
+Flight::route('/map', function () {
     Flight::render('map');
 });
 
-Flight::route('/map3', function(){
-    Flight::render('map3', );
+Flight::route('/map3', function () {
+    Flight::render('map3',);
 });
 
-Flight::route('/map4', function(){
-    Flight::render('map4', );
+Flight::route('/map4', function () {
+    Flight::render('map4',);
 });
 
 
-Flight::route('GET /getAccidentCoordinates', function(){
+Flight::route('GET /getAccidentCoordinates', function () {
     $link = Flight::get('BDD');
 
     // Vérifiez si num_acc est défini
@@ -113,7 +113,7 @@ Flight::route('GET /getAccidentCoordinates', function(){
 
         // Utilisez une requête préparée pour éviter les injections SQL
         $stmt = pg_prepare($link, "get_accident", 'SELECT lat, long FROM accident_velo_2010_2022 WHERE num_acc = $1');
-        
+
         // Exécutez la requête avec le paramètre num_acc
         $result = pg_execute($link, "get_accident", array($num_acc));
 
@@ -138,15 +138,15 @@ Flight::route('GET /getAccidentCoordinates', function(){
 });
 
 
-Flight::route('/cesium', function(){
+Flight::route('/cesium', function () {
     Flight::render('cesium');
 });
 
-Flight::route('/mapJeanne', function(){
+Flight::route('/mapJeanne', function () {
     Flight::render('mapJeanne');
 });
 
-Flight::route('GET /recupere_pistes', function(){
+Flight::route('GET /recupere_pistes', function () {
     $link = Flight::get('BDD');
 
     $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geo FROM voie_cyclable_geovelo;");
@@ -171,7 +171,7 @@ Flight::route('GET /recupere_pistes', function(){
 });
 
 
-Flight::route('GET /recupere_acci', function(){
+Flight::route('GET /recupere_acci', function () {
     $link = Flight::get('BDD');
 
     $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(geom) AS geo, EXTRACT(MONTH FROM TO_DATE(date, 'DD/MM/YYYY')) AS mois FROM accident_velo_2010_2022");
@@ -196,7 +196,7 @@ Flight::route('GET /recupere_acci', function(){
 });
 
 
-Flight::route('GET /recupere_plan', function(){
+Flight::route('GET /recupere_plan', function () {
     $link = Flight::get('BDD');
 
     $accidents = pg_query($link, "SELECT ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geom, statut FROM plan_velo;");
@@ -207,7 +207,7 @@ Flight::route('GET /recupere_plan', function(){
         $features[] = array(
             'type' => 'Feature',
             'geometry' => $geometry,
-            'properties' => array('statut' => $row['statut']) 
+            'properties' => array('statut' => $row['statut'])
         );
     }
 
@@ -220,5 +220,3 @@ Flight::route('GET /recupere_plan', function(){
 });
 
 Flight::start();
-
-?>

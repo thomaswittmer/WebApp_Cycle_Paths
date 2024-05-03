@@ -5,21 +5,31 @@ let app = Vue.createApp({
             selectedMonth: '',
             suggestions: [],
             caseChecked: true,
+            moisChecked: false,
             caseDisabled: true,
             isAutoPlaying: false,
-            autoPlayInterval: null 
+            autoPlayInterval: null,
         };
     },
     computed: {
+        formattedDate() {
+            if (this.selectedMonth === '') {
+                return null;
+            }
+            let startDate = new Date(2016, 0); //début du curseur
+            let selectedDate = new Date(startDate.getFullYear(), startDate.getMonth() + this.selectedMonth); //date actuelle
+            let mois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+            return `${mois[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;
+        }
     },
     methods: {
         startAutoPlay() {
             this.isAutoPlaying = true;
             this.autoPlayInterval = setInterval(() => {
-                this.nextYear();
+                this.nextDate();
             }, 1000);
         },
-       
+
         stopAutoPlay() {
             this.isAutoPlaying = false;
             clearInterval(this.autoPlayInterval);
@@ -27,23 +37,39 @@ let app = Vue.createApp({
             this.selectedYear = '';
             this.annule_annee();
         },
-        
-        nextYear() {
-            if (this.selectedYear === '') {
-                this.selectedYear = '2016';
-                this.cherche_annee();
-            } else {
-                let currentYear = parseInt(this.selectedYear);
-                if (currentYear < 2022) {
-                    this.selectedYear = (currentYear + 1).toString();
+
+        nextDate() {
+            if (this.moisChecked) {
+                if (this.selectedMonth === '') {
+                    this.selectedMonth = 0;
+                    this.cherche_mois_annee();
+                } else {
+                    let currentMonth = parseInt(this.selectedMonth);
+                    if (currentMonth < 83) {
+                        this.selectedMonth = (currentMonth + 1).toString();
+                        this.cherche_mois_annee();
+                    } else {
+                        this.stopAutoPlay();
+                    }
+                }
+            }
+            else {
+                if (this.selectedYear === '') {
+                    this.selectedYear = '2016';
                     this.cherche_annee();
                 } else {
-                    this.stopAutoPlay();
+                    let currentYear = parseInt(this.selectedYear);
+                    if (currentYear < 2022) {
+                        this.selectedYear = (currentYear + 1).toString();
+                        this.cherche_annee();
+                    } else {
+                        this.stopAutoPlay();
+                    }
                 }
             }
         },
 
-        cherche_annee(){
+        cherche_annee() {
             this.caseChecked = false;
             this.caseDisabled = false;
             acci_anneeSelect = accidents.features.filter(feature => {
@@ -57,7 +83,7 @@ let app = Vue.createApp({
             else {
                 acci_select = acci_anneeSelect;
             }
-                
+
             map.removeLayer(acciLayer);
             //map.removeLayer(pistesLayer);
 
@@ -83,30 +109,43 @@ let app = Vue.createApp({
               })*/
 
         },
-        
-        cherche_mois_annee() {
-            let selectedYear = this.selectedYear;
-            let selectedMonth = this.selectedMonth;
 
-            acci_moisAnneeSelect = accidents.features.filter(feature => {
-                annee = feature.properties.an;
-                mois = feature.properties.mois;
-                return annee === selectedYear && mois === selectedMonth;
+        cherche_mois_annee() {
+            this.caseChecked = false;
+            this.caseDisabled = false;
+            let year = Math.trunc(this.selectedMonth/12) + 2016 ;
+            let month = this.selectedMonth - (year-2016)*12 + 1;
+
+            acci_anneeSelect = accidents.features.filter(feature => {
+                let annee = feature.properties.an;
+                let mois = feature.properties.mois;
+                return (annee == year && mois == month);
             });
+
+            if (acci_paramSelect != null) {
+                acci_select = acci_paramSelect.filter(element => {
+                    return acci_anneeSelect.includes(element);
+                });
+            }
+            else {
+                acci_select = acci_anneeSelect;
+            }
 
             map.removeLayer(acciLayer);
 
             var geojsonAcciMoisAnnee = {
                 type: "FeatureCollection",
-                features: acci_moisAnneeSelect
+                features: acci_select
             };
 
             acciLayer = creeCoucheAccidents(geojsonAcciMoisAnnee).addTo(map);
         },
 
         annule_annee() {
-            this.selectedYear='';
+            this.selectedYear = '';
             this.caseDisabled = true;
+            this.selectedMonth = '';
+            this.caseChecked = true;
 
             acci_anneeSelect = accidents.features;
             if (acci_paramSelect != null) {
@@ -129,8 +168,8 @@ let app = Vue.createApp({
 
 //gestion curseur sur la map
 var dateSlider = document.getElementById('dateSlider');
-dateSlider.addEventListener('mousemove', function(event) {
-    event.stopPropagation(); 
+dateSlider.addEventListener('mousemove', function (event) {
+    event.stopPropagation();
 });
 
 
@@ -149,9 +188,9 @@ function creeCouchePistes(objet) {
             } else if (ame_d === 'VOIE VERTE' || ame_d === 'AMENAGEMENT MIXTE PIETON VELO HORS VOIE VERTE') {
                 couleur = '#63DE6E';
             } else if (ame_d === 'PISTE CYCLABLE') {
-                couleur = '#1D3FD9'; 
+                couleur = '#1D3FD9';
             } else if (ame_d === 'BANDE CYCLABLE') {
-                couleur = '#4DC0EF'; 
+                couleur = '#4DC0EF';
             }
             else {
                 couleur = '#C1A4BD  ';
@@ -178,11 +217,11 @@ function creeCouchePlan(objet) {
             let couleur = null;
             if (statut === 'à réaliser') {
                 couleur = 'orange';
-            } else if (statut=== 'existant' ) {
+            } else if (statut === 'existant') {
                 couleur = 'blue';
             }
-            else{
-                couleur ='gray'
+            else {
+                couleur = 'gray'
             }
 
             // Retourner le style avec la couleur définie
@@ -199,14 +238,14 @@ function creeCouchePlan(objet) {
 // crée la couche contenant les accidents contenus dans "objet"
 function creeCoucheAccidents(objet) {
     var clusterGroup = L.markerClusterGroup({
-        maxClusterRadius: 50, 
+        maxClusterRadius: 50,
         disableClusteringAtZoom: 15 //fin des clusters quand on zoome
-    }); 
+    });
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
             const properties = feature.properties;
             // si rien n'est sélectionné
-            if (type == null){
+            if (type == null) {
                 var mark = L.circleMarker(latlng, {
                     radius: 4.5,
                     fillColor: "red",
@@ -220,7 +259,7 @@ function creeCoucheAccidents(objet) {
             else {
                 // Créer une icône personnalisée
                 var customIcon = L.icon({
-                    iconUrl: 'assets/images/icones/'+type+'/'+properties[type]+'.png', // chemin vers icône
+                    iconUrl: 'assets/images/icones/' + type + '/' + properties[type] + '.png', // chemin vers icône
                     iconSize: [25, 25], // Taille icône
                     iconAnchor: [16, 16], // point d'ancrage centre icône
                     popupAnchor: [0, -16] // point d'ancrage popup par rapport à l'icône
@@ -229,7 +268,7 @@ function creeCoucheAccidents(objet) {
                 var mark = L.marker(latlng, { icon: customIcon });
             }
             //const marker = mark;
-            
+
             // Récupération des informations de l'accident correspondant
 
             const popupContenu = `
@@ -245,7 +284,7 @@ function creeCoucheAccidents(objet) {
             <b>Circulation :</b> ${properties.circ}<br>
             <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
             `;
-            
+
             // Ajout d'une pop-up au marqueur
             mark.bindPopup(popupContenu);
             clusterGroup.addLayer(mark);
@@ -253,7 +292,7 @@ function creeCoucheAccidents(objet) {
             return clusterGroup;
         }
     });
-    
+
 }
 
 
@@ -348,7 +387,6 @@ var accidents = null;
 var pistes = null;
 var acci_select = null;
 var acci_anneeSelect = null;
-var acci_moisAnneeSelect = null;
 var acci_paramSelect = null;
 var type = null;
 
@@ -357,10 +395,10 @@ var type = null;
 var checkboxes = document.querySelectorAll('.droite input[type="checkbox"]');
 
 // Ajouter un écouteur d'événements à chaque bouton radio
-checkboxes.forEach(function(check) {
-    check.addEventListener('change', function() {
+checkboxes.forEach(function (check) {
+    check.addEventListener('change', function () {
         // supprimer la classe 'active' de toutes les options de caractéristiques
-        caracteres.forEach(function(opt) {
+        caracteres.forEach(function (opt) {
             opt.classList.remove('active');
         });
         document.getElementById('legendAcci').innerHTML = ``;
@@ -368,16 +406,16 @@ checkboxes.forEach(function(check) {
         let meteo_select = [];
         type = check.parentNode.parentNode.className.split(' ')[1];
         // Parcourir toutes les cases cochées et les ajouter à FormData
-        checkboxes.forEach(function(checkbox) {
+        checkboxes.forEach(function (checkbox) {
             if (checkbox.checked) {
                 // icone de la coche
                 let icone = checkbox.parentNode.parentNode.querySelector('img').getAttribute('alt');
                 if (checkbox.parentNode.parentNode.classList.contains('lum')) {
                     // Si la case à cocher appartient à la classe "dropdown-item lumi"
-                    lumi_select.push({valeur: checkbox.value, icon: icone});
+                    lumi_select.push({ valeur: checkbox.value, icon: icone });
                 } else if (checkbox.parentNode.parentNode.classList.contains('atm')) {
                     // Si la case à cocher appartient à la classe "dropdown-item meteo"
-                    meteo_select.push({valeur: checkbox.value, icon: icone});
+                    meteo_select.push({ valeur: checkbox.value, icon: icone });
                 }
             }
         });
@@ -405,7 +443,7 @@ checkboxes.forEach(function(check) {
 // déplacer le contenu de meteo vers le bas lorsque le menu est ouvert
 let dropdownLumi = document.querySelector('.btn-group.lumi .dropdown-toggle');
 
-dropdownLumi.addEventListener('click', function() {
+dropdownLumi.addEventListener('click', function () {
     // décale l'element en dessous (meteo)
     let meteoDecalable = document.querySelector('.btn-group.meteo');
     meteoDecalable.classList.toggle('meteo-decale-vers-le-bas');
@@ -414,7 +452,7 @@ dropdownLumi.addEventListener('click', function() {
 // déplacer le contenu de caracteristiques vers le bas lorsque le menu est ouvert
 let dropdownMeteo = document.querySelector('.btn-group.meteo .dropdown-toggle');
 
-dropdownMeteo.addEventListener('click', function() {
+dropdownMeteo.addEventListener('click', function () {
     // décale l'element en dessous (meteo)
     let caracDecalable = document.querySelector('.btn-group.carac');
     caracDecalable.classList.toggle('carac-decale-vers-le-bas');
@@ -426,9 +464,9 @@ var caracteres = document.querySelectorAll('.caractere');
 
 // ecouteur d'evenement
 caracteres.forEach(function (carac) {
-    carac.addEventListener('click', function() {
+    carac.addEventListener('click', function () {
         // supprimer la classe 'active' de toutes les options
-        caracteres.forEach(function(opt) {
+        caracteres.forEach(function (opt) {
             opt.classList.remove('active');
         });
         // Ajouter la classe 'active' à l'option cliquée
@@ -448,7 +486,7 @@ var planVisible = false; // Indique si le plan vélo est visible ou non
 
 // gestion couleur des pistes 
 
-plan.addEventListener('click', function() {
+plan.addEventListener('click', function () {
     var button = this;
     // Vérifie l'état actuel du bouton
     if (planVisible) {
@@ -467,7 +505,7 @@ plan.addEventListener('click', function() {
         button.classList.add('clique'); // Ajouter la classe de grisage
         planLayer.addTo(map);
         acciLayer.bringToFront();
-        
+
     }
     mettreAJourLegende({ planVisible: !planVisible });
     // Mettre à jour l'état du bouton
@@ -479,7 +517,7 @@ plan.addEventListener('click', function() {
 var pistesLayer = null;
 var acciLayer = null;
 var planLayer = null;
-var map = L.map('map',{ zoomControl: false }).setView([48.866667, 2.333333], 12);
+var map = L.map('map', { zoomControl: false }).setView([48.866667, 2.333333], 12);
 new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 var defaultLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -498,21 +536,21 @@ const searchInput = document.getElementById('research_input');
 const suggestions = document.getElementById('suggestions');
 
 
-searchInput.addEventListener('input', function() {
+searchInput.addEventListener('input', function () {
     const query = this.value;
 
     geocoder.suggest().text(query).run((error, results, response) => {
-      if (error) {
-        console.error('Error fetching address suggestions:', error);
-        return;
-      }
+        if (error) {
+            console.error('Error fetching address suggestions:', error);
+            return;
+        }
 
-      suggestions.innerHTML = ''; // Efface les suggestions précédentes
+        suggestions.innerHTML = ''; // Efface les suggestions précédentes
 
-    //propose des suggestions en dessous de la barre
-      results.suggestions.forEach(suggestion => {
-        const address = suggestion.text;
-        const location = suggestion.location;
+        //propose des suggestions en dessous de la barre
+        results.suggestions.forEach(suggestion => {
+            const address = suggestion.text;
+            const location = suggestion.location;
         // Vérifier si la suggestion se trouve dans la zone géographique de Paris
         /*if (
             address.toLowerCase().includes('paris')
@@ -520,79 +558,79 @@ searchInput.addEventListener('input', function() {
             location.x <= 2.469920 &&
             location.y >= 48.815573  &&
             location.y <= 48.902145
-            )*/{         
-        const a = document.createElement('a');
-        a.classList.add('dropdown-item');
-        a.textContent = address;
-        a.addEventListener('click', function() {
-            searchInput.value = address; 
-            suggestions.style.display = 'none'; 
-          });
-        suggestions.appendChild(a);
+            )*/{
+                const a = document.createElement('a');
+                a.classList.add('dropdown-item');
+                a.textContent = address;
+                a.addEventListener('click', function () {
+                    searchInput.value = address;
+                    suggestions.style.display = 'none';
+                });
+                suggestions.appendChild(a);
             }
-      });
+        });
 
-      if (results.suggestions.length > 0) {
-        suggestions.style.display = 'block';
-      } else {
-        suggestions.style.display = 'none';
-      }
+        if (results.suggestions.length > 0) {
+            suggestions.style.display = 'block';
+        } else {
+            suggestions.style.display = 'none';
+        }
     });
 });
 
 //zoome sur l'endroit selectionne
-suggestions.addEventListener('click', function(event) {
+suggestions.addEventListener('click', function (event) {
     const target = event.target;
     if (target && target.matches('a.dropdown-item')) {
-      const address = target.textContent.trim();
-      geocoder.geocode().text(address).run((error, results, response) => {
-        if (error) {
-          console.error('Error geocoding address:', error);
-          return;
-        }
-        if (results.results.length > 0) {
-          const location = results.results[0].latlng;
-          map.setView(location, 18); 
-        }
-      });
-      searchInput.value = address; 
-      suggestions.style.display = 'none'; 
+        const address = target.textContent.trim();
+        geocoder.geocode().text(address).run((error, results, response) => {
+            if (error) {
+                console.error('Error geocoding address:', error);
+                return;
+            }
+            if (results.results.length > 0) {
+                const location = results.results[0].latlng;
+                map.setView(location, 18);
+            }
+        });
+        searchInput.value = address;
+        suggestions.style.display = 'none';
     }
 });
 
 
 // Cacher le menu déroulant si on clique en dehors
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     if (!event.target.closest('.input-group')) {
-      suggestions.style.display = 'none';
+        suggestions.style.display = 'none';
     }
 });
 
 
 // Récupération de tous les accidents
 fetch('recupere_acci')
-.then(result => result.json())
-.then(result => {
-    accidents = result;
-    acci_select = accidents;
-})
+    .then(result => result.json())
+    .then(result => {
+        accidents = result;
+        acci_select = accidents;
+    })
 
 // Récupération de toutes les pistes cyclables
 fetch('recupere_pistes')
-.then(result => result.json())
-.then(result => {
-    pistes = result;
-    pistesLayer = creeCouchePistes(pistes).addTo(map);
-    acciLayer = creeCoucheAccidents(accidents).addTo(map);
-})
+    .then(result => result.json())
+    .then(result => {
+        pistes = result;
+        pistesLayer = creeCouchePistes(pistes).addTo(map);
+        acciLayer = creeCoucheAccidents(accidents).addTo(map);
+    })
 
 
 // Récupération de toutes les pistes cyclables
 fetch('recupere_plan')
-.then(result => result.json())
-.then(result => {
-planLayer = creeCouchePlan(result);
-})
+    .then(result => result.json())
+    .then(result => {
+        planLayer = creeCouchePlan(result);
+    })
 
 
 // Affichage de l'overlay d'images de statistiques
@@ -628,22 +666,22 @@ document.getElementById('image-overlay').style.display = 'none';
 var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
 var topographicLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Associer des boutons à des actions pour changer de fond de plan
-    document.getElementById('btnSatellite').onclick = function() {
+    document.getElementById('btnSatellite').onclick = function () {
         map.removeLayer(defaultLayer);
         map.addLayer(satelliteLayer);
         map.removeLayer(topographicLayer);
     };
 
-    document.getElementById('btnTopographic').onclick = function() {
+    document.getElementById('btnTopographic').onclick = function () {
         map.removeLayer(defaultLayer);
         map.removeLayer(satelliteLayer);
         map.addLayer(topographicLayer);
     };
 
     // Définir un bouton pour revenir au fond de plan par défaut
-    document.getElementById('btnDefault').onclick = function() {
+    document.getElementById('btnDefault').onclick = function () {
         map.removeLayer(satelliteLayer);
         map.removeLayer(topographicLayer);
         map.addLayer(defaultLayer);
