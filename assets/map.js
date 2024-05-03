@@ -287,12 +287,13 @@ function creeCoucheAccidents(objet) {
 
             // Récupération des informations de l'accident correspondant
             const popupContenu = `
+            <h4><b>${properties.num_acc}</b></h4>
             <b>Date:</b> ${properties.date}<br>
             <b>Type d'intersection :</b> ${properties.int}<br>
-            <b>Vitesse max :</b> ${properties.vma}<br>
+            <b>Vitesse max (km/h) :</b> ${properties.vma}<br>
             <b>Type de collision :</b> ${properties.col}<br>
             <b>Conditions atmosphériques :</b> ${properties.atm}<br>
-            <b>Catégorie de route :</b> ${properties.catr}<br>
+            <b>Catégorie de la route :</b> ${properties.catr}<br>
             <b>Etat de la route :</b> ${properties.surf}<br>
             <b>Infrastructure de la route :</b> ${properties.infra}<br>
             <b>Catégorie du véhicule :</b> ${properties.catv}<br>
@@ -307,7 +308,6 @@ function creeCoucheAccidents(objet) {
             return clusterGroup;
         }
     });
-
 }
 
 // Fonction pour mettre à jour la légende
