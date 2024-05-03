@@ -7,7 +7,7 @@ let app = Vue.createApp({
             caseChecked: true,
             caseDisabled: true,
             isAutoPlaying: false,
-            autoPlayInterval: null 
+            autoPlayInterval: null,
         };
     },
     computed: {
@@ -196,12 +196,44 @@ function creeCouchePlan(objet) {
 }
 
 
+
+
+
+var isCheckedCluster = this.checked;
+// Ajouter un écouteur d'événements à la case à cocher
+document.getElementById('clusterCheckbox').addEventListener('change', function() {
+    // Récupérer l'état actuel de la case à cocher
+    isCheckedCluster = this.checked;
+});
+
+var isCheckedAccident = false;
+// Ajouter un écouteur d'événements à la case à cocher
+document.getElementById('accidentCheckbox').addEventListener('change', function() {
+    // Récupérer l'état actuel de la case à cocher
+    isCheckedCluster = true;
+    if (map.hasLayer(clusterGroup)) { // Vérifier si la couche existe sur la carte
+        map.removeLayer(clusterGroup); // Supprimer la couche de la carte
+        console.log("Couche des accidents supprimée");
+    } else {
+        console.log("La couche des accidents n'est pas ajoutée à la carte");
+    }
+});
+
+
+// Définir la fonction zoomSur dans le contexte global
+function zoomSur(latitude, longitude) {
+    map.setView([latitude, longitude], 15); // Définir la vue de la carte sur les coordonnées spécifiées avec un zoom de 15
+}
+
+var clusterGroup;
+
 // crée la couche contenant les accidents contenus dans "objet"
 function creeCoucheAccidents(objet) {
     var clusterGroup = L.markerClusterGroup({
         maxClusterRadius: 50, 
         disableClusteringAtZoom: 15 //fin des clusters quand on zoome
     }); 
+
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
             const properties = feature.properties;
@@ -244,6 +276,7 @@ function creeCoucheAccidents(objet) {
             <b>Catégorie du véhicule :</b> ${properties.catv}<br>
             <b>Circulation :</b> ${properties.circ}<br>
             <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="zoomSur(${latlng.lat}, ${latlng.lng})">Zoomer sur</button>
             `;
             
             // Ajout d'une pop-up au marqueur
@@ -252,9 +285,25 @@ function creeCoucheAccidents(objet) {
             //return mark;
             return clusterGroup;
         }
+        
     });
     
+
+
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Fonction pour mettre à jour la légende

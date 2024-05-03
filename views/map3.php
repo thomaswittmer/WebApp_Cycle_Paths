@@ -24,9 +24,6 @@
     <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.js" crossorigin=""></script>
 </head>
 <body>
-    <a href="/"><img src="/assets/images/safelane_carre.png" alt="Logo" class="header-image"></a>
-    <h1>SAFELANE</h1>
-
     <div id=app>
         <div class="carte">
             <!--<div id="cesiumContainer"></div> -->
@@ -306,7 +303,7 @@
                         <!--<div class = "menu-lateral">-->
                             <div class="offcanvas-header">
                                 <a href="/"><img src="/assets/images/param_safelane.png" alt="logo" class="header-image"></a>
-                                <a id="infoButton" href=".popup"><img src="/assets/images/bouton_info.png" alt="info" class="bouton-info"></a>
+                                <a id="infoButton"><img src="/assets/images/bouton_info.png" alt="info" class="bouton-info"></a>
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
 
@@ -548,8 +545,23 @@
                             </button>
                         </div>
 
+                        <!-- AFFICHAGE ACCIDENTS -->
+                        <h3 id="titre-carte">Affichage des accidents</h3>
+                        <div class="button-container-fond">
+                            <form>
+                                <div class="form-switch atm mx-2">
+                                    <div class="gauche">
+                                        <img src="../assets/images/accident.png" alt="Accidents">
+                                        Masquer les accidents
+                                    </div>
+                                    <div class="droite">
+                                        <input id="accidentCheckbox" class="form-check-input mr-2" type="checkbox" value="Accidents" >
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
                         <!-- AFFICHAGE CLUSTERS -->
-                        <h3 id="titre-carte">Affichage des clusters</h3>
                         <div class="button-container-fond">
                             <form>
                                 <div class="form-switch atm mx-2">
@@ -558,7 +570,7 @@
                                         Masquer les clusters
                                     </div>
                                     <div class="droite">
-                                        <input id="clusterCheckbox" class="form-check-input mr-2" type="checkbox" value="Clusters" checked>
+                                        <input id="clusterCheckbox" class="form-check-input mr-2" type="checkbox" value="Clusters" >
                                     </div>
                                 </div>
                             </form>

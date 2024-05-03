@@ -191,19 +191,25 @@
                         .then(altitude => {
                             console.log('Altitude:', altitude);
                             
-                            // Création d'un point sur la carte avec les coordonnées et l'altitude récupérées
-                            const point = viewer.entities.add({
+                            // Création d'un pin personnalisé avec PinBuilder
+                            const pinColor = Cesium.Color.RED; // Couleur du pin
+                            const pinSize = 48; // Taille du pin en pixels
+                            const pinBuilder = new Cesium.PinBuilder();
+                            const pinCanvas = pinBuilder.fromColor(pinColor, pinSize);
+
+                            // Création d'un billboard avec le pin personnalisé
+                            const billboard = viewer.entities.add({
                                 name: 'Accident',
                                 position: Cesium.Cartesian3.fromDegrees(
                                     coordinates.longitude,
                                     coordinates.latitude,
-                                    altitude  // Utilisation de l'altitude récupérée ici
+                                    altitude +40
                                 ),
-                                point: {
-                                    pixelSize: 10,
-                                    color: Cesium.Color.RED,
-                                    outlineColor: Cesium.Color.WHITE,
-                                    outlineWidth: 2,
+                                billboard: {
+                                    image: pinCanvas, // Utilisation du pin personnalisé comme image
+                                    verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Alignement vertical
+                                    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND, // Référence d'altitude
+                                    scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 1.5e6, 0.1), // Échelle en fonction de la distance
                                 },
                             });
 

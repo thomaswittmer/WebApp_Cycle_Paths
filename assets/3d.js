@@ -53,7 +53,7 @@ getAccidentCoordinatesFromDB(accidentId)
 
 
         // Déplacer la caméra vers le point avec une altitude ajustée
-        viewer.camera.flyTo({
+        viewer.camera.zoomTo({
             destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude - 0.0015, 300),
             orientation: {
                 heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
@@ -129,7 +129,7 @@ getAccidentCoordinatesFromDB(accidentId)
                         });
 
                         // Déplacer la caméra vers le point avec une altitude ajustée
-                        viewer.camera.flyTo({
+                        viewer.camera.zoomTo({
                             destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude, altitude + 300),
                             orientation: {
                                 heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
@@ -151,7 +151,7 @@ getAccidentCoordinatesFromDB(accidentId)
 
 
 
-
+    /*
     // Define the zoomToViewport function
     function zoomToViewport(viewport) {
         viewer.camera.flyTo({
@@ -162,5 +162,6 @@ getAccidentCoordinatesFromDB(accidentId)
                 viewport.getNorthEast().lat()
             ),
         });
-    }
+    }*/
+
     });
