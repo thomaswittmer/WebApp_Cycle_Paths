@@ -355,13 +355,17 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .dropdown-menu {
-    min-width: auto !important;
-    width: max-content !important;
-    z-index: 1000;
+    
+  /*   min-width: auto !important;
+   /* width: max-content !important;*/
+    white-space: nowrap;
+   
 }
 
 .dropdown-item {
     cursor: pointer;
+    
+    
 }
 
 /* eclaircie bouton plan velo*/
