@@ -121,7 +121,7 @@
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                                     Luminosité
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-menu position-fixed" aria-labelledby="dropdownMenuButton">
                                     <form>
                                         <div class="form-switch lum mx-2">
                                             <div class="gauche">
@@ -189,7 +189,7 @@
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                                 Météo
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-menu position-fixed" aria-labelledby="dropdownMenuButton">
                                 <form>
                                     <div class="form-switch atm mx-2">
                                         <div class="gauche">
@@ -289,7 +289,7 @@
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Caractéristiques
                             </button>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu position-fixed">
                                 <form>
                                     <option class="dropdown-item caractere" value="int">Type d'intersection</option>
                                     <option class="dropdown-item caractere" value="col">Type de collision</option>
@@ -305,7 +305,7 @@
                             <button id="stat" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 Statistiques
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu position-fixed">
                                 <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
                                 <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_intersection.png')">Type d'intersection</a></li>
                                 <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_surface.png')">Type de surface</a></li>
