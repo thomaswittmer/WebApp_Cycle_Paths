@@ -550,9 +550,7 @@ var planLayer = null;
 var map = L.map('map', { zoomControl: false }).setView([48.866667, 2.333333], 12);
 new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
-var defaultLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(this.map);
+var defaultLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}').addTo(this.map);
 
 // Gestion petite et grande carte
 const sidebar = document.getElementById('offcanvasScrolling');
@@ -707,25 +705,37 @@ document.getElementById('image-overlay').style.display = 'none';
 // Ajouter d'autres couches de tuiles pour différentes vues
 var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
 var topographicLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
+var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
+
 
 document.addEventListener('DOMContentLoaded', function () {
     // Associer des boutons à des actions pour changer de fond de plan
     document.getElementById('btnSatellite').onclick = function () {
         map.removeLayer(defaultLayer);
         map.addLayer(satelliteLayer);
+        map.removeLayer(openStreetMapLayer);
         map.removeLayer(topographicLayer);
     };
 
     document.getElementById('btnTopographic').onclick = function () {
         map.removeLayer(defaultLayer);
         map.removeLayer(satelliteLayer);
+        map.removeLayer(openStreetMapLayer);
         map.addLayer(topographicLayer);
     };
 
     // Définir un bouton pour revenir au fond de plan par défaut
-    document.getElementById('btnDefault').onclick = function () {
+    document.getElementById('btnOpenStreetMap').onclick = function() {
         map.removeLayer(satelliteLayer);
         map.removeLayer(topographicLayer);
+        map.removeLayer(defaultLayer);
+        map.addLayer(openStreetMapLayer)
+    };
+
+    document.getElementById('btnDefault').onclick = function() {
+        map.removeLayer(satelliteLayer);
+        map.removeLayer(topographicLayer);
+        map.removeLayer(openStreetMapLayer);
         map.addLayer(defaultLayer);
     };
 });

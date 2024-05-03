@@ -4,6 +4,17 @@ body {
     padding: 0;
 }
 
+.logo-head {
+    width: 40px;
+    height: auto;
+    position:absolute;
+    top: 23px; 
+    left: 75px;
+    margin-left: 5px;
+    align-items: center; 
+    z-index: 1000;
+}
+
 header {
     background-color: #333;
     color: #fff;
@@ -27,9 +38,21 @@ h1 {
 }
 
 /* bouton information pour lire les fonctionnalités */
+.button-container-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 30px;
+    position: relative;
+}
+
 .bouton-info {
-    width: 25%;
+    display: block;
+    width: 25px;
     height: auto;
+    position: absolute;
+    top: -13px;
+    right: 30px;
 }
 
 ul {
@@ -59,7 +82,7 @@ ul li {
 
 .popup-content {
     background-color: #fff;
-    border: 3px solid #333;
+    border: 3px solid #0F1A29;
     color: black;
     max-width: 80%;
     margin: 0 auto;
@@ -85,9 +108,9 @@ ul li {
 
 /* barre de recherche de l'adresse */
 #research_bar {
-    position: absolute;
-    top: 25px;
-    left: 75px;
+    position:absolute;
+    top: 25px; 
+    left: 120px;
     margin-left: 5px;
     align-items: center;
     z-index: 1000;
@@ -203,7 +226,7 @@ input[type="range"] {
     appearance: none;
     width: 100%;
     height: 5px;
-    background: #333;
+    background: #0F1A29;
 }
 
 
@@ -301,6 +324,7 @@ input[type="range"]::-webkit-slider-thumb {
 /*BANDEAU LATERAL*/
 .offcanvas-header {
     height: 10%;
+    position: relative;
 }
 
 .btn-lateral { 
@@ -411,10 +435,18 @@ input[type="range"]::-webkit-slider-thumb {
 
 .button-container-fond {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
     margin-top: 20px;
     margin-bottom: 5px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .map-button {
@@ -422,7 +454,7 @@ input[type="range"]::-webkit-slider-thumb {
     border: none;
     background-color: #f0f0f0;
     padding: 0;
-    width: 90px;
+    width: 150px;
     height: 90px;
     display: flex;
     border-radius: 10px;
@@ -430,7 +462,7 @@ input[type="range"]::-webkit-slider-thumb {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    margin-right: 20px;
+    border: 2px solid #0F1A29;
 }
 
 .map-button:last-child {
@@ -452,7 +484,8 @@ input[type="range"]::-webkit-slider-thumb {
     text-align: center;
     font-size: 14px;
     font-weight: bold;
-    color: #333;
+    color: #0F1A29;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
 }
 
 .button-label-sat {
@@ -464,6 +497,7 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 14px;
     font-weight: bold;
     color: white;
+    text-shadow: -1px -1px 0 #0F1A29, 1px -1px 0 #0F1A29, -1px 1px 0 #0F1A29, 1px 1px 0 #0F1A29;
 }
 
 /* boutons pour le play/pause/stop de la lecture automatique du curseur temporel */
@@ -490,8 +524,8 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .play-button {
-    background-color: #007bff;
-    border: 2px solid #007bff;
+    background-color: #0F1A29;
+    border: 2px solid #0F1A29;
 }
 
 .stop-button {
