@@ -1,41 +1,121 @@
 /*page*/
-body{
+body {
     margin: 0;
     padding: 0;
 }
 
-/*barre de recherche*/
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin: 0;
+    margin-left: 5px;
+    font-family: 'Zen Dots';
+    font-size: 32px;
+}
+
+.header-image {
+    width: 90%;
+    height: auto;
+    margin-left: -10px;
+}
+
+/* bouton information pour lire les fonctionnalités */
+.bouton-info {
+    width: 25%;
+    height: auto;
+}
+
+ul {
+    text-align: left;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+ul li {
+    font-family: Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    padding-top: 100px;
+}
+
+.popup-content {
+    background-color: #fff;
+    border: 3px solid #333;
+    color: black;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #DC3545;
+    color: white;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* barre de recherche de l'adresse */
 #research_bar {
-    position:absolute;
-    top: 20px; 
+    position: absolute;
+    top: 25px;
     left: 75px;
     margin-left: 5px;
-    align-items: center; 
+    align-items: center;
     z-index: 1000;
 }
 
 #research_input[type="text"] {
     align-items: center;
-    padding: 8px; 
-    border: none; 
+    padding: 8px;
+    border: none;
     border-radius: 5px;
-    margin-right: 5px; 
-    font-size: 16px; 
+    margin-right: 5px;
+    font-size: 16px;
 }
 
+/*CARTE*/
 
-#app{
+#app {
     margin: 0;
     padding: 0;
     height: 100%;
-    display: flex;  
+    display: flex;
 }
 
 .carte {
     height: 100%;
     width: 100%;
     margin: 0;
-    padding: 0;  
+    padding: 0;
 }
 
 /*CARTE*/
@@ -45,7 +125,7 @@ body{
     right: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; 
+    z-index: 0;
 }
 
 
@@ -88,7 +168,6 @@ body{
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
-
 /* BOUTON 3D*/
 #cesiumContainer {
     width: 100%;
@@ -105,14 +184,14 @@ body{
     width: 90%;
     text-align: center;
     z-index: 1000;
-    left: 50%; 
+    left: 50%;
     transform: translateX(-50%);
 }
 
 #dateSlider {
     width: 100%; 
     bottom : 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     z-index: 1000;
     border-radius: 10px;
 }
@@ -122,15 +201,15 @@ input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: 15px;
-    background: rgba(73, 109, 160, 1);
+    height: 5px;
+    background: #333;
 }
 
 input[type="range"]::-moz-range-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 50px; /* Largeur de l'image */
-    height: 50px; /* Hauteur de l'image */
+    width: 50px;
+    height: 50px;
     background: url('../assets/images/icon_safelane.png') center center no-repeat; 
     background-size: contain;
     cursor: pointer;
@@ -140,8 +219,8 @@ input[type="range"]::-moz-range-thumb {
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 50px; /* Largeur de l'image */
-    height: 50px; /* Hauteur de l'image */
+    width: 50px;
+    height: 50px;
     background: url('../assets/images/icon_safelane.png') center center no-repeat; 
     background-size: contain;
     cursor: pointer;
@@ -149,55 +228,49 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /*date séléctionée*/
-#date{
-    margin:auto;
+#date {
+    margin: auto;
     font-size: 16px;
     color: #0E0E29;
     padding: 10px;
     border-radius: 5px;
-    width:20%;
+    width: 20%;
     background-color:rgba(255, 255, 255, 0.5);
 }
 
-/*GESTION TEMPORALITE*/
-/*curseur temporel*/
-.curseur-date {
+/*checkbox*/
+.checkbox-date {
     position: absolute;
-    bottom: 10px;
-    width: 90%;
-    text-align: center;
+    bottom: 15px;
+    left: 10px;
     z-index: 1000;
-    left: 50%; 
-    transform: translateX(-50%);
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
 }
 
-#dateSlider {
-    width: 100%; 
-    bottom : 10px;
-    margin-bottom: 10px;
+.checkbox-date input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.checkbox-date label {
+    font-size: 20px;
+}
+
+.checkbox-mois {
+    position: absolute;
+    bottom: 15px;
+    left: 150px;
     z-index: 1000;
-    border-radius: 10px;
-}
-
-/*point du curseur tentative logo*/
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 15px;
-    background: rgba(73, 109, 160, 1);
-}
-
-input[type="range"]::-webkit-slider-thumb,
-input[type="range"]::-moz-range-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 50px; /* Largeur de l'image */
-    height: 50px; /* Hauteur de l'image */
-    background: url('../assets/images/safelane.png') center center no-repeat; 
-    background-size: contain;
-    cursor: pointer;
-    border: none;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -209,22 +282,9 @@ input[type="range"]::-moz-range-thumb {
 #plan{
     width:50%;
 }
-/*gestion des caractéristiques*/
-
-/*checkbox*/
-.checkbox-date {
-    position: absolute;
-    bottom: 15px; 
-    left: 10px; 
-    z-index: 1000; 
-    background-color: white; 
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
 
 /*BANDEAU LATERAL*/
-.offcanvas-header{
+.offcanvas-header {
     height: 10%;
 }
 
@@ -249,16 +309,16 @@ input[type="range"]::-moz-range-thumb {
     width:100%;
 }
 
-.btn-group{
+.btn-group {
     width: 50%;
     margin-bottom: 5px;
 }
 
 /*gestion des caractéristiques*/
 .form-switch img {
-    height: 40px; /* Hauteur de l'image */
-    width: auto; /* Largeur automatique pour conserver les proportions */
-    margin-right: 10px; /* Marge à droite pour séparer l'image du texte */
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
 }
 
 .form-switch {
@@ -276,13 +336,13 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .form-switch .droite {
-    margin-left: auto; 
+    margin-left: auto;
 }
 
 .dropdown-menu {
-    min-width: auto !important;   
+    min-width: auto !important;
     width: max-content !important;
-    z-index :1000;
+    z-index: 1000;
 }
 
 .dropdown-item {
@@ -295,7 +355,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /*legende*/
-.legend{
+.legend {
     top: 10px;
     right: 10px;
     background-color: white;
@@ -311,7 +371,7 @@ input[type="range"]::-moz-range-thumb {
     vertical-align: middle;
 }
 
-#legend{
+#legend {
     margin-top: 10px;
     padding-top: 10px;
 }
@@ -320,7 +380,7 @@ input[type="range"]::-moz-range-thumb {
 .legend-img {
     width: 30px;
     height: 30px;
-    margin-right: 5px; /* Espace entre l'image et le texte */
+    margin-right: 5px;
 }
 
 #legendAcci {
@@ -347,19 +407,19 @@ input[type="range"]::-moz-range-thumb {
     border: none;
     background-color: #f0f0f0;
     padding: 0;
-    width: 90px; /* Largeur fixe pour chaque bouton */
-    height: 90px; /* Hauteur fixe pour chaque bouton */
+    width: 90px;
+    height: 90px;
     display: flex;
     border-radius: 10px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    margin-right: 20px; /* Espacement entre chaque bouton (à droite) */
+    margin-right: 20px;
 }
 
 .map-button:last-child {
-    margin-right: 0; /* Aucun espacement à droite pour le dernier bouton */
+    margin-right: 0;
 }
 
 .map-button img {
@@ -371,7 +431,7 @@ input[type="range"]::-moz-range-thumb {
 
 .button-label {
     position: absolute;
-    bottom: 10px; /* Ajustez cette valeur pour le positionnement vertical */
+    bottom: 10px;
     left: 0;
     right: 0;
     text-align: center;
@@ -382,7 +442,7 @@ input[type="range"]::-moz-range-thumb {
 
 .button-label-sat {
     position: absolute;
-    bottom: 10px; /* Ajustez cette valeur pour le positionnement vertical */
+    bottom: 10px;
     left: 0;
     right: 0;
     text-align: center;
@@ -391,45 +451,59 @@ input[type="range"]::-moz-range-thumb {
     color: white;
 }
 
-.play {
+/* boutons pour le play/pause/stop de la lecture automatique du curseur temporel */
+.button-container {
     position: absolute;
-    bottom: 56px; 
-    left: 10px; 
-    z-index: 1000; 
+    bottom: 55px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.play-button, .stop-button, .pause-button {
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.play-button {
     background-color: #007bff;
     border: 2px solid #007bff;
-    border-radius: 20px;
-    padding: 5px px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    z-index:1000; 
 }
 
-.stop {
-    position: absolute;
-    bottom: 56px; 
-    left: 10px; 
-    z-index: 1000; 
+.stop-button {
     background-color: #eb3d3d;
-    border: 2px solid #c60d0d;
-    border-radius: 20px;
-    padding: 5px px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid #eb3d3d;
 }
 
-.play:hover {
-    background-color: #0056b3;
-    color: #ffffff;
-    transition: background-color 0.3s ease, color 0.3s ease;
+.pause-button {
+    background-color: #e4f319e9;
+    border: 2px solid #e4f319e9;
 }
 
-img {
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
+.play-button img, .stop-button img, .pause-button img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.play-button:hover, .stop-button:hover, .pause-button:hover {
+    transform: scale(1.1);
+}
+
+.meteo-decale-vers-le-bas {
+    margin-top: 220px;
+    transition: margin-top 0.3s ease;
+}
+
+.carac-decale-vers-le-bas {
+    margin-top: 380px;
+    transition: margin-top 0.3s ease;
 }
