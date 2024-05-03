@@ -9,6 +9,7 @@ let app = Vue.createApp({
             caseDisabled: true,
             isAutoPlaying: false,
             autoPlayInterval: null,
+            autoPlayInterval: null,
             isPaused: false
         };
     },
@@ -205,9 +206,9 @@ function creeCouchePistes(objet) {
             } else if (ame_d === 'VOIE VERTE' || ame_d === 'AMENAGEMENT MIXTE PIETON VELO HORS VOIE VERTE') {
                 couleur = '#63DE6E';
             } else if (ame_d === 'PISTE CYCLABLE') {
-                couleur = '#1D3FD9';
+                couleur = '#1D3FD9'; 
             } else if (ame_d === 'BANDE CYCLABLE') {
-                couleur = '#4DC0EF';
+                couleur = '#4DC0EF'; 
             }
             else {
                 couleur = '#C1A4BD  ';
@@ -251,12 +252,26 @@ function creeCouchePlan(objet) {
     });
 }
 
+
+
+
+
+
+// Définir la fonction zoomSur dans le contexte global
+function zoomSur(latitude, longitude) {
+    map.setView([latitude, longitude], 15); // Définir la vue de la carte sur les coordonnées spécifiées avec un zoom de 15
+}
+
+var clusterGroup;
+
+
 // crée la couche contenant les accidents contenus dans "objet"
 function creeCoucheAccidents(objet) {
     var clusterGroup = L.markerClusterGroup({
         maxClusterRadius: 50,
         disableClusteringAtZoom: 15 //fin des clusters quand on zoome
-    });
+    }); 
+
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
             const properties = feature.properties;
@@ -299,6 +314,7 @@ function creeCoucheAccidents(objet) {
             <b>Catégorie du véhicule :</b> ${properties.catv}<br>
             <b>Circulation :</b> ${properties.circ}<br>
             <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="zoomSur(${latlng.lat}, ${latlng.lng})">Zoomer sur</button>
             `;
 
             // Ajout d'une pop-up au marqueur
@@ -308,7 +324,20 @@ function creeCoucheAccidents(objet) {
             return clusterGroup;
         }
     });
+    
+
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // Fonction pour mettre à jour la légende
 function mettreAJourLegende(etatCouches) {
@@ -459,7 +488,59 @@ checkboxes.forEach(function (check) {
             else {
                 acci_select = acci_paramSelect;
             }
+        if (check.value == "lum" || check.value == "atm") {
+            // si on coche la case
+            if (this.checked) {
+                document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { // on décoche toutes les visualisations
+                    all.checked = false;
+                })
+                this.checked = true; // on recoche l'actuelle
+                type = check.value;  // nouvelle legende selectionnee
+                map.removeLayer(acciLayer);
+                acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
+                document.getElementById('legendAcci').innerHTML = ``; // on supprime la legende
+            }
+            // si on la décoche
+            else {
+                type = null;  // nouvelle legende selectionnee (aucune)
+                map.removeLayer(acciLayer);
+                acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
+            }
+        }
+        else {
+            let lumi_select = [];
+            let meteo_select = [];
+            // Parcourir toutes les cases cochées
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    // icone de la coche
+                    if (checkbox.parentNode.parentNode.classList.contains('lum')) {
+                        // Si la case à cocher appartient à la classe "dropdown-item lumi"
+                        lumi_select.push(checkbox.value);
+                    } else if (checkbox.parentNode.parentNode.classList.contains('atm')) {
+                        // Si la case à cocher appartient à la classe "dropdown-item meteo"
+                        meteo_select.push(checkbox.value);
+                    }
+                }
+            });
+            // accidents selectionnes avec la luminosité
+            acci_paramSelect = accidents.features.filter(feature => {
+                // true ou false selon si l'accident appartient aux param sélectionnés
+                return (lumi_select.includes(feature.properties.lum) && meteo_select.includes(feature.properties.atm));
+            });
+            // accidents en luminosité et en année
+            if (acci_anneeSelect != null) {
+                acci_select = acci_anneeSelect.filter(element => {
+                    return acci_paramSelect.includes(element);
+                });
+            }
+            else {
+                acci_select = acci_paramSelect;
+            }
 
+            map.removeLayer(acciLayer);
+            acciLayer = creeCoucheAccidents(acci_select).addTo(map);
+        }
             map.removeLayer(acciLayer);
             acciLayer = creeCoucheAccidents(acci_select).addTo(map);
         }
@@ -496,6 +577,11 @@ caracteres.forEach(function (carac) {
         });
         // Ajouter la classe 'active' à l'option cliquée
         this.classList.add('active');
+
+        // on décoche toutes les visualisations
+        document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { 
+            all.checked = false;
+        })
 
         // on décoche toutes les visualisations
         document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { 
@@ -551,6 +637,7 @@ var map = L.map('map', { zoomControl: false }).setView([48.866667, 2.333333], 12
 new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 var defaultLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}').addTo(this.map);
+var defaultLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}').addTo(this.map);
 
 // Gestion petite et grande carte
 const sidebar = document.getElementById('offcanvasScrolling');
@@ -581,6 +668,7 @@ const geocoder = L.esri.Geocoding.geocodeService({
 });
 const searchInput = document.getElementById('research_input');
 const suggestions = document.getElementById('suggestions');
+
 
 searchInput.addEventListener('input', function () {
     const query = this.value;
@@ -707,6 +795,8 @@ var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/se
 var topographicLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
 var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
 
+var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
+
 
 document.addEventListener('DOMContentLoaded', function () {
     // Associer des boutons à des actions pour changer de fond de plan
@@ -714,12 +804,14 @@ document.addEventListener('DOMContentLoaded', function () {
         map.removeLayer(defaultLayer);
         map.addLayer(satelliteLayer);
         map.removeLayer(openStreetMapLayer);
+        map.removeLayer(openStreetMapLayer);
         map.removeLayer(topographicLayer);
     };
 
     document.getElementById('btnTopographic').onclick = function () {
         map.removeLayer(defaultLayer);
         map.removeLayer(satelliteLayer);
+        map.removeLayer(openStreetMapLayer);
         map.removeLayer(openStreetMapLayer);
         map.addLayer(topographicLayer);
     };
@@ -733,9 +825,20 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     document.getElementById('btnDefault').onclick = function() {
+    document.getElementById('btnOpenStreetMap').onclick = function() {
+        map.removeLayer(satelliteLayer);
+        map.removeLayer(topographicLayer);
+        map.removeLayer(defaultLayer);
+        map.addLayer(openStreetMapLayer)
+    };
+
+    document.getElementById('btnDefault').onclick = function() {
         map.removeLayer(satelliteLayer);
         map.removeLayer(topographicLayer);
         map.removeLayer(openStreetMapLayer);
+        map.removeLayer(openStreetMapLayer);
         map.addLayer(defaultLayer);
     };
+
+    }
 });

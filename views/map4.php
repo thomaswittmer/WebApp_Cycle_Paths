@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         body{
-            background-color: #333;
+            background-color: #0b101f;
             margin: 0;
             padding: 0;
             max-height: 100vh;
@@ -22,13 +22,13 @@
             display: flex;
             flex-direction: row;
             align-items: start;
-            background-color: #333;
+            background-color: #0b101f;
         }
 
 
         /* Style pour le header */
         header {
-            background-color: #333; /* Couleur de fond */
+            background-color: #0b101f; /* Couleur de fond */
             color: #fff; /* Couleur du texte */
             padding: 10px; /* Espacement intérieur */
             display: flex; /* Utilisation de flexbox */
@@ -51,16 +51,24 @@
 
         
         .return-button {
-            background-color: red; /* Couleur de fond */
+            background-color: #dc3545; /* Couleur de fond */
             color: #fff; /* Couleur du texte */
             padding: 10px 20px; /* Espacement intérieur */
             border: none; /* Pas de bordure */
             border-radius: 5px; /* Coins arrondis */
-            font-family: 'Zen Dots';
+            font-family: 'Arial', sans-serif; /* Police de caractères */
+            font-size: 16px; /* Taille de la police */
+            font-weight: bold; /* Gras */
             cursor: pointer; /* Curseur au survol */
             text-decoration: none; /* Suppression du soulignement */
             margin-left: 10px; /* Espacement à gauche */
+            transition: background-color 0.3s ease; /* Transition en douceur */
         }
+
+        .return-button:hover {
+            background-color: #c82333; /* Couleur de fond au survol */
+        }
+
 
         /* BOUTON 3D*/
         #cesiumContainer {
@@ -71,20 +79,19 @@
 
         }
 
+        .header-image {
+            width: 350px; /* Largeur de l'image */
+        }
+
+
 
     </style>
 </head>
 <body>
     <header>
-        <img src="/assets/images/safelane.png" alt="Logo" class="header-image"> 
-        <h1>SAFELANE</h1>
-        <input type="checkbox" id="animationCheckbox">
-        <label for="animationCheckbox">Activer animation</label>
-
-
+        <img src="/assets/images/param_safelane.png" alt="Logo" class="header-image"> 
         <a href="map3" class="return-button">Retour</a> 
     </header>
-
     
     <div id=app>
             <div id="cesiumContainer"></div>
@@ -104,7 +111,7 @@
     function getAccidentCoordinatesFromDB(num_acc) {
         return new Promise((resolve, reject) => {
             // URL de votre API pour récupérer les coordonnées d'un accident
-            const apiUrl = `http://localhost:80/getAccidentCoordinates?num_acc=${num_acc}`;
+            const apiUrl = `http://localhost:8000/getAccidentCoordinates?num_acc=${num_acc}`;
 
             // Effectuer la requête AJAX
             $.ajax({
@@ -191,19 +198,25 @@
                         .then(altitude => {
                             console.log('Altitude:', altitude);
                             
-                            // Création d'un point sur la carte avec les coordonnées et l'altitude récupérées
-                            const point = viewer.entities.add({
+                            // Création d'un pin personnalisé avec PinBuilder
+                            const pinColor = Cesium.Color.RED; // Couleur du pin
+                            const pinSize = 48; // Taille du pin en pixels
+                            const pinBuilder = new Cesium.PinBuilder();
+                            const pinCanvas = pinBuilder.fromColor(pinColor, pinSize);
+
+                            // Création d'un billboard avec le pin personnalisé
+                            const billboard = viewer.entities.add({
                                 name: 'Accident',
                                 position: Cesium.Cartesian3.fromDegrees(
                                     coordinates.longitude,
                                     coordinates.latitude,
-                                    altitude  // Utilisation de l'altitude récupérée ici
+                                    altitude +40
                                 ),
-                                point: {
-                                    pixelSize: 10,
-                                    color: Cesium.Color.RED,
-                                    outlineColor: Cesium.Color.WHITE,
-                                    outlineWidth: 2,
+                                billboard: {
+                                    image: pinCanvas, // Utilisation du pin personnalisé comme image
+                                    verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Alignement vertical
+                                    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND, // Référence d'altitude
+                                    scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 1.5e6, 0.1), // Échelle en fonction de la distance
                                 },
                             });
 

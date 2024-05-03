@@ -347,6 +347,7 @@ input[type="range"]::-webkit-slider-thumb {
     left: 23px;
     position:absolute;
     background-color: #0F1A29;
+    z-index: 1001;
 }
 
 #btn-lateral .navbar-toggler-icon {
