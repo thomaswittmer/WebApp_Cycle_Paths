@@ -1,7 +1,7 @@
 let app = Vue.createApp({
     data() {
         return {
-            selectedYear: '',
+            selectedYear: '2016-2022',
             selectedMonth: '',
             suggestions: [],
             caseChecked: true,
@@ -9,12 +9,13 @@ let app = Vue.createApp({
             caseDisabled: true,
             isAutoPlaying: false,
             autoPlayInterval: null,
+            isPaused: false
         };
     },
     computed: {
         formattedDate() {
             if (this.selectedMonth === '') {
-                return null;
+                return '2016-2022';
             }
             let startDate = new Date(2016, 0); //début du curseur
             let selectedDate = new Date(startDate.getFullYear(), startDate.getMonth() + this.selectedMonth); //date actuelle
@@ -54,18 +55,28 @@ let app = Vue.createApp({
                 }
             }
             else {
-                if (this.selectedYear === '') {
+                if (this.selectedYear === '2016-2022') {
                     this.selectedYear = '2016';
                     this.cherche_annee();
-                } else {
+                }
+                else {
                     let currentYear = parseInt(this.selectedYear);
                     if (currentYear < 2022) {
-                        this.selectedYear = (currentYear + 1).toString();
+                        this.selectedYear = (currentYear +1).toString();
                         this.cherche_annee();
-                    } else {
+                    }
+                    else {
                         this.stopAutoPlay();
                     }
                 }
+            }
+        },
+
+        pauseAutoPlay() {
+            if (this.isAutoPlaying) {
+                clearInterval(this.autoPlayInterval);
+                this.isAutoPlaying = false;
+                this.isPaused = true;
             }
         },
 
@@ -142,7 +153,7 @@ let app = Vue.createApp({
         },
 
         annule_annee() {
-            this.selectedYear = '';
+            this.selectedYear='2016-2022';
             this.caseDisabled = true;
             this.selectedMonth = '';
             this.caseChecked = true;
@@ -171,8 +182,6 @@ var dateSlider = document.getElementById('dateSlider');
 dateSlider.addEventListener('mousemove', function (event) {
     event.stopPropagation();
 });
-
-
 
 // crée la couche contenant les pistes contenues dans "objet"
 function creeCouchePistes(objet) {
@@ -234,7 +243,6 @@ function creeCouchePlan(objet) {
     });
 }
 
-
 // crée la couche contenant les accidents contenus dans "objet"
 function creeCoucheAccidents(objet) {
     var clusterGroup = L.markerClusterGroup({
@@ -270,7 +278,6 @@ function creeCoucheAccidents(objet) {
             //const marker = mark;
 
             // Récupération des informations de l'accident correspondant
-
             const popupContenu = `
             <b>Date:</b> ${properties.date}<br>
             <b>Type d'intersection :</b> ${properties.int}<br>
@@ -294,7 +301,6 @@ function creeCoucheAccidents(objet) {
     });
 
 }
-
 
 // Fonction pour mettre à jour la légende
 function mettreAJourLegende(etatCouches) {
@@ -390,7 +396,6 @@ var acci_anneeSelect = null;
 var acci_paramSelect = null;
 var type = null;
 
-
 // PARAMETRES VARIANTS
 var checkboxes = document.querySelectorAll('.droite input[type="checkbox"]');
 
@@ -458,7 +463,6 @@ dropdownMeteo.addEventListener('click', function () {
     caracDecalable.classList.toggle('carac-decale-vers-le-bas');
 });
 
-
 // CARACTERISTIQUES
 var caracteres = document.querySelectorAll('.caractere');
 
@@ -524,7 +528,6 @@ var defaultLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(this.map);
 
-
 //la barre de recherche des adresses
 
 // test ESRI 
@@ -535,8 +538,7 @@ const geocoder = L.esri.Geocoding.geocodeService({
 const searchInput = document.getElementById('research_input');
 const suggestions = document.getElementById('suggestions');
 
-
-searchInput.addEventListener('input', function () {
+searchInput.addEventListener('input', function() {
     const query = this.value;
 
     geocoder.suggest().text(query).run((error, results, response) => {
@@ -598,14 +600,12 @@ suggestions.addEventListener('click', function (event) {
     }
 });
 
-
 // Cacher le menu déroulant si on clique en dehors
 document.addEventListener('click', function (event) {
     if (!event.target.closest('.input-group')) {
         suggestions.style.display = 'none';
     }
 });
-
 
 // Récupération de tous les accidents
 fetch('recupere_acci')
@@ -624,14 +624,12 @@ fetch('recupere_pistes')
         acciLayer = creeCoucheAccidents(accidents).addTo(map);
     })
 
-
 // Récupération de toutes les pistes cyclables
 fetch('recupere_plan')
     .then(result => result.json())
     .then(result => {
         planLayer = creeCouchePlan(result);
     })
-
 
 // Affichage de l'overlay d'images de statistiques
 var imageOverlay;
@@ -660,8 +658,6 @@ function closeImageOverlay() {
 // Masquer l'overlay d'image au chargement de la page
 document.getElementById('image-overlay').style.display = 'none';
 
-
-
 // Ajouter d'autres couches de tuiles pour différentes vues
 var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
 var topographicLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
@@ -686,6 +682,4 @@ document.addEventListener('DOMContentLoaded', function () {
         map.removeLayer(topographicLayer);
         map.addLayer(defaultLayer);
     };
-
-
 });

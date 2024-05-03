@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>SAFELANE</title>
     <link rel="icon" type="image/png" href="/assets/images/icon_safelane_carre.png" sizes="32x32 64x64 128x128">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +23,10 @@
     <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.css" crossorigin="" />
     <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.js" crossorigin=""></script>
 </head>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 48f66caf22913b8e45e7cdf56ed8ce402be46cd6
 <body>
     <div id=app>
         <div class="carte">
@@ -53,11 +56,18 @@
                     <input class="form-check-input mr-2" type="checkbox" v-model="moisChecked" @change="annule_annee"> Curseur par mois <br> 
                 </div>
 
-                <!-- bouton play pour lire les accidents dans le temps automatiquement-->
-                <button :class="isAutoPlaying ? 'stop' : 'play'" @click="isAutoPlaying ? stopAutoPlay() : startAutoPlay()">
-                    <img v-if="!isAutoPlaying" src="assets/images/play.svg" alt="Lecture automatique">
-                    <img v-else src="assets/images/stop.svg" alt="Arrêter la lecture automatique">
-                </button>
+                <!-- Bouton play pour la lecture automatique-->
+                <div class="button-container">
+                    <button v-if="!isAutoPlaying" @click="startAutoPlay()" class="play-button">
+                        <img src="assets/images/play.svg" alt="Lecture automatique">
+                    </button>
+                    <button v-if="isAutoPlaying" @click="stopAutoPlay()" class="stop-button">
+                        <img src="assets/images/stop.svg" alt="Arrêter la lecture automatique">
+                    </button>
+                    <button v-if="isAutoPlaying" @click="pauseAutoPlay()" class="pause-button">
+                        <img src="assets/images/pause.svg" alt="Pause">
+                    </button>
+                </div>
 
                 <!-- curseur temporel -->
                 <div v-if="moisChecked" class="curseur-date">
@@ -79,11 +89,10 @@
                     </button>
 
                     <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-
-                        <!--<div class = "menu-lateral">-->
+        
                         <div class="offcanvas-header">
                             <a href="/"><img src="/assets/images/param_safelane.png" alt="logo" class="header-image"></a>
-                            <a id="infoButton" href=".popup"><img src="/assets/images/bouton_info.png" alt="info" class="bouton-info"></a>
+                            <a id="infoButton"><img src="/assets/images/bouton_info.png" alt="info" class="bouton-info"></a>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
 
@@ -124,42 +133,42 @@
                                                     <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked>
                                                 </div>
                                             </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Crépuscule ou aube.png" alt="Crépuscule ou aube">
-                                                    Crépuscule ou aube
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
-                                                </div>
+                                        <div class="form-switch lum mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/lum/Crépuscule ou aube.png" alt="Crépuscule ou aube">
+                                                Crépuscule ou aube
                                             </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
-                                                    Nuit sans éclairage public
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
-                                                </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
                                             </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
-                                                    Nuit avec éclairage public non allumé
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
-                                                </div>
+                                        </div>
+                                        <div class="form-switch lum mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/lum/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
+                                                Nuit sans éclairage public
                                             </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
-                                                    Nuit avec éclairage public allumé
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
-                                                </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
                                             </div>
+                                        </div>
+                                        <div class="form-switch lum mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/lum/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
+                                                Nuit avec éclairage public non allumé
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-switch lum mx-2">
+                                            <div class="gauche">
+                                                <img src="../assets/images/icones/lum/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
+                                                Nuit avec éclairage public allumé
+                                            </div>
+                                            <div class="droite">
+                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
+                                            </div>
+                                        </div>
                                         </form>
                                     </div>
                                 </div>
@@ -167,7 +176,7 @@
 
                             <!-- METEO -->
                             <div class="btn-group meteo">
-                                <button type="button" class="btn btn-primary dropdown-toggle meteo" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                                <button type="button" class="btn btn-primary dropdown-toggle meteo" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false" data-bs-auto-close="false">
                                     Météo
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -304,10 +313,8 @@
                                 <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
                             </div>
 
-
-                            <div id="legendAcci"></div>
-
-
+                            <div id="legendAcci"></div> 
+                            
                             <!-- FOND DE CARTE -->
                             <h3 id="titre-carte">Fond de carte</h3>
                             <div class="button-container-fond">

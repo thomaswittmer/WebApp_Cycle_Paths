@@ -5,8 +5,6 @@ body {
 
 }
 
-/*BANDEAU HEADER*/
-/*safelane*/
 header {
     background-color: #333;
     color: #fff;
@@ -29,6 +27,7 @@ h1 {
     margin-left: -10px;
 }
 
+/* bouton information pour lire les fonctionnalités */
 .bouton-info {
     width: 25%;
     height: auto;
@@ -61,6 +60,7 @@ ul li {
 
 .popup-content {
     background-color: #fff;
+    border: 3px solid #333;
     color: black;
     max-width: 80%;
     margin: 0 auto;
@@ -84,6 +84,7 @@ ul li {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* barre de recherche de l'adresse */
 #research_bar {
     position: absolute;
     top: 25px;
@@ -102,7 +103,6 @@ ul li {
     font-size: 16px;
 }
 
-
 /*CARTE*/
 
 #app {
@@ -110,7 +110,6 @@ ul li {
     padding: 0;
     height: 100%;
     display: flex;
-
 }
 
 .carte {
@@ -118,7 +117,6 @@ ul li {
     width: 100%;
     margin: 0;
     padding: 0;
-
 }
 
 #map {
@@ -131,8 +129,6 @@ ul li {
 }
 
 /*statistique*/
-
-
 #image-overlay {
     position: absolute;
     top: 50%;
@@ -171,14 +167,12 @@ ul li {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
-
 /* BOUTON 3D*/
 #cesiumContainer {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-
 }
 
 /*GESTION TEMPORALITE*/
@@ -194,9 +188,9 @@ ul li {
 }
 
 #dateSlider {
-    width: 100%;
-    bottom: 10px;
-    margin-bottom: 10px;
+    width: 100%; 
+    bottom : 10px;
+    margin-bottom: 15px;
     z-index: 1000;
     border-radius: 10px;
 }
@@ -206,18 +200,16 @@ input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: 15px;
-    background: #0056b3;
+    height: 5px;
+    background: #333;
 }
 
 input[type="range"]::-moz-range-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 50px;
-    /* Largeur de l'image */
     height: 50px;
-    /* Hauteur de l'image */
-    background: url('../assets/images/icon_safelane.png') center center no-repeat;
+    background: url('../assets/images/icon_safelane.png') center center no-repeat; 
     background-size: contain;
     cursor: pointer;
     border: none;
@@ -227,10 +219,8 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 50px;
-    /* Largeur de l'image */
     height: 50px;
-    /* Hauteur de l'image */
-    background: url('../assets/images/icon_safelane.png') center center no-repeat;
+    background: url('../assets/images/icon_safelane.png') center center no-repeat; 
     background-size: contain;
     cursor: pointer;
     border: none;
@@ -244,45 +234,8 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 10px;
     border-radius: 5px;
     width: 20%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color:rgba(255, 255, 255, 0.5);
 }
-
-/*GESTION TEMPORALITE*/
-
-/*point du curseur tentative logo*/
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 15px;
-    background: rgba(73, 109, 160, 1);
-}
-
-input[type="range"]::-webkit-slider-thumb,
-input[type="range"]::-moz-range-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 50px;
-    /* Largeur de l'image */
-    height: 50px;
-    /* Hauteur de l'image */
-    background: url('../assets/images/safelane.png') center center no-repeat;
-    background-size: contain;
-    cursor: pointer;
-    border: none;
-}
-
-/*date séléctionée*/
-#date {
-    margin: auto;
-    font-size: 16px;
-    color: #0E0E29;
-    padding: 10px;
-    border-radius: 5px;
-    width: 20%;
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
 
 /*checkbox*/
 .checkbox-date {
@@ -291,9 +244,21 @@ input[type="range"]::-moz-range-thumb {
     left: 10px;
     z-index: 1000;
     background-color: white;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-date input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.checkbox-date label {
+    font-size: 20px;
 }
 
 .checkbox-mois {
@@ -313,15 +278,8 @@ input[type="range"]::-moz-range-thumb {
     color: #6c757d;
 }
 
-
-
 /*BANDEAU LATERAL*/
-/*.btn-close{
-    position: absolute;
-    top: 10px; /* Ajustez selon vos besoins 
-    right: 10px;
-}*/
-.offcanvas-header {
+.offcanvas-header{
     height: 10%;
 }
 
@@ -344,8 +302,6 @@ input[type="range"]::-moz-range-thumb {
     width: 50%;
 }
 
-/*gestion des caractéristiques*/
-
 /*eclaircie quand inactif*/
 .anDesactive {
     color: #6c757d;
@@ -356,21 +312,16 @@ input[type="range"]::-moz-range-thumb {
     height: 10%;
 }
 
-
-.navbar-dark {
-    top: 15px;
+.navbar-dark{
+    top: 15px; 
     left: 5px;
     position: absolute;
     z-index: 1000;
 }
 
 .navbar-toggler {
-    color: #030257;
-    /* Choisissez votre couleur préférée */
-    background-color: rgb(35, 115, 140);
-    /* Couleur de fond du bouton */
-    border-color: blue;
-    /* Couleur de la bordure du bouton */
+    color: #333;
+    background-color: #333;
 }
 
 #offcanvasDarkNavbar {
@@ -383,9 +334,8 @@ input[type="range"]::-moz-range-thumb {
     background-color: #333;
     overflow-y: auto;
     padding: 20px;
-    height: 100%;
+    height: 100%; 
     z-index: 1000;
-
 }
 
 .btn-group {
@@ -400,11 +350,8 @@ input[type="range"]::-moz-range-thumb {
 /*gestion des caractéristiques*/
 .form-switch img {
     height: 40px;
-    /* Hauteur de l'image */
     width: auto;
-    /* Largeur automatique pour conserver les proportions */
     margin-right: 10px;
-    /* Marge à droite pour séparer l'image du texte */
 }
 
 .form-switch {
@@ -467,7 +414,6 @@ input[type="range"]::-moz-range-thumb {
     width: 30px;
     height: 30px;
     margin-right: 5px;
-    /* Espace entre l'image et le texte */
 }
 
 #legendAcci {
@@ -475,10 +421,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /*bouton fonds de carte*/
-#titre-carte,
-#titre-pistes {
+#titre-carte, #titre-pistes{
     border-top: 2px solid #ccc;
-    /* Ligne de séparation */
     margin-top: 25px;
     padding-top: 25px;
 }
@@ -497,9 +441,7 @@ input[type="range"]::-moz-range-thumb {
     background-color: #f0f0f0;
     padding: 0;
     width: 90px;
-    /* Largeur fixe pour chaque bouton */
     height: 90px;
-    /* Hauteur fixe pour chaque bouton */
     display: flex;
     border-radius: 10px;
     flex-direction: column;
@@ -507,12 +449,10 @@ input[type="range"]::-moz-range-thumb {
     justify-content: center;
     cursor: pointer;
     margin-right: 20px;
-    /* Espacement entre chaque bouton (à droite) */
 }
 
 .map-button:last-child {
     margin-right: 0;
-    /* Aucun espacement à droite pour le dernier bouton */
 }
 
 .map-button img {
@@ -525,7 +465,6 @@ input[type="range"]::-moz-range-thumb {
 .button-label {
     position: absolute;
     bottom: 10px;
-    /* Ajustez cette valeur pour le positionnement vertical */
     left: 0;
     right: 0;
     text-align: center;
@@ -537,7 +476,6 @@ input[type="range"]::-moz-range-thumb {
 .button-label-sat {
     position: absolute;
     bottom: 10px;
-    /* Ajustez cette valeur pour le positionnement vertical */
     left: 0;
     right: 0;
     text-align: center;
@@ -546,53 +484,51 @@ input[type="range"]::-moz-range-thumb {
     color: white;
 }
 
-.play {
+/* boutons pour le play/pause/stop de la lecture automatique du curseur temporel */
+.button-container {
     position: absolute;
-    bottom: 56px;
+    bottom: 55px;
     left: 10px;
+    display: flex;
+    align-items: center;
     z-index: 1000;
+}
+
+.play-button, .stop-button, .pause-button {
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.play-button {
     background-color: #007bff;
     border: 2px solid #007bff;
-    border-radius: 20px;
-    padding: 5px px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    z-index: 1000;
 }
 
-.play:hover {
-    background-color: #0056b3;
-    color: #ffffff;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.stop {
-    position: absolute;
-    bottom: 56px;
-    left: 10px;
-    z-index: 1000;
+.stop-button {
     background-color: #eb3d3d;
     border: 2px solid #eb3d3d;
-    border-radius: 20px;
-    padding: 5px px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.stop:hover {
-    background-color: #c60d0d;
-    color: #ffffff;
-    transition: background-color 0.3s ease, color 0.3s ease;
+.pause-button {
+    background-color: #e4f319e9;
+    border: 2px solid #e4f319e9;
 }
 
-img {
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
+.play-button img, .stop-button img, .pause-button img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.play-button:hover, .stop-button:hover, .pause-button:hover {
+    transform: scale(1.1);
 }
 
 .meteo-decale-vers-le-bas {
