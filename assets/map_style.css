@@ -1,14 +1,16 @@
-body{
+/*page*/
+body {
     margin: 0;
     padding: 0;
+
 }
 
 header {
-    background-color: #333; 
-    color: #fff; 
-    padding: 10px; 
-    display: flex; 
-    align-items: center; 
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -84,11 +86,11 @@ ul li {
 
 /* barre de recherche de l'adresse */
 #research_bar {
-    position:absolute;
-    top: 25px; 
+    position: absolute;
+    top: 25px;
     left: 75px;
     margin-left: 5px;
-    align-items: center; 
+    align-items: center;
     z-index: 1000;
 }
 
@@ -102,7 +104,8 @@ ul li {
 }
 
 /*CARTE*/
-#app{
+
+#app {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -122,7 +125,7 @@ ul li {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; 
+    z-index: 0;
 }
 
 /*statistique*/
@@ -180,7 +183,7 @@ ul li {
     width: 90%;
     text-align: center;
     z-index: 1000;
-    left: 50%; 
+    left: 50%;
     transform: translateX(-50%);
 }
 
@@ -224,7 +227,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /*date séléctionée*/
-#date{
+#date {
     margin: auto;
     font-size: 16px;
     color: #0E0E29;
@@ -258,6 +261,18 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 20px;
 }
 
+.checkbox-mois {
+    position: absolute;
+    bottom: 15px;
+    left: 150px;
+    z-index: 1001;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
 /*eclaircie quand inactif*/
 .anDesactive {
     color: #6c757d;
@@ -268,22 +283,23 @@ input[type="range"]::-webkit-slider-thumb {
     height: 10%;
 }
 
-.menu-lateral{
+.menu-lateral {
     display: flex;
     flex-direction: column;
     background-color: #333;
     overflow-y: auto;
-    padding:20px;
+    padding: 20px;
+
 }
 
-.btn-group{
+.btn-group {
     width: 50%;
     margin-bottom: 5px;
     flex-wrap: wrap;
 }
 
-#plan{
-    width:50%;
+#plan {
+    width: 50%;
 }
 
 /*eclaircie quand inactif*/
@@ -292,15 +308,15 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /*BANDEAU LATERAL*/
-.offcanvas-header{
+.offcanvas-header {
     height: 10%;
 }
 
 .navbar-dark{
     top: 15px; 
     left: 5px;
-    position:absolute;
-    z-index:1000;
+    position: absolute;
+    z-index: 1000;
 }
 
 .navbar-toggler {
@@ -309,10 +325,10 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #offcanvasDarkNavbar {
-    width: 30%; 
+    width: 30%;
 }
 
-.menu-lateral{
+.menu-lateral {
     display: flex;
     flex-direction: column;
     background-color: #333;
@@ -322,13 +338,13 @@ input[type="range"]::-webkit-slider-thumb {
     z-index: 1000;
 }
 
-.btn-group{
+.btn-group {
     width: 50%;
     margin-bottom: 5px;
 }
 
-#plan{
-    width:50%;
+#plan {
+    width: 50%;
 }
 
 /*gestion des caractéristiques*/
@@ -353,13 +369,13 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .form-switch .droite {
-    margin-left: auto; 
+    margin-left: auto;
 }
 
 .dropdown-menu {
-    min-width: auto !important;   
+    min-width: auto !important;
     width: max-content !important;
-    z-index :1000;
+    z-index: 1000;
 }
 
 .dropdown-item {
@@ -372,7 +388,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /*legende*/
-.legend{
+.legend {
     top: 10px;
     right: 10px;
     background-color: white;
@@ -388,7 +404,7 @@ input[type="range"]::-webkit-slider-thumb {
     vertical-align: middle;
 }
 
-#legend{
+#legend {
     margin-top: 10px;
     padding-top: 10px;
 }
