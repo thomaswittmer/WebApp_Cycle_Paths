@@ -2,15 +2,12 @@
 body{
     margin: 0;
     padding: 0;
- 
 }
-
-
 
 /*barre de recherche*/
 #research_bar {
     position:absolute;
-    top: 25px; 
+    top: 20px; 
     left: 75px;
     margin-left: 5px;
     align-items: center; 
@@ -19,44 +16,40 @@ body{
 
 #research_input[type="text"] {
     align-items: center;
-    padding: 8px; /* Espacement intérieur */
-    border: none; /* Pas de bordure */
-    border-radius: 5px; /* Coins arrondis */
-    margin-right: 5px; /* Espacement à droite */
-    font-size: 16px; /* Taille de la police */
+    padding: 8px; 
+    border: none; 
+    border-radius: 5px;
+    margin-right: 5px; 
+    font-size: 16px; 
 }
 
-
-/*CARTE*/
 
 #app{
     margin: 0;
     padding: 0;
     height: 100%;
-    display: flex;
-    
+    display: flex;  
 }
 
 .carte {
     height: 100%;
     width: 100%;
     margin: 0;
-    padding: 0;
-    
+    padding: 0;  
 }
 
+/*CARTE*/
 #map {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     height: 100%;
     z-index: 0; 
 }
 
+
 /*statistique*/
-
-
 #image-overlay {
     position: absolute;
     top: 50%;
@@ -102,11 +95,9 @@ body{
     height: 100%;
     margin: 0;
     padding: 0;
-
 }
 
 /*GESTION TEMPORALITE*/
-
 /*curseur temporel*/
 .curseur-date {
     position: absolute;
@@ -169,7 +160,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /*GESTION TEMPORALITE*/
-
 /*curseur temporel*/
 .curseur-date {
     position: absolute;
@@ -210,60 +200,10 @@ input[type="range"]::-moz-range-thumb {
     border: none;
 }
 
-/*date séléctionée*/
-#date{
-    margin:auto;
-    font-size: 16px;
-    color: #0E0E29;
-    padding: 10px;
-    border-radius: 5px;
-    width:20%;
-    background-color:rgba(255, 255, 255, 0.5);
-}
-
-
-/*checkbox*/
-.checkbox-date {
-    position: absolute;
-    bottom: 15px; 
-    left: 10px; 
-    z-index: 1000; 
-    background-color: white; 
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
 
 /*eclaircie quand inactif*/
 .anDesactive {
     color: #6c757d;
-}
-
-
-
-/*BANDEAU LATERAL*/
-/*.btn-close{
-    position: absolute;
-    top: 10px; /* Ajustez selon vos besoins 
-    right: 10px;
-}*/
-.offcanvas-header{
-    height: 10%;
-}
-
-.menu-lateral{
-    display: flex;
-    flex-direction: column;
-    background-color: #333;
-    overflow-y: auto;
-    padding:20px;
-    
-}
-
-.btn-group{
-    width: 50%;
-    margin-bottom: 5px;
-    flex-wrap: wrap;
 }
 
 #plan{
@@ -283,52 +223,35 @@ input[type="range"]::-moz-range-thumb {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/*eclaircie quand inactif*/
-.anDesactive {
-    color: #6c757d;
-}
-
 /*BANDEAU LATERAL*/
 .offcanvas-header{
     height: 10%;
 }
 
-
-.navbar-dark{
-    top: 15px; 
-    left: 5px;
+.btn-lateral { 
+    top: 20px; 
+    left: 15px;
     position:absolute;
-    z-index:1000;
 }
 
-.navbar-toggler {
-    color: #030257; /* Choisissez votre couleur préférée */
-    background-color: rgb(35, 115, 140); /* Couleur de fond du bouton */
-    border-color: blue; /* Couleur de la bordure du bouton */
+
+.offcanvas-start {
+    width: 100%; 
+    height: 100%; 
+    left: -30%;  
 }
 
-#offcanvasDarkNavbar {
-    width: 30%; 
-}
 
-.menu-lateral{
+#barre-laterale{
     display: flex;
     flex-direction: column;
-    background-color: #333;
-    overflow-y: auto;
-    padding:20px;
     height: 100%; 
-    z-index: 1000;
-    
+    width:100%;
 }
 
 .btn-group{
     width: 50%;
     margin-bottom: 5px;
-}
-
-#plan{
-    width:50%;
 }
 
 /*gestion des caractéristiques*/
@@ -406,7 +329,7 @@ input[type="range"]::-moz-range-thumb {
 
 /*bouton fonds de carte*/
 #titre-carte, #titre-pistes{
-    border-top: 2px solid #ccc; /* Ligne de séparation */
+    border-top: 2px solid #ccc; 
     margin-top: 25px;
     padding-top: 25px;
 }

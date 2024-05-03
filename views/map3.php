@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>SAFELANE</title>
     <link rel="icon" type="image/png" href="/assets/images/icon_safelane_carre.png" sizes="32x32 64x64 128x128">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,8 +25,6 @@
     <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.js" crossorigin=""></script>
 </head>
 <body>
-    <a href="/"><img src="/assets/images/safelane_carre.png" alt="Logo" class="header-image"></a>
-    <h1>SAFELANE</h1>
 
     <div id=app>
         <div class="carte">
@@ -62,480 +61,239 @@
                     <p id="date"><strong>Date sélectionnée : {{ selectedYear }}</strong></p>
                 </div>
 
-                <!--<nav class="navbar navbar-dark" >
-                    <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" style="order: -1;">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-        
-                        <!--<div class = "menu-lateral">-->
-                            <!--<div class="offcanvas-header">
-                                <h2 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Paramètres</h2>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            </div>
-
-                        <!-- Choix des paramètres -->
-                            <!--<div class = "menu-lateral">
-
-                        <!-- LUMINOSITE -->
-                           <!-- <div class="boutons-barre">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Luminosité
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <form>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Plein jour.png" alt="Plein jour">
-                                                    Plein jour
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked>
-                                                </div>
-                                            </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Crépuscule ou aube.png" alt="Crépuscule ou aube">
-                                                    Crépuscule ou aube
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
-                                                </div>
-                                            </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
-                                                    Nuit sans éclairage public
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
-                                                </div>
-                                            </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
-                                                    Nuit avec éclairage public non allumé
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
-                                                </div>
-                                            </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
-                                                    Nuit avec éclairage public allumé
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
-                                                </div>
-                                            </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            <!-- METEO -->
-                            <!--<div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Météo
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <form>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Temps éblouissant.png" alt="Temps éblouissant">
-                                                Temps éblouissant
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Temps éblouissant" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Brouillard - fumée.png" alt="Brouillard - fumée">
-                                                Brouillard - fumée
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Brouillard - fumée" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Neige - grêle.png" alt="Neige - grêle">
-                                                Neige - grêle
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Neige - grêle" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Vent fort - tempête.png" alt="Vent fort - tempête">
-                                                Vent fort - tempête
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Vent fort - tempête" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Pluie légère.png" alt="Pluie légère">
-                                                Pluie légère
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Pluie légère" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Pluie forte.png" alt="Pluie forte">
-                                                Pluie forte
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Pluie forte" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Temps couvert.png" alt="Temps couvert">
-                                                Temps couvert
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Temps couvert" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Normale.png" alt="Normale">
-                                                Normale
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Normale" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Autre.png" alt="Autre">
-                                                Autre
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Autre" checked>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            
-
-                            <!-- CARACTERISTIQUES -->
-                            <!--<div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Caractéristiques
-                                </button>
-                                <div class="dropdown-menu">
-                                    <form>
-                                        <option class="dropdown-item caractere" value="int">Type d'intersection</option>
-                                        <option class="dropdown-item caractere" value="col">Type de collision</option>
-                                        <option class="dropdown-item caractere" value="surf">Etat de la route</option>
-                                        <option class="dropdown-item caractere" value="infra">Infrastructure de la route</option>
-                                        <option class="dropdown-item caractere" value="catv">Catégorie du véhicule</option>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="btn-group">
-                                <button id="stat" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <!--<span class="visually-hidden">Toggle Dropdown</span>-->
-                                <!--Statistiques 
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
-                                    <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_intersection.png')">Type d'intersection</a></li>
-                                    <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_surface.png')">Type de surface</a></li>
-                                    <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_luminosite.png')">Type de luminosité</a></li>
-                                    <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_collision.png')">Type de collision</a></li>
-                                </ul>
-                            </div>
-
-                            
-
-                            <!-- COUCHES PISTES -->
-                            <!--<h3 id="titre-pistes">Couches voies cyclables</h3>
-
-                            <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
-
-                            <div id="legend">
-                            <h4>Légende</h4>
-                                <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
-                                <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
-                                <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
-                                <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
-                                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
-                            </div>
-
-
-                        <div id="legendAcci"></div>
-
-                        
-                        <!-- FOND DE CARTE -->
-                        <!--<h3 id="titre-carte">Fond de carte</h3>
-                        <div class="button-container-fond">
-                            <button id="btnSatellite" class="map-button">
-                                <img src="assets/images/fond_aerien_paris.png" alt="Vue satellite">
-                                <span class="button-label-sat">Vue satellite</span>
-                            </button>
-                            <button id="btnTopographic" class="map-button">
-                                <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
-                                <span class="button-label">Vue topologique</span>
-                            </button>
-                            <button id="btnDefault" class="map-button">
-                                <img src="assets/images/fond_routier_paris.png" alt="Vue routière">
-                                <span class="button-label">Vue routière</span>
-                            </button>
-                        </div>
-                </div>
-            </div>
-        </div>
-    </nav>-->
-
 
             </div><!--map-->
-            <nav class="navbar navbar-dark" >
-                    <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" style="order: -1;">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
 
-                        <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         
-                        <!--<div class = "menu-lateral">-->
-                            <div class="offcanvas-header">
-                                <h2 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Paramètres</h2>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            </div>
 
-                        <!-- Choix des paramètres -->
-                            <div class = "menu-lateral">
+            <button class="btn btn-secondary btn-lateral" id ="btn-lateral" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="offcanvas offcanvas-start"  data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Paramètres</h5>
+                    <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+
+                    <div id= "barre-laterale">
 
                         <!-- LUMINOSITE -->
-                           <div class="boutons-barre">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Luminosité
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <form>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Plein jour.png" alt="Plein jour">
-                                                    Plein jour
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked>
-                                                </div>
-                                            </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Crépuscule ou aube.png" alt="Crépuscule ou aube">
-                                                    Crépuscule ou aube
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
-                                                </div>
-                                            </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
-                                                    Nuit sans éclairage public
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
-                                                </div>
-                                            </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
-                                                    Nuit avec éclairage public non allumé
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
-                                                </div>
-                                            </div>
-                                            <div class="form-switch lum mx-2">
-                                                <div class="gauche">
-                                                    <img src="../assets/images/icones/lum/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
-                                                    Nuit avec éclairage public allumé
-                                                </div>
-                                                <div class="droite">
-                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
-                                                </div>
-                                            </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            <!-- METEO -->
+                        <div class="boutons-barre">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Météo
+                                    Luminosité
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <form>
-                                        <div class="form-switch atm mx-2">
+                                        <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Temps éblouissant.png" alt="Temps éblouissant">
-                                                Temps éblouissant
+                                                <img src="../assets/images/icones/lum/Plein jour.png" alt="Plein jour">
+                                                Plein jour
                                             </div>
                                             <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Temps éblouissant" checked>
+                                                <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked>
                                             </div>
                                         </div>
-                                        <div class="form-switch atm mx-2">
+                                        <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Brouillard - fumée.png" alt="Brouillard - fumée">
-                                                Brouillard - fumée
+                                                <img src="../assets/images/icones/lum/Crépuscule ou aube.png" alt="Crépuscule ou aube">
+                                                Crépuscule ou aube
                                             </div>
                                             <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Brouillard - fumée" checked>
+                                                <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
                                             </div>
                                         </div>
-                                        <div class="form-switch atm mx-2">
+                                        <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Neige - grêle.png" alt="Neige - grêle">
-                                                Neige - grêle
+                                                <img src="../assets/images/icones/lum/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
+                                                Nuit sans éclairage public
                                             </div>
                                             <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Neige - grêle" checked>
+                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
                                             </div>
                                         </div>
-                                        <div class="form-switch atm mx-2">
+                                        <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Vent fort - tempête.png" alt="Vent fort - tempête">
-                                                Vent fort - tempête
+                                                <img src="../assets/images/icones/lum/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
+                                                Nuit avec éclairage public non allumé
                                             </div>
                                             <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Vent fort - tempête" checked>
+                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
                                             </div>
                                         </div>
-                                        <div class="form-switch atm mx-2">
+                                        <div class="form-switch lum mx-2">
                                             <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Pluie légère.png" alt="Pluie légère">
-                                                Pluie légère
+                                                <img src="../assets/images/icones/lum/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
+                                                Nuit avec éclairage public allumé
                                             </div>
                                             <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Pluie légère" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Pluie forte.png" alt="Pluie forte">
-                                                Pluie forte
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Pluie forte" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Temps couvert.png" alt="Temps couvert">
-                                                Temps couvert
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Temps couvert" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Normale.png" alt="Normale">
-                                                Normale
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Normale" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch atm mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/atm/Autre.png" alt="Autre">
-                                                Autre
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Autre" checked>
+                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            
-
-                            <!-- CARACTERISTIQUES -->
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Caractéristiques
-                                </button>
-                                <div class="dropdown-menu">
-                                    <form>
-                                        <option class="dropdown-item caractere" value="int">Type d'intersection</option>
-                                        <option class="dropdown-item caractere" value="col">Type de collision</option>
-                                        <option class="dropdown-item caractere" value="surf">Etat de la route</option>
-                                        <option class="dropdown-item caractere" value="infra">Infrastructure de la route</option>
-                                        <option class="dropdown-item caractere" value="catv">Catégorie du véhicule</option>
-                                    </form>
-                                </div>
+                        </div>
+                        
+                        <!-- METEO -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Météo
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <form>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/atm/Temps éblouissant.png" alt="Temps éblouissant">
+                                            Temps éblouissant
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Temps éblouissant" checked>
+                                        </div>
+                                    </div>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/atm/Brouillard - fumée.png" alt="Brouillard - fumée">
+                                            Brouillard - fumée
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Brouillard - fumée" checked>
+                                        </div>
+                                    </div>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/atm/Neige - grêle.png" alt="Neige - grêle">
+                                            Neige - grêle
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Neige - grêle" checked>
+                                        </div>
+                                    </div>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/atm/Vent fort - tempête.png" alt="Vent fort - tempête">
+                                            Vent fort - tempête
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Vent fort - tempête" checked>
+                                        </div>
+                                    </div>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/atm/Pluie légère.png" alt="Pluie légère">
+                                            Pluie légère
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Pluie légère" checked>
+                                        </div>
+                                    </div>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/atm/Pluie forte.png" alt="Pluie forte">
+                                            Pluie forte
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Pluie forte" checked>
+                                        </div>
+                                    </div>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/atm/Temps couvert.png" alt="Temps couvert">
+                                            Temps couvert
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Temps couvert" checked>
+                                        </div>
+                                    </div>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/atm/Normale.png" alt="Normale">
+                                            Normale
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Normale" checked>
+                                        </div>
+                                    </div>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/atm/Autre.png" alt="Autre">
+                                            Autre
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Autre" checked>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
+                        </div>
 
-                            <div class="btn-group">
-                                <button id="stat" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <!--<span class="visually-hidden">Toggle Dropdown</span>-->
+                        <!-- CARACTERISTIQUES -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Caractéristiques
+                            </button>
+                            <div class="dropdown-menu">
+                            <form>
+                                <option class="dropdown-item caractere" value="int">Type d'intersection</option>
+                                <option class="dropdown-item caractere" value="col">Type de collision</option>
+                                <option class="dropdown-item caractere" value="surf">Etat de la route</option>
+                                <option class="dropdown-item caractere" value="infra">Infrastructure de la route</option>
+                                <option class="dropdown-item caractere" value="catv">Catégorie du véhicule</option>
+                            </form>
+                            </div>
+                        </div>
+
+                        <!-- STATISTIQUES-->
+                        <div class="btn-group">
+                            <button id="stat" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 Statistiques 
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
-                                    <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_intersection.png')">Type d'intersection</a></li>
-                                    <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_surface.png')">Type de surface</a></li>
-                                    <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_luminosite.png')">Type de luminosité</a></li>
-                                    <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_collision.png')">Type de collision</a></li>
-                                </ul>
-                            </div>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_intersection.png')">Type d'intersection</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_surface.png')">Type de surface</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_luminosite.png')">Type de luminosité</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_collision.png')">Type de collision</a></li>
+                            </ul>
+                        </div>
 
-                            
+                        <!-- COUCHES PISTES -->
+                        <h3 id="titre-pistes">Couches voies cyclables</h3>
 
-                            <!-- COUCHES PISTES -->
-                            <h3 id="titre-pistes">Couches voies cyclables</h3>
+                        <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
 
-                            <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
-
-                            <div id="legend">
-                            <h4>Légende</h4>
-                                <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
-                                <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
-                                <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
-                                <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
-                                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
-                            </div>
+                        <div id="legend">
+                        <h4>Légende</h4>
+                            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
+                            <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
+                            <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
+                            <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
+                            <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
+                        </div>
 
 
                         <div id="legendAcci"></div>
 
-                        
+
                         <!-- FOND DE CARTE -->
                         <h3 id="titre-carte">Fond de carte</h3>
                         <div class="button-container-fond">
-                            <button id="btnSatellite" class="map-button">
-                                <img src="assets/images/fond_aerien_paris.png" alt="Vue satellite">
-                                <span class="button-label-sat">Vue satellite</span>
-                            </button>
-                            <button id="btnTopographic" class="map-button">
-                                <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
-                                <span class="button-label">Vue topologique</span>
-                            </button>
-                            <button id="btnDefault" class="map-button">
-                                <img src="assets/images/fond_routier_paris.png" alt="Vue routière">
-                                <span class="button-label">Vue routière</span>
-                            </button>
+                        <button id="btnSatellite" class="map-button">
+                            <img src="assets/images/fond_aerien_paris.png" alt="Vue satellite">
+                            <span class="button-label-sat">Vue satellite</span>
+                        </button>
+                        <button id="btnTopographic" class="map-button">
+                            <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
+                            <span class="button-label">Vue topologique</span>
+                        </button>
+                        <button id="btnDefault" class="map-button">
+                            <img src="assets/images/fond_routier_paris.png" alt="Vue routière">
+                            <span class="button-label">Vue routière</span>
+                        </button>
                         </div>
 
                         <!-- AFFICHAGE CLUSTERS -->
@@ -553,9 +311,9 @@
                                 </div>
                             </form>
                         </div>
+                    </div> <!--barre-laterale-->
+                </div>
             </div>
-        </div>
-    </nav>
         </div><!--carte-->
     
         

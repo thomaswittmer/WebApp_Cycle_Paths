@@ -435,9 +435,28 @@ var defaultLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(this.map);
 
+// Gestion petite et grande carte
+const sidebar = document.getElementById('offcanvasScrolling');
+const map2 = document.getElementById('map');
+
+function toggleSidebar() {
+    sidebar.style.left = '0';
+    sidebar.style.width = '30%';
+    map2.style.width = '70%'; 
+}
+
+function closeSidebar() {
+    sidebar.style.left = '-30%'; 
+    map2.style.width = '100%'; 
+  }
+
+// Écouteur d'événement pour le clic sur un bouton par exemple
+document.getElementById('btn-lateral').addEventListener('click', toggleSidebar);
+document.getElementById('btn-close').addEventListener('click', closeSidebar);
+
+
 
 //la barre de recherche des adresses
-
 // test ESRI 
 const api = "AAPK07603a779b2f4f9dab2e28dc9fde0f05IJ2S4Lh8g5-lGWF4WEkWb1aRCDmpSK4NEfHQdWICq1wU-r9GM1MLdWTUL_qxj0xt";
 const geocoder = L.esri.Geocoding.geocodeService({
@@ -572,7 +591,6 @@ function closeImageOverlay() {
 document.getElementById('image-overlay').style.display = 'none';
 
 
-
 // Ajouter d'autres couches de tuiles pour différentes vues
 var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
 var topographicLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
@@ -597,6 +615,7 @@ document.addEventListener('DOMContentLoaded', function() {
         map.removeLayer(topographicLayer);
         map.addLayer(defaultLayer);
     };
+
 
 
 });
