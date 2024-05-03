@@ -537,7 +537,7 @@ input[type="range"]::-webkit-slider-thumb {
     left: 10px;
     display: flex;
     align-items: center;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .play-button,

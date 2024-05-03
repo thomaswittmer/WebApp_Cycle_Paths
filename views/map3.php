@@ -321,21 +321,21 @@
                         <!-- COUCHES PISTES -->
                         <h3 id="titre-pistes">Couches voies cyclables</h3>
 
-                        <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
+                        <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2021-2026</button>
 
                         <div id="legend">
                             <h4>Légende</h4>
-                            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
-                            <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
-                            <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
-                            <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
-                            <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
+                            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> Piste cyclable</div>
+                            <div><span class="legend-color" style="background-color: #63DE6E;"></span> Voie verte / aménagement mixte</div>
+                            <div><span class="legend-color" style="background-color: #EC1DD0;"></span> Couloir bus + vélo</div>
+                            <div><span class="legend-color" style="background-color: #4DC0EF;"></span> Bande cyclable</div>
+                            <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> Voie mixte</div>
                         </div>
 
                         <div id="legendAcci"></div>
 
                         <!-- FOND DE CARTE -->
-                        <h3 id="titre-carte">Fond de carte</h3>
+                        <h3 id="titre-carte">Fonds de carte</h3>
                         <div class="button-container-fond">
                             <!-- Première ligne de boutons -->
                             <div class="button-row">
