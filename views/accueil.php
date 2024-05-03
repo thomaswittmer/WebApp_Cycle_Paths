@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="/assets/images/safelane_carre.png" height=200px><br>
+        <img id="logo" src="/assets/images/safelane_carre.png"><br>
         <h1>Bienvenue sur l'application SAFELANE</h1><br>
 
         <p>Une application web a été développée pour répondre à l'augmentation des accidents de vélo à Paris entre 2016 et 2022 
