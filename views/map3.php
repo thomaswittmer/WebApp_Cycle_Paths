@@ -23,14 +23,581 @@
     <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.css" crossorigin="" />
     <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.js" crossorigin=""></script>
+    <style>
+        /*page*/
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.logo-head {
+    width: 40px;
+    height: auto;
+    position:absolute;
+    top: 23px; 
+    left: 75px;
+    margin-left: 5px;
+    align-items: center; 
+    z-index: 1000;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin: 0;
+    margin-left: 5px;
+    font-family: 'Zen Dots';
+    font-size: 32px;
+}
+
+.header-image {
+    width: 90%;
+    height: auto;
+    margin-left: -10px;
+}
+
+/* bouton information pour lire les fonctionnalités */
+.button-container-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 30px;
+    position: relative;
+}
+
+.bouton-info {
+    display: block;
+    width: 25px;
+    height: auto;
+    position: absolute;
+    top: -13px;
+    right: 30px;
+}
+
+ul {
+    text-align: left;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+ul li {
+    font-family: Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    padding-top: 100px;
+}
+
+.popup-content {
+    background-color: #fff;
+    border: 3px solid #0F1A29;
+    color: black;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #DC3545;
+    color: white;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* barre de recherche de l'adresse */
+#research_bar {
+    position:absolute;
+    top: 25px; 
+    left: 120px;
+    margin-left: 5px;
+    align-items: center;
+    z-index: 1000;
+}
+
+#research_input[type="text"] {
+    align-items: center;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+/*CARTE*/
+
+#app {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+}
+
+.carte {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/*CARTE*/
+#map {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+
+/*statistique*/
+#image-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#image-overlay img {
+    max-width: 100%;
+    max-height: 60vh;
+    width: auto;
+    height: auto;
+}
+
+.close-button {
+    cursor: pointer;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #DC3545;
+    color: white;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* BOUTON 3D*/
+#cesiumContainer {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/*GESTION TEMPORALITE*/
+/*curseur temporel*/
+.curseur-date {
+    position: absolute;
+    bottom: 20px;
+    width: 90%;
+    text-align: center;
+    z-index: 1000;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#dateSlider {
+    width: 100%; 
+    bottom : 10px;
+    margin-bottom: 15px;
+    z-index: 1000;
+    border-radius: 10px;
+}
+
+/*point du curseur tentative logo*/
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    background: #0F1A29;
+}
+
+
+input[type="range"]::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    background: url('../assets/images/icon_safelane.png') center center no-repeat; 
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    background: url('../assets/images/icon_safelane.png') center center no-repeat; 
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+}
+
+
+
+/*date séléctionée*/
+#date {
+    margin: auto;
+    margin-top:15px;
+    font-size: 15px;
+    color: #0E0E29;
+    padding: 5px;
+    border-radius: 5px;
+    width: 40%;
+    background-color:rgba(255, 255, 255, 0.5);
+}
+
+/*checkbox*/
+.checkbox-date {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    z-index: 1001;
+    background-color: white;
+    margin-left:5px;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-date input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+
+.checkbox-mois {
+    position: absolute;
+    bottom: 20px;
+    right: 150px;
+    z-index: 1001;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-mois label {
+    font-size: 20px;
+}
+
+.checkbox-mois input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+
+/*eclaircie quand inactif*/
+.anDesactive {
+    color: #6c757d;
+}
+
+#plan{
+    width:50%;
+}
+
+/*BANDEAU LATERAL*/
+.offcanvas-header {
+    height: 10%;
+    position: relative;
+}
+
+.btn-lateral { 
+    top: 20px; 
+    left: 15px;
+    position:absolute;
+    z-index: 1000;
+}
+
+
+.offcanvas-start {
+    width: 100%; 
+    height: 100%; 
+    left: -30%;  
+}
+
+
+#barre-laterale{
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    width:100%;
+}
+
+.btn-group {
+    width: 50%;
+    margin-bottom: 5px;
+}
+
+/*gestion des caractéristiques*/
+.form-switch img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.form-switch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-switch input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+.form-switch .gauche {
+    margin-right: 10px;
+}
+
+.form-switch .droite {
+    margin-left: auto;
+}
+
+.dropdown-menu {
+    min-width: auto !important;
+    width: max-content !important;
+    z-index: 1000;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+/* eclaircie bouton plan velo*/
+.clique {
+    opacity: 0.5;
+}
+
+/*legende*/
+.legend {
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+#legend {
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+/* Styles CSS pour les images de légende */
+.legend-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+#legendAcci {
+    margin-top: 20px;
+}
+
+/*bouton fonds de carte*/
+#titre-carte, #titre-pistes{
+    border-top: 2px solid #ccc; 
+    margin-top: 25px;
+    padding-top: 25px;
+}
+
+.button-container-fond {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.map-button {
+    position: relative;
+    border: none;
+    background-color: #f0f0f0;
+    padding: 0;
+    width: 150px;
+    height: 90px;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid #0F1A29;
+}
+
+.map-button:last-child {
+    margin-right: 0;
+}
+
+.map-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.button-label {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #0F1A29;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+}
+
+.button-label-sat {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-shadow: -1px -1px 0 #0F1A29, 1px -1px 0 #0F1A29, -1px 1px 0 #0F1A29, 1px 1px 0 #0F1A29;
+}
+
+/* boutons pour le play/pause/stop de la lecture automatique du curseur temporel */
+.button-container {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.play-button, .stop-button, .pause-button {
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 5px;
+    left: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.play-button {
+    background-color: #0F1A29;
+    border: 2px solid #0F1A29;
+}
+
+.stop-button {
+    background-color: #eb3d3d;
+    border: 2px solid #eb3d3d;
+}
+
+.pause-button {
+    background-color: #e4f319e9;
+    border: 2px solid #e4f319e9;
+}
+
+.play-button img, .stop-button img, .pause-button img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.play-button:hover, .stop-button:hover, .pause-button:hover {
+    transform: scale(1.1);
+}
+
+.meteo-decale-vers-le-bas {
+    margin-top: 260px;
+    transition: margin-top 0.3s ease;
+}
+
+.carac-decale-vers-le-bas {
+    margin-top: 420px;
+    transition: margin-top 0.3s ease;
+}
+
+
+
+</style>
 
 </head>
+
 <body>
     <div id=app>
         <div class="carte">
             <!--<div id="cesiumContainer"></div> -->
             <!-- curseur temporel -->
             <div id="map">
+                <a href="/"><img src="/assets/images/safelane_carre.png" alt="logo" class="logo-head"></a>
                 <!-- barre recherche-->
                 <div id="research_bar">
                     <input class="form-control me-2" type="search" id="research_input" name="pacViewPlace" placeholder="Entrez un lieu..." aria-label="Search">
@@ -51,13 +618,14 @@
 
                 <!-- coche pour avoir un curseur selon mois et année -->
                 <div class="checkbox-mois">
-                    <input class="form-check-input mr-2" type="checkbox" v-model="moisChecked" @change="annule_annee"> Curseur par mois <br> 
+                    <input class="form-check-input mr-2" type="checkbox" v-model="moisChecked" @change="annule_annee">  
+                    <span> Curseur par mois </span>
                 </div>
 
                 <!-- Bouton play pour la lecture automatique-->
                 <div class="button-container">
                     <button v-if="!isAutoPlaying" @click="startAutoPlay()" class="play-button">
-                        <img src="assets/images/play.svg" alt="Lecture automatique">
+                        <img src="assets/images/play.png" alt="Lecture automatique">
                     </button>
                     <button v-if="isAutoPlaying" @click="stopAutoPlay()" class="stop-button">
                         <img src="assets/images/stop.svg" alt="Arrêter la lecture automatique">
@@ -68,24 +636,25 @@
                 </div>
 
                 <!-- curseur temporel -->
-                <div v-if="moisChecked" class="curseur-date">
-                    <input type="range" min="0" max="83" v-model="selectedMonth" id="dateSlider" @change="cherche_mois_annee">
-                    <p id="date"><strong>Date sélectionnée : {{ formattedDate }}</strong></p>
+                <div id="dateSlider">
+                    <div v-if="moisChecked" class="curseur-date">
+                        <input type="range" min="0" max="83" v-model="selectedMonth"  @change="cherche_mois_annee">
+                        <p id="date"><strong>Date sélectionnée : {{ formattedDate }}</strong></p>
+                    </div>
+                    <div v-if="!moisChecked" class="curseur-date">
+                        <input type="range" min="2016" max="2022" v-model="selectedYear"  @change="cherche_annee">
+                        <p id="date"><strong>Date sélectionnée : {{ selectedYear }}</strong></p>
+                    </div>
                 </div>
-                <div v-if="!moisChecked" class="curseur-date">
-                    <input type="range" min="2016" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
-                    <p id="date"><strong>Date sélectionnée : {{ selectedYear }}</strong></p>
-                </div>
-
 
             </div><!--map-->
 
-            <button class="btn btn-secondary btn-lateral" id ="btn-lateral" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+            <button class="btn btn-secondary btn-lateral" id="btn-lateral" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
 
-            <div class="offcanvas offcanvas-start"  data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                 <div class="offcanvas-header">
                     <a href="/"><img src="/assets/images/param_safelane.png" alt="logo" class="header-image"></a>
                     <a id="infoButton"><img src="/assets/images/bouton_info.png" alt="info" class="bouton-info"></a>
@@ -111,7 +680,7 @@
 
                 <div class="offcanvas-body">
 
-                    <div id= "barre-laterale">
+                    <div id="barre-laterale">
 
                         <!-- LUMINOSITE -->
                         <div class="boutons-barre">
@@ -121,6 +690,17 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <form>
+                                        <div class="form-switch lum mx-2">
+                                            <div class="gauche">
+                                                Visualiser sur la carte
+                                            </div>
+                                            <div class="droite all">
+                                                <input class="form-check-input mr-2" type="checkbox" value="lum">
+                                            </div>
+                                        </div>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
                                         <div class="form-switch lum mx-2">
                                             <div class="gauche">
                                                 <img src="../assets/images/icones/lum/Plein jour.png" alt="Plein jour">
@@ -170,7 +750,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- METEO -->
                         <div class="btn-group meteo">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
@@ -178,6 +758,14 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <form>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            Visualiser sur la carte
+                                        </div>
+                                        <div class="droite all">
+                                            <input class="form-check-input mr-2" type="checkbox" value="atm">
+                                        </div>
+                                    </div>
                                     <div class="form-switch atm mx-2">
                                         <div class="gauche">
                                             <img src="../assets/images/icones/atm/Temps éblouissant.png" alt="Temps éblouissant">
@@ -269,20 +857,20 @@
                                 Caractéristiques
                             </button>
                             <div class="dropdown-menu">
-                            <form>
-                                <option class="dropdown-item caractere" value="int">Type d'intersection</option>
-                                <option class="dropdown-item caractere" value="col">Type de collision</option>
-                                <option class="dropdown-item caractere" value="surf">Etat de la route</option>
-                                <option class="dropdown-item caractere" value="infra">Infrastructure de la route</option>
-                                <option class="dropdown-item caractere" value="catv">Catégorie du véhicule</option>
-                            </form>
+                                <form>
+                                    <option class="dropdown-item caractere" value="int">Type d'intersection</option>
+                                    <option class="dropdown-item caractere" value="col">Type de collision</option>
+                                    <option class="dropdown-item caractere" value="surf">Etat de la route</option>
+                                    <option class="dropdown-item caractere" value="infra">Infrastructure de la route</option>
+                                    <option class="dropdown-item caractere" value="catv">Catégorie du véhicule</option>
+                                </form>
                             </div>
                         </div>
 
                         <!-- STATISTIQUES-->
                         <div class="btn-group">
                             <button id="stat" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                Statistiques 
+                                Statistiques
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
@@ -312,19 +900,30 @@
                         <!-- FOND DE CARTE -->
                         <h3 id="titre-carte">Fond de carte</h3>
                         <div class="button-container-fond">
-                            <button id="btnSatellite" class="map-button">
-                                <img src="assets/images/fond_aerien_paris.png" alt="Vue satellite">
-                                <span class="button-label-sat">Vue satellite</span>
-                            </button>
-                            <button id="btnTopographic" class="map-button">
-                                <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
-                                <span class="button-label">Vue topologique</span>
-                            </button>
-                            <button id="btnDefault" class="map-button">
-                                <img src="assets/images/fond_routier_paris.png" alt="Vue routière">
-                                <span class="button-label">Vue routière</span>
-                            </button>
+                            <!-- Première ligne de boutons -->
+                            <div class="button-row">
+                                <button id="btnSatellite" class="map-button">
+                                    <img src="assets/images/fond_aerien_paris.png" alt="Vue satellite">
+                                    <span class="button-label-sat">Vue satellite</span>
+                                </button>
+                                <button id="btnTopographic" class="map-button">
+                                    <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
+                                    <span class="button-label">Vue topologique</span>
+                                </button>
+                            </div>
+                            <!-- Deuxième ligne de boutons -->
+                            <div class="button-row">
+                                <button id="btnOpenStreetMap" class="map-button">
+                                    <img src="assets/images/fond_routier_paris.png" alt="Vue OpenStreetMap">
+                                    <span class="button-label">Vue OpenStreetMap</span>
+                                </button>
+                                <button id="btnDefault" class="map-button">
+                                    <img src="assets/images/fond_gris_clair.png" alt="Vue routière">
+                                    <span class="button-label">Vue base gris clair</span>
+                                </button>
+                            </div>
                         </div>
+
 
                         <!-- AFFICHAGE ACCIDENTS -->
                         <h3 id="titre-carte">Affichage des accidents</h3>

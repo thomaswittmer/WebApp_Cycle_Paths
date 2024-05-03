@@ -63,7 +63,7 @@ let app = Vue.createApp({
                 else {
                     let currentYear = parseInt(this.selectedYear);
                     if (currentYear < 2022) {
-                        this.selectedYear = (currentYear +1).toString();
+                        this.selectedYear = (currentYear + 1).toString();
                         this.cherche_annee();
                     }
                     else {
@@ -125,8 +125,8 @@ let app = Vue.createApp({
         cherche_mois_annee() {
             this.caseChecked = false;
             this.caseDisabled = false;
-            let year = Math.trunc(this.selectedMonth/12) + 2016 ;
-            let month = this.selectedMonth - (year-2016)*12 + 1;
+            let year = Math.trunc(this.selectedMonth / 12) + 2016;
+            let month = this.selectedMonth - (year - 2016) * 12 + 1;
 
             acci_anneeSelect = accidents.features.filter(feature => {
                 let annee = feature.properties.an;
@@ -154,7 +154,7 @@ let app = Vue.createApp({
         },
 
         annule_annee() {
-            this.selectedYear='2016-2022';
+            this.selectedYear = '2016-2022';
             this.caseDisabled = true;
             this.selectedMonth = '';
             this.caseChecked = true;
@@ -173,16 +173,24 @@ let app = Vue.createApp({
 
             // Création de la nouvelle couche des accidents et affichage sur la carte
             acciLayer = creeCoucheAccidents(acci_select).addTo(map);
-        }
+
+            
+
+        },
+        
     }
 
 }).mount('#app');
+
+
 
 //gestion curseur sur la map
 var dateSlider = document.getElementById('dateSlider');
 dateSlider.addEventListener('mousemove', function (event) {
     event.stopPropagation();
 });
+
+
 
 // crée la couche contenant les pistes contenues dans "objet"
 function creeCouchePistes(objet) {
@@ -451,46 +459,59 @@ var checkboxes = document.querySelectorAll('.droite input[type="checkbox"]');
 // Ajouter un écouteur d'événements à chaque bouton radio
 checkboxes.forEach(function (check) {
     check.addEventListener('change', function () {
-        // supprimer la classe 'active' de toutes les options de caractéristiques
-        caracteres.forEach(function (opt) {
-            opt.classList.remove('active');
-        });
-        document.getElementById('legendAcci').innerHTML = ``;
-        let lumi_select = [];
-        let meteo_select = [];
-        type = check.parentNode.parentNode.className.split(' ')[1];
-        // Parcourir toutes les cases cochées et les ajouter à FormData
-        checkboxes.forEach(function (checkbox) {
-            if (checkbox.checked) {
-                // icone de la coche
-                let icone = checkbox.parentNode.parentNode.querySelector('img').getAttribute('alt');
-                if (checkbox.parentNode.parentNode.classList.contains('lum')) {
-                    // Si la case à cocher appartient à la classe "dropdown-item lumi"
-                    lumi_select.push({ valeur: checkbox.value, icon: icone });
-                } else if (checkbox.parentNode.parentNode.classList.contains('atm')) {
-                    // Si la case à cocher appartient à la classe "dropdown-item meteo"
-                    meteo_select.push({ valeur: checkbox.value, icon: icone });
-                }
+        if (check.value == "lum" || check.value == "atm") {
+            // si on coche la case
+            if (this.checked) {
+                document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { // on décoche toutes les visualisations
+                    all.checked = false;
+                })
+                this.checked = true; // on recoche l'actuelle
+                type = check.value;  // nouvelle legende selectionnee
+                map.removeLayer(acciLayer);
+                acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
+                document.getElementById('legendAcci').innerHTML = ``; // on supprime la legende
             }
-        });
-        // accidents selectionnes avec la luminosité
-        acci_paramSelect = accidents.features.filter(feature => {
-            // true ou false selon si l'accident appartient aux param sélectionnés
-            return (lumi_select.some(item => item.valeur === feature.properties.lum) && meteo_select.some(item => item.valeur === feature.properties.atm));
-        });
-        // accidents en luminosité et en année
-        if (acci_anneeSelect != null) {
-            acci_select = acci_anneeSelect.filter(element => {
-                return acci_paramSelect.includes(element);
-            });
+            // si on la décoche
+            else {
+                type = null;  // nouvelle legende selectionnee (aucune)
+                map.removeLayer(acciLayer);
+                acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
+            }
         }
         else {
-            acci_select = acci_paramSelect;
+            let lumi_select = [];
+            let meteo_select = [];
+            // Parcourir toutes les cases cochées
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    // icone de la coche
+                    if (checkbox.parentNode.parentNode.classList.contains('lum')) {
+                        // Si la case à cocher appartient à la classe "dropdown-item lumi"
+                        lumi_select.push(checkbox.value);
+                    } else if (checkbox.parentNode.parentNode.classList.contains('atm')) {
+                        // Si la case à cocher appartient à la classe "dropdown-item meteo"
+                        meteo_select.push(checkbox.value);
+                    }
+                }
+            });
+            // accidents selectionnes avec la luminosité
+            acci_paramSelect = accidents.features.filter(feature => {
+                // true ou false selon si l'accident appartient aux param sélectionnés
+                return (lumi_select.includes(feature.properties.lum) && meteo_select.includes(feature.properties.atm));
+            });
+            // accidents en luminosité et en année
+            if (acci_anneeSelect != null) {
+                acci_select = acci_anneeSelect.filter(element => {
+                    return acci_paramSelect.includes(element);
+                });
+            }
+            else {
+                acci_select = acci_paramSelect;
+            }
+
+            map.removeLayer(acciLayer);
+            acciLayer = creeCoucheAccidents(acci_select).addTo(map);
         }
-
-        map.removeLayer(acciLayer);
-        acciLayer = creeCoucheAccidents(acci_select).addTo(map);
-
     });
 });
 
@@ -524,6 +545,11 @@ caracteres.forEach(function (carac) {
         });
         // Ajouter la classe 'active' à l'option cliquée
         this.classList.add('active');
+
+        // on décoche toutes les visualisations
+        document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { 
+            all.checked = false;
+        })
 
         // récupération de tous les types de la variable cochée
         type = carac.value;
@@ -573,9 +599,7 @@ var planLayer = null;
 var map = L.map('map', { zoomControl: false }).setView([48.866667, 2.333333], 12);
 new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
-var defaultLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(this.map);
+var defaultLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}').addTo(this.map);
 
 // Gestion petite et grande carte
 const sidebar = document.getElementById('offcanvasScrolling');
@@ -607,7 +631,7 @@ const geocoder = L.esri.Geocoding.geocodeService({
 const searchInput = document.getElementById('research_input');
 const suggestions = document.getElementById('suggestions');
 
-searchInput.addEventListener('input', function() {
+searchInput.addEventListener('input', function () {
     const query = this.value;
 
     geocoder.suggest().text(query).run((error, results, response) => {
@@ -730,25 +754,37 @@ document.getElementById('image-overlay').style.display = 'none';
 // Ajouter d'autres couches de tuiles pour différentes vues
 var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
 var topographicLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
+var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
+
 
 document.addEventListener('DOMContentLoaded', function () {
     // Associer des boutons à des actions pour changer de fond de plan
     document.getElementById('btnSatellite').onclick = function () {
         map.removeLayer(defaultLayer);
         map.addLayer(satelliteLayer);
+        map.removeLayer(openStreetMapLayer);
         map.removeLayer(topographicLayer);
     };
 
     document.getElementById('btnTopographic').onclick = function () {
         map.removeLayer(defaultLayer);
         map.removeLayer(satelliteLayer);
+        map.removeLayer(openStreetMapLayer);
         map.addLayer(topographicLayer);
     };
 
     // Définir un bouton pour revenir au fond de plan par défaut
-    document.getElementById('btnDefault').onclick = function () {
+    document.getElementById('btnOpenStreetMap').onclick = function() {
         map.removeLayer(satelliteLayer);
         map.removeLayer(topographicLayer);
+        map.removeLayer(defaultLayer);
+        map.addLayer(openStreetMapLayer)
+    };
+
+    document.getElementById('btnDefault').onclick = function() {
+        map.removeLayer(satelliteLayer);
+        map.removeLayer(topographicLayer);
+        map.removeLayer(openStreetMapLayer);
         map.addLayer(defaultLayer);
     };
 
