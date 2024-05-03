@@ -532,11 +532,11 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .meteo-decale-vers-le-bas {
-    margin-top: 220px;
+    margin-top: 260px;
     transition: margin-top 0.3s ease;
 }
 
 .carac-decale-vers-le-bas {
-    margin-top: 380px;
+    margin-top: 420px;
     transition: margin-top 0.3s ease;
 }

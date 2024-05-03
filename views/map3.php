@@ -126,6 +126,15 @@
                                         <form>
                                             <div class="form-switch lum mx-2">
                                                 <div class="gauche">
+                                                    Visualiser sur la carte
+                                                </div>
+                                                <div class="droite all">
+                                                    <input class="form-check-input mr-2" type="checkbox" value="lum">
+                                                </div>
+                                            </div>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <div class="form-switch lum mx-2">
+                                                <div class="gauche">
                                                     <img src="../assets/images/icones/lum/Plein jour.png" alt="Plein jour">
                                                     Plein jour
                                                 </div>
@@ -133,42 +142,42 @@
                                                     <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked>
                                                 </div>
                                             </div>
-                                        <div class="form-switch lum mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/lum/Crépuscule ou aube.png" alt="Crépuscule ou aube">
-                                                Crépuscule ou aube
+                                            <div class="form-switch lum mx-2">
+                                                <div class="gauche">
+                                                    <img src="../assets/images/icones/lum/Crépuscule ou aube.png" alt="Crépuscule ou aube">
+                                                    Crépuscule ou aube
+                                                </div>
+                                                <div class="droite">
+                                                    <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
+                                                </div>
                                             </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
+                                            <div class="form-switch lum mx-2">
+                                                <div class="gauche">
+                                                    <img src="../assets/images/icones/lum/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
+                                                    Nuit sans éclairage public
+                                                </div>
+                                                <div class="droite">
+                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-switch lum mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/lum/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
-                                                Nuit sans éclairage public
+                                            <div class="form-switch lum mx-2">
+                                                <div class="gauche">
+                                                    <img src="../assets/images/icones/lum/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
+                                                    Nuit avec éclairage public non allumé
+                                                </div>
+                                                <div class="droite">
+                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
+                                                </div>
                                             </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
+                                            <div class="form-switch lum mx-2">
+                                                <div class="gauche">
+                                                    <img src="../assets/images/icones/lum/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
+                                                    Nuit avec éclairage public allumé
+                                                </div>
+                                                <div class="droite">
+                                                    <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-switch lum mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/lum/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
-                                                Nuit avec éclairage public non allumé
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
-                                            </div>
-                                        </div>
-                                        <div class="form-switch lum mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/lum/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
-                                                Nuit avec éclairage public allumé
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
-                                            </div>
-                                        </div>
                                         </form>
                                     </div>
                                 </div>
@@ -181,6 +190,15 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <form>
+                                        <div class="form-switch atm mx-2">
+                                                <div class="gauche">
+                                                    Visualiser sur la carte
+                                                </div>
+                                                <div class="droite all">
+                                                    <input class="form-check-input mr-2" type="checkbox" value="atm">
+                                                </div>
+                                        </div>
+                                        <li><hr class="dropdown-divider"></li>
                                         <div class="form-switch atm mx-2">
                                             <div class="gauche">
                                                 <img src="../assets/images/icones/atm/Temps éblouissant.png" alt="Temps éblouissant">
