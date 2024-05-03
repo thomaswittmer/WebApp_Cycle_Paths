@@ -256,26 +256,6 @@ function creeCouchePlan(objet) {
 
 
 
-var isCheckedCluster = this.checked;
-// Ajouter un écouteur d'événements à la case à cocher
-document.getElementById('clusterCheckbox').addEventListener('change', function() {
-    // Récupérer l'état actuel de la case à cocher
-    isCheckedCluster = this.checked;
-});
-
-var isCheckedAccident = false;
-// Ajouter un écouteur d'événements à la case à cocher
-document.getElementById('accidentCheckbox').addEventListener('change', function() {
-    // Récupérer l'état actuel de la case à cocher
-    isCheckedAccident = true;
-    if (isCheckedAccident) { // Vérifier si la couche existe sur la carte
-        map.removeLayer(clusterGroup); // Supprimer la couche de la carte
-        console.log("Couche des accidents supprimée");
-    } else {
-        console.log("La couche des accidents n'est pas ajoutée à la carte");
-    }
-});
-
 
 // Définir la fonction zoomSur dans le contexte global
 function zoomSur(latitude, longitude) {
@@ -322,12 +302,13 @@ function creeCoucheAccidents(objet) {
 
             // Récupération des informations de l'accident correspondant
             const popupContenu = `
+            <h4><b>${properties.num_acc}</b></h4>
             <b>Date:</b> ${properties.date}<br>
             <b>Type d'intersection :</b> ${properties.int}<br>
-            <b>Vitesse max :</b> ${properties.vma}<br>
+            <b>Vitesse max (km/h) :</b> ${properties.vma}<br>
             <b>Type de collision :</b> ${properties.col}<br>
             <b>Conditions atmosphériques :</b> ${properties.atm}<br>
-            <b>Catégorie de route :</b> ${properties.catr}<br>
+            <b>Catégorie de la route :</b> ${properties.catr}<br>
             <b>Etat de la route :</b> ${properties.surf}<br>
             <b>Infrastructure de la route :</b> ${properties.infra}<br>
             <b>Catégorie du véhicule :</b> ${properties.catv}<br>
@@ -342,7 +323,6 @@ function creeCoucheAccidents(objet) {
             //return mark;
             return clusterGroup;
         }
-        
     });
     
 
@@ -508,7 +488,59 @@ checkboxes.forEach(function (check) {
             else {
                 acci_select = acci_paramSelect;
             }
+        if (check.value == "lum" || check.value == "atm") {
+            // si on coche la case
+            if (this.checked) {
+                document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { // on décoche toutes les visualisations
+                    all.checked = false;
+                })
+                this.checked = true; // on recoche l'actuelle
+                type = check.value;  // nouvelle legende selectionnee
+                map.removeLayer(acciLayer);
+                acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
+                document.getElementById('legendAcci').innerHTML = ``; // on supprime la legende
+            }
+            // si on la décoche
+            else {
+                type = null;  // nouvelle legende selectionnee (aucune)
+                map.removeLayer(acciLayer);
+                acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
+            }
+        }
+        else {
+            let lumi_select = [];
+            let meteo_select = [];
+            // Parcourir toutes les cases cochées
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    // icone de la coche
+                    if (checkbox.parentNode.parentNode.classList.contains('lum')) {
+                        // Si la case à cocher appartient à la classe "dropdown-item lumi"
+                        lumi_select.push(checkbox.value);
+                    } else if (checkbox.parentNode.parentNode.classList.contains('atm')) {
+                        // Si la case à cocher appartient à la classe "dropdown-item meteo"
+                        meteo_select.push(checkbox.value);
+                    }
+                }
+            });
+            // accidents selectionnes avec la luminosité
+            acci_paramSelect = accidents.features.filter(feature => {
+                // true ou false selon si l'accident appartient aux param sélectionnés
+                return (lumi_select.includes(feature.properties.lum) && meteo_select.includes(feature.properties.atm));
+            });
+            // accidents en luminosité et en année
+            if (acci_anneeSelect != null) {
+                acci_select = acci_anneeSelect.filter(element => {
+                    return acci_paramSelect.includes(element);
+                });
+            }
+            else {
+                acci_select = acci_paramSelect;
+            }
 
+            map.removeLayer(acciLayer);
+            acciLayer = creeCoucheAccidents(acci_select).addTo(map);
+        }
             map.removeLayer(acciLayer);
             acciLayer = creeCoucheAccidents(acci_select).addTo(map);
         }
@@ -545,6 +577,11 @@ caracteres.forEach(function (carac) {
         });
         // Ajouter la classe 'active' à l'option cliquée
         this.classList.add('active');
+
+        // on décoche toutes les visualisations
+        document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { 
+            all.checked = false;
+        })
 
         // on décoche toutes les visualisations
         document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { 
@@ -600,6 +637,7 @@ var map = L.map('map', { zoomControl: false }).setView([48.866667, 2.333333], 12
 new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 var defaultLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}').addTo(this.map);
+var defaultLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}').addTo(this.map);
 
 // Gestion petite et grande carte
 const sidebar = document.getElementById('offcanvasScrolling');
@@ -630,6 +668,7 @@ const geocoder = L.esri.Geocoding.geocodeService({
 });
 const searchInput = document.getElementById('research_input');
 const suggestions = document.getElementById('suggestions');
+
 
 searchInput.addEventListener('input', function () {
     const query = this.value;
@@ -756,6 +795,8 @@ var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/se
 var topographicLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
 var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
 
+var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
+
 
 document.addEventListener('DOMContentLoaded', function () {
     // Associer des boutons à des actions pour changer de fond de plan
@@ -763,12 +804,14 @@ document.addEventListener('DOMContentLoaded', function () {
         map.removeLayer(defaultLayer);
         map.addLayer(satelliteLayer);
         map.removeLayer(openStreetMapLayer);
+        map.removeLayer(openStreetMapLayer);
         map.removeLayer(topographicLayer);
     };
 
     document.getElementById('btnTopographic').onclick = function () {
         map.removeLayer(defaultLayer);
         map.removeLayer(satelliteLayer);
+        map.removeLayer(openStreetMapLayer);
         map.removeLayer(openStreetMapLayer);
         map.addLayer(topographicLayer);
     };
@@ -782,11 +825,20 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     document.getElementById('btnDefault').onclick = function() {
+    document.getElementById('btnOpenStreetMap').onclick = function() {
         map.removeLayer(satelliteLayer);
         map.removeLayer(topographicLayer);
+        map.removeLayer(defaultLayer);
+        map.addLayer(openStreetMapLayer)
+    };
+
+    document.getElementById('btnDefault').onclick = function() {
+        map.removeLayer(satelliteLayer);
+        map.removeLayer(topographicLayer);
+        map.removeLayer(openStreetMapLayer);
         map.removeLayer(openStreetMapLayer);
         map.addLayer(defaultLayer);
     };
 
-
+    }
 });

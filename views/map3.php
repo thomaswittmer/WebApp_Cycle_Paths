@@ -925,22 +925,6 @@ input[type="range"]::-webkit-slider-thumb {
                         </div>
 
 
-                        <!-- AFFICHAGE ACCIDENTS -->
-                        <h3 id="titre-carte">Affichage des accidents</h3>
-                        <div class="button-container-fond">
-                            <form>
-                                <div class="form-switch atm mx-2">
-                                    <div class="gauche">
-                                        <img src="../assets/images/accident.png" alt="Accidents">
-                                        Masquer les accidents
-                                    </div>
-                                    <div class="droite">
-                                        <input id="accidentCheckbox" class="form-check-input mr-2" type="checkbox" value="Accidents" >
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
                         <!-- AFFICHAGE CLUSTERS -->
                         <div class="button-container-fond">
                             <form>
