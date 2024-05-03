@@ -321,7 +321,7 @@ input[type="range"]::-webkit-slider-thumb {
     margin-right: 10px;
 }
 
-.form-switch {
+.form-switch.lum, .form-switch.atm {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -506,4 +506,16 @@ input[type="range"]::-webkit-slider-thumb {
 .carac-decale-vers-le-bas {
     margin-top: 420px;
     transition: margin-top 0.3s ease;
+}
+
+
+/* Pour permettre une transition fluide en ouvrant la barre laterale*/
+/* Au niveau de la barre*/
+.sidebar-transition {
+    transition: left 0.5s ease, width 0.5s ease;
+}
+
+/*Au niveau de la carte*/
+.map-transition {
+    transition: width 0.5s ease;
 }

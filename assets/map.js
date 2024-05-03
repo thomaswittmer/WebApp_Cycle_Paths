@@ -409,6 +409,11 @@ checkboxes.forEach(function (check) {
                     all.checked = false;
                 })
                 this.checked = true; // on recoche l'actuelle
+                btnCluster.checked = false;  // on decoche la case du masquage des accidents
+                // On desactive toutes les caractéristiques dans le menu correspondant
+                caracteres.forEach(function (opt) {
+                    opt.classList.remove('active');
+                });
                 type = check.value;  // nouvelle legende selectionnee
                 map.removeLayer(acciLayer);
                 acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
@@ -419,6 +424,7 @@ checkboxes.forEach(function (check) {
                 type = null;  // nouvelle legende selectionnee (aucune)
                 map.removeLayer(acciLayer);
                 acciLayer = creeCoucheAccidents(acci_select).addTo(map);  // on affiche la nouvelle légende
+                btnCluster.checked = false;  // on decoche la case du masquage des accidents
             }
         }
         else {
@@ -490,9 +496,10 @@ caracteres.forEach(function (carac) {
         this.classList.add('active');
 
         // on décoche toutes les visualisations
-        document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) { 
+        document.querySelectorAll('.droite.all input[type="checkbox"]').forEach(function (all) {
             all.checked = false;
         })
+        btnCluster.checked = false;  // on decoche la case du masquage des accidents
 
         // récupération de tous les types de la variable cochée
         type = carac.value;
@@ -553,13 +560,16 @@ const map2 = document.getElementById('map');
 function toggleSidebar() {
     sidebar.style.left = '0';
     sidebar.style.width = '30%';
-    map2.style.width = '70%'; 
+    map2.style.width = '70%';
+
+    sidebar.classList.add('sidebar-transition');
+    map2.classList.add('map-transition');
 }
 
 function closeSidebar() {
-    sidebar.style.left = '-30%'; 
-    map2.style.width = '100%'; 
-  }
+    sidebar.style.left = '-30%';
+    map2.style.width = '100%';
+}
 
 // Écouteur d'événement pour le clic sur un bouton par exemple
 document.getElementById('btn-lateral').addEventListener('click', toggleSidebar);
@@ -721,3 +731,14 @@ document.addEventListener('DOMContentLoaded', function () {
         map.addLayer(defaultLayer);
     };
 });
+
+// Gestion l'appration/disparition des accidents
+var btnCluster = document.getElementById('accidentsCheckbox');
+btnCluster.addEventListener('change', function () {
+    if (this.checked) {
+        map.removeLayer(acciLayer);
+    }
+    else {
+        acciLayer.addTo(map);
+    }
+})

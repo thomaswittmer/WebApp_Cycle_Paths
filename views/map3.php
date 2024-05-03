@@ -197,6 +197,9 @@
                                             <input class="form-check-input mr-2" type="checkbox" value="atm">
                                         </div>
                                     </div>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
                                     <div class="form-switch atm mx-2">
                                         <div class="gauche">
                                             <img src="../assets/images/icones/atm/Temps éblouissant.png" alt="Temps éblouissant">
@@ -347,19 +350,12 @@
 
                         <!-- AFFICHAGE CLUSTERS -->
                         <h3 id="titre-carte">Affichage des clusters</h3>
-                        <div class="button-container-fond">
-                            <form>
-                                <div class="form-switch atm mx-2">
-                                    <div class="gauche">
-                                        <img src="../assets/images/cluster.png" alt="Clusters">
-                                        Masquer les clusters
-                                    </div>
-                                    <div class="droite">
-                                        <input id="clusterCheckbox" class="form-check-input mr-2" type="checkbox" value="Clusters" checked>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                        <form>
+                            <div class="form-switch cluster mx-2">
+                                Masquer les accidents
+                                <input id="accidentsCheckbox" class="form-check-input mr-2" type="checkbox">
+                            </div>
+                        </form>
                     </div> <!--barre-laterale-->
                 </div>
             </div>
