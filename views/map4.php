@@ -97,12 +97,6 @@
             <div id="cesiumContainer"></div>
     </div>
 
-
-
-
-
-
-
     <script>
 
     // Enable simultaneous requests.
@@ -111,7 +105,7 @@
     function getAccidentCoordinatesFromDB(num_acc) {
         return new Promise((resolve, reject) => {
             // URL de votre API pour récupérer les coordonnées d'un accident
-            const apiUrl = `http://localhost:8000/getAccidentCoordinates?num_acc=${num_acc}`;
+            const apiUrl = `http://localhost:80/getAccidentCoordinates?num_acc=${num_acc}`;
 
             // Effectuer la requête AJAX
             $.ajax({
