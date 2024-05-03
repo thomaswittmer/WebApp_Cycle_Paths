@@ -24,13 +24,13 @@
     <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.css" crossorigin="" />
     <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.js" crossorigin=""></script>
 </head>
-
 <body>
     <div id=app>
         <div class="carte">
             <!--<div id="cesiumContainer"></div> -->
             <!-- curseur temporel -->
             <div id="map">
+                <a href="/"><img src="/assets/images/safelane_carre.png" alt="logo" class="logo-head"></a>
                 <!-- barre recherche-->
                 <div id="research_bar">
                     <input class="form-control me-2" type="search" id="research_input" name="pacViewPlace" placeholder="Entrez un lieu..." aria-label="Search">
@@ -51,13 +51,14 @@
 
                 <!-- coche pour avoir un curseur selon mois et année -->
                 <div class="checkbox-mois">
-                    <input class="form-check-input mr-2" type="checkbox" v-model="moisChecked" @change="annule_annee"> Curseur par mois <br>
+                    <input class="form-check-input mr-2" type="checkbox" v-model="moisChecked" @change="annule_annee">  
+                    <span> Curseur par mois </span>
                 </div>
 
                 <!-- Bouton play pour la lecture automatique-->
                 <div class="button-container">
                     <button v-if="!isAutoPlaying" @click="startAutoPlay()" class="play-button">
-                        <img src="assets/images/play.svg" alt="Lecture automatique">
+                        <img src="assets/images/play.png" alt="Lecture automatique">
                     </button>
                     <button v-if="isAutoPlaying" @click="stopAutoPlay()" class="stop-button">
                         <img src="assets/images/stop.svg" alt="Arrêter la lecture automatique">
@@ -68,15 +69,16 @@
                 </div>
 
                 <!-- curseur temporel -->
-                <div v-if="moisChecked" class="curseur-date">
-                    <input type="range" min="0" max="83" v-model="selectedMonth" id="dateSlider" @change="cherche_mois_annee">
-                    <p id="date"><strong>Date sélectionnée : {{ formattedDate }}</strong></p>
+                <div id="dateSlider">
+                    <div v-if="moisChecked" class="curseur-date">
+                        <input type="range" min="0" max="83" v-model="selectedMonth"  @change="cherche_mois_annee">
+                        <p id="date"><strong>Date sélectionnée : {{ formattedDate }}</strong></p>
+                    </div>
+                    <div v-if="!moisChecked" class="curseur-date">
+                        <input type="range" min="2016" max="2022" v-model="selectedYear"  @change="cherche_annee">
+                        <p id="date"><strong>Date sélectionnée : {{ selectedYear }}</strong></p>
+                    </div>
                 </div>
-                <div v-if="!moisChecked" class="curseur-date">
-                    <input type="range" min="2016" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
-                    <p id="date"><strong>Date sélectionnée : {{ selectedYear }}</strong></p>
-                </div>
-
 
             </div><!--map-->
 
@@ -306,7 +308,7 @@
                             <button id="stat" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 Statistiques
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu position-fixed">
                                 <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
                                 <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_intersection.png')">Type d'intersection</a></li>
                                 <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_surface.png')">Type de surface</a></li>
@@ -334,19 +336,30 @@
                         <!-- FOND DE CARTE -->
                         <h3 id="titre-carte">Fond de carte</h3>
                         <div class="button-container-fond">
-                            <button id="btnSatellite" class="map-button">
-                                <img src="assets/images/fond_aerien_paris.png" alt="Vue satellite">
-                                <span class="button-label-sat">Vue satellite</span>
-                            </button>
-                            <button id="btnTopographic" class="map-button">
-                                <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
-                                <span class="button-label">Vue topologique</span>
-                            </button>
-                            <button id="btnDefault" class="map-button">
-                                <img src="assets/images/fond_routier_paris.png" alt="Vue routière">
-                                <span class="button-label">Vue routière</span>
-                            </button>
+                            <!-- Première ligne de boutons -->
+                            <div class="button-row">
+                                <button id="btnSatellite" class="map-button">
+                                    <img src="assets/images/fond_aerien_paris.png" alt="Vue satellite">
+                                    <span class="button-label-sat">Vue satellite</span>
+                                </button>
+                                <button id="btnTopographic" class="map-button">
+                                    <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
+                                    <span class="button-label">Vue topologique</span>
+                                </button>
+                            </div>
+                            <!-- Deuxième ligne de boutons -->
+                            <div class="button-row">
+                                <button id="btnOpenStreetMap" class="map-button">
+                                    <img src="assets/images/fond_routier_paris.png" alt="Vue OpenStreetMap">
+                                    <span class="button-label">Vue OpenStreetMap</span>
+                                </button>
+                                <button id="btnDefault" class="map-button">
+                                    <img src="assets/images/fond_gris_clair.png" alt="Vue routière">
+                                    <span class="button-label">Vue base gris clair</span>
+                                </button>
+                            </div>
                         </div>
+
 
                         <!-- AFFICHAGE CLUSTERS -->
                         <h3 id="titre-carte">Affichage des clusters</h3>

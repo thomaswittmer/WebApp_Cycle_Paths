@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="/assets/images/safelane_carre.png" height=200px><br>
+        <img id="logo" src="/assets/images/safelane_carre.png"><br>
         <h1>Bienvenue sur l'application SAFELANE</h1><br>
 
         <p>Une application web a été développée pour répondre à l'augmentation des accidents de vélo à Paris entre 2016 et 2022 
@@ -22,7 +22,7 @@
 
         <!-- Groupe de boutons pour ouvrir la popup et accéder à la carte -->
         <div class="button-group">
-            <button class="btn btn-outline-danger btn-lg mt-3" onclick="openPopup()">Voir les fonctionnalités</button>
+            <button class="btn btn-outline-primary btn-lg mt-3" onclick="openPopup()">Voir les fonctionnalités</button>
             <a href="/map3" class="btn btn-success btn-lg mt-3">Accéder à l'application</a>
         </div>
 

@@ -53,7 +53,7 @@ getAccidentCoordinatesFromDB(accidentId)
 
 
         // Déplacer la caméra vers le point avec une altitude ajustée
-        viewer.camera.flyTo({
+        viewer.camera.zoomTo({
             destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude - 0.0015, 300),
             orientation: {
                 heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
@@ -67,10 +67,14 @@ getAccidentCoordinatesFromDB(accidentId)
 
         // Chargement du tileset
         const tileset = new Cesium.Cesium3DTileset({
-            url: 'https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'
+            url: 'https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80',
+            minimumTerrainHeight: 0  // Ajustez cette valeur selon vos besoins
+
         });
         viewer.scene.primitives.add(tileset);
         viewer.zoomTo(tileset);
+
+
 
 
 
@@ -114,7 +118,7 @@ getAccidentCoordinatesFromDB(accidentId)
                             position: Cesium.Cartesian3.fromDegrees(
                                 coordinates.longitude,
                                 coordinates.latitude,
-                                altitude  // Utilisation de l'altitude récupérée ici
+                                100  // Utilisation de l'altitude récupérée ici
                             ),
                             point: {
                                 pixelSize: 10,
@@ -125,14 +129,16 @@ getAccidentCoordinatesFromDB(accidentId)
                         });
 
                         // Déplacer la caméra vers le point avec une altitude ajustée
-                        viewer.camera.flyTo({
+                        viewer.camera.zoomTo({
                             destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude, altitude + 300),
                             orientation: {
                                 heading: Cesium.Math.toRadians(0), // Orientation de la caméra en degrés
                                 pitch: Cesium.Math.toRadians(-50), // Inclinaison de la caméra en degrés
                                 roll: 0 // Rotation de la caméra en degrés
                             },
+                            maximumHeight: altitude + 10
                         });
+                        
                     })
                     .catch(error => {
                         console.error('Erreur lors de la récupération de l\'altitude:', error);
@@ -145,7 +151,7 @@ getAccidentCoordinatesFromDB(accidentId)
 
 
 
-
+    /*
     // Define the zoomToViewport function
     function zoomToViewport(viewport) {
         viewer.camera.flyTo({
@@ -156,5 +162,6 @@ getAccidentCoordinatesFromDB(accidentId)
                 viewport.getNorthEast().lat()
             ),
         });
-    }
+    }*/
+
     });
