@@ -172,16 +172,24 @@ let app = Vue.createApp({
 
             // Création de la nouvelle couche des accidents et affichage sur la carte
             acciLayer = creeCoucheAccidents(acci_select).addTo(map);
-        }
+
+            
+
+        },
+        
     }
 
 }).mount('#app');
+
+
 
 //gestion curseur sur la map
 var dateSlider = document.getElementById('dateSlider');
 dateSlider.addEventListener('mousemove', function (event) {
     event.stopPropagation();
 });
+
+
 
 // crée la couche contenant les pistes contenues dans "objet"
 function creeCouchePistes(objet) {

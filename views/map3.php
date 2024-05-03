@@ -51,7 +51,8 @@
 
                 <!-- coche pour avoir un curseur selon mois et année -->
                 <div class="checkbox-mois">
-                    <input class="form-check-input mr-2" type="checkbox" v-model="moisChecked" @change="annule_annee"> Curseur par mois <br>
+                    <input class="form-check-input mr-2" type="checkbox" v-model="moisChecked" @change="annule_annee">  
+                    <span> Curseur par mois </span>
                 </div>
 
                 <!-- Bouton play pour la lecture automatique-->
@@ -68,15 +69,16 @@
                 </div>
 
                 <!-- curseur temporel -->
-                <div v-if="moisChecked" class="curseur-date">
-                    <input type="range" min="0" max="83" v-model="selectedMonth" id="dateSlider" @change="cherche_mois_annee">
-                    <p id="date"><strong>Date sélectionnée : {{ formattedDate }}</strong></p>
+                <div id="dateSlider">
+                    <div v-if="moisChecked" class="curseur-date">
+                        <input type="range" min="0" max="83" v-model="selectedMonth"  @change="cherche_mois_annee">
+                        <p id="date"><strong>Date sélectionnée : {{ formattedDate }}</strong></p>
+                    </div>
+                    <div v-if="!moisChecked" class="curseur-date">
+                        <input type="range" min="2016" max="2022" v-model="selectedYear"  @change="cherche_annee">
+                        <p id="date"><strong>Date sélectionnée : {{ selectedYear }}</strong></p>
+                    </div>
                 </div>
-                <div v-if="!moisChecked" class="curseur-date">
-                    <input type="range" min="2016" max="2022" v-model="selectedYear" id="dateSlider" @change="cherche_annee">
-                    <p id="date"><strong>Date sélectionnée : {{ selectedYear }}</strong></p>
-                </div>
-
 
             </div><!--map-->
 
