@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.css" crossorigin="" />
     <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.js" crossorigin=""></script>
 </head>
+
 <body>
     <div id=app>
         <div class="carte">
@@ -81,12 +82,12 @@
 
             </div><!--map-->
 
-            <button class="btn btn-secondary btn-lateral" id ="btn-lateral" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+            <button class="btn btn-secondary btn-lateral" id="btn-lateral" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
 
-            <div class="offcanvas offcanvas-start"  data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                 <div class="offcanvas-header">
                     <a href="/"><img src="/assets/images/param_safelane.png" alt="logo" class="header-image"></a>
                     <a id="infoButton"><img src="/assets/images/bouton_info.png" alt="info" class="bouton-info"></a>
@@ -112,7 +113,7 @@
 
                 <div class="offcanvas-body">
 
-                    <div id= "barre-laterale">
+                    <div id="barre-laterale">
 
                         <!-- LUMINOSITE -->
                         <div class="boutons-barre">
@@ -122,6 +123,17 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <form>
+                                        <div class="form-switch lum mx-2">
+                                            <div class="gauche">
+                                                Visualiser sur la carte
+                                            </div>
+                                            <div class="droite all">
+                                                <input class="form-check-input mr-2" type="checkbox" value="lum">
+                                            </div>
+                                        </div>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
                                         <div class="form-switch lum mx-2">
                                             <div class="gauche">
                                                 <img src="../assets/images/icones/lum/Plein jour.png" alt="Plein jour">
@@ -171,7 +183,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- METEO -->
                         <div class="btn-group meteo">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
@@ -179,6 +191,14 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <form>
+                                    <div class="form-switch atm mx-2">
+                                        <div class="gauche">
+                                            Visualiser sur la carte
+                                        </div>
+                                        <div class="droite all">
+                                            <input class="form-check-input mr-2" type="checkbox" value="atm">
+                                        </div>
+                                    </div>
                                     <div class="form-switch atm mx-2">
                                         <div class="gauche">
                                             <img src="../assets/images/icones/atm/Temps éblouissant.png" alt="Temps éblouissant">
@@ -270,20 +290,20 @@
                                 Caractéristiques
                             </button>
                             <div class="dropdown-menu">
-                            <form>
-                                <option class="dropdown-item caractere" value="int">Type d'intersection</option>
-                                <option class="dropdown-item caractere" value="col">Type de collision</option>
-                                <option class="dropdown-item caractere" value="surf">Etat de la route</option>
-                                <option class="dropdown-item caractere" value="infra">Infrastructure de la route</option>
-                                <option class="dropdown-item caractere" value="catv">Catégorie du véhicule</option>
-                            </form>
+                                <form>
+                                    <option class="dropdown-item caractere" value="int">Type d'intersection</option>
+                                    <option class="dropdown-item caractere" value="col">Type de collision</option>
+                                    <option class="dropdown-item caractere" value="surf">Etat de la route</option>
+                                    <option class="dropdown-item caractere" value="infra">Infrastructure de la route</option>
+                                    <option class="dropdown-item caractere" value="catv">Catégorie du véhicule</option>
+                                </form>
                             </div>
                         </div>
 
                         <!-- STATISTIQUES-->
                         <div class="btn-group">
                             <button id="stat" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                Statistiques 
+                                Statistiques
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
