@@ -9,11 +9,11 @@ body {
 .logo-head {
     width: 40px;
     height: auto;
-    position:absolute;
-    top: 23px; 
+    position: absolute;
+    top: 23px;
     left: 75px;
     margin-left: 5px;
-    align-items: center; 
+    align-items: center;
     z-index: 1000;
 }
 
@@ -108,8 +108,8 @@ ul li {
 
 /* barre de recherche de l'adresse */
 #research_bar {
-    position:absolute;
-    top: 25px; 
+    position: absolute;
+    top: 25px;
     left: 120px;
     margin-left: 5px;
     align-items: center;
@@ -212,8 +212,8 @@ ul li {
 }
 
 #dateSlider {
-    width: 100%; 
-    bottom : 10px;
+    width: 100%;
+    bottom: 10px;
     margin-bottom: 15px;
     z-index: 1000;
     border-radius: 10px;
@@ -235,7 +235,7 @@ input[type="range"]::-moz-range-thumb {
     appearance: none;
     width: 50px;
     height: 50px;
-    background: url('../assets/images/icon_safelane.png') center center no-repeat; 
+    background: url('../assets/images/icon_safelane.png') center center no-repeat;
     background-size: contain;
     cursor: pointer;
     border: none;
@@ -246,7 +246,7 @@ input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     width: 50px;
     height: 50px;
-    background: url('../assets/images/icon_safelane.png') center center no-repeat; 
+    background: url('../assets/images/icon_safelane.png') center center no-repeat;
     background-size: contain;
     cursor: pointer;
     border: none;
@@ -257,13 +257,13 @@ input[type="range"]::-webkit-slider-thumb {
 /*date séléctionée*/
 #date {
     margin: auto;
-    margin-top:15px;
+    margin-top: 15px;
     font-size: 15px;
     color: #0E0E29;
     padding: 5px;
     border-radius: 5px;
     width: 40%;
-    background-color:rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 /*checkbox*/
@@ -273,7 +273,7 @@ input[type="range"]::-webkit-slider-thumb {
     right: 10px;
     z-index: 1001;
     background-color: white;
-    margin-left:5px;
+    margin-left: 5px;
     padding: 5px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -317,8 +317,8 @@ input[type="range"]::-webkit-slider-thumb {
     color: #6c757d;
 }
 
-#plan{
-    width:50%;
+#plan {
+    width: 50%;
 }
 
 /*BANDEAU LATERAL*/
@@ -342,10 +342,10 @@ input[type="range"]::-webkit-slider-thumb {
     opacity: 0.8;
 }
 
-.btn-lateral { 
-    top: 23px; 
+.btn-lateral {
+    top: 23px;
     left: 23px;
-    position:absolute;
+    position: absolute;
     background-color: #0F1A29;
     z-index: 1001;
 }
@@ -358,17 +358,17 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .offcanvas-start {
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
     left: -30%;
     color: white;
     background-color: #0F1A29;
 }
 
-#barre-laterale{
+#barre-laterale {
     display: flex;
     flex-direction: column;
-    height: 100%; 
+    height: 100%;
     width: 100%;
 }
 
@@ -384,7 +384,8 @@ input[type="range"]::-webkit-slider-thumb {
     margin-right: 10px;
 }
 
-.form-switch.lum, .form-switch.atm {
+.form-switch.lum,
+.form-switch.atm {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -403,17 +404,17 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .dropdown-menu {
-    
-  /*   min-width: auto !important;
+
+    /*   min-width: auto !important;
    /* width: max-content !important;*/
     white-space: nowrap;
-   
+
 }
 
 .dropdown-item {
     cursor: pointer;
-    
-    
+
+
 }
 
 /* eclaircie bouton plan velo*/
@@ -455,8 +456,9 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /*bouton fonds de carte*/
-#titre-carte, #titre-pistes{
-    border-top: 2px solid #ccc; 
+#titre-carte,
+#titre-pistes {
+    border-top: 2px solid #ccc;
     margin-top: 25px;
     padding-top: 25px;
 }
@@ -538,7 +540,9 @@ input[type="range"]::-webkit-slider-thumb {
     z-index: 1000;
 }
 
-.play-button, .stop-button, .pause-button {
+.play-button,
+.stop-button,
+.pause-button {
     border: none;
     border-radius: 20px;
     padding: 5px;
@@ -566,13 +570,17 @@ input[type="range"]::-webkit-slider-thumb {
     border: 2px solid #e4f319e9;
 }
 
-.play-button img, .stop-button img, .pause-button img {
+.play-button img,
+.stop-button img,
+.pause-button img {
     width: 20px;
     height: 20px;
     vertical-align: middle;
 }
 
-.play-button:hover, .stop-button:hover, .pause-button:hover {
+.play-button:hover,
+.stop-button:hover,
+.pause-button:hover {
     transform: scale(1.1);
 }
 

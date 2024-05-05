@@ -557,18 +557,29 @@ checkboxes.forEach(function (check) {
 let dropdownLumi = document.querySelector('.btn-group.lumi .dropdown-toggle');
 
 dropdownLumi.addEventListener('click', function () {
-    // décale l'element en dessous (meteo)
     let meteoDecalable = document.querySelector('.btn-group.meteo');
-    meteoDecalable.classList.toggle('meteo-decale-vers-le-bas');
+    // décale l'element en dessous (meteo)
+    if (!dropdownLumi.classList.contains('show')) {
+        meteoDecalable.classList.remove('meteo-decale-vers-le-bas');
+    }
+    else {
+        meteoDecalable.classList.add('meteo-decale-vers-le-bas');
+    }
+
 });
 
 // déplacer le contenu de caracteristiques vers le bas lorsque le menu est ouvert
 let dropdownMeteo = document.querySelector('.btn-group.meteo .dropdown-toggle');
 
 dropdownMeteo.addEventListener('click', function () {
-    // décale l'element en dessous (meteo)
     let caracDecalable = document.querySelector('.btn-group.carac');
-    caracDecalable.classList.toggle('carac-decale-vers-le-bas');
+    // décale l'element en dessous (meteo)
+    if (!dropdownMeteo.classList.contains('show')) {
+        caracDecalable.classList.remove('carac-decale-vers-le-bas');
+    }
+    else {
+        caracDecalable.classList.add('carac-decale-vers-le-bas');
+    }
 });
 
 // CARACTERISTIQUES
@@ -663,6 +674,13 @@ function closeSidebar() {
     sidebar.style.left = '-30%';
     map2.style.width = '100%';
 }
+
+// La barre se ferme quand on appuie sur Echap
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        closeSidebar();
+    }
+});
 
 // Écouteur d'événement pour le clic sur un bouton par exemple
 document.getElementById('btn-lateral').addEventListener('click', toggleSidebar);
