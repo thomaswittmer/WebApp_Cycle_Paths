@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.css" crossorigin="" />
     <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.4/dist/esri-leaflet-geocoder.js" crossorigin=""></script>
 </head>
+
 <body>
     <div id=app>
         <div class="carte">
@@ -51,7 +52,7 @@
 
                 <!-- coche pour avoir un curseur selon mois et année -->
                 <div class="checkbox-mois">
-                    <input class="form-check-input mr-2" type="checkbox" v-model="moisChecked" @change="annule_annee">  
+                    <input class="form-check-input mr-2" type="checkbox" v-model="moisChecked" @change="annule_annee">
                     <span> Curseur par mois </span>
                 </div>
 
@@ -71,11 +72,11 @@
                 <!-- curseur temporel -->
                 <div id="dateSlider">
                     <div v-if="moisChecked" class="curseur-date">
-                        <input type="range" min="0" max="83" v-model="selectedMonth"  @change="cherche_mois_annee">
+                        <input type="range" min="0" max="83" v-model="selectedMonth" @change="cherche_mois_annee">
                         <p id="date"><strong>Date sélectionnée : {{ formattedDate }}</strong></p>
                     </div>
                     <div v-if="!moisChecked" class="curseur-date">
-                        <input type="range" min="2016" max="2022" v-model="selectedYear"  @change="cherche_annee">
+                        <input type="range" min="2016" max="2022" v-model="selectedYear" @change="cherche_annee">
                         <p id="date"><strong>Date sélectionnée : {{ selectedYear }}</strong></p>
                     </div>
                 </div>
@@ -122,64 +123,64 @@
                                     Luminosité
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <form>
-                                        <div class="form-switch lum mx-2">
-                                            <div class="gauche">
-                                                Visualiser sur la carte
-                                            </div>
-                                            <div class="droite all">
-                                                <input class="form-check-input mr-2" type="checkbox" value="lum">
-                                            </div>
+
+                                    <div class="form-switch lum mx-2">
+                                        <div class="gauche">
+                                            Visualiser sur la carte
                                         </div>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <div class="form-switch lum mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/lum/Plein jour.png" alt="Plein jour">
-                                                Plein jour
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked>
-                                            </div>
+                                        <div class="droite all">
+                                            <input class="form-check-input mr-2" type="checkbox" value="lum">
                                         </div>
-                                        <div class="form-switch lum mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/lum/Crépuscule ou aube.png" alt="Crépuscule ou aube">
-                                                Crépuscule ou aube
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
-                                            </div>
+                                    </div>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <div class="form-switch lum mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/lum/Plein jour.png" alt="Plein jour">
+                                            Plein jour
                                         </div>
-                                        <div class="form-switch lum mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/lum/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
-                                                Nuit sans éclairage public
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
-                                            </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Plein jour" checked>
                                         </div>
-                                        <div class="form-switch lum mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/lum/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
-                                                Nuit avec éclairage public non allumé
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
-                                            </div>
+                                    </div>
+                                    <div class="form-switch lum mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/lum/Crépuscule ou aube.png" alt="Crépuscule ou aube">
+                                            Crépuscule ou aube
                                         </div>
-                                        <div class="form-switch lum mx-2">
-                                            <div class="gauche">
-                                                <img src="../assets/images/icones/lum/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
-                                                Nuit avec éclairage public allumé
-                                            </div>
-                                            <div class="droite">
-                                                <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
-                                            </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Crépuscule ou aube" checked>
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="form-switch lum mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/lum/Nuit sans éclairage public.png" alt="Nuit sans éclairage public">
+                                            Nuit sans éclairage public
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Nuit sans éclairage public" checked>
+                                        </div>
+                                    </div>
+                                    <div class="form-switch lum mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/lum/Nuit avec éclairage public non allumé.png" alt="Nuit avec éclairage public non allumé">
+                                            Nuit avec éclairage public non allumé
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public non allumé" checked>
+                                        </div>
+                                    </div>
+                                    <div class="form-switch lum mx-2">
+                                        <div class="gauche">
+                                            <img src="../assets/images/icones/lum/Nuit avec éclairage public allumé.png" alt="Nuit avec éclairage public allumé">
+                                            Nuit avec éclairage public allumé
+                                        </div>
+                                        <div class="droite">
+                                            <input class="form-check-input mr-2" type="checkbox" value="Nuit avec éclairage public allumé" checked>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

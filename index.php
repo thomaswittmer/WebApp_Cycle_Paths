@@ -19,7 +19,7 @@ if (!$link) {
     Flight::set('BDD', $link);
 }
 
-Flight::route('/', function(){
+Flight::route('/', function () {
     Flight::render('accueil');
 });
 
@@ -85,8 +85,8 @@ Flight::route('POST /recup_caractere', function () {
     Flight::json($geojson);
 });
 
-Flight::route('/map3', function(){
-    Flight::render('map3', );
+Flight::route('/map3', function () {
+    Flight::render('map3',);
 });
 
 Flight::route('/map4', function () {
@@ -132,7 +132,7 @@ Flight::route('/cesium', function () {
     Flight::render('cesium');
 });
 
-Flight::route('GET /recupere_pistes', function(){
+Flight::route('GET /recupere_pistes', function () {
     $link = Flight::get('BDD');
 
     $accidents = pg_query($link, "SELECT *, ST_AsGeoJSON(ST_Transform(geom, 4326)) AS geo FROM voie_cyclable_geovelo;");
@@ -206,5 +206,3 @@ Flight::route('GET /recupere_plan', function () {
 });
 
 Flight::start();
-
-?>
