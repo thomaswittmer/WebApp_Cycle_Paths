@@ -26,18 +26,47 @@ let app = Vue.createApp({
     },
     methods: {
         startAutoPlay() {
-            this.isAutoPlaying = true;
+            if (!this.isAutoPlaying) {
+                this.isAutoPlaying = true;
+                this.setAutoPlayInterval(1);
+            }
+        },
+        
+        setAutoPlaySpeed(speed) {
+            if (this.isAutoPlaying) {
+                clearInterval(this.autoPlayInterval);
+                this.setAutoPlayInterval(speed);
+            }
+        },
+        
+        setAutoPlayInterval(speed) {
+            let interval = 1000; //interval par défaut pour la vitesse x1
+        
+            if (speed === 2) {
+                interval = 500; //vitesse x2
+            } else if (speed === 0.5) {
+                interval = 2000; //vitesse x0.5
+            }
+        
             this.autoPlayInterval = setInterval(() => {
                 this.nextDate();
-            }, 1000);
+            }, interval);
         },
-
+        
         stopAutoPlay() {
             this.isAutoPlaying = false;
             clearInterval(this.autoPlayInterval);
             this.caseChecked = true;
             this.selectedYear = '';
             this.annule_annee();
+        },
+        
+        pauseAutoPlay() {
+            if (this.isAutoPlaying) {
+                clearInterval(this.autoPlayInterval);
+                this.isAutoPlaying = false;
+                this.isPaused = true;
+            }
         },
 
         nextDate() {
@@ -70,14 +99,6 @@ let app = Vue.createApp({
                         this.stopAutoPlay();
                     }
                 }
-            }
-        },
-
-        pauseAutoPlay() {
-            if (this.isAutoPlaying) {
-                clearInterval(this.autoPlayInterval);
-                this.isAutoPlaying = false;
-                this.isPaused = true;
             }
         },
 
@@ -302,8 +323,7 @@ function creeCoucheAccidents(objet) {
 
             // Récupération des informations de l'accident correspondant
             const popupContenu = `
-            <h4><b>${properties.num_acc}</b></h4>
-            <b>Date:</b> ${properties.date}<br>
+            <h4><b>${properties.date}</b></h4>
             <b>Type d'intersection :</b> ${properties.int}<br>
             <b>Vitesse max (km/h) :</b> ${properties.vma}<br>
             <b>Type de collision :</b> ${properties.col}<br>
@@ -313,8 +333,8 @@ function creeCoucheAccidents(objet) {
             <b>Infrastructure de la route :</b> ${properties.infra}<br>
             <b>Catégorie du véhicule :</b> ${properties.catv}<br>
             <b>Circulation :</b> ${properties.circ}<br>
-            <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
             <button type="button" class="btn btn-primary btn-sm" onclick="zoomSur(${latlng.lat}, ${latlng.lng})">Zoomer sur</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
             `;
 
             // Ajout d'une pop-up au marqueur
@@ -839,15 +859,11 @@ var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/se
 var topographicLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
 var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
 
-var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
-
-
 document.addEventListener('DOMContentLoaded', function () {
     // Associer des boutons à des actions pour changer de fond de plan
     document.getElementById('btnSatellite').onclick = function () {
         map.removeLayer(defaultLayer);
         map.addLayer(satelliteLayer);
-        map.removeLayer(openStreetMapLayer);
         map.removeLayer(openStreetMapLayer);
         map.removeLayer(topographicLayer);
     };
@@ -855,7 +871,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('btnTopographic').onclick = function () {
         map.removeLayer(defaultLayer);
         map.removeLayer(satelliteLayer);
-        map.removeLayer(openStreetMapLayer);
         map.removeLayer(openStreetMapLayer);
         map.addLayer(topographicLayer);
     };
@@ -869,21 +884,11 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     document.getElementById('btnDefault').onclick = function () {
-        document.getElementById('btnOpenStreetMap').onclick = function () {
-            map.removeLayer(satelliteLayer);
-            map.removeLayer(topographicLayer);
-            map.removeLayer(defaultLayer);
-            map.addLayer(openStreetMapLayer)
-        };
-
-        document.getElementById('btnDefault').onclick = function () {
-            map.removeLayer(satelliteLayer);
-            map.removeLayer(topographicLayer);
-            map.removeLayer(openStreetMapLayer);
-            map.removeLayer(openStreetMapLayer);
-            map.addLayer(defaultLayer);
-        };
-    }
+        map.removeLayer(satelliteLayer);
+        map.removeLayer(topographicLayer);
+        map.removeLayer(openStreetMapLayer);
+        map.addLayer(defaultLayer)
+    };
 });
 
 // Gestion l'appration/disparition des accidents

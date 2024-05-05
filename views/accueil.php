@@ -29,16 +29,18 @@
         <div id="popup" class="popup">
             <div class="popup-content">
                 <span class="close" onclick="closePopup()">X</span>
-                <h2>Fonctionnalités de SAFELANE</h2>
-                <p>Voici les principales fonctionnalités de l'application :</p>
+                <h2>Fonctionnalités de <em>SAFELANE</em></h2>
+                <u>Voici les principales fonctionnalités de l'application :</u>
                 <ul>
                     <li>⚠️ Identification des zones à risque pour les cyclistes.</li>
                     <li>🚲 Consultation du Plan Vélo 2021-2026 de la mairie de Paris.</li>
-                    <li>🗓️ Visualisation des données des accidents par année.</li>
+                    <li>🗓️ Visualisation des données des accidents par année et par mois de chaque année.</li>
+                    <li>⏯️ Lecture automatique de ses mêmes données toutes les secondes, avec option pause, arrêt et vitesses de lecture (x2 & xO.5).</li>
                     <li>🎥 Carte interactive 2D avec option 3D pour une visualisation plus détaillée du lieu de l'accident.</li>
-                    <li>✅ Filtrage des accidents par caractéristiques (météo, infrastructure, luminosité, ...).</li>
+                    <li>💬 Description de l'accident par ses caractéristiques visualisées dans une popup en cliquant dessus.</li>
+                    <li>✅ Filtrage des accidents par caractéristiques (météo, infrastructure, luminosité, type d'intersection, ...).</li>
                     <li>🗺️ Personnalisation du fond de carte.</li>
-                    <li>📈 Affichage de statistiques sur les accidents.</li>
+                    <li>📈 Affichage de statistiques générales sur les accidents.</li>
                 </ul>
             </div>
         </div>

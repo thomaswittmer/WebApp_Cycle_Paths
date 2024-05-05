@@ -67,6 +67,11 @@
                     <button v-if="isAutoPlaying" @click="pauseAutoPlay()" class="pause-button">
                         <img src="assets/images/pause.svg" alt="Pause">
                     </button>
+
+                    <!-- Ajoutez des boutons de contrôle de vitesse -->
+                    <button @click="setAutoPlaySpeed(1)" :disabled="!isAutoPlaying" class="speed-button">x1</button>
+                    <button @click="setAutoPlaySpeed(2)" :disabled="!isAutoPlaying" class="speed-button">x2</button>
+                    <button @click="setAutoPlaySpeed(0.5)" :disabled="!isAutoPlaying" class="speed-button">x0.5</button>
                 </div>
 
                 <!-- curseur temporel -->
@@ -87,7 +92,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                 <div class="offcanvas-header">
                     <a href="/"><img src="/assets/images/param_safelane.png" alt="logo" class="header-image"></a>
@@ -98,16 +102,18 @@
                 <div id="popup" class="popup">
                     <div class="popup-content">
                         <span class="close" onclick="closePopup()">X</span>
-                        <h2>Fonctionnalités de SAFELANE</h2>
-                        <p>Voici les principales fonctionnalités de l'application :</p>
+                        <h2>Fonctionnalités de <em>SAFELANE</em></h2>
+                        <u>Voici les principales fonctionnalités de l'application :</u>
                         <ul>
                             <li>⚠️ Identification des zones à risque pour les cyclistes.</li>
                             <li>🚲 Consultation du Plan Vélo 2021-2026 de la mairie de Paris.</li>
-                            <li>🗓️ Visualisation des données des accidents par année.</li>
+                            <li>🗓️ Visualisation des données des accidents par année et par mois de chaque année.</li>
+                            <li>⏯️ Lecture automatique de ses mêmes données toutes les secondes, avec option pause, arrêt et vitesses de lecture (x2 & xO.5).</li>
                             <li>🎥 Carte interactive 2D avec option 3D pour une visualisation plus détaillée du lieu de l'accident.</li>
-                            <li>✅ Filtrage des accidents par caractéristiques (météo, infrastructure, luminosité, ...).</li>
+                            <li>💬 Description de l'accident par ses caractéristiques visualisées dans une popup en cliquant dessus.</li>
+                            <li>✅ Filtrage des accidents par caractéristiques (météo, infrastructure, luminosité, type d'intersection, ...).</li>
                             <li>🗺️ Personnalisation du fond de carte.</li>
-                            <li>📈 Affichage de statistiques sur les accidents.</li>
+                            <li>📈 Affichage de statistiques générales sur les accidents.</li>
                         </ul>
                     </div>
                 </div>
@@ -115,6 +121,7 @@
                 <div class="offcanvas-body">
 
                     <div id="barre-laterale">
+                        <h3 id="titre-caract">Caractéristiques</h3>
 
                         <!-- LUMINOSITE -->
                         <div class="boutons-barre">
@@ -319,23 +326,23 @@
                         </div>
 
                         <!-- COUCHES PISTES -->
-                        <h3 id="titre-pistes">Couches voies cyclables</h3>
+                        <h3 id="titre-pistes">Couches des voies cyclables</h3>
 
-                        <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2024</button>
+                        <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2021-2026</button>
 
                         <div id="legend">
                             <h4>Légende</h4>
-                            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
-                            <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
-                            <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
-                            <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
-                            <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
+                            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> Piste cyclable</div>
+                            <div><span class="legend-color" style="background-color: #63DE6E;"></span> Voie verte / aménagement mixte</div>
+                            <div><span class="legend-color" style="background-color: #EC1DD0;"></span> Couloir bus + vélo</div>
+                            <div><span class="legend-color" style="background-color: #4DC0EF;"></span> Bande cyclable</div>
+                            <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> Voie mixte</div>
                         </div>
 
                         <div id="legendAcci"></div>
 
                         <!-- FOND DE CARTE -->
-                        <h3 id="titre-carte">Fond de carte</h3>
+                        <h3 id="titre">Fonds de carte</h3>
                         <div class="button-container-fond">
                             <!-- Première ligne de boutons -->
                             <div class="button-row">
@@ -356,16 +363,16 @@
                                 </button>
                                 <button id="btnDefault" class="map-button">
                                     <img src="assets/images/fond_gris_clair.png" alt="Vue routière">
-                                    <span class="button-label">Vue base gris clair</span>
+                                    <span class="button-label">Vue par défault</span>
                                 </button>
                             </div>
                         </div>
 
-
                         <!-- AFFICHAGE CLUSTERS -->
-                        <h3 id="titre-carte">Affichage des clusters</h3>
+                        <h3 id="titre">Affichage des accidents</h3>
                         <form>
-                            <div class="form-switch cluster mx-2">
+                            <div id="acc" class="form-switch cluster mx-2">
+                                <img id="img_acc" src="assets/images/accident.png" alt="Affichage accident">
                                 Masquer les accidents
                                 <input id="accidentsCheckbox" class="form-check-input mr-2" type="checkbox">
                             </div>
