@@ -371,11 +371,11 @@ function mettreAJourLegende(etatCouches) {
     } else {
         legendElement.innerHTML = `
             <h3>Légende</h3>
-            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> piste cyclable</div>
-                <div><span class="legend-color" style="background-color: #63DE6E;"></span> voie verte / aménagement mixte</div>
-                <div><span class="legend-color" style="background-color: #EC1DD0;"></span> couloir bus + vélo</div>
-                <div><span class="legend-color" style="background-color: #4DC0EF;"></span> bande cyclable</div>
-                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> voie mixte</div>
+            <div><span class="legend-color" style="background-color: #1D3FD9;"></span> Piste cyclable</div>
+                <div><span class="legend-color" style="background-color: #63DE6E;"></span> Voie verte / aménagement mixte</div>
+                <div><span class="legend-color" style="background-color: #EC1DD0;"></span> Couloir bus + vélo</div>
+                <div><span class="legend-color" style="background-color: #4DC0EF;"></span> Bande cyclable</div>
+                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> Voie mixte</div>
                 
         `;
     }

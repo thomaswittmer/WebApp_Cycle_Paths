@@ -298,7 +298,7 @@
                         <!-- CARACTERISTIQUES -->
                         <div class="btn-group carac contenu-decalable">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Caractéristiques
+                                Autres attributs
                             </button>
                             <div class="dropdown-menu">
                                 <form>
@@ -311,19 +311,7 @@
                             </div>
                         </div>
 
-                        <!-- STATISTIQUES-->
-                        <div class="btn-group">
-                            <button id="stat" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                Statistiques
-                            </button>
-                            <ul class="dropdown-menu position-fixed">
-                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
-                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_intersection.png')">Type d'intersection</a></li>
-                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_surface.png')">Type de surface</a></li>
-                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_luminosite.png')">Type de luminosité</a></li>
-                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_collision.png')">Type de collision</a></li>
-                            </ul>
-                        </div>
+                        <div id="legendAcci"></div>
 
                         <!-- COUCHES PISTES -->
                         <h3 id="titre-pistes">Couches des voies cyclables</h3>
@@ -339,7 +327,21 @@
                             <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> Voie mixte</div>
                         </div>
 
-                        <div id="legendAcci"></div>
+                        <!-- STATISTIQUES-->
+                        <h3 id="titre">Statistiques</h3>
+
+                        <div class="btn-group">
+                            <button id="stat" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Choisir
+                            </button>
+                            <ul class="dropdown-menu position-fixed">
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_intersection.png')">Type d'intersection</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_surface.png')">Type de surface</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_luminosite.png')">Type de luminosité</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_collision.png')">Type de collision</a></li>
+                            </ul>
+                        </div>
 
                         <!-- FOND DE CARTE -->
                         <h3 id="titre">Fonds de carte</h3>
