@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap');
 
 /*page*/
 body {
+    font-family: 'Radio Canada Big', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -29,8 +31,11 @@ header {
 h1 {
     margin: 0;
     margin-left: 5px;
-    font-family: 'Zen Dots';
     font-size: 32px;
+}
+
+em {
+    font-family: 'Zen Dots', sans-serif;
 }
 
 .header-image {
@@ -62,7 +67,6 @@ ul {
 }
 
 ul li {
-    font-family: Helvetica, sans-serif;
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 10px;
@@ -71,6 +75,7 @@ ul li {
 .popup {
     display: none;
     position: fixed;
+    overflow: auto;
     top: 0;
     left: 0;
     width: 100%;
@@ -114,6 +119,7 @@ ul li {
     margin-left: 5px;
     align-items: center;
     z-index: 1000;
+    font-family: 'Radio Canada Big', sans-serif;
 }
 
 #research_input[type="text"] {
@@ -123,6 +129,7 @@ ul li {
     border-radius: 5px;
     margin-right: 5px;
     font-size: 16px;
+    font-family: 'Radio Canada Big', sans-serif;
 }
 
 /*CARTE*/
@@ -256,6 +263,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 /*date séléctionée*/
 #date {
+    font-family: 'Radio Canada Big', sans-serif;
     margin: auto;
     margin-top: 15px;
     font-size: 15px;
@@ -268,6 +276,9 @@ input[type="range"]::-webkit-slider-thumb {
 
 /*checkbox*/
 .checkbox-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     bottom: 20px;
     right: 10px;
@@ -277,18 +288,20 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 5px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
 }
 
 .checkbox-date input[type="checkbox"] {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+    margin-top: 0px;
+
 }
 
-
 .checkbox-mois {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     bottom: 20px;
     right: 150px;
@@ -297,20 +310,14 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 5px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-}
-
-.checkbox-mois label {
-    font-size: 20px;
 }
 
 .checkbox-mois input[type="checkbox"] {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+    margin-top: 0px;
 }
-
 
 /*eclaircie quand inactif*/
 .anDesactive {
@@ -325,7 +332,7 @@ input[type="range"]::-webkit-slider-thumb {
 .offcanvas-header {
     height: 10%;
     position: relative;
-    background-color: #333;
+    background-color: #071120;
 }
 
 .offcanvas-header .btn-close {
@@ -452,15 +459,39 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #legendAcci {
+    font-family: 'Radio Canada Big', sans-serif;
     margin-top: 20px;
 }
 
 /*bouton fonds de carte*/
-#titre-carte,
+#titre,
 #titre-pistes {
     border-top: 2px solid #ccc;
     margin-top: 25px;
     padding-top: 25px;
+    margin-bottom: 15px;
+    font-family: 'Radio Canada Big', sans-serif;
+}
+
+#titre-caract{
+    margin-bottom: 15px;
+    font-family: 'Radio Canada Big', sans-serif;
+}
+
+#acc{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    font-size: 16px;
+    font-family: 'Radio Canada Big', sans-serif;
+}
+
+#img_acc{
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
 }
 
 .button-container-fond {
@@ -507,6 +538,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .button-label {
+    font-family: 'Radio Canada Big', sans-serif;
     position: absolute;
     bottom: 10px;
     left: 0;
@@ -519,6 +551,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .button-label-sat {
+    font-family: 'Radio Canada Big', sans-serif;
     position: absolute;
     bottom: 10px;
     left: 0;
@@ -542,7 +575,8 @@ input[type="range"]::-webkit-slider-thumb {
 
 .play-button,
 .stop-button,
-.pause-button {
+.pause-button,
+.speed-button {
     border: none;
     border-radius: 20px;
     padding: 5px;
@@ -555,7 +589,9 @@ input[type="range"]::-webkit-slider-thumb {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.play-button {
+.play-button,
+.speed-button {
+    color: white;
     background-color: #0F1A29;
     border: 2px solid #0F1A29;
 }
@@ -580,8 +616,16 @@ input[type="range"]::-webkit-slider-thumb {
 
 .play-button:hover,
 .stop-button:hover,
-.pause-button:hover {
+.pause-button:hover,
+.speed-button:hover  {
     transform: scale(1.1);
+}
+
+.speed-button:disabled {
+    background-color: #ccc;
+    border: 2px solid #ccc;
+    color: #666;
+    cursor: not-allowed;
 }
 
 .meteo-decale-vers-le-bas {
@@ -621,7 +665,7 @@ input[type="range"]::-webkit-slider-thumb {
 .leaflet-popup-content button {
     display: block;
     width: 100%;
-    background-color: #007bff;
+    background-color: #0F1A29;
     color: #ffffff;
     border: none;
     margin-top: 10px;
