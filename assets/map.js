@@ -40,12 +40,12 @@ let app = Vue.createApp({
         },
         
         setAutoPlayInterval(speed) {
-            let interval = 1000; // Interval par défaut pour la vitesse x1
+            let interval = 1000; //interval par défaut pour la vitesse x1
         
             if (speed === 2) {
-                interval = 500; // Vitesse x2
+                interval = 500; //vitesse x2
             } else if (speed === 0.5) {
-                interval = 2000; // Vitesse x0.5
+                interval = 2000; //vitesse x0.5
             }
         
             this.autoPlayInterval = setInterval(() => {
@@ -68,29 +68,6 @@ let app = Vue.createApp({
                 this.isPaused = true;
             }
         },
-        /*
-        startAutoPlay() {
-            this.isAutoPlaying = true;
-            this.autoPlayInterval = setInterval(() => {
-                this.nextDate();
-            }, 1000);
-        },
-
-        stopAutoPlay() {
-            this.isAutoPlaying = false;
-            clearInterval(this.autoPlayInterval);
-            this.caseChecked = true;
-            this.selectedYear = '';
-            this.annule_annee();
-        },
-        
-        pauseAutoPlay() {
-            if (this.isAutoPlaying) {
-                clearInterval(this.autoPlayInterval);
-                this.isAutoPlaying = false;
-                this.isPaused = true;
-            }
-        },*/
 
         nextDate() {
             if (this.moisChecked) {
