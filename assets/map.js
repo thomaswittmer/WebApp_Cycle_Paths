@@ -602,6 +602,20 @@ dropdownMeteo.addEventListener('click', function () {
     }
 });
 
+dropdownLumi.addEventListener('keyup', function (event) {  // pour fermer proprement le menu déroulant lumi quand on ferme avec escape
+    if (event.key === 'Escape') {
+        caracDecalable = document.querySelector('.btn-group.meteo');
+        caracDecalable.classList.remove('meteo-decale-vers-le-bas');
+    }
+});
+
+dropdownMeteo.addEventListener('keyup', function (event) {  // pour fermer proprement le menu déroulant meteo quand on ferme avec escape
+    if (event.key === 'Escape') {
+        caracDecalable = document.querySelector('.btn-group.carac');
+        caracDecalable.classList.remove('carac-decale-vers-le-bas');
+    }
+});
+
 // CARACTERISTIQUES
 var caracteres = document.querySelectorAll('.caractere');
 
@@ -688,11 +702,13 @@ function toggleSidebar() {
 
     sidebar.classList.add('sidebar-transition');
     map2.classList.add('map-transition');
+    sidebar.classList.add('showing');  //pour forcer la visualisation de la barre laterale
 }
 
 function closeSidebar() {
     sidebar.style.left = '-30%';
     map2.style.width = '100%';
+    sidebar.classList.add('showing');
 }
 
 // La barre se ferme quand on appuie sur Echap
