@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/accueil_style.css">
-    <link rel="icon" type="image/png" href="/assets/images/icon_safelane_carre.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/images/logo/icon_safelane_carre.png" sizes="32x32">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - SAFELANE</title>
 </head>
 <body>
     <div class="container">
-        <img id="logo" src="/assets/images/safelane_carre.png"><br>
+        <img id="logo" src="/assets/images/logo/safelane_carre.png"><br>
         <h1>Bienvenue sur l'application SAFELANE</h1><br>
 
         <!-- Explication du fonctionnement de l'application -->

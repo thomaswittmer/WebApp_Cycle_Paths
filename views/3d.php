@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>SAFELANE 3D</title>
-    <link rel="icon" type="image/png" href="/assets/images/icon_safelane_carre.png" sizes="32x32 64x64 128x128">
+    <link rel="icon" type="image/png" href="/assets/images/logo/icon_safelane_carre.png" sizes="32x32 64x64 128x128">
     <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
     <link href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-        <img src="/assets/images/param_safelane.png" alt="Logo" class="header-image"> 
+        <img src="/assets/images/logo/param_safelane.png" alt="Logo" class="header-image"> 
         <a href="safelane" class="return-button">Retour</a> 
     </header>
     
