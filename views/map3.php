@@ -28,34 +28,29 @@
 <body>
     <div id=app>
         <div class="carte">
-            <!--<div id="cesiumContainer"></div> -->
-            <!-- curseur temporel -->
+            <!-- Afficher fonctionnalités présentes sur la carte -->
             <div id="map">
                 <a href="/"><img src="/assets/images/safelane_carre.png" alt="logo" class="logo-head"></a>
-                <!-- barre recherche-->
+                <!-- Créer la boîte pour la barre  de recherche-->
                 <div id="research_bar">
                     <input class="form-control me-2" type="search" id="research_input" name="pacViewPlace" placeholder="Entrez un lieu..." aria-label="Search">
                     <ul id="suggestions" class="dropdown-menu" style="display: none;"></ul>
                 </div>
-
-                <!-- fermer les fenêtres des statistiques -->
+                <!-- Fermer les fenêtres des statistiques -->
                 <div id="image-overlay">
                     <img id="overlayImage" src="" alt="Overlay Image">
                     <span class="close-button" onclick="closeImageOverlay()">X</span>
                 </div>
-
-                <!-- voir toutes les dates -->
+                <!-- Checkbox pour voir visualiser les accidents de 2016 à 2022 -->
                 <div class="checkbox-date">
                     <input class="form-check-input mr-2" type="checkbox" v-model="caseChecked" id="checkboxdate" :disabled="caseDisabled" @change="annule_annee">
                     <span :class="{ 'anDesactive': caseDisabled }"> Toutes les années </span>
                 </div>
-
-                <!-- coche pour avoir un curseur selon mois et année -->
+                <!-- Checkbox pour visualiser les accidents selon le mois et l'année -->
                 <div class="checkbox-mois">
                     <input class="form-check-input mr-2" type="checkbox" v-model="moisChecked" @change="annule_annee">
                     <span> Curseur par mois </span>
                 </div>
-
                 <!-- Bouton play pour la lecture automatique-->
                 <div class="button-container">
                     <button v-if="!isAutoPlaying" @click="startAutoPlay()" class="play-button">
@@ -67,14 +62,12 @@
                     <button v-if="isAutoPlaying" @click="pauseAutoPlay()" class="pause-button">
                         <img src="assets/images/pause.svg" alt="Pause">
                     </button>
-
-                    <!-- Ajoutez des boutons de contrôle de vitesse -->
+                    <!-- Ajouter des boutons de contrôle de vitesse -->
                     <button @click="setAutoPlaySpeed(1)" :disabled="!isAutoPlaying" class="speed-button">x1</button>
                     <button @click="setAutoPlaySpeed(2)" :disabled="!isAutoPlaying" class="speed-button">x2</button>
                     <button @click="setAutoPlaySpeed(0.5)" :disabled="!isAutoPlaying" class="speed-button">x0.5</button>
                 </div>
-
-                <!-- curseur temporel -->
+                <!-- Créer un curseur temporel -->
                 <div id="dateSlider">
                     <div v-if="moisChecked" class="curseur-date">
                         <input type="range" min="0" max="83" v-model="selectedMonth" @change="cherche_mois_annee">
@@ -85,14 +78,15 @@
                         <p id="date"><strong>Date sélectionnée : {{ selectedYear }}</strong></p>
                     </div>
                 </div>
-
             </div><!--map-->
 
+            <!-- Créer le bandeau latéral contenant des paramètres -->
+            <!-- Affichage du bouton permettant d'ouvrir la barre latéral sur la carte -->
             <button class="btn btn-secondary btn-lateral" id="btn-lateral" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <!-- Bandeau avec le titre et le bouton information -->
                 <div class="offcanvas-header">
                     <a href="/"><img src="/assets/images/param_safelane.png" alt="logo" class="header-image"></a>
                     <a id="infoButton"><img src="/assets/images/bouton_info.png" alt="info" class="bouton-info"></a>
@@ -117,13 +111,12 @@
                         </ul>
                     </div>
                 </div>
-
+                <!-- Contenu de la barre latéral -->
                 <div class="offcanvas-body">
-
                     <div id="barre-laterale">
+                        <!-- Affichage des 3 boutons caractéristiques : luminosité, météo et autre -->
                         <h3 id="titre-caract">Caractéristiques</h3>
-
-                        <!-- LUMINOSITE -->
+                        <!-- Gestion de la luminosité -->
                         <div class="boutons-barre">
                             <div class="btn-group lumi">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
@@ -191,8 +184,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- METEO -->
+                        <!-- Gestion de la météo -->
                         <div class="btn-group meteo">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                                 Météo
@@ -294,8 +286,7 @@
                                 </form>
                             </div>
                         </div>
-
-                        <!-- CARACTERISTIQUES -->
+                        <!-- Gestion des autres attributs -->
                         <div class="btn-group carac contenu-decalable">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Autres attributs
@@ -310,14 +301,12 @@
                                 </form>
                             </div>
                         </div>
-
                         <div id="legendAcci"></div>
 
-                        <!-- COUCHES PISTES -->
+                        <!-- Bouton permettant de changer la couche des pistes -->
                         <h3 id="titre-pistes">Couches des voies cyclables</h3>
-
                         <button type="button" class="btn btn-primary" id="plan">Plan Vélo 2021-2026</button>
-
+                        <!-- Affichage de la légende par défault -->
                         <div id="legend">
                             <h4>Légende</h4>
                             <div><span class="legend-color" style="background-color: #1D3FD9;"></span> Piste cyclable</div>
@@ -327,13 +316,13 @@
                             <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> Voie mixte</div>
                         </div>
 
-                        <!-- STATISTIQUES-->
+                        <!-- Affichage des statistiques -->
                         <h3 id="titre">Statistiques</h3>
-
                         <div class="btn-group">
                             <button id="stat" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 Choisir
                             </button>
+                            <!-- Menu déroulant des différentes statistiques calculées -->
                             <ul class="dropdown-menu position-fixed">
                                 <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
                                 <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_intersection.png')">Type d'intersection</a></li>
@@ -343,7 +332,7 @@
                             </ul>
                         </div>
 
-                        <!-- FOND DE CARTE -->
+                        <!-- Affichage des différents fonds de carte disponibles -->
                         <h3 id="titre">Fonds de carte</h3>
                         <div class="button-container-fond">
                             <!-- Première ligne de boutons -->
@@ -370,7 +359,7 @@
                             </div>
                         </div>
 
-                        <!-- AFFICHAGE CLUSTERS -->
+                        <!-- Choix affichage des accidents ou non -->
                         <h3 id="titre">Affichage des accidents</h3>
                         <form>
                             <div id="acc" class="form-switch cluster mx-2">
@@ -387,7 +376,6 @@
 
     <script src="/assets/map.js"></script>
     <script src="/assets/accueil.js"></script>
-    <!-- <script src="/assets/leaflet.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
