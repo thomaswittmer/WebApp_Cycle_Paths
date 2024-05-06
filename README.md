@@ -9,7 +9,9 @@ Le but du projet est de créer une application Web-SIG sur laquelle nous pouvons
 
 Ce projet est commandité par l’entreprise française Coexya, par l’intermédiaire de Mathieu Cattin, architecte et responsable technique de la cellule SIG de Coexya à Paris, et de Gabin Jubault, ingénieur d'études chez Coexya.
 
-<img src="assets/images/Logo_Coexya.png" width=auto height="100" align="center" />
+<p align="center">
+  <img src="assets/images/Logo_Coexya.png" height="100" alt="Logo Coexya">
+</p>
 
 Ceci est le tutoriel d'installation pour obtenir en local (sur votre ordinateur) l'application.
 
