@@ -66,12 +66,10 @@ Pour mettre en place la base de données de toute l'application, il faudra bien 
 - Puis vous pouvez enfin lancer l'application, il n'y a qu'à écrire *localhost* dans votre barre de recherche de n'importe quel navigateur et vous serez redirigé sur la page d'accueil de l'application, *Accueil - SAFELANE*.
 
 ```
-Chef de projet :
-- WITTMER Thomas
+- Thomas WITTMER : chef de projet et développeur
+- Jeanne BOUNAN : analyste des besoins et développeur
+- Laure GREGOIRE : analyste SIG, responsable qualité et développeur
+- Johan PALOS : analyste SIG et développeur
 
-Développeurs :
-- BOUNAN Jeanne
-- GREGOIRE Laure
-- PALOS Johan
 ING2 2023-2024
 ```
