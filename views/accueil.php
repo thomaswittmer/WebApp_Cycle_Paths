@@ -24,7 +24,7 @@
         <!-- Groupe de boutons pour ouvrir la popup et accéder à la carte -->
         <div class="button-group">
             <button class="btn btn-outline-primary btn-lg mt-3" onclick="openPopup()">Voir les fonctionnalités</button>
-            <a href="/map3" class="btn btn-success btn-lg mt-3">Accéder à l'application</a>
+            <a href="/safelane" class="btn btn-success btn-lg mt-3">Accéder à l'application</a>
         </div>
 
         <!-- Popup montrant les fonctionnalités de l'application -->
