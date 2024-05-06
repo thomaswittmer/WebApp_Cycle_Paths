@@ -47,7 +47,7 @@ Pour mettre en place la base de données de toute l'application, il faudra bien 
 - Avant de lancer l'application, il est nécessaire de se connecter à la base de données via le code et une modification est à faire. La modification est à faire dans le code *index.php*, il faudra renseigner vos identifiants de connexion ($user et $password) de *pgAdmin4*. Voici le code :
 
 <p align="center">
-  <img src="assets/images/index_bdd.png"/>
+  <img src="assets/images/index_bdd.png" height="50"/>
 </p>
 
 - Puis, pour se connecter à une base de données postgres en PHP, il vous faut d’abord le configurer :
