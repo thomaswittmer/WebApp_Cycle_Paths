@@ -1,5 +1,5 @@
-# Projet de Développement Informatique n°18
-## Application Web pour l’Aménagement des Voies Cyclables à Paris <img src="assets/images/safelane_carre.png" width="50" height=auto />
+# Projet de Développement Informatique n°18 <img src="assets/images/safelane_carre.png" width="50" height=auto />
+## Application Web pour l’Aménagement des Voies Cyclables à Paris 
 
 <img src="assets/images/safelane_carre.png" width="50" height=auto />
 
