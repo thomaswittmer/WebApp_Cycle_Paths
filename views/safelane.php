@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>SAFELANE</title>
-    <link rel="icon" type="image/png" href="/assets/images/icon_safelane_carre.png" sizes="32x32 64x64 128x128">
+    <link rel="icon" type="image/png" href="/assets/images/logo/icon_safelane_carre.png" sizes="32x32 64x64 128x128">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -30,7 +30,7 @@
         <div class="carte">
             <!-- Afficher fonctionnalités présentes sur la carte -->
             <div id="map">
-                <a href="/"><img src="/assets/images/safelane_carre.png" alt="logo" class="logo-head"></a>
+                <a href="/"><img src="/assets/images/logo/safelane_carre.png" alt="logo" class="logo-head"></a>
                 <!-- Créer la boîte pour la barre  de recherche-->
                 <div id="research_bar">
                     <input class="form-control me-2" type="search" id="research_input" name="pacViewPlace" placeholder="Entrez un lieu..." aria-label="Search">
@@ -88,7 +88,7 @@
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                 <!-- Bandeau avec le titre et le bouton information -->
                 <div class="offcanvas-header">
-                    <a href="/"><img src="/assets/images/param_safelane.png" alt="logo" class="header-image"></a>
+                    <a href="/"><img src="/assets/images/logo/param_safelane.png" alt="logo" class="header-image"></a>
                     <a id="infoButton"><img src="/assets/images/bouton_info.png" alt="info" class="bouton-info"></a>
                     <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
@@ -338,22 +338,22 @@
                             <!-- Première ligne de boutons -->
                             <div class="button-row">
                                 <button id="btnSatellite" class="map-button">
-                                    <img src="assets/images/fond_aerien_paris.png" alt="Vue satellite">
+                                    <img src="assets/images/fond_carte/fond_aerien_paris.png" alt="Vue satellite">
                                     <span class="button-label-sat">Vue satellite</span>
                                 </button>
                                 <button id="btnTopographic" class="map-button">
-                                    <img src="assets/images/fond_topo_paris.png" alt="Vue topographique">
+                                    <img src="assets/images/fond_carte/fond_topo_paris.png" alt="Vue topographique">
                                     <span class="button-label">Vue topologique</span>
                                 </button>
                             </div>
                             <!-- Deuxième ligne de boutons -->
                             <div class="button-row">
                                 <button id="btnOpenStreetMap" class="map-button">
-                                    <img src="assets/images/fond_routier_paris.png" alt="Vue OpenStreetMap">
+                                    <img src="assets/images/fond_carte/fond_routier_paris.png" alt="Vue OpenStreetMap">
                                     <span class="button-label">Vue OpenStreetMap</span>
                                 </button>
                                 <button id="btnDefault" class="map-button">
-                                    <img src="assets/images/fond_gris_clair.png" alt="Vue routière">
+                                    <img src="assets/images/fond_carte/fond_gris_clair.png" alt="Vue routière">
                                     <span class="button-label">Vue par défaut</span>
                                 </button>
                             </div>
