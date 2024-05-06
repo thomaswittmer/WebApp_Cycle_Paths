@@ -10,7 +10,7 @@ Le but du projet est de créer une application Web-SIG sur laquelle nous pouvons
 Ce projet est commandité par l’entreprise française [Coexya](https://www.coexya.eu/) à Paris, par l’intermédiaire de Mathieu Cattin, architecte et responsable technique de la cellule SIG de Coexya, et de Gabin Jubault, ingénieur d'études chez Coexya également.
 
 <p align="center">
-  <img src="assets/images/Logo_Coexya.png" height="100" alt="Logo Coexya">
+  <img src="assets/images/readme/Logo_Coexya.png" height="100" alt="Logo Coexya">
 </p>
 
 Ceci est le tutoriel d'installation pour obtenir en local (sur votre ordinateur) l'application Web-SIG. Un tutoriel d'utilisation de l'application est disponible sur ce git s'appellant *README-USE.md*.
@@ -47,7 +47,7 @@ Pour mettre en place la base de données de toute l'application, il faudra bien 
 - Avant de lancer l'application, il est nécessaire de se connecter à la base de données via le code et une modification est à faire. La modification est à faire dans le code *index.php*, il faudra renseigner vos identifiants de connexion ($user et $password) de *pgAdmin4*. Voici le code :
 
 <p align="center">
-  <img src="assets/images/index_bdd.png" height="200"/>
+  <img src="assets/images/readme/index_bdd.png" height="200"/>
 </p>
 
 - Puis, pour se connecter à une base de données postgres en PHP, il vous faut d’abord le configurer :
@@ -58,7 +58,7 @@ Pour mettre en place la base de données de toute l'application, il faudra bien 
 - Une dernière manipulation est nécessaire avant de pouvoir lancer l'application.
 
 <p align="center">
-  <img src="assets/images/mamp.jpg"/>
+  <img src="assets/images/readme/mamp.jpg"/>
 </p>
 
 - Cliquez sur l'onglet *MAMP* en haut à gauche --> puis sur *Preferences* --> et *Server* --> un chemin de fichier vous est demandé dans la section *Document Root* et vous indiquez l'endroit sur votre ordinateur où vous avez stocké les données du jeu. Par exemple, *C:\PDI18\WebApp_Cycle_Paths*. Toutes les données du jeu sont dans le fichier *WebApp_Cycle_Paths* sur ce github.
