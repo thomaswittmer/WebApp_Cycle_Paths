@@ -203,9 +203,7 @@ let app = Vue.createApp({
 
 }).mount('#app');
 
-
-
-//gestion curseur sur la map
+//Empêcher que le clic sur lecurseur de la barre temporelle fasse bouger la carte
 var dateSlider = document.getElementById('dateSlider');
 dateSlider.addEventListener('mousemove', function (event) {
     event.stopPropagation();
@@ -217,10 +215,10 @@ dateSlider.addEventListener('mousemove', function (event) {
 function creeCouchePistes(objet) {
     return L.geoJSON(objet, {
         style: function (feature) {
-            // Récupérer la valeur de la colonne ame_d
+            //Récupérer la valeur de la colonne ame_d
             const ame_d = feature.properties.ame_d;
 
-            // Définir la couleur en fonction de la valeur de ame_d
+            //Définir la couleur en fonction de la valeur de ame_d
             let couleur = null;
             if (ame_d === 'COULOIR BUS+VELO') {
                 couleur = '#EC1DD0  ';
@@ -234,26 +232,23 @@ function creeCouchePistes(objet) {
             else {
                 couleur = '#C1A4BD  ';
             }
-
-            // Retourner le style avec la couleur définie
             return {
-                color: couleur, // Couleur de la ligne
-                weight: 2, // Épaisseur de la ligne
-                opacity: 1 // Opacité de la ligne
+                color: couleur, 
+                weight: 2, 
+                opacity: 1 
             };
         }
     });
 }
 
-// cree couche plan velo selon statut 
+//Créer couche plan vélo selon le statut des pistes
 function creeCouchePlan(objet) {
     return L.geoJSON(objet, {
         style: function (feature) {
-            // Récupérer la valeur de la colonne statut
+            //Récupérer la valeur de la colonne statut
             const statut = feature.properties.statut;
-
-            // Définir la couleur en fonction de la valeur de ame_d
             let couleur = null;
+            //Définir la légende associée
             if (statut === 'à réaliser') {
                 couleur = 'orange';
             } else if (statut === 'existant') {
@@ -262,21 +257,14 @@ function creeCouchePlan(objet) {
             else {
                 couleur = 'gray'
             }
-
-            // Retourner le style avec la couleur définie
             return {
-                color: couleur, // Couleur de la ligne
-                weight: 2, // Épaisseur de la ligne
-                opacity: 1 // Opacité de la ligne
+                color: couleur,
+                weight: 2,
+                opacity: 1
             };
         }
     });
 }
-
-
-
-
-
 
 // Définir la fonction zoomSur dans le contexte global
 function zoomSur(latitude, longitude) {
@@ -285,18 +273,18 @@ function zoomSur(latitude, longitude) {
 
 var clusterGroup;
 
-
 // crée la couche contenant les accidents contenus dans "objet"
 function creeCoucheAccidents(objet) {
+    //Créer des clusters pour les accidents selon le niveau de zoom
     var clusterGroup = L.markerClusterGroup({
         maxClusterRadius: 50,
-        disableClusteringAtZoom: 15 //fin des clusters quand on zoome
+        disableClusteringAtZoom: 15
     });
 
     return L.geoJSON(objet, {
         pointToLayer: function (feature, latlng) {
             const properties = feature.properties;
-            // si rien n'est sélectionné
+            //Définir l'apparence d'un point seul (hors cluster) sans paramètres séléctionné
             if (type == null) {
                 var mark = L.circleMarker(latlng, {
                     radius: 4.5,
@@ -307,14 +295,13 @@ function creeCoucheAccidents(objet) {
                     fillOpacity: 0.8
                 });
             }
-            // si un des paramètres est sélectionné
+            //Si un des paramètres est sélectionné, création d'une icône personnalisée
             else {
-                // Créer une icône personnalisée
                 var customIcon = L.icon({
-                    iconUrl: 'assets/images/icones/' + type + '/' + properties[type] + '.png', // chemin vers icône
-                    iconSize: [25, 25], // Taille icône
-                    iconAnchor: [16, 16], // point d'ancrage centre icône
-                    popupAnchor: [0, -16] // point d'ancrage popup par rapport à l'icône
+                    iconUrl: 'assets/images/icones/' + type + '/' + properties[type] + '.png', 
+                    iconSize: [25, 25], 
+                    iconAnchor: [16, 16], 
+                    popupAnchor: [0, -16] 
                 });
                 // Créer le marqueur avec l'icône personnalisée
                 var mark = L.marker(latlng, { icon: customIcon });
@@ -340,34 +327,22 @@ function creeCoucheAccidents(objet) {
             // Ajout d'une pop-up au marqueur
             mark.bindPopup(popupContenu);
             clusterGroup.addLayer(mark);
-            //return mark;
             return clusterGroup;
         }
     });
-
-
 }
 
-
-
-
-
-
-
-
-
-
-
-
-// Fonction pour mettre à jour la légende
+//Mettre à jour la légende selon la couche des pistes séléctionnée
 function mettreAJourLegende(etatCouches) {
     const legendElement = document.getElementById('legend');
+    //Couche du plan vélo
     if (etatCouches.planVisible) {
         legendElement.innerHTML = `
             <h3>Légende</h3>
             <div><span class="legend-color" style="background-color: blue;"></span> Existant </div>
             <div><span class="legend-color" style="background-color: orange;"></span> A réaliser </div>
         `;
+    //Couche des pistes issues de géovélo
     } else {
         legendElement.innerHTML = `
             <h3>Légende</h3>
@@ -375,8 +350,7 @@ function mettreAJourLegende(etatCouches) {
                 <div><span class="legend-color" style="background-color: #63DE6E;"></span> Voie verte / aménagement mixte</div>
                 <div><span class="legend-color" style="background-color: #EC1DD0;"></span> Couloir bus + vélo</div>
                 <div><span class="legend-color" style="background-color: #4DC0EF;"></span> Bande cyclable</div>
-                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> Voie mixte</div>
-                
+                <div><span class="legend-color" style="background-color: #C1A4BD ;"></span> Voie mixte</div>    
         `;
     }
 }
@@ -724,8 +698,7 @@ document.getElementById('btn-close').addEventListener('click', closeSidebar);
 
 
 
-//la barre de recherche des adresses
-// test ESRI 
+//Construction de la barre de recherche
 const api = "AAPK07603a779b2f4f9dab2e28dc9fde0f05IJ2S4Lh8g5-lGWF4WEkWb1aRCDmpSK4NEfHQdWICq1wU-r9GM1MLdWTUL_qxj0xt";
 const geocoder = L.esri.Geocoding.geocodeService({
     apikey: api
@@ -742,21 +715,11 @@ searchInput.addEventListener('input', function () {
             console.error('Error fetching address suggestions:', error);
             return;
         }
-
-        suggestions.innerHTML = ''; // Efface les suggestions précédentes
-
-        //propose des suggestions en dessous de la barre
+        suggestions.innerHTML = '';
+        //Construire un menu déroulant affichant les potentielles adresses recherchées
         results.suggestions.forEach(suggestion => {
             const address = suggestion.text;
-            const location = suggestion.location;
-        // Vérifier si la suggestion se trouve dans la zone géographique de Paris
-        /*if (
-            address.toLowerCase().includes('paris')
-            location.x >= 2.224199 &&
-            location.x <= 2.469920 &&
-            location.y >= 48.815573  &&
-            location.y <= 48.902145
-            )*/{
+            const location = suggestion.location;{
                 const a = document.createElement('a');
                 a.classList.add('dropdown-item');
                 a.textContent = address;
@@ -767,7 +730,6 @@ searchInput.addEventListener('input', function () {
                 suggestions.appendChild(a);
             }
         });
-
         if (results.suggestions.length > 0) {
             suggestions.style.display = 'block';
         } else {
@@ -776,7 +738,7 @@ searchInput.addEventListener('input', function () {
     });
 });
 
-//zoome sur l'endroit selectionne
+//Zoomer sur l'endroit recherché 
 suggestions.addEventListener('click', function (event) {
     const target = event.target;
     if (target && target.matches('a.dropdown-item')) {
