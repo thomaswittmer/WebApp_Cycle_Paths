@@ -6,13 +6,14 @@
     <link rel="icon" type="image/png" href="/assets/images/icon_safelane_carre.png" sizes="32x32">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <title>Accueil - SAFELANE</title>
 </head>
 <body>
     <div class="container">
         <img id="logo" src="/assets/images/safelane_carre.png"><br>
         <h1>Bienvenue sur l'application SAFELANE</h1><br>
 
+        <!-- Explication du fonctionnement de l'application -->
         <p>Une application web a été développée pour répondre à l'augmentation des accidents de vélo à Paris entre 2016 et 2022 
         malgré les aménagements cyclables existants. Cette application vise à identifier les zones à risque les plus élevés pour les 
         cyclistes, afin de prioriser les améliorations nécessaires. Elle offrira une carte interactive 2D avec une option 3D pour une 
@@ -26,6 +27,7 @@
             <a href="/map3" class="btn btn-success btn-lg mt-3">Accéder à l'application</a>
         </div>
 
+        <!-- Popup montrant les fonctionnalités de l'application -->
         <div id="popup" class="popup">
             <div class="popup-content">
                 <span class="close" onclick="closePopup()">X</span>
