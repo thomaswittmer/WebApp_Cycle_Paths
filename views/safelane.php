@@ -324,11 +324,11 @@
                             </button>
                             <!-- Menu déroulant des différentes statistiques calculées -->
                             <ul class="dropdown-menu position-fixed">
-                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/categorie_velo.png')">Catégorie du vélo</a></li>
-                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_intersection.png')">Type d'intersection</a></li>
-                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_surface.png')">Type de surface</a></li>
-                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_luminosite.png')">Type de luminosité</a></li>
-                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/type_collision.png')">Type de collision</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/statistiques/categorie_velo.png')">Catégorie du vélo</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/statistiques/type_intersection.png')">Type d'intersection</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/statistiques/type_surface.png')">Type de surface</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/statistiques/type_luminosite.png')">Type de luminosité</a></li>
+                                <li><a class="dropdown-item" onclick="showImageOverlay('assets/images/statistiques/type_collision.png')">Type de collision</a></li>
                             </ul>
                         </div>
 
