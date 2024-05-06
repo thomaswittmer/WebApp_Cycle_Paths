@@ -5,7 +5,7 @@ Le but du projet est de créer une application Web-SIG sur laquelle nous pouvons
 
 Ce projet est commandité par l’entreprise française Coexya, par l’intermédiaire de Mathieu Cattin, architecte et responsable technique de la cellule SIG de Coexya à Paris, et de Gabin Jubault, ingénieur d'études chez Coexya.
 
-<img src="assets/images/safelane_carre.png" width="50" height=auto /> <img src="assets/images/Logo_Coexya.png" width=auto height="50" />
+<img src="assets/images/safelane_carre.png" width="100" height=auto /> <img src="assets/images/Logo_Coexya.png" width=auto height="100" />
 
 Ceci est le tutoriel d'installation pour obtenir en local (sur votre ordinateur) l'application.
 
