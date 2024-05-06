@@ -63,7 +63,7 @@ Pour mettre en place la base de données de toute l'application, il faudra bien 
 
 - Cliquez sur l'onglet *MAMP* en haut à gauche --> puis sur *Preferences* --> et *Server* --> un chemin de fichier vous est demandé dans la section *Document Root* et vous indiquez l'endroit sur votre ordinateur où vous avez stocké les données du jeu. Par exemple, *C:\PDI18\WebApp_Cycle_Paths*. Toutes les données du jeu sont dans le fichier *WebApp_Cycle_Paths* sur ce github.
 
-- Puis vous pouvez enfin lancer l'application, il n'y a qu'à écrire *localhost* dans votre barre de recherche de n'importe quel navigateur et vous serez redirigé sur la page d'accueil de l'application, *Accueil - SAFELANE*.
+- Puis vous pouvez enfin lancer l'application, il n'y a qu'à écrire *localhost* dans votre barre de recherche de n'importe quel navigateur et vous serez redirigé sur la page d'accueil de l'application = *Accueil - SAFELANE*.
 
 ```
 - Thomas WITTMER : chef de projet et développeur
