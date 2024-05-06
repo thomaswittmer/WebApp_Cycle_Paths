@@ -310,7 +310,7 @@ function creeCoucheAccidents(objet) {
             <b>Catégorie du véhicule :</b> ${properties.catv}<br>
             <b>Circulation :</b> ${properties.circ}<br>
             <button type="button" class="btn btn-primary btn-sm" onclick="zoomSur(${latlng.lat}, ${latlng.lng})">Zoomer sur</button>
-            <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='map4?accidentId=${properties.num_acc}'">Voir en 3D</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='3d?accidentId=${properties.num_acc}'">Voir en 3D</button>
             `;
             // Ajout d'une popup au marqueur
             mark.bindPopup(popupContenu);

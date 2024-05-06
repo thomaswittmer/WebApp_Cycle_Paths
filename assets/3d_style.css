@@ -1,53 +1,65 @@
 body{
-    background-color: #333;
-    height: 50vh;
+    background-color: #0b101f;
     margin: 0;
     padding: 0;
     max-height: 100vh;
-    /*overflow: hidden;*/
 }
 
 #app{
     display: flex;
     flex-direction: row;
     align-items: start;
-    background-color: #333;
-    padding: 30px;
+    background-color: #0b101f;
 }
 
-
-/* Style pour le header */
+/* Style pour la partie haute de l'application */
 header {
-    background-color: #333; /* Couleur de fond */
-    color: #fff; /* Couleur du texte */
-    padding: 10px; /* Espacement intérieur */
-    display: flex; /* Utilisation de flexbox */
-    align-items: center; /* Centrer verticalement les éléments */
+    background-color: #0b101f;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
 /* Style pour le titre */
 h1 {
-    margin: 0; /* Réinitialiser les marges */
-    margin-left: 5px; /* Nouvelle marge à gauche */
+    margin: 0;
+    margin-left: 5px;
     font-family: 'Zen Dots';font-size: 32px;
 }
 
 .header-image {
-    width: 50px; /* Largeur de l'image */
-    height: auto; /* Hauteur automatique en maintenant le ratio */
-    margin-right: 10px; /* Espacement à droite */
+    width: 350px;
+    height: auto;
+    margin-right: 10px;
 }
 
-
+/* Style du bouton retour à la page de la carte */
 .return-button {
-    background-color: red; /* Couleur de fond */
-    color: #fff; /* Couleur du texte */
-    padding: 10px 20px; /* Espacement intérieur */
-    border: none; /* Pas de bordure */
-    border-radius: 5px; /* Coins arrondis */
-    font-family: 'Zen Dots';
-    cursor: pointer; /* Curseur au survol */
-    text-decoration: none; /* Suppression du soulignement */
-    margin-left: 10px; /* Espacement à gauche */
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.return-button:hover {
+    background-color: #c82333;
+}
+
+/* BOUTON 3D*/
+#cesiumContainer {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
 }

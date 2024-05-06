@@ -85,12 +85,12 @@ Flight::route('POST /recup_caractere', function () {
     Flight::json($geojson);
 });
 
-Flight::route('/map3', function () {
-    Flight::render('map3',);
+Flight::route('/safelane', function () {
+    Flight::render('safelane',);
 });
 
-Flight::route('/map4', function () {
-    Flight::render('map4',);
+Flight::route('/3d', function () {
+    Flight::render('3d',);
 });
 
 
