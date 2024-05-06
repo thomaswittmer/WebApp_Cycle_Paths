@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap');
 
-/*page*/
+/* Corps de la page */
 body {
     font-family: 'Radio Canada Big', sans-serif;
     margin: 0;
     padding: 0;
 }
 
+/* Logo de l'application sur le haut de page */
 .logo-head {
     width: 40px;
     height: auto;
@@ -19,15 +20,7 @@ body {
     z-index: 1000;
 }
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+/* Style du texte */
 h1 {
     margin: 0;
     margin-left: 5px;
@@ -38,13 +31,26 @@ em {
     font-family: 'Zen Dots', sans-serif;
 }
 
+ul {
+    text-align: left;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+ul li {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* Taille du logo en haute de la barre latéral */
 .header-image {
     width: 90%;
     height: auto;
     margin-left: -10px;
 }
 
-/* bouton information pour lire les fonctionnalités */
+/* Bouton information pour lire les fonctionnalités */
 .button-container-info {
     display: flex;
     align-items: center;
@@ -60,18 +66,7 @@ em {
     margin-right: 30px;
 }
 
-ul {
-    text-align: left;
-    padding-left: 0;
-    list-style-type: none;
-}
-
-ul li {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
+/* Popup des fonctionnalités */
 .popup {
     display: none;
     position: fixed;
@@ -96,6 +91,7 @@ ul li {
     position: relative;
 }
 
+/* Bouton fermer en haut à droite de la popup */
 .close {
     cursor: pointer;
     position: absolute;
@@ -111,7 +107,7 @@ ul li {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* barre de recherche de l'adresse */
+/* Barre de recherche de l'adresse */
 #research_bar {
     position: absolute;
     top: 25px;
@@ -132,8 +128,7 @@ ul li {
     font-family: 'Radio Canada Big', sans-serif;
 }
 
-/*CARTE*/
-
+/* Carte */
 #app {
     margin: 0;
     padding: 0;
@@ -148,7 +143,6 @@ ul li {
     padding: 0;
 }
 
-/*CARTE*/
 #map {
     position: absolute;
     top: 0;
@@ -158,8 +152,7 @@ ul li {
     z-index: 0;
 }
 
-
-/*statistique*/
+/* Statistiques */
 #image-overlay {
     position: absolute;
     top: 50%;
@@ -183,6 +176,7 @@ ul li {
     height: auto;
 }
 
+/* Bouton fermer des statistiques */
 .close-button {
     cursor: pointer;
     position: absolute;
@@ -198,7 +192,7 @@ ul li {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* BOUTON 3D*/
+/* Bouton pour aller à la 3D */
 #cesiumContainer {
     width: 100%;
     height: 100%;
@@ -206,8 +200,8 @@ ul li {
     padding: 0;
 }
 
-/*GESTION TEMPORALITE*/
-/*curseur temporel*/
+/* GESTION TEMPORALITE */
+/* Curseur temporel */
 .curseur-date {
     position: absolute;
     bottom: 20px;
@@ -226,8 +220,7 @@ ul li {
     border-radius: 10px;
 }
 
-/*point du curseur tentative logo*/
-
+/* Point du curseur avec le logo */
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
@@ -235,7 +228,6 @@ input[type="range"] {
     height: 5px;
     background: #0F1A29;
 }
-
 
 input[type="range"]::-moz-range-thumb {
     -webkit-appearance: none;
@@ -259,9 +251,7 @@ input[type="range"]::-webkit-slider-thumb {
     border: none;
 }
 
-
-
-/*date séléctionée*/
+/* Date séléctionée */
 #date {
     font-family: 'Radio Canada Big', sans-serif;
     margin: auto;
@@ -274,7 +264,7 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-/*checkbox*/
+/* Checkbox pour sélectionner "toutes les années" */
 .checkbox-date {
     display: flex;
     align-items: center;
@@ -298,6 +288,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 }
 
+/* Checkbox pour sélectionner le curseur des mois */
 .checkbox-mois {
     display: flex;
     align-items: center;
@@ -319,7 +310,7 @@ input[type="range"]::-webkit-slider-thumb {
     margin-top: 0px;
 }
 
-/*eclaircie quand inactif*/
+/* Eclaircie quand inactif */
 .anDesactive {
     color: #6c757d;
 }
@@ -328,7 +319,7 @@ input[type="range"]::-webkit-slider-thumb {
     width: 50%;
 }
 
-/*BANDEAU LATERAL*/
+/* BANDEAU LATERAL */
 .offcanvas-header {
     height: 10%;
     position: relative;
@@ -349,6 +340,15 @@ input[type="range"]::-webkit-slider-thumb {
     opacity: 0.8;
 }
 
+.offcanvas-start {
+    width: 100%;
+    height: 100%;
+    left: -30%;
+    color: white;
+    background-color: #0F1A29;
+}
+
+/* Bouton pour ouvrir le panneau latéral */
 .btn-lateral {
     top: 23px;
     left: 23px;
@@ -364,14 +364,6 @@ input[type="range"]::-webkit-slider-thumb {
     background-size: cover;
 }
 
-.offcanvas-start {
-    width: 100%;
-    height: 100%;
-    left: -30%;
-    color: white;
-    background-color: #0F1A29;
-}
-
 #barre-laterale {
     display: flex;
     flex-direction: column;
@@ -384,7 +376,7 @@ input[type="range"]::-webkit-slider-thumb {
     margin-bottom: 5px;
 }
 
-/*gestion des caractéristiques*/
+/* Gestion des caractéristiques */
 .form-switch img {
     height: 40px;
     width: auto;
@@ -411,25 +403,19 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .dropdown-menu {
-
-    /*   min-width: auto !important;
-   /* width: max-content !important;*/
     white-space: nowrap;
-
 }
 
 .dropdown-item {
     cursor: pointer;
-
-
 }
 
-/* eclaircie bouton plan velo*/
+/* Eclaircie le bouton du plan velo*/
 .clique {
     opacity: 0.5;
 }
 
-/*legende*/
+/* Légende */
 .legend {
     top: 10px;
     right: 10px;
@@ -463,7 +449,7 @@ input[type="range"]::-webkit-slider-thumb {
     margin-top: 20px;
 }
 
-/*bouton fonds de carte*/
+/* Style des titres dans la barre latérale */
 #titre,
 #titre-pistes {
     border-top: 2px solid #ccc;
@@ -478,6 +464,7 @@ input[type="range"]::-webkit-slider-thumb {
     font-family: 'Radio Canada Big', sans-serif;
 }
 
+/* Partie "affichage des accidents" */
 #acc{
     display: flex;
     align-items: center;
@@ -494,6 +481,8 @@ input[type="range"]::-webkit-slider-thumb {
     margin-right: 10px;
 }
 
+/* FONDS DE CARTE */
+/* Conteneur des 4 boutons fonds de carte différents */
 .button-container-fond {
     display: flex;
     flex-direction: column;
@@ -562,7 +551,8 @@ input[type="range"]::-webkit-slider-thumb {
     text-shadow: -1px -1px 0 #0F1A29, 1px -1px 0 #0F1A29, -1px 1px 0 #0F1A29, 1px 1px 0 #0F1A29;
 }
 
-/* boutons pour le play/pause/stop de la lecture automatique du curseur temporel */
+/* BOUTONS LECTURE AUTOMATIQUE */
+/* Boutons pour le play/pause/stop de la lecture automatique du curseur temporel + des vitesses de lecture */
 .button-container {
     position: absolute;
     bottom: 20px;
@@ -633,11 +623,13 @@ input[type="range"]::-webkit-slider-thumb {
     cursor: not-allowed;
 }
 
+/* Décalage du menu déroulant de la météo */
 .meteo-decale-vers-le-bas {
     margin-top: 260px;
     transition: margin-top 0.3s ease;
 }
 
+/* Décalage du menu déroulant des autres attributs */
 .carac-decale-vers-le-bas {
     margin-top: 420px;
     transition: margin-top 0.3s ease;
@@ -645,16 +637,18 @@ input[type="range"]::-webkit-slider-thumb {
 
 
 /* Pour permettre une transition fluide en ouvrant la barre laterale*/
-/* Au niveau de la barre*/
+/* Au niveau de la barre */
 .sidebar-transition {
     transition: left 0.5s ease, width 0.5s ease;
 }
 
-/*Au niveau de la carte*/
+/* Au niveau de la carte */
 .map-transition {
     transition: width 0.5s ease;
 }
 
+/* POPUP CARACTERISTIQUES */
+/* Style des popup quand on clique sur un point de la carte avec les caractéristiques */
 .leaflet-popup {
     border: 2px solid #0F1A29;
     color: white;

@@ -354,7 +354,7 @@
                                 </button>
                                 <button id="btnDefault" class="map-button">
                                     <img src="assets/images/fond_gris_clair.png" alt="Vue routière">
-                                    <span class="button-label">Vue par défault</span>
+                                    <span class="button-label">Vue par défaut</span>
                                 </button>
                             </div>
                         </div>
@@ -377,10 +377,7 @@
     <script src="/assets/map.js"></script>
     <script src="/assets/accueil.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
-
 </html>
-
 <!-- clef Gabin : AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80 -->
 <!-- clef Thomas : AIzaSyAuosDPx4wvSs6L__ZM1AtcJLjTaGq2P7w -->
