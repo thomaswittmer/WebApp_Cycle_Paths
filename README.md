@@ -1,7 +1,7 @@
 # Projet de Développement Informatique n°18
-## Application Web pour l’Aménagement des Voies Cyclables à Paris
+## Application Web pour l’Aménagement des Voies Cyclables à Paris <img src="assets/images/safelane_carre.png" width="50" height=auto />
 
-<img src="assets/images/safelane_carre.png" width="100" height=auto />
+<img src="assets/images/safelane_carre.png" width="50" height=auto />
 
 Le but du projet est de créer une application Web-SIG sur laquelle nous pouvons visualiser les accidents de vélo ainsi que les aménagements cyclables présents dans la ville de Paris. De nombreuses fonctionnalités sont présentes dans l'application pour une prise en main des données facile. Le plan vélo Paris 2021-2026 et un mode de visualisation 3D sont au coeur de l'application afin d'identifier si des aménagements sont présents ou non. 
 
