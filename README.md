@@ -1,13 +1,13 @@
 # Projet de Développement Informatique n°18
 ## Application Web pour l’Aménagement des Voies Cyclables à Paris
 
-<img src="assets/images/safelane_carre.png" width="100" height="100" />
+<img src="assets/images/safelane_carre.png" width="100" height=auto />
 
 Le but du projet est de créer une application Web-SIG sur laquelle nous pouvons visualiser les accidents de vélo ainsi que les aménagements cyclables présents dans la ville de Paris. De nombreuses fonctionnalités sont présentes dans l'application pour une prise en main des données facile. Le plan vélo Paris 2021-2026 et un mode de visualisation 3D sont au coeur de l'application afin d'identifier si des aménagements sont présents ou non. 
 
 Ce projet est commandité par l’entreprise française Coexya, par l’intermédiaire de Mathieu Cattin, architecte et responsable technique de la cellule SIG de Coexya à Paris, et de Gabin Jubault, ingénieur d'études chez Coexya.
 
-<img src="assets/images/Logo_Coexya.png" width="200" height="100" />
+<img src="assets/images/Logo_Coexya.png" width="300" height=auto />
 
 Ceci est le tutoriel d'installation pour obtenir en local (sur votre ordinateur) l'application.
 
