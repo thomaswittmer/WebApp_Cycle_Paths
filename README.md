@@ -40,7 +40,7 @@ Pour mettre en place la base de données de toute l'application, il faudra bien 
 - Importez la base de données : clic droit sur la database *amenagement_velo_paris* --> [Restore](#restore) --> Filename --> choisir le fichier fourni *new_backup_amenagement_velo_paris.backup*, ce backup se trouve dans le fichier Data sur ce github.
 
 
-## LANCEMENT DE L'APPLICATION
+## 3. LANCEMENT DE L'APPLICATION
 - Désormais, pour pouvoir lancer l'application en local, il va vous falloir télécharger un autre logiciel, celui-ci se nomme *MAMP*. Il nous sert à lancer l'application en local sans nécessité de connexion internet grâce au serveur Apache :
    * [MAMP - Windows Installer](https://www.mamp.info/en/downloads/) : Version 5.0.5
 
