@@ -619,7 +619,7 @@ plan.addEventListener('click', function () {
     // Vérifie l'état actuel du bouton
     if (planVisible) {
         // Si le plan vélo est visible, le masquer
-        button.textContent = 'Plan Vélo 2024';
+        button.textContent = 'Plan Vélo 2021-2026';
         button.classList.remove('clique'); // Supprimer la classe de grisage
         map.removeLayer(planLayer);
         pistesLayer.addTo(map);
