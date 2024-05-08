@@ -831,7 +831,31 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 });
 
-// Gestion l'appration/disparition des accidents
+// Fonction zoom lorsque la map par défaut est au zoom 17 on remplace par la topographique car la défaut n'a pas de données à ce niveau de zoom
+map.on('zoomend', function() {
+    var currentZoom = map.getZoom();
+
+    if (currentZoom >= 17) {
+        map.removeLayer(defaultLayer);
+        map.addLayer(topographicLayer);
+    } else {
+        map.removeLayer(topographicLayer);
+        map.addLayer(defaultLayer);
+    }
+});
+
+// Bordure bleue sur le fond de carte sélectionné
+var fondsCartes = document.querySelectorAll('.map-button');
+fondsCartes.forEach(function (button) {
+    button.addEventListener('click', function () {
+        fondsCartes.forEach(function (couche) {
+            couche.classList.remove('selected');
+        });
+        button.classList.add('selected');
+    })
+})
+
+// Gestion l'apparition/disparition des accidents
 var btnCluster = document.getElementById('accidentsCheckbox');
 btnCluster.addEventListener('change', function () {
     if (this.checked) {
