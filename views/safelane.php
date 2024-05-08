@@ -352,7 +352,7 @@
                                     <img src="assets/images/fond_carte/fond_routier_paris.png" alt="Vue OpenStreetMap">
                                     <span class="button-label">Vue OpenStreetMap</span>
                                 </button>
-                                <button id="btnDefault" class="map-button">
+                                <button id="btnDefault" class="map-button selected">
                                     <img src="assets/images/fond_carte/fond_gris_clair.png" alt="Vue routière">
                                     <span class="button-label">Vue par défaut</span>
                                 </button>

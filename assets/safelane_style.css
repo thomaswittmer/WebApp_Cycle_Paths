@@ -551,6 +551,11 @@ input[type="range"]::-webkit-slider-thumb {
     text-shadow: -1px -1px 0 #0F1A29, 1px -1px 0 #0F1A29, -1px 1px 0 #0F1A29, 1px 1px 0 #0F1A29;
 }
 
+/* Style pour le bouton sélectionné */
+.selected {
+    border: 4px solid #007bff;
+}
+
 /* BOUTONS LECTURE AUTOMATIQUE */
 /* Boutons pour le play/pause/stop de la lecture automatique du curseur temporel + des vitesses de lecture */
 .button-container {
