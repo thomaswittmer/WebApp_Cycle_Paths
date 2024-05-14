@@ -66,7 +66,7 @@ Pour mettre en place la base de données de toute l'application, il faudra bien 
 - Une dernière manipulation est nécessaire avant de pouvoir lancer l'application.
 
 <p align="center">
-  <img src="assets/images/readme/mamp.jpg"/>
+  <img src="assets/images/readme/mamp.jpg" height="200"/>
 </p>
 
 - Cliquez sur l'onglet *MAMP* en haut à gauche --> puis sur *Preferences* --> et *Server* --> un chemin de fichier vous est demandé dans la section *Document Root* et vous indiquez l'endroit sur votre ordinateur où vous avez stocké les données du jeu. Par exemple, *C:\PDI18\WebApp_Cycle_Paths*. Toutes les données du jeu sont dans le fichier *WebApp_Cycle_Paths* sur ce github.
