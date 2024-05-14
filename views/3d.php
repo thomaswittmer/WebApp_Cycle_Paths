@@ -17,12 +17,16 @@
         <a href="safelane" class="return-button">Retour</a> 
     </header>
     
+    <!-- Conteneur pour visualisation 3D -->
     <div id=app>
             <div id="cesiumContainer"></div>
     </div>
+    <!-- Relier le fichier JS -->
     <script src="/assets/3d.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<!-- clef Gabin : AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80 -->
-<!-- clef Thomas : AIzaSyAuosDPx4wvSs6L__ZM1AtcJLjTaGq2P7w -->
+
+
+
+<!-- clef API : AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80 -->
