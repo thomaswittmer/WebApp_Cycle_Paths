@@ -52,7 +52,7 @@ Pour mettre en place la base de données de toute l'application, il faudra bien 
 
 - Puis, pour se connecter à une base de données postgres en PHP, il vous faut d’abord le configurer :
    - dans le fichier *php.ini*, décommentez les lignes (enlever le point-virgule) chargeant les extensions, notamment *extension=php_pgsql.dll*
-   - dans le fichier *httpd.conf* (Apache), chargez la librairie dynamique avec *LoadFile*, c'est une ligne de code à insérer --> *LoadFile "C:/MAMP/bin/ php/php8.0.1/libpq.dll"* (exemple avec *MAMP*, vérifiez bien le dossier de votre version de PHP)
+   - dans le fichier *httpd.conf* (Apache), chargez la librairie dynamique avec *LoadFile*, c'est une ligne de code à insérer --> *LoadFile "C:/MAMP/bin/ php/phpNum.version.utilisée/libpq.dll"* (exemple avec *MAMP*, vérifiez bien le dossier de votre version de PHP)
    - redémarrez le serveur Apache avec *MAMP*.
 
 - Ensuite pour visualiser la 3D, vous devrez effectuer une modification dans le code afin de spécifier le port sur lequel le serveur Apache est en cours d'exécution. Cette étape est nécessaire pour assurer le bon fonctionnement de l'application. 
