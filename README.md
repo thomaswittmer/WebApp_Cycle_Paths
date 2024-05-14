@@ -55,6 +55,14 @@ Pour mettre en place la base de données de toute l'application, il faudra bien 
    - dans le fichier *httpd.conf* (Apache), chargez la librairie dynamique avec *LoadFile*, c'est une ligne de code à insérer --> *LoadFile "C:/MAMP/bin/ php/php8.0.1/libpq.dll"* (exemple avec *MAMP*, vérifiez bien le dossier de votre version de PHP)
    - redémarrez le serveur Apache avec *MAMP*.
 
+- Ensuite pour visualiser la 3D, vous devrez effectuer une modification dans le code afin de spécifier le port sur lequel le serveur Apache est en cours d'exécution. Cette étape est nécessaire pour assurer le bon fonctionnement de l'application. 
+
+- Pour ce faire, vous devez accéder au fichier *3d.js* et localiser la variable *apiUrl*. Remplacez l'adresse *localhost:80* par le numéro de port utilisé par votre serveur Apache sur votre ordinateur. Cette modification permettra à l'application de se connecter correctement au serveur pour récupérer les données nécessaires à la visualisation en 3D.
+
+<p align="center">
+  <img src="assets/images/readme/apiurl.png" height="200"/>
+</p>
+
 - Une dernière manipulation est nécessaire avant de pouvoir lancer l'application.
 
 <p align="center">
