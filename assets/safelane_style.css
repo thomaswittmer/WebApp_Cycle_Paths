@@ -410,7 +410,7 @@ input[type="range"]::-webkit-slider-thumb {
     cursor: pointer;
 }
 
-/* Eclaircie le bouton du plan velo*/
+/* Eclaircir le bouton du plan velo*/
 .clique {
     opacity: 0.5;
 }

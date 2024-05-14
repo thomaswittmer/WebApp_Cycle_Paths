@@ -1,10 +1,11 @@
-// Enable simultaneous requests.
+// Autoriser des requêtes simultanées
 Cesium.RequestScheduler.requestsByServer["tile.googleapis.com:443"] = 18;
-// Fonction pour récupérer les coordonnées de l'accident depuis la base de données
+// Récupérer les coordonnées de l'accident depuis la base de données
 function getAccidentCoordinatesFromDB(num_acc) {
     return new Promise((resolve, reject) => {
-        // URL de votre API pour récupérer les coordonnées d'un accident
-        const apiUrl = `http://localhost:80/getAccidentCoordinates?num_acc=${num_acc}`;
+        // URL de l'API pour récupérer les coordonnées d'un accident
+        // Port à modifier selon le port Apache utilisé : voir ReadMe
+        const apiUrl = `http://localhost:8000/getAccidentCoordinates?num_acc=${num_acc}`;
 
         // Effectuer la requête AJAX
         $.ajax({
@@ -30,14 +31,14 @@ function getAccidentCoordinatesFromDB(num_acc) {
     });
 }
 
-// Récupération du paramètre accidentId depuis l'URL
+// Récupérer le paramètre accidentId depuis l'URL
 const urlParams = new URLSearchParams(window.location.search);
 const accidentId = urlParams.get('accidentId');
 
-// Appel de la fonction pour récupérer les coordonnées de l'accident
+// Appeer la fonction pour récupérer les coordonnées de l'accident
 getAccidentCoordinatesFromDB(accidentId)
     .then(coordinates => {
-        // Initialisation de la vue Cesium avec les coordonnées récupérées
+        // Initialiser la vue Cesium avec les coordonnées récupérées
         const viewer = new Cesium.Viewer('cesiumContainer', {
             baseLayerPicker: false,
             geocoder: false,
@@ -50,7 +51,7 @@ getAccidentCoordinatesFromDB(accidentId)
         });
         viewer.scene.skyAtmosphere.show = true;
 
-        // Chargement du tileset
+        // Charger le tileset
         const tileset = new Cesium.Cesium3DTileset({
             url: 'https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'
         });
@@ -59,7 +60,7 @@ getAccidentCoordinatesFromDB(accidentId)
 
         function getAltitudeFromCoordinates(lat, long) {
             const apiKey = 'AIzaSyCV613JJHOSp-JVbKMB7P8sxJlSt_wrK80'; 
-
+            // Récupérer l'altitude d'un accident à partir de ses coordonnées
             const apiUrl = `https://api.open-elevation.com/api/v1/lookup?locations=${lat},${long}&key=${apiKey}`;
 
             return new Promise((resolve, reject) => {
@@ -81,18 +82,18 @@ getAccidentCoordinatesFromDB(accidentId)
 
         getAccidentCoordinatesFromDB(accidentId)
             .then(coordinates => {
-                // Utilisation de la fonction pour obtenir l'altitude à partir des coordonnées de l'accident
+                // Utiliser de la fonction pour obtenir l'altitude à partir des coordonnées de l'accident
                 getAltitudeFromCoordinates(coordinates.latitude, coordinates.longitude)
                     .then(altitude => {
                         console.log('Altitude:', altitude);
                         
-                        // Création d'un pin personnalisé avec PinBuilder
+                        // Créer un pin personnalisé avec PinBuilder
                         const pinColor = Cesium.Color.RED; // Couleur du pin
                         const pinSize = 48; // Taille du pin en pixels
                         const pinBuilder = new Cesium.PinBuilder();
                         const pinCanvas = pinBuilder.fromColor(pinColor, pinSize);
 
-                        // Création d'un billboard avec le pin personnalisé
+                        // Créer un billboard avec le pin personnalisé
                         const billboard = viewer.entities.add({
                             name: 'Accident',
                             position: Cesium.Cartesian3.fromDegrees(
@@ -126,15 +127,18 @@ getAccidentCoordinatesFromDB(accidentId)
                 console.error('Erreur lors de la récupération des coordonnées de l\'accident:', error);
             });
 
-    // Define the zoomToViewport function
+    // Définition de la fonction zoomToViewport prenant un objet viewport comme paramètre
     function zoomToViewport(viewport) {
+        // Animation de la caméra pour effectuer un zoom sur la zone définie par le viewport
         viewer.camera.flyTo({
+            // Définition de la destination comme un rectangle géographique à partir des coordonnées sud-ouest et nord-est du viewport
             destination: Cesium.Rectangle.fromDegrees(
-                viewport.getSouthWest().lng(), 
-                viewport.getSouthWest().lat(), 
-                viewport.getNorthEast().lng(), 
-                viewport.getNorthEast().lat()
+                viewport.getSouthWest().lng(),  // Obtenir la longitude du coin sud-ouest du viewport
+                viewport.getSouthWest().lat(),  // Obtenir la latitude du coin sud-ouest du viewport
+                viewport.getNorthEast().lng(),  // Obtenir la longitude du coin nord-est du viewport
+                viewport.getNorthEast().lat()   // Obtenir la latitude du coin nord-est du viewport
             ),
         });
     }
+
 });

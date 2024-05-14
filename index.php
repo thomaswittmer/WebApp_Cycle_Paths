@@ -1,7 +1,7 @@
 <?php
 require 'flight/Flight.php';
 
-// Database configuration
+// Configurer de la base de données
 $server = 'localhost';
 $port = '5432';
 $base = 'amenagement_velo_paris';
@@ -9,10 +9,10 @@ $user = 'postgres';
 $password = 'postgres';
 $dsn = "host=$server port=$port dbname=$base user=$user password=$password";
 
-// Connect to database
+// Connecter la base de données
 $link = pg_connect($dsn);
 
-// Check connection and set Flight variable
+// Vérifier la connection
 if (!$link) {
     die('Erreur de connexion: ' . pg_last_error());
 } else {
@@ -50,7 +50,7 @@ Flight::route('POST /recup_annee', function () {
         $features = [];
         while ($row = pg_fetch_assoc($accidents)) {
             $geometry = json_decode($row['geo']);
-            unset($row['geom']); // on retire la colonne geom pour ne garder que la geo en geojson
+            unset($row['geom']); // Retirer la colonne geom pour ne garder que la geo en geojson
             $features[] = array(
                 'type' => 'Feature',
                 'geometry' => $geometry,
@@ -97,20 +97,20 @@ Flight::route('/3d', function () {
 Flight::route('GET /getAccidentCoordinates', function () {
     $link = Flight::get('BDD');
 
-    // Vérifiez si num_acc est défini
+    // Vérifier si num_acc est défini
     if (isset($_GET['num_acc']) && $_GET['num_acc'] !== null) {
         $num_acc = $_GET['num_acc'];
 
-        // Utilisez une requête préparée pour éviter les injections SQL
+        // Utiliser une requête préparée pour éviter les injections SQL
         $stmt = pg_prepare($link, "get_accident", 'SELECT lat, long FROM accident_velo_2010_2022 WHERE num_acc = $1');
 
-        // Exécutez la requête avec le paramètre num_acc
+        // Exécuter la requête avec le paramètre num_acc
         $result = pg_execute($link, "get_accident", array($num_acc));
 
-        // Récupérez les données
+        // Récupérer les données
         $accident = pg_fetch_assoc($result);
 
-        // Vérifiez si un accident a été trouvé
+        // Vérifier si un accident a été trouvé
         if ($accident) {
             // Renvoyer les données en format JSON
             header('Content-Type: application/json');
@@ -140,7 +140,7 @@ Flight::route('GET /recupere_pistes', function () {
     $features = [];
     while ($row = pg_fetch_assoc($accidents)) {
         $geometry = json_decode($row['geo']);
-        unset($row['geom']); // on retire la colonne geom pour ne garder que la geo en geojson
+        unset($row['geom']); // Retirer la colonne geom pour ne garder que la geo en geojson
         $features[] = array(
             'type' => 'Feature',
             'geometry' => $geometry,
@@ -165,7 +165,7 @@ Flight::route('GET /recupere_acci', function () {
     $features = [];
     while ($row = pg_fetch_assoc($accidents)) {
         $geometry = json_decode($row['geo']);
-        unset($row['geom']); // on retire la colonne geom pour ne garder que la geo en geojson
+        unset($row['geom']); // Retirer la colonne geom pour ne garder que la geo en geojson
         $features[] = array(
             'type' => 'Feature',
             'geometry' => $geometry,
