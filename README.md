@@ -60,13 +60,13 @@ Pour mettre en place la base de données de toute l'application, il faudra bien 
 - Pour ce faire, vous devez accéder au fichier *3d.js* et localiser la variable *apiUrl*. Remplacez l'adresse *localhost:80* par le numéro de port utilisé par votre serveur Apache sur votre ordinateur (si vous n'êtes pas sûr du port utilisé, vous pouvez vérifier via *MAMP*). Cette modification permettra à l'application de se connecter correctement au serveur pour récupérer les données nécessaires à la visualisation en 3D.
 
 <p align="center">
-  <img src="assets/images/readme/apiurl.png" height="200"/>
+  <img src="assets/images/readme/apiurl.png" height="150"/>
 </p>
 
 - Une dernière manipulation est nécessaire avant de pouvoir lancer l'application.
 
 <p align="center">
-  <img src="assets/images/readme/mamp.jpg" height="200"/>
+  <img src="assets/images/readme/mamp.jpg"/>
 </p>
 
 - Cliquez sur l'onglet *MAMP* en haut à gauche --> puis sur *Preferences* --> et *Server* --> un chemin de fichier vous est demandé dans la section *Document Root* et vous indiquez l'endroit sur votre ordinateur où vous avez stocké les données du jeu. Par exemple, *C:\PDI18\WebApp_Cycle_Paths*. Toutes les données du jeu sont dans le fichier *WebApp_Cycle_Paths* sur ce github.
